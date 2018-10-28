@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2041
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogSender", "LogSender\LogSender.csproj", "{CC24A769-2AF6-4994-A05B-A9F06795CE36}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Log Sender Installer", "Log Sender Installer\Log Sender Installer.vdproj", "{9E8BB329-86F4-4472-8211-976F89ADD766}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CC24A769-2AF6-4994-A05B-A9F06795CE36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC24A769-2AF6-4994-A05B-A9F06795CE36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC24A769-2AF6-4994-A05B-A9F06795CE36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC24A769-2AF6-4994-A05B-A9F06795CE36}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E8BB329-86F4-4472-8211-976F89ADD766}.Debug|Any CPU.ActiveCfg = Debug
+		{9E8BB329-86F4-4472-8211-976F89ADD766}.Release|Any CPU.ActiveCfg = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5F708839-EB00-4E61-AAA4-F08FF8005800}
+	EndGlobalSection
+EndGlobal
