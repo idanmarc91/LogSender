@@ -2,6 +2,7 @@
 using BinaryFileToTextFile.Models;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.IO.Compression;
@@ -70,14 +71,23 @@ namespace LogSender
                 while(true)
                 {
                     //thread sleep for _threadSleepTime miliseconds - configurable
-                    Thread.Sleep(_threadSleepTime);
+                    //Thread.Sleep(_threadSleepTime);
 
                     if (currDir.EnumerateFiles(logType).Where(f => (f.Length <= _binaryFileMaxSize) && (f.Length > 0)).ToArray().Length > NUM_OF_FILES)
                     {
                         FileInfo[] files = currDir.GetFiles();
 
+                        //json array - multifile json log - hold data from few file
+                        List<JsonLog> jsonArray = new List<JsonLog>();
+
+                        //list of file name - hold file full name fot further action on the files like delete
+                        List<string> listOfFileNames = new List<string>();
+
+                        //loop on files in folder
                         foreach (FileInfo file in files)
                         {
+                            listOfFileNames.Add(file.FullName);
+
                             BinaryFileHandler bFile = new BinaryFileHandler(file.FullName);
 
                             if (!bFile.IsFileNull())
@@ -97,14 +107,17 @@ namespace LogSender
                                     case "*.cyb":
                                         //extract data from binary file
                                         CybTable log = new CybTable(expandedFileByteArray, headerParameters._hostName.GetData(), headerParameters._serverClientDelta.GetData(), headerParameters._version.GetData());
-                                        string jsonAsString;
-                                        //jsonAsString += JsonToString(log.GetAsJson());
-
+                                        log.GetAsJson(jsonArray);
                                         break;
                                 }
 
+
+
                             }
                         }
+                        string jsonString = JsonSerialization(jsonArray);
+                        //send to server
+                        //SendToServer()
                     }
                 }
 
@@ -119,15 +132,19 @@ namespace LogSender
         }
 
 
-        private string JsonToString(JsonLog[] jsonLog)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="jsonArray"></param>
+        /// <returns></returns>
+        private string JsonSerialization(List<JsonLog> jsonArray)
         {
-            ////write gzip stream
             try
             {
                 using (StringWriter jsonStrWriter = new StringWriter())
                 {
                     JsonSerializer serializer = new JsonSerializer();
-                    serializer.Serialize(jsonStrWriter, jsonLog);
+                    serializer.Serialize(jsonStrWriter, jsonArray);
 
                     return jsonStrWriter.ToString();
                     //string Compressed = CompressString(jsonAsString);
@@ -137,34 +154,10 @@ namespace LogSender
             {
                 //TODO:Create logger
                 System.IO.StreamWriter logFile = new System.IO.StreamWriter(AppDomain.CurrentDomain.BaseDirectory + "log.txt", true);
-                logFile.WriteLine("Compressing error\n" + ex.Message);
+                logFile.WriteLine("Json Serializetion error\n" + ex.Message);
                 logFile.Close();
+                return string.Empty;
             }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="text"></param>
-        /// <returns></returns>
-        public static string CompressString(string text)
-        {
-            byte[] buffer = Encoding.UTF8.GetBytes(text);
-            var memoryStream = new MemoryStream();
-            using (var gZipStream = new GZipStream(memoryStream, CompressionMode.Compress, true))
-            {
-                gZipStream.Write(buffer, 0, buffer.Length);
-            }
-
-            memoryStream.Position = 0;
-
-            var compressedData = new byte[memoryStream.Length];
-            memoryStream.Read(compressedData, 0, compressedData.Length);
-
-            var gZipBuffer = new byte[compressedData.Length + 4];
-            Buffer.BlockCopy(compressedData, 0, gZipBuffer, 4, compressedData.Length);
-            Buffer.BlockCopy(BitConverter.GetBytes(buffer.Length), 0, gZipBuffer, 0, 4);
-            return Convert.ToBase64String(gZipBuffer);
         }
 
         /// <summary>

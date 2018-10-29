@@ -27,7 +27,8 @@ namespace LogSender
         {
             //System.IO.File.Create(AppDomain.CurrentDomain.BaseDirectory + "OnStart.txt");
             string path = AppDomain.CurrentDomain.BaseDirectory;
-            _logSender = new LogSender(path); 
+            _logSender = new LogSender(path);
+            _logSender.RunService();
         }
 
         protected override void OnStop()
