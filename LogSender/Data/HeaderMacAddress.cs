@@ -2,7 +2,7 @@
 
 namespace BinaryFileToTextFile.Data
 {
-    class HeaderMacAddress
+    public class HeaderMacAddress
     {
         ///**********************************************
         ///             Members Section

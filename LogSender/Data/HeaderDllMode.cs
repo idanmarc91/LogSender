@@ -1,7 +1,7 @@
 ﻿
 namespace BinaryFileToTextFile.Data
 {
-    class HeaderDllMode
+    public class HeaderDllMode
     {
         ///**********************************************
         ///             Members Section

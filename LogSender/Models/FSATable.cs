@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace BinaryFileToTextFile
 {
-    class FSATable : Table
+    public class FSATable : Table
     {
         ///**********************************************
         ///             Members Section
@@ -82,15 +82,13 @@ namespace BinaryFileToTextFile
         /// <summary>
         /// This function convert table to json array
         /// </summary>
-        /// <returns>json log array </returns>
-        public JsonLog[] GetAsJson()
+        /// <returns>json log array</returns>
+        public override void GetAsJson(List<JsonLog> array)
         {
-            JsonLog[] jsonArray = new JsonLog[_FsaTable.Count];
-
-            for (int index = 0; index < _FsaTable.Count; index++)
-                jsonArray[index] = _FsaTable[index].GetRowAsJson();
-
-            return jsonArray;
+            foreach (FSARow row in _FsaTable)
+            {
+                array.Add(row.GetRowAsJson());
+            }
         }
     }
 }

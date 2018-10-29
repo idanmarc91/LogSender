@@ -2,7 +2,7 @@
 
 namespace BinaryFileToTextFile.Data
 {
-    class HeaderServerClientDelta
+    public class HeaderServerClientDelta
     {
         ///**********************************************
         ///             Members Section

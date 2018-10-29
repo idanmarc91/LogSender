@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace BinaryFileToTextFile
 {
-    class CybTable : Table
+    public class CybTable : Table
     {
         ///**********************************************
         ///             Members Section
@@ -81,15 +81,8 @@ namespace BinaryFileToTextFile
         /// This function convert table to json array
         /// </summary>
         /// <returns>json log array</returns>
-        public void GetAsJson(List<JsonLog> array)
+        public override void GetAsJson(List<JsonLog> array)
         {
-            //JsonLog[] jsonArray = new JsonLog[_cybTable.Count];
-
-            //for (int index = 0; index < _cybTable.Count; index++)
-            //    jsonArray[index] = _cybTable[index].GetRowAsJson();
-
-            //return jsonArray;
-
             foreach(CybRow row in _cybTable)
             {
                 array.Add(row.GetRowAsJson());

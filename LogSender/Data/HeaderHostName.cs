@@ -3,7 +3,7 @@ using System.Text;
 
 namespace BinaryFileToTextFile.Data
 {
-    class HeaderHostName
+    public class HeaderHostName
     {
         ///**********************************************
         ///             Members Section

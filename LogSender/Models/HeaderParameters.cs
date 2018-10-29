@@ -2,7 +2,7 @@
 
 namespace BinaryFileToTextFile.Models
 {
-    class HeaderParameters
+    public class HeaderParameters
     {
         ///**********************************************
         ///             Members Section

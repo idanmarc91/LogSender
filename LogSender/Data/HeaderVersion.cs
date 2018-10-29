@@ -2,7 +2,7 @@
 
 namespace BinaryFileToTextFile.Data
 {
-    class HeaderVersion
+    public class HeaderVersion
     {
         ///**********************************************
         ///             Members Section

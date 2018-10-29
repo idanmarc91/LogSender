@@ -1,7 +1,10 @@
 ﻿
+using BinaryFileToTextFile.Models;
+using System.Collections.Generic;
+
 namespace BinaryFileToTextFile
 {
-    abstract class Table
+    public abstract class Table
     {
         ///**********************************************
         ///             Members Section
@@ -23,5 +26,7 @@ namespace BinaryFileToTextFile
         {
             return (headerVersion > 2) ? (byte_in_row + NEW_VER_BYTE_EXTENTION) : byte_in_row;
         }
+
+        public abstract void GetAsJson(List<JsonLog> array);
     }
 }

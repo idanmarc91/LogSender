@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace BinaryFileToTextFile.Models
 {
-    class MogTable :Table
-    {       ///**********************************************
-            ///             Members Section
-            ///**********************************************
+    public class MogTable :Table
+    {       
+        ///**********************************************
+        ///             Members Section
+        ///**********************************************
 
         //Constant Section
         const int BYTES_IN_ROW = 1608;
@@ -32,7 +32,6 @@ namespace BinaryFileToTextFile.Models
 
                 for (int loopIndex = 0; loopIndex < expandedFileByteArray.Length; loopIndex = loopIndex + bytesInRow)
                 {
-
                     //create new row
                     MogRow row = new MogRow(serverClientDelta, hostName, headerVersion);
 
@@ -83,18 +82,15 @@ namespace BinaryFileToTextFile.Models
         /// <summary>
         /// This function convert table to json array
         /// </summary>
-        /// <returns>json log array </returns>
-        public JsonLog[] GetAsJson()
+        /// <returns>json log array</returns>
+        public override void GetAsJson(List<JsonLog> array)
         {
-            JsonLog[] jsonArray = new JsonLog[_mogTable.Count];
-
-            for (int index = 0; index < _mogTable.Count; index++)
-                jsonArray[index] = _mogTable[index].GetRowAsJson();
-
-            return jsonArray;
+            foreach (MogRow row in _mogTable)
+            {
+                array.Add(row.GetRowAsJson());
+            }
         }
     }
-
 }
 
 

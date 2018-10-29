@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 namespace BinaryFileToTextFile.Models
 {
     [JsonObject(MemberSerialization.OptIn)]
-    class JsonLog
+    public class JsonLog
     {
         [JsonProperty]
         public string OS { get; set; }

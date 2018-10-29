@@ -2,7 +2,7 @@
 
 namespace BinaryFileToTextFile.Data
 {
-    class HeaderClientZValue
+    public class HeaderClientZValue
     {
         ///**********************************************
         ///             Members Section

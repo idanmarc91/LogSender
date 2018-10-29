@@ -5,7 +5,7 @@ using System.Text;
 
 namespace BinaryFileToTextFile
 {
-    class DLLTable : Table
+    public class DLLTable : Table
     {
         ///**********************************************
         ///             Members Section
@@ -50,15 +50,13 @@ namespace BinaryFileToTextFile
         /// <summary>
         /// This function convert table to json array
         /// </summary>
-        /// <returns>json log array </returns>
-        public JsonLog[] GetAsJson()
+        /// <returns>json log array</returns>
+        public override void GetAsJson(List<JsonLog> array)
         {
-            JsonLog[] jsonArray = new JsonLog[_DLLTable.Count];
-
-            for (int index = 0; index < _DLLTable.Count; index++)
-                jsonArray[index] = _DLLTable[index].GetRowAsJson();
-
-            return jsonArray;
+            foreach (DLLRow row in _DLLTable)
+            {
+                array.Add(row.GetRowAsJson());
+            }
         }
     }
 }

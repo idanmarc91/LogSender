@@ -1,5 +1,6 @@
 ﻿using BinaryFileToTextFile;
 using BinaryFileToTextFile.Models;
+using LogSender.Utilities;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -55,7 +56,7 @@ namespace LogSender
 
         public void RunService()
         {
-            _threadFlow = new Thread(() => SendLogs("*.cyb",_dirFlowLogs));
+            _threadFlow = new Thread(() => SendLogs("cyb",_dirFlowLogs));
             _threadFlow.Start();
         }
 
@@ -73,7 +74,7 @@ namespace LogSender
                     //thread sleep for _threadSleepTime miliseconds - configurable
                     //Thread.Sleep(_threadSleepTime);
 
-                    if (currDir.EnumerateFiles(logType).Where(f => (f.Length <= _binaryFileMaxSize) && (f.Length > 0)).ToArray().Length > NUM_OF_FILES)
+                    if (currDir.EnumerateFiles("*." + logType).Where(f => (f.Length <= _binaryFileMaxSize) && (f.Length > 0)).ToArray().Length > NUM_OF_FILES)
                     {
                         FileInfo[] files = currDir.GetFiles();
 
@@ -86,36 +87,18 @@ namespace LogSender
                         //loop on files in folder
                         foreach (FileInfo file in files)
                         {
+                            //check if file is locked Write mode
+                            if (FileMaintenance.IsFileLocked(file))
+                                continue;
+
+                            //add file path to the list.for tracking which file should be deleted 
                             listOfFileNames.Add(file.FullName);
 
-                            BinaryFileHandler bFile = new BinaryFileHandler(file.FullName);
+                            //parsing oparation
+                            ParseBinaryFile(file.FullName, jsonArray, logType);
 
-                            if (!bFile.IsFileNull())
-                            {
-                                //preprocessing file
-                                BinaryFileData data = bFile.SeparateHeaderAndFile();
-
-                                //expend log section
-                                byte[] expandedFileByteArray = data.ExpendLogSection();
-
-                                //get header parameters
-                                HeaderParameters headerParameters = new HeaderParameters();
-                                headerParameters.ExtractData(data._headerArray);
-
-                                switch(logType)
-                                {
-                                    case "*.cyb":
-                                        //extract data from binary file
-                                        CybTable log = new CybTable(expandedFileByteArray, headerParameters._hostName.GetData(), headerParameters._serverClientDelta.GetData(), headerParameters._version.GetData());
-                                        log.GetAsJson(jsonArray);
-                                        break;
-                                }
-
-
-
-                            }
                         }
-                        string jsonString = JsonSerialization(jsonArray);
+                        string jsonString = JsonDataConvertion.JsonSerialization(jsonArray);
                         //send to server
                         //SendToServer()
                     }
@@ -124,41 +107,76 @@ namespace LogSender
             }
             catch (Exception ex)
             {
-                //TODO:Create logger
                 System.IO.StreamWriter logFile = new System.IO.StreamWriter(AppDomain.CurrentDomain.BaseDirectory + "log.txt", true);
                 logFile.WriteLine("\n" + ex.Message);
                 logFile.Close();
             }
         }
 
-
         /// <summary>
-        /// 
+        /// This function is parsing the binary file.
+        /// There are 4 different kind of parsing methods
         /// </summary>
+        /// <param name="FilePath"></param>
         /// <param name="jsonArray"></param>
-        /// <returns></returns>
-        private string JsonSerialization(List<JsonLog> jsonArray)
+        /// <param name="logType"></param>
+        private void ParseBinaryFile(string FilePath, List<JsonLog> jsonArray, string logType)
         {
             try
             {
-                using (StringWriter jsonStrWriter = new StringWriter())
-                {
-                    JsonSerializer serializer = new JsonSerializer();
-                    serializer.Serialize(jsonStrWriter, jsonArray);
+                BinaryFileHandler bFile = new BinaryFileHandler(FilePath);
 
-                    return jsonStrWriter.ToString();
-                    //string Compressed = CompressString(jsonAsString);
+                if (!bFile.IsFileNull())
+                {
+                    //preprocessing file
+                    BinaryFileData data = bFile.SeparateHeaderAndFile();
+
+                    //expend log section
+                    byte[] expandedFileByteArray = data.ExpendLogSection();
+
+                    //get header parameters
+                    HeaderParameters headerParameters = new HeaderParameters();
+                    headerParameters.ExtractData(data._headerArray);
+
+                    Table logTable = null;
+
+                    //Build data table from binary file
+                    switch (logType)
+                    {
+                        case "cyb":
+                            logTable = new CybTable(expandedFileByteArray, headerParameters._hostName.GetData(), headerParameters._serverClientDelta.GetData(), headerParameters._version.GetData());
+                            break;
+
+                        case "fsa":
+                            logTable = new FSATable(expandedFileByteArray, headerParameters._hostName.GetData(), headerParameters._serverClientDelta.GetData(), headerParameters._version.GetData());
+                            break;
+
+                        case "mog":
+                            logTable = new MogTable(expandedFileByteArray, headerParameters._hostName.GetData(), headerParameters._serverClientDelta.GetData(), headerParameters._version.GetData());
+                            break;
+
+                        case "cimg":
+                            logTable = new DLLTable(expandedFileByteArray, headerParameters._hostName.GetData(), headerParameters._serverClientDelta.GetData());
+                            break;
+                    }
+
+                    //check if log table was created in the switch case above
+                    if (logTable != null)
+                        logTable.GetAsJson(jsonArray);
+                    else
+                        throw new Exception("log type string error. log table was not created");
                 }
+                else
+                    throw new Exception("File Is Null");
             }
             catch (Exception ex)
             {
-                //TODO:Create logger
                 System.IO.StreamWriter logFile = new System.IO.StreamWriter(AppDomain.CurrentDomain.BaseDirectory + "log.txt", true);
-                logFile.WriteLine("Json Serializetion error\n" + ex.Message);
+                logFile.WriteLine("problem with " + FilePath + " in parsing function" + ex.Message);
                 logFile.Close();
-                return string.Empty;
             }
         }
+
 
         /// <summary>
         /// 
