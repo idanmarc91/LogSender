@@ -160,6 +160,5 @@ namespace LogSender_Tests
             Assert.AreEqual(jsonTest, jsonTrueOutput);
         }
 
-
     }
 }
