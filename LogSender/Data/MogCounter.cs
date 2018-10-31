@@ -1,12 +1,9 @@
-﻿
-
-using System;
+﻿using System;
 
 namespace BinaryFileToTextFile.Data
 {
     class MogCounter : FileData
     {
-
         ///**********************************************
         ///             Members Section
         ///**********************************************

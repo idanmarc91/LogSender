@@ -11,7 +11,6 @@ namespace BinaryFileToTextFile.Data
 
         private Int64 _serverClientDelta;
         private string _clientTimeStamp;
-        //private string _serverTimeStamp;
         private string _fullServerTimeStamp;
 
         ///**********************************************
@@ -44,7 +43,6 @@ namespace BinaryFileToTextFile.Data
             ticksNumber = ticksNumber + epochToAdd.Ticks;
             DateTime time = new DateTime(ticksNumber).ToLocalTime();
             _clientTimeStamp = time.ToString("dd/MM HH:mm:ss");
-            //_serverTimeStamp = time.AddMilliseconds(_serverClientDelta).ToString("dd/MM HH:mm:ss");
             _fullServerTimeStamp = time.AddMilliseconds(_serverClientDelta).ToString("dd/MM HH:mm:ss.fff");
         }
 
@@ -56,15 +54,6 @@ namespace BinaryFileToTextFile.Data
         {
             return _clientTimeStamp;
         }
-
-        /// <summary>
-        /// get server time
-        /// </summary>
-        /// <returns>string - server time</returns>
-        //public string GetServerTime()
-        //{
-        //    return _serverTimeStamp;
-        //}
 
         /// <summary>
         /// get full server time

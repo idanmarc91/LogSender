@@ -61,9 +61,12 @@ namespace BinaryFileToTextFile
             return data;
         }
 
+        /// <summary>
+        /// This function extract header size from binary file
+        /// </summary>
+        /// <returns></returns>
         public ushort GetHeaderSize()
         {
-
             byte[] tempHeaderSize = new byte[SIZE_OF_HEADER];
 
             //Check the header size. first two byte are header size
@@ -74,11 +77,13 @@ namespace BinaryFileToTextFile
         }
 
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public bool IsFileNull()
         {
-            return (_file == null) ? true : false;
+            return ( _file == null );
         }
     }
-
-
 }

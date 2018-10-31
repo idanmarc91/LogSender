@@ -3,10 +3,22 @@ namespace BinaryFileToTextFile.Data
 {
     class ReasonDll : FileData
     {
+        ///**********************************************
+        ///             Members Section
+        ///**********************************************
         private const int REASON_DLL_LEN = 1;
-
         private string _reason;
 
+        ///**********************************************
+        ///             Functions Section
+        ///**********************************************
+        
+        /// <summary>
+        /// This function extract the reason data from the binary file
+        /// </summary>
+        /// <param name="loopIndex"></param>
+        /// <param name="expandedFileByteArray"></param>
+        /// <param name="fileIndex"></param>
         public override void ExtractData(int loopIndex, byte[] expandedFileByteArray, ref int fileIndex)
         {
             System.Text.StringBuilder builder = new System.Text.StringBuilder();
@@ -62,11 +74,19 @@ namespace BinaryFileToTextFile.Data
             }
         }
 
+        /// <summary>
+        /// Get reason
+        /// </summary>
+        /// <returns>string -reason</returns>
         public override string GetData()
         {
             return _reason;
         }
 
+        /// <summary>
+        /// set new reason
+        /// </summary>
+        /// <param name="reason"></param>
         public override void SetData(string reason)
         {
             _reason = reason;

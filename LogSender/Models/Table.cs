@@ -1,5 +1,4 @@
-﻿
-using BinaryFileToTextFile.Models;
+﻿using BinaryFileToTextFile.Models;
 using System.Collections.Generic;
 using System.Text;
 

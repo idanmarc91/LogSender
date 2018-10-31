@@ -13,7 +13,6 @@ namespace BinaryFileToTextFile.Models
         ///**********************************************
         ///             Functions Section
         ///**********************************************
-        ///
         
         /// <summary>
         /// This function expend the log section: expend the '0' values 

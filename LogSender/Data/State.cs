@@ -3,9 +3,15 @@ namespace BinaryFileToTextFile.Data
 {
     class State : FileData
     {
+        ///**********************************************
+        ///             Members Section
+        ///**********************************************
         const int STATE_LEN = 1;
         private string _state;
 
+        ///**********************************************
+        ///             Functions Section
+        ///**********************************************   
         /// <summary>
         /// This function extract state string 
         /// </summary>

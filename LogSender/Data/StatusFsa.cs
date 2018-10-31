@@ -1,5 +1,4 @@
-﻿
-namespace BinaryFileToTextFile.Data
+﻿namespace BinaryFileToTextFile.Data
 {
     class StatusFsa : FileData
     {

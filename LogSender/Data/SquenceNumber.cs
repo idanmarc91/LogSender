@@ -10,7 +10,6 @@ namespace BinaryFileToTextFile.Data
         const int SEQ_NUM_LEN = 2;
         private string _sequenceNumber;
 
-
         ///**********************************************
         ///             Members Section
         ///**********************************************
@@ -42,6 +41,5 @@ namespace BinaryFileToTextFile.Data
         {
             _sequenceNumber = seqNum;
         }
-
     }
 }

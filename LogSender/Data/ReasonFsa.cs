@@ -10,7 +10,6 @@ namespace BinaryFileToTextFile.Data
         private const int REASON_STR_LEN = 1;
         private string _reason;
 
-
         ///**********************************************
         ///             Members Section
         ///**********************************************

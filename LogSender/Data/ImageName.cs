@@ -18,8 +18,7 @@ namespace BinaryFileToTextFile.Data
         /// empty ctor for image name class
         /// </summary>
         public ImageName()
-        {
-        }
+        {}
 
         /// <summary>
         /// ctor for ImmageName class
@@ -48,6 +47,13 @@ namespace BinaryFileToTextFile.Data
             _imageName = data;
         }
 
+        
+        /// <summary>
+        /// No extraction needed
+        /// </summary>
+        /// <param name="loopIndex"></param>
+        /// <param name="expandedFileByteArray"></param>
+        /// <param name="fileIndex"></param>
         public override void ExtractData(int loopIndex, byte[] expandedFileByteArray, ref int fileIndex)
         {
             throw new NotImplementedException();

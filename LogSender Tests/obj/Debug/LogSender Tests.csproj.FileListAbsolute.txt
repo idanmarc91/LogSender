@@ -1,5 +1,3 @@
-C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\obj\Debug\LogSender Tests.csprojAssemblyReference.cache
-C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\obj\Debug\LogSender Tests.csproj.CoreCompileInputs.cache
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
@@ -9,10 +7,14 @@ C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\bin\Debug\LogSender.exe
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.dll
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\bin\Debug\Newtonsoft.Json.dll
-C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\bin\Debug\LogSender.pdb
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.xml
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\bin\Debug\Newtonsoft.Json.xml
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\obj\Debug\LogSender Tests.csprojAssemblyReference.cache
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\obj\Debug\LogSender Tests.csproj.CoreCompileInputs.cache
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\obj\Debug\LogSender Tests.csproj.CopyComplete
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\obj\Debug\LogSender Tests.dll
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\obj\Debug\LogSender Tests.pdb
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\bin\Debug\LogSender Tests.dll.CodeAnalysisLog.xml
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\bin\Debug\LogSender Tests.dll.lastcodeanalysissucceeded
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\bin\Debug\LogSender.pdb

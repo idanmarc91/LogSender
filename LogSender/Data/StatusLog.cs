@@ -3,8 +3,15 @@ namespace BinaryFileToTextFile.Data
 {
     class StatusLog : FileData
     {
+        ///**********************************************
+        ///             Members Section
+        ///**********************************************
         private const int STATUS_LEN = 1;
         private string _status;
+
+        ///**********************************************
+        ///             Functions Section
+        ///**********************************************
 
         /// <summary>
         /// This function create status string

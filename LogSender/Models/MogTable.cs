@@ -46,7 +46,6 @@ namespace BinaryFileToTextFile.Models
             }
             catch (Exception ex)
             {
-                //TODO:Create logger
                 System.IO.StreamWriter logFile = new System.IO.StreamWriter(AppDomain.CurrentDomain.BaseDirectory + "log.txt", true);
                 logFile.WriteLine("Mog Table exception\n" + ex.Message);
                 logFile.Close();

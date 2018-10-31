@@ -1,25 +1,21 @@
-﻿using BinaryFileToTextFile.Models;
-using LogSender.Models;
-using LogSender.Utilities;
-using Newtonsoft.Json;
+﻿using LogSender.Utilities;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.IO;
-using System.IO.Compression;
 using System.Linq;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace LogSender
 {
     class LogSender
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger( "LogSender.cs" );
+
         ///**********************************************
         ///             Members Section
         ///**********************************************
-        
+
         private const int NUM_OF_FILES = 1;
 
         private DirectoryInfo _dirCybLogs;
@@ -61,6 +57,25 @@ namespace LogSender
         /// </summary>
         public void RunService()
         {
+            log.Error("error");
+            log.Error("error");
+            log.Error("error");
+            log.Error("error");
+            log.Error("error");
+            log.Error("error");
+            log.Error("error");
+            log.Error("error");
+            log.Error("error");
+            log.Error("error");
+            log.Error("error");
+            log.Error("error");
+            log.Error("error");
+            log.Error("error");
+            log.Error("error");
+            log.Error("error");
+            log.Error("error");
+            log.Error("error");
+            log.Error("error");
             _threadCyb = new Thread(() => SendLogs("cyb", _dirCybLogs));
             _threadCyb.Start();
 

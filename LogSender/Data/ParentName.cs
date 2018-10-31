@@ -5,7 +5,6 @@ namespace BinaryFileToTextFile.Data
 {
     class ParentName :FileData
     {
-
         ///**********************************************
         ///             Members Section
         ///**********************************************
@@ -19,9 +18,8 @@ namespace BinaryFileToTextFile.Data
         /// empty Ctor fot Parent name class
         /// </summary>
         public ParentName()
-        {
+        {}
 
-        }
         /// <summary>
         /// Ctor fot Parent name class
         /// </summary>

@@ -17,7 +17,6 @@ namespace BinaryFileToTextFile.Models
         ///**********************************************
         ///             Functions Section
         ///**********************************************
-        
         public void ExtractData(byte [] headerArray)
         {
             int fileIndex = 0;

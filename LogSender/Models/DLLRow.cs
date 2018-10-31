@@ -54,7 +54,7 @@ namespace BinaryFileToTextFile.Models
                     _fileExtractData[index] = new ImageName(_fileExtractData[(int)_fileExtractDataIndexs.IMAGE_PATH].GetData());
 
                 else if (index == (int)_fileExtractDataIndexs.PARENT_NAME)
-                    _fileExtractData[index] = new ImageName(_fileExtractData[(int)_fileExtractDataIndexs.PARENT_PATH].GetData());
+                    _fileExtractData[index] = new ParentName(_fileExtractData[(int)_fileExtractDataIndexs.PARENT_PATH].GetData());
                 else
                     _fileExtractData[index].ExtractData(loopIndex, expandedFileByteArray, ref fileIndex);
             }
@@ -106,12 +106,7 @@ namespace BinaryFileToTextFile.Models
         public void AddRowToDataOutput(StringBuilder dataAsString)
         {
             List<string> paramList = GetAsList();
-
-            dataAsString.Append(String.Join(",", paramList));
-
-            dataAsString.Append(",");
-
-            dataAsString.Append("\n ");
+            BuildAsCsv(paramList, dataAsString);
         }
     }
 }

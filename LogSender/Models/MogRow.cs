@@ -124,27 +124,7 @@ namespace BinaryFileToTextFile.Models
         {
             List<string> paramList = GetAsList();
 
-            dataAsString.Append(String.Join(",", paramList));
-
-            dataAsString.Append(",");
-
-            if (_expandSVCHost.Count > 0)
-            {
-                StringBuilder svcTemp = new StringBuilder();
-                //svcTemp.Append("\"");
-                for (int index = 0; index < _expandSVCHost.Count; index++)
-                {
-                    svcTemp.Append(_expandSVCHost[index]._appName + "," + _expandSVCHost[index]._fullPath + "," + _expandSVCHost[index]._status);
-
-                    if (index + 1 != _expandSVCHost.Count)
-                        svcTemp.Append("||");
-                }
-                //svcTemp.Append("\"");
-                dataAsString.Append(svcTemp);
-            }
-            else
-                dataAsString.Append(",");
-            dataAsString.Append("\n ");
+            BuildAsCsv(paramList, dataAsString);
         }
 
         /// <summary>

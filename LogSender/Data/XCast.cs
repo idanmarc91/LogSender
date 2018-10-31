@@ -1,10 +1,16 @@
-﻿
-namespace BinaryFileToTextFile.Data
+﻿namespace BinaryFileToTextFile.Data
 {
     class XCast :FileData
     {
+        ///**********************************************
+        ///             Members Section
+        ///**********************************************
         const int X_CAST_LEN = 1;
         private string _xCast;
+
+        ///**********************************************
+        ///             Functions Section
+        ///**********************************************
 
         /// <summary>
         /// This function extract x cast string 

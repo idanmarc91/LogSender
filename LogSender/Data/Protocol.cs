@@ -3,10 +3,16 @@ namespace BinaryFileToTextFile.Data
 {
     class Protocol : FileData
     {
+        ///**********************************************
+        ///             Members Section
+        ///**********************************************
         private const int PROTOCOL_LEN = 1;
-
         private string _protocol;
 
+        ///**********************************************
+        ///             Functions Section
+        ///**********************************************
+        
         /// <summary>
         /// this function extract protocol string
         /// </summary>

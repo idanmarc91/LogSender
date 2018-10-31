@@ -8,7 +8,6 @@ namespace BinaryFileToTextFile.Data
         ///             Members Section
         ///**********************************************
         const int PROCESS_NAME_LEN = 512;
-
         private string _processName;
 
         ///**********************************************
