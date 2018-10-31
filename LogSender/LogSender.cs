@@ -1,5 +1,7 @@
 ﻿using BinaryFileToTextFile.Models;
+using LogSender.Models;
 using LogSender.Utilities;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -92,8 +94,10 @@ namespace LogSender
                     {
                         FileInfo[] files = currDir.GetFiles();
 
-                        //json array - multifile json log - hold data from few file
-                        List<JsonLog> jsonArray = new List<JsonLog>();
+                        //multifile string - hold data from few file
+                        StringBuilder dataAsString = new StringBuilder();
+
+                        ParsingBinaryFile.AddOutputHeader(dataAsString);
 
                         //list of file name - hold file full name fot further action on the files like delete
                         List<string> listOfFileNames = new List<string>();
@@ -111,13 +115,16 @@ namespace LogSender
                             listOfFileNames.Add(file.FullName);
 
                             //parsing oparation
-                            ParsingBinaryFile.Parse(file.FullName, jsonArray, logType);
+                            ParsingBinaryFile.Parse(file.FullName, dataAsString, logType);
 
                         }
 
                         //get json data from multiple log files as one string
-                        string multipleLogFileAsjsonString = JsonDataConvertion.JsonSerialization(jsonArray);
-                        fileSize = System.Text.ASCIIEncoding.Unicode.GetByteCount(multipleLogFileAsjsonString);
+                        string multipleLogFileAsjsonString = JsonDataConvertion.JsonSerialization(dataAsString);
+
+
+                        //check with aviad. how to check the size before sending the data.
+                        //fileSize = System.Text.ASCIIEncoding.Unicode.GetByteCount(multipleLogFileAsjsonString);
 
                         //compress string with gzip
 

@@ -107,6 +107,7 @@
     </Compile>
     <Compile Include="Models\MogRow.cs" />
     <Compile Include="Models\MogTable.cs" />
+    <Compile Include="Models\Payload.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="ProjectInstaller.cs">
       <SubType>Component</SubType>

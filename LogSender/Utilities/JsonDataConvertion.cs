@@ -1,32 +1,30 @@
-﻿using BinaryFileToTextFile.Models;
+﻿using LogSender.Models;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace LogSender.Utilities
 {
     public class JsonDataConvertion
     {
         /// <summary>
-        /// 
+        /// This function get data as json with one payload attribute
         /// </summary>
         /// <param name="jsonArray"></param>
         /// <returns></returns>
-        public static string JsonSerialization(List<JsonLog> jsonArray)
+        public static string JsonSerialization(StringBuilder dataAsString)
         {
             try
             {
                 using (StringWriter jsonStrWriter = new StringWriter())
                 {
+                    Payload payload = new Payload(dataAsString);
                     JsonSerializer serializer = new JsonSerializer();
-                    serializer.Serialize(jsonStrWriter, jsonArray);
+
+                    serializer.Serialize(jsonStrWriter, payload);
 
                     return jsonStrWriter.ToString();
-                    //string Compressed = CompressString(jsonAsString);
                 }
             }
             catch (Exception ex)

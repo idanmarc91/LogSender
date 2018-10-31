@@ -1,6 +1,7 @@
 ﻿using BinaryFileToTextFile.Data;
 using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace BinaryFileToTextFile.Models
 {
@@ -116,51 +117,74 @@ namespace BinaryFileToTextFile.Models
         }
 
         /// <summary>
-        /// This function return the parameters as json
+        /// This function add current row to data output
         /// </summary>
-        /// <returns>csv format line</returns>
-        public JsonLog GetRowAsJson()
+        /// <param name="dataAsString"></param>
+        public void AddRowToDataOutput(StringBuilder dataAsString)
         {
-            JsonLog row = new JsonLog
-            {
-                HostName = _hostName,
-                ClientTime = _timeStamp.GetClientTime(),
-                FullServerTime = _timeStamp.GetFullServerTime(),
-                Protocol = _fileExtractData[(int)_fileExtractDataIndexs.PROTOCOL].GetData(),
-                Status = _fileExtractData[(int)_fileExtractDataIndexs.STATUS].GetData(),
-                Direction = _fileExtractData[(int)_fileExtractDataIndexs.DIRECTION].GetData(),
-                ApplicationName = _fileExtractData[(int)_fileExtractDataIndexs.APPLICATION_NAME].GetData(),
-                FilePath = _fileExtractData[(int)_fileExtractDataIndexs.FILE_PATH].GetData(),
-                XCast = _fileExtractData[(int)_fileExtractDataIndexs.X_CAST].GetData(),
-                State = _fileExtractData[(int)_fileExtractDataIndexs.STATE].GetData(),
-                SourceIP = _fileExtractData[(int)_fileExtractDataIndexs.SOURCE_IP].GetData(),
-                DestinationIP = _fileExtractData[(int)_fileExtractDataIndexs.DESTINATION_IP].GetData(),
-                OS = "win"
-        };
+            List<string> paramList = GetAsList();
 
+            dataAsString.Append(String.Join(",", paramList));
 
-            if (_fileExtractData[(int)_fileExtractDataIndexs.SOURCE_PORT].GetData() != "")
-                row.SourcePort = Int32.Parse(_fileExtractData[(int)_fileExtractDataIndexs.SOURCE_PORT].GetData());
-            if (_fileExtractData[(int)_fileExtractDataIndexs.DESTINATION_PORT].GetData() != "")
-                row.DestinationPort = Int32.Parse(_fileExtractData[(int)_fileExtractDataIndexs.DESTINATION_PORT].GetData());
-            if (_fileExtractData[(int)_fileExtractDataIndexs.SEQ_NUM].GetData() != "")
-                row.SequanceNumber = Int32.Parse(_fileExtractData[(int)_fileExtractDataIndexs.SEQ_NUM].GetData());
-            if (_fileExtractData[(int)_fileExtractDataIndexs.SUB_SEQ_NUM].GetData() != "")
-                row.SubSequanceNumber = Int32.Parse(_fileExtractData[(int)_fileExtractDataIndexs.SUB_SEQ_NUM].GetData());
-            if (_fileExtractData[(int)_fileExtractDataIndexs.MOG_COUNTER].GetData() != "")
-                row.MogCounter = Int32.Parse(_fileExtractData[(int)_fileExtractDataIndexs.MOG_COUNTER].GetData());
+            dataAsString.Append(",");
 
             if (_expandSVCHost.Count > 0)
             {
-                row.ChainArray = new ExpandSVCHostRow[_expandSVCHost.Count];
-
+                StringBuilder svcTemp = new StringBuilder();
+                //svcTemp.Append("\"");
                 for (int index = 0; index < _expandSVCHost.Count; index++)
                 {
-                    row.ChainArray[index] = _expandSVCHost[index];
-                }
-            }
+                    svcTemp.Append(_expandSVCHost[index]._appName + "," + _expandSVCHost[index]._fullPath + "," + _expandSVCHost[index]._status);
 
-            return row;
+                    if (index + 1 != _expandSVCHost.Count)
+                        svcTemp.Append("||");
+                }
+                //svcTemp.Append("\"");
+                dataAsString.Append(svcTemp);
+            }
+            else
+                dataAsString.Append(",");
+            dataAsString.Append("\n ");
+        }
+
+        /// <summary>
+        /// Return all parameters as list
+        /// </summary>
+        /// <returns>list of parameters </returns>
+        private List<string> GetAsList()
+        {
+            List<string> list = new List<string>
+            {
+                "win", //OS field
+                _hostName,
+                _timeStamp.GetClientTime(),
+                _timeStamp.GetFullServerTime(),
+                "",
+                "",
+                "",
+                _fileExtractData[(int)_fileExtractDataIndexs.APPLICATION_NAME].GetData(),
+                _fileExtractData[(int)_fileExtractDataIndexs.PROTOCOL].GetData(),
+                _fileExtractData[(int)_fileExtractDataIndexs.STATUS].GetData(),
+                _fileExtractData[(int)_fileExtractDataIndexs.SOURCE_PORT].GetData(),
+                _fileExtractData[(int)_fileExtractDataIndexs.DESTINATION_PORT].GetData(),
+                _fileExtractData[(int)_fileExtractDataIndexs.DIRECTION].GetData(),
+                _fileExtractData[(int)_fileExtractDataIndexs.FILE_PATH].GetData(),
+                _fileExtractData[(int)_fileExtractDataIndexs.X_CAST].GetData(),
+                _fileExtractData[(int)_fileExtractDataIndexs.STATE].GetData(),
+                _fileExtractData[(int)_fileExtractDataIndexs.SOURCE_IP].GetData(),
+                _fileExtractData[(int)_fileExtractDataIndexs.DESTINATION_IP].GetData(),
+                _fileExtractData[(int)_fileExtractDataIndexs.SEQ_NUM].GetData(),
+                _fileExtractData[(int)_fileExtractDataIndexs.SUB_SEQ_NUM].GetData(),
+                _fileExtractData[(int)_fileExtractDataIndexs.USER_NAME].GetData(),
+                _fileExtractData[(int)_fileExtractDataIndexs.MOG_COUNTER].GetData(),
+                "",
+                "",
+                "",
+                "",
+                "",
+                ""
+            };
+            return list;
         }
 
         /// <summary>

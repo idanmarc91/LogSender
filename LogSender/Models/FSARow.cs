@@ -77,66 +77,67 @@ namespace BinaryFileToTextFile.Models
         {
             List<string> list = new List<string>
             {
+                "win",
                 _hostName,
                 _timeStamp.GetClientTime(),
                 _timeStamp.GetFullServerTime(),
                 _fileExtractData[(int)_fileExtractDataIndexs.PROCESS_ID].GetData(),
                 _fileExtractData[(int)_fileExtractDataIndexs.PROCESS_NAME].GetData(),
                 _fileExtractData[(int)_fileExtractDataIndexs.PROCESS_PATH].GetData(),
-                _fileExtractData[(int)_fileExtractDataIndexs.DESTINATION_PATH].GetData(),
-                _fileExtractData[(int)_fileExtractDataIndexs.USER_NAME].GetData(),
+                "",
+                "",
                 _fileExtractData[(int)_fileExtractDataIndexs.STATUS].GetData(),
-                _fileExtractData[(int)_fileExtractDataIndexs.REASON].GetData(),
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
                 _fileExtractData[(int)_fileExtractDataIndexs.SEQ_NUM].GetData(),
-                _fileExtractData[(int)_fileExtractDataIndexs.SUB_SEQ_NUM].GetData()
+                _fileExtractData[(int)_fileExtractDataIndexs.SUB_SEQ_NUM].GetData(),
+                _fileExtractData[(int)_fileExtractDataIndexs.USER_NAME].GetData(),
+                "",
+                _fileExtractData[(int)_fileExtractDataIndexs.DESTINATION_PATH].GetData(),
+                _fileExtractData[(int)_fileExtractDataIndexs.REASON].GetData(),
+                "",
+                "",
+                "",
+                "",
             };
             return list;
         }
 
         /// <summary>
-        /// This function return the parameters as json
+        /// This function add current row to data output
         /// </summary>
-        /// <returns>csv format line</returns>
-        public JsonLog GetRowAsJson()
+        /// <param name="dataAsString"></param>
+        public void AddRowToDataOutput(StringBuilder dataAsString)
         {
-            JsonLog row = new JsonLog
-            {
-                HostName = _hostName,
-                ClientTime = _timeStamp.GetClientTime(),
-                FullServerTime = _timeStamp.GetFullServerTime(),
-                ProcessName = _fileExtractData[(int)_fileExtractDataIndexs.PROCESS_NAME].GetData(),
-                ProcessPath = _fileExtractData[(int)_fileExtractDataIndexs.PROCESS_PATH].GetData(),
-                DestinationPath = _fileExtractData[(int)_fileExtractDataIndexs.DESTINATION_PATH].GetData(),
-                UserName = _fileExtractData[(int)_fileExtractDataIndexs.USER_NAME].GetData(),
-                Status = _fileExtractData[(int)_fileExtractDataIndexs.STATUS].GetData(),
-                Reason = _fileExtractData[(int)_fileExtractDataIndexs.REASON].GetData(),
-                OS = "win"
-            };
+            List<string> paramList = GetAsList();
 
-            if (_fileExtractData[(int)_fileExtractDataIndexs.SEQ_NUM].GetData() != "")
-                row.SequanceNumber = Int32.Parse(_fileExtractData[(int)_fileExtractDataIndexs.SEQ_NUM].GetData());
-            if (_fileExtractData[(int)_fileExtractDataIndexs.SUB_SEQ_NUM].GetData() != "")
-                row.SubSequanceNumber = Int32.Parse(_fileExtractData[(int)_fileExtractDataIndexs.SUB_SEQ_NUM].GetData());
+            dataAsString.Append(String.Join(",", paramList));
+
+            dataAsString.Append(",");
 
             if (_expandSVCHost.Count > 0)
             {
-                row.ChainArray = new ExpandSVCHostRow[_expandSVCHost.Count];
-
+                StringBuilder svcTemp = new StringBuilder();
+                //svcTemp.Append("\"");
                 for (int index = 0; index < _expandSVCHost.Count; index++)
                 {
-                    row.ChainArray[index] = _expandSVCHost[index];
-                }
-            }
+                    svcTemp.Append(_expandSVCHost[index]._appName + "," + _expandSVCHost[index]._fullPath + "," + _expandSVCHost[index]._status);
 
-            return row;
-        }
-        /// <summary>
-        /// This function return the mog csv header line
-        /// </summary>
-        /// <returns></returns>
-        public static string GetCsvHeader()
-        {
-            return "host name,client time,full server time,process id,process name,process path,destination path,user name,status,reason,sequence number,sub sequence number,chain expand section";
+                    if (index + 1 != _expandSVCHost.Count)
+                        svcTemp.Append("||");
+                }
+                //svcTemp.Append("\"");
+                dataAsString.Append(svcTemp);
+            }
+            else
+                dataAsString.Append(",");
+            dataAsString.Append("\n ");
         }
 
         /// <summary>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace BinaryFileToTextFile.Models
 {
@@ -42,9 +43,6 @@ namespace BinaryFileToTextFile.Models
                     else
                         _serviceMogTable.Add(row);
                 }
-
-
-                //ExpandSVCHost();
             }
             catch (Exception ex)
             {
@@ -83,11 +81,11 @@ namespace BinaryFileToTextFile.Models
         /// This function convert table to json array
         /// </summary>
         /// <returns>json log array</returns>
-        public override void GetAsJson(List<JsonLog> array)
+        public override void GetAsJson(StringBuilder dataAsString)
         {
             foreach (MogRow row in _mogTable)
             {
-                array.Add(row.GetRowAsJson());
+                row.AddRowToDataOutput(dataAsString);
             }
         }
     }

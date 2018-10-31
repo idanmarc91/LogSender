@@ -1,7 +1,7 @@
 ﻿using BinaryFileToTextFile;
 using BinaryFileToTextFile.Models;
 using System;
-using System.Collections.Generic;
+using System.Text;
 
 namespace LogSender.Utilities
 {
@@ -14,7 +14,7 @@ namespace LogSender.Utilities
         /// <param name="FilePath"></param>
         /// <param name="jsonArray"></param>
         /// <param name="logType"></param>
-        public static void Parse(string FilePath, List<JsonLog> jsonArray, string logType)
+        public static void Parse(string FilePath, StringBuilder dataAsString, string logType)
         {
             try
             {
@@ -56,7 +56,7 @@ namespace LogSender.Utilities
 
                     //check if log table was created in the switch case above
                     if (logTable != null)
-                        logTable.GetAsJson(jsonArray);
+                        logTable.GetAsJson(dataAsString);
                     else
                         throw new Exception("log type string error. log table was not created");
                 }
@@ -69,6 +69,70 @@ namespace LogSender.Utilities
                 logFile.WriteLine("problem with " + FilePath + " in parsing function" + ex.Message);
                 logFile.Close();
             }
+        }
+
+        /// <summary>
+        /// This funcion add data header for output string
+        /// </summary>
+        /// <param name="dataAsString"></param>
+        public static void AddOutputHeader(StringBuilder dataAsString)
+        {
+            dataAsString.Append("OS," +
+                "HostName" +
+                "," +
+                "ClientTime" +
+                "," +
+                "FullServerTime" +
+                "," +
+                "ProcessID" +
+                "," +
+                "ProcessName" +
+                "," +
+                "ProcessPath" +
+                "," +
+                "ApplicationName" +
+                "," +
+                "Protocol" +
+                "," +
+                "Status" +
+                "," +
+                "SourcePort" +
+                "," +
+                "DestinationPort" +
+                "," +
+                "Direction" +
+                "," +
+                "FilePath" +
+                "," +
+                "XCast" +
+                "," +
+                "State" +
+                "," +
+                "SourceIP" +
+                "," +
+                "DestinationIP" +
+                "," +
+                "SequanceNumber" +
+                "," +
+                "SubSequanceNumber" +
+                "," +
+                "UserName" +
+                "," +
+                "MogCounter" +
+                "," +
+                "DestinationPath" +
+                "," +
+                "Reason" +
+                "," +
+                "ImagePath" +
+                "," +
+                "ImageName" +
+                "," +
+                "ParentPath" +
+                "," +
+                "ParentName" +
+                ",ChainArray");
+            dataAsString.Append("\n ");
         }
     }
 }

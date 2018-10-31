@@ -1,6 +1,7 @@
 ﻿using BinaryFileToTextFile.Data;
 using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace BinaryFileToTextFile.Models
 {
@@ -60,26 +61,57 @@ namespace BinaryFileToTextFile.Models
         }
 
         /// <summary>
-        /// This function return the parameters as json
+        /// Get dll row parameters as List of string
         /// </summary>
-        /// <returns>jsonlog format object</returns>
-        public JsonLog GetRowAsJson()
+        /// <returns>list<string> - dll parameters</returns>
+        private List<string> GetAsList()
         {
-            JsonLog row = new JsonLog
+            List<string> list = new List<string>
             {
-                ClientTime = _timeStamp.GetClientTime(),
-                FullServerTime = _timeStamp.GetFullServerTime(),
-                ImagePath = _fileExtractData[(int)_fileExtractDataIndexs.IMAGE_PATH].GetData(),
-                ImageName = _fileExtractData[(int)_fileExtractDataIndexs.IMAGE_NAME].GetData(),
-                ParentPath = _fileExtractData[(int)_fileExtractDataIndexs.PARENT_PATH].GetData(),
-                ParentName = _fileExtractData[(int)_fileExtractDataIndexs.PARENT_NAME].GetData(),
-                Reason = _fileExtractData[(int)_fileExtractDataIndexs.REASON].GetData(),
-                OS = "win"
+                "win",
+                _timeStamp.GetClientTime(),
+                _timeStamp.GetFullServerTime(),
+                _fileExtractData[(int)_fileExtractDataIndexs.PROCESS_ID].GetData(),
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                _fileExtractData[(int)_fileExtractDataIndexs.REASON].GetData(),
+                _fileExtractData[(int)_fileExtractDataIndexs.IMAGE_PATH].GetData(),
+                _fileExtractData[(int)_fileExtractDataIndexs.IMAGE_NAME].GetData(),
+                _fileExtractData[(int)_fileExtractDataIndexs.PARENT_PATH].GetData(),
+                _fileExtractData[(int)_fileExtractDataIndexs.PARENT_NAME].GetData(),
             };
+            return list;
+        }
 
-            if (_fileExtractData[(int)_fileExtractDataIndexs.PROCESS_ID].GetData() != "")
-                row.ProcessID = Int32.Parse(_fileExtractData[(int)_fileExtractDataIndexs.PROCESS_ID].GetData());
-            return row;
+        /// <summary>
+        /// This function add current row to data output
+        /// </summary>
+        /// <param name="dataAsString"></param>
+        public void AddRowToDataOutput(StringBuilder dataAsString)
+        {
+            List<string> paramList = GetAsList();
+
+            dataAsString.Append(String.Join(",", paramList));
+
+            dataAsString.Append(",");
+
+            dataAsString.Append("\n ");
         }
     }
 }

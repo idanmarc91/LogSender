@@ -1,6 +1,7 @@
 ﻿using BinaryFileToTextFile.Models;
 using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace BinaryFileToTextFile
 {
@@ -50,11 +51,11 @@ namespace BinaryFileToTextFile
         /// This function convert table to json array
         /// </summary>
         /// <returns>json log array</returns>
-        public override void GetAsJson(List<JsonLog> array)
+        public override void GetAsJson(StringBuilder dataAsString)
         {
             foreach (DLLRow row in _DLLTable)
             {
-                array.Add(row.GetRowAsJson());
+                row.AddRowToDataOutput(dataAsString);
             }
         }
     }
