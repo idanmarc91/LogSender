@@ -3,8 +3,11 @@ using System.ServiceProcess;
 
 namespace LogSender
 {
+
     public partial class LogSenderService : ServiceBase
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger( "LogSenderService.cs" );
+
         LogSender _logSender;
         public LogSenderService()
         {
@@ -13,19 +16,30 @@ namespace LogSender
 
         public void LogSenderServiceOnDebug()
         {
-            OnStart(null);
+            log.Debug( "Log Sender Service On Debug" );
+            OnStart( null );
         }
 
         protected override void OnStart(string[] args)
         {
-            string path = AppDomain.CurrentDomain.BaseDirectory;
-            _logSender = new LogSender(path);
-            _logSender.RunService();
+            try
+            {
+                log.Debug( "Log Sender Service OnStart Fucntion" );
+
+                string path = AppDomain.CurrentDomain.BaseDirectory;
+                _logSender = new LogSender( path );
+                _logSender.RunService();
+            }
+            catch( Exception ex )
+            {
+                log.Fatal( "creation of log sender class problem" , ex );
+            }
         }
 
         protected override void OnStop()
         {
-            //System.IO.File.Create(AppDomain.CurrentDomain.BaseDirectory + "OnStop.txt");
+            log.Debug( "Log Sender Service enter OnStop Fucntion" );
+            log.Warn( "The service has stoped" );
         }
     }
 }

@@ -8,6 +8,8 @@ namespace LogSender.Utilities
 {
     public class JsonDataConvertion
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger( "JsonDataConvertion.cs" );
+
         /// <summary>
         /// This function get data as json with one payload attribute
         /// </summary>
@@ -17,24 +19,21 @@ namespace LogSender.Utilities
         {
             try
             {
-                using (StringWriter jsonStrWriter = new StringWriter())
+                using( StringWriter jsonStrWriter = new StringWriter() )
                 {
-                    Payload payload = new Payload(dataAsString);
+                    Payload payload = new Payload( dataAsString );
                     JsonSerializer serializer = new JsonSerializer();
 
-                    serializer.Serialize(jsonStrWriter, payload);
+                    serializer.Serialize( jsonStrWriter , payload );
 
                     return jsonStrWriter.ToString();
                 }
             }
-            catch (Exception ex)
+            catch( Exception ex )
             {
-                //TODO:Create logger
-                System.IO.StreamWriter logFile = new System.IO.StreamWriter(AppDomain.CurrentDomain.BaseDirectory + "log.txt", true);
-                logFile.WriteLine("Json Serializetion error\n" + ex.Message);
-                logFile.Close();
-                return string.Empty;
+                log.Error( "problem with json serialization process" , ex );
             }
+            return "";
         }
     }
 }

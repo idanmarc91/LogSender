@@ -1,17 +1,13 @@
 ﻿using LogSender.Data;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LogSender.Utilities
 {
     public class ConfigFile
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger( "ConfigFile.cs" );
+
         public ConfigData configData = new ConfigData();
-
-
 
         /// <summary>
         /// This function read from configuration data
@@ -22,78 +18,89 @@ namespace LogSender.Utilities
             try
             {
                 //create config file if not exist
-                if (!(System.IO.File.Exists(path + "\\Log Sender Configuration.cfg")))
-                    System.IO.File.WriteAllText(path + "\\Log Sender Configuration.cfg", CreateCfgFile());
+                if( !( System.IO.File.Exists( path + "\\Log Sender Configuration.cfg" ) ) )
+                {
+                    System.IO.File.WriteAllText( path + "\\Log Sender Configuration.cfg" , CreateCfgFile() );
+                    log.Debug( "Log Sender Configuration file is created" );
+                }
+                else
+                {
+                    log.Debug( "Log Sender Configuration file exist" );
+                }
+
 
                 //Read Log Sender Configuration file
-                string[] lineArr = System.IO.File.ReadAllLines(path + "\\Log Sender Configuration.cfg");
+                string[] lineArr = System.IO.File.ReadAllLines( path + "\\Log Sender Configuration.cfg" );
 
                 int startOffset;
 
                 //Check lines in cfg file
-                foreach (string line in lineArr)
+                foreach( string line in lineArr )
                 {
-                    if (line.Contains("json_data_max_size="))
+                    if( line.Contains( "json_data_max_size=" ) )
                     {
                         try
                         {
                             startOffset = 19;
-                            if (line.Contains("#"))
+                            if( line.Contains( "#" ) )
                             {
-                                configData._jsonDataMaxSize = int.Parse(line.Substring(startOffset, line.IndexOf('#') - startOffset).Trim());
+                                configData._jsonDataMaxSize = int.Parse( line.Substring( startOffset , line.IndexOf( '#' ) - startOffset ).Trim() );
                             }
                             else
-                                configData._jsonDataMaxSize = int.Parse(line.Substring(startOffset, line.Length - startOffset));
+                            {
+                                configData._jsonDataMaxSize = int.Parse( line.Substring( startOffset , line.Length - startOffset ) );
+                            }
                         }
-                        catch (Exception)
+                        catch( Exception )
                         {
                             configData._jsonDataMaxSize = 10000000;
                         }
                     }
 
-                    if (line.Contains("binary_file_max_size="))
+                    if( line.Contains( "binary_file_max_size=" ) )
                     {
                         try
                         {
                             startOffset = 21;
-                            if (line.Contains("#"))
+                            if( line.Contains( "#" ) )
                             {
-                                configData._binaryFileMaxSize = int.Parse(line.Substring(startOffset, line.IndexOf('#') - startOffset).Trim());
+                                configData._binaryFileMaxSize = int.Parse( line.Substring( startOffset , line.IndexOf( '#' ) - startOffset ).Trim() );
                             }
                             else
-                                configData._binaryFileMaxSize = int.Parse(line.Substring(startOffset, line.Length - startOffset));
+                            {
+                                configData._binaryFileMaxSize = int.Parse( line.Substring( startOffset , line.Length - startOffset ) );
+                            }
                         }
-                        catch (Exception)
+                        catch( Exception )
                         {
                             configData._binaryFileMaxSize = 6291456; // 6 MB
                         }
                     }
 
-                    if (line.Contains("send_file_time="))
+                    if( line.Contains( "send_file_time=" ) )
                     {
                         try
                         {
                             startOffset = 15;
-                            if (line.Contains("#"))
+                            if( line.Contains( "#" ) )
                             {
-                                configData._threadSleepTime = int.Parse(line.Substring(startOffset, line.IndexOf('#') - startOffset).Trim());
+                                configData._threadSleepTime = int.Parse( line.Substring( startOffset , line.IndexOf( '#' ) - startOffset ).Trim() );
                             }
                             else
-                                configData._threadSleepTime = int.Parse(line.Substring(startOffset, line.Length - startOffset));
+                            {
+                                configData._threadSleepTime = int.Parse( line.Substring( startOffset , line.Length - startOffset ) );
+                            }
                         }
-                        catch (Exception)
+                        catch( Exception )
                         {
                             configData._threadSleepTime = 60000; // 60 Seconds by Default
                         }
                     }
                 }
             }
-            catch (Exception ex)
+            catch( Exception ex )
             {
-                //TODO:Create logger
-                System.IO.StreamWriter logFile = new System.IO.StreamWriter(AppDomain.CurrentDomain.BaseDirectory + "log.txt", true);
-                logFile.WriteLine("Configuration File Error \n" + ex.Message);
-                logFile.Close();
+                log.Fatal( "Fatal error config file in creation or reading process" , ex );
             }
         }
 

@@ -7,3 +7,17 @@ C:\Users\idanm\source\repos\LogSender\LogSender\obj\Release\LogSender.csproj.Cor
 C:\Users\idanm\source\repos\LogSender\LogSender\obj\Release\LogSender.exe
 C:\Users\idanm\source\repos\LogSender\LogSender\obj\Release\LogSender.pdb
 C:\Users\idanm\source\repos\LogSender\LogSender\obj\Release\LogSender.csprojAssemblyReference.cache
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\obj\Release\LogSender.csprojAssemblyReference.cache
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\obj\Release\LogSender.ProjectInstaller.resources
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\obj\Release\LogSender.csproj.GenerateResource.cache
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\obj\Release\LogSender.csproj.CoreCompileInputs.cache
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\obj\Release\LogSender.exe
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\obj\Release\LogSender.pdb
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\LogSender.exe.config
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\LogSender.exe
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\LogSender.pdb
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\log4net.dll
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\Newtonsoft.Json.dll
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\log4net.xml
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\Newtonsoft.Json.xml
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\obj\Release\LogSender.csproj.CopyComplete

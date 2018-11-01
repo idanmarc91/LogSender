@@ -7,6 +7,8 @@ namespace BinaryFileToTextFile
 {
     public class CybTable : Table
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger( "CybTable.cs" );
+
         ///**********************************************
         ///             Members Section
         ///**********************************************
@@ -47,10 +49,7 @@ namespace BinaryFileToTextFile
             }
             catch (Exception ex)
             {
-                //TODO:Create logger
-                System.IO.StreamWriter logFile = new System.IO.StreamWriter(AppDomain.CurrentDomain.BaseDirectory + "log.txt", true);
-                logFile.WriteLine("Cyb Table exception\n" + ex.Message);
-                logFile.Close();
+                log.Error("Problem with creating cyb table for one of the binary files",ex);
             }
 
         }

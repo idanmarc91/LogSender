@@ -32,6 +32,7 @@ namespace BinaryFileToTextFile
             _fileLenght = (int)_fs.Length;
             _file = new byte[_fileLenght];
             _fs.Read(_file, 0, _fileLenght);
+            _fs.Close();
 
         }
 

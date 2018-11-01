@@ -4,8 +4,10 @@ using System.Text;
 
 namespace BinaryFileToTextFile.Models
 {
-    public class MogTable :Table
-    {       
+    public class MogTable : Table
+    {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger( "MogTable.cs" );
+
         ///**********************************************
         ///             Members Section
         ///**********************************************
@@ -22,59 +24,37 @@ namespace BinaryFileToTextFile.Models
         ///**********************************************
 
         //Ctor of MogTable Class
-        public MogTable(byte[] expandedFileByteArray, string hostName, Int64 serverClientDelta, UInt16 headerVersion)
+        public MogTable(byte[] expandedFileByteArray , string hostName , Int64 serverClientDelta , UInt16 headerVersion)
         {
             try
             {
                 _mogTable = new List<MogRow>();
                 _serviceMogTable = new List<MogRow>();
 
-                int bytesInRow = DefineRowSize(headerVersion, BYTES_IN_ROW);
+                int bytesInRow = DefineRowSize( headerVersion , BYTES_IN_ROW );
 
-                for (int loopIndex = 0; loopIndex < expandedFileByteArray.Length; loopIndex = loopIndex + bytesInRow)
+                for( int loopIndex = 0 ; loopIndex < expandedFileByteArray.Length ; loopIndex = loopIndex + bytesInRow )
                 {
                     //create new row
-                    MogRow row = new MogRow(serverClientDelta, hostName, headerVersion);
+                    MogRow row = new MogRow( serverClientDelta , hostName , headerVersion );
 
-                    row.ExtractData(loopIndex, expandedFileByteArray);
+                    row.ExtractData( loopIndex , expandedFileByteArray );
 
-                    if (row.CheckSubSeqNum())
-                        _mogTable.Add(row);
-                    else
-                        _serviceMogTable.Add(row);
-                }
-            }
-            catch (Exception ex)
-            {
-                System.IO.StreamWriter logFile = new System.IO.StreamWriter(AppDomain.CurrentDomain.BaseDirectory + "log.txt", true);
-                logFile.WriteLine("Mog Table exception\n" + ex.Message);
-                logFile.Close();
-            }
-
-        }
-
-        /// <summary>
-        ///  this function expand SVC Host
-        /// </summary>
-        private void ExpandSVCHost()
-        {
-            foreach (MogRow row in _mogTable)
-            {
-                if (row.GetSeqNum() != "0")
-                {
-                    foreach (MogRow serviceRow in _serviceMogTable)
+                    if( row.CheckSubSeqNum() )
                     {
-                        if ((serviceRow.GetSubSeqNum() == row.GetSeqNum()) && (serviceRow.GetFullAccTime() == row.GetFullAccTime()))
-                            row.ExpandSvc(serviceRow);
-
+                        _mogTable.Add( row );
                     }
-                    _serviceMogTable.RemoveAll(i => i.GetFullAccTime() == row.GetFullAccTime() && i.GetSubSeqNum() == row.GetSeqNum());
-                    //add counter of svchost process name
-                    if (row.GetAppName() != "")
-                        row.ChangeAppName();
+                    else
+                    {
+                        _serviceMogTable.Add( row );
+                    }
                 }
             }
-        }
+            catch( Exception ex )
+            {
+                log.Error( "Problem with creating MOG table for one of the binary files" , ex );
+            }
+        } 
 
         /// <summary>
         /// This function convert table to json array
@@ -82,9 +62,9 @@ namespace BinaryFileToTextFile.Models
         /// <returns>json log array</returns>
         public override void GetAsJson(StringBuilder dataAsString)
         {
-            foreach (MogRow row in _mogTable)
+            foreach( MogRow row in _mogTable )
             {
-                row.AddRowToDataOutput(dataAsString);
+                row.AddRowToDataOutput( dataAsString );
             }
         }
     }

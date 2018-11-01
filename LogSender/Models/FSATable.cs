@@ -7,6 +7,8 @@ namespace BinaryFileToTextFile
 {
     public class FSATable : Table
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger( "FSATable.cs" );
+
         ///**********************************************
         ///             Members Section
         ///**********************************************
@@ -24,7 +26,7 @@ namespace BinaryFileToTextFile
         ///**********************************************
 
         //Ctor of FSATable
-        public FSATable(byte[] expandedFileByteArray, string hostName, Int64 serverClientDelta, UInt16 headerVersion)
+        public FSATable(byte[] expandedFileByteArray , string hostName , Int64 serverClientDelta , UInt16 headerVersion)
         {
             try
             {
@@ -32,28 +34,29 @@ namespace BinaryFileToTextFile
                 _servicesFsaTable = new List<FSARow>();
 
                 //define how much bytes in each FSA row 
-                int bytesInRow = DefineRowSize(headerVersion, BYTES_IN_ROW);
-                
-                //main loop itaration binary file and extract data from it
-                for (int loopIndex = 0; loopIndex < expandedFileByteArray.Length; loopIndex = loopIndex + bytesInRow)
-                {
-                    FSARow row = new FSARow(serverClientDelta, hostName, headerVersion);
-                    row.ExtractData(loopIndex, expandedFileByteArray);
+                int bytesInRow = DefineRowSize( headerVersion , BYTES_IN_ROW );
 
-                    if (row.GetSubSeqNum() == "0")
-                        _FsaTable.Add(row);
+                //main loop itaration binary file and extract data from it
+                for( int loopIndex = 0 ; loopIndex < expandedFileByteArray.Length ; loopIndex = loopIndex + bytesInRow )
+                {
+                    FSARow row = new FSARow( serverClientDelta , hostName , headerVersion );
+                    row.ExtractData( loopIndex , expandedFileByteArray );
+
+                    if( row.GetSubSeqNum() == "0" )
+                    {
+                        _FsaTable.Add( row );
+                    }
                     else
-                        _servicesFsaTable.Add(row);
+                    {
+                        _servicesFsaTable.Add( row );
+                    }
                 }
 
                 ExpandSVCHost();
             }
-            catch (Exception ex)
+            catch( Exception ex )
             {
-                //TODO:Create logger
-                System.IO.StreamWriter logFile = new System.IO.StreamWriter(AppDomain.CurrentDomain.BaseDirectory + "log.txt", true);
-                logFile.WriteLine("FSA Table exception\n" + ex.Message);
-                logFile.Close();
+                log.Error( "Problem with creating FSA table for one of the binary files" , ex );
             }
         }
 
@@ -62,20 +65,23 @@ namespace BinaryFileToTextFile
         /// </summary>
         private void ExpandSVCHost()
         {
-            foreach (FSARow row in _FsaTable)
+            foreach( FSARow row in _FsaTable )
             {
-                if (row.GetSeqNum() != "0")
+                if( row.GetSeqNum() != "0" )
                 {
-                    foreach (FSARow serviceRow in _servicesFsaTable)
+                    foreach( FSARow serviceRow in _servicesFsaTable )
                     {
-                        if ((serviceRow.GetSubSeqNum() == row.GetSeqNum()) && (serviceRow.GetFullAccTime() == row.GetFullAccTime()))
-                            row.ExpandSvc(serviceRow);
-                        
+                        if( ( serviceRow.GetSubSeqNum() == row.GetSeqNum() ) && ( serviceRow.GetFullAccTime() == row.GetFullAccTime() ) )
+                        {
+                            row.ExpandSvc( serviceRow );
+                        }
                     }
-                    _servicesFsaTable.RemoveAll(i => i.GetFullAccTime() == row.GetFullAccTime() && i.GetSubSeqNum() == row.GetSeqNum());
+                    _servicesFsaTable.RemoveAll( i => i.GetFullAccTime() == row.GetFullAccTime() && i.GetSubSeqNum() == row.GetSeqNum() );
                     //add counter of svchost process name
-                    if (row.GetProcessName() != "")
+                    if( row.GetProcessName() != "" )
+                    {
                         row.ChangeProcessName();
+                    }
                 }
             }
         }
@@ -86,9 +92,9 @@ namespace BinaryFileToTextFile
         /// <returns>json log array</returns>
         public override void GetAsJson(StringBuilder dataAsString)
         {
-            foreach (FSARow row in _FsaTable)
+            foreach( FSARow row in _FsaTable )
             {
-                row.AddRowToDataOutput(dataAsString);
+                row.AddRowToDataOutput( dataAsString );
             }
         }
     }

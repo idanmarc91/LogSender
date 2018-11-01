@@ -7,6 +7,8 @@ namespace LogSender.Utilities
 {
     abstract class ParsingBinaryFile
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger( "ParsingBinaryFile.cs" );
+
         /// <summary>
         /// This function is parsing the binary file.
         /// There are 4 different kind of parsing methods
@@ -14,14 +16,16 @@ namespace LogSender.Utilities
         /// <param name="FilePath"></param>
         /// <param name="jsonArray"></param>
         /// <param name="logType"></param>
-        public static void Parse(string FilePath, StringBuilder dataAsString, string logType)
+        public static void Parse(string FilePath , StringBuilder dataAsString , string logType)
         {
             try
             {
-                BinaryFileHandler bFile = new BinaryFileHandler(FilePath);
 
-                if (!bFile.IsFileNull())
+                BinaryFileHandler bFile = new BinaryFileHandler( FilePath );
+
+                if( !bFile.IsFileNull() )
                 {
+                    log.Debug( FilePath + " started his parsing process" );
                     //preprocessing file
                     BinaryFileData data = bFile.SeparateHeaderAndFile();
 
@@ -30,44 +34,49 @@ namespace LogSender.Utilities
 
                     //get header parameters
                     HeaderParameters headerParameters = new HeaderParameters();
-                    headerParameters.ExtractData(data._headerArray);
+                    headerParameters.ExtractData( data._headerArray );
 
                     Table logTable = null;
 
                     //Build data table from binary file
-                    switch (logType)
+                    switch( logType )
                     {
                         case "cyb":
-                            logTable = new CybTable(expandedFileByteArray, headerParameters._hostName.GetData(), headerParameters._serverClientDelta.GetData(), headerParameters._version.GetData());
+                            logTable = new CybTable( expandedFileByteArray , headerParameters._hostName.GetData() , headerParameters._serverClientDelta.GetData() , headerParameters._version.GetData() );
                             break;
 
                         case "fsa":
-                            logTable = new FSATable(expandedFileByteArray, headerParameters._hostName.GetData(), headerParameters._serverClientDelta.GetData(), headerParameters._version.GetData());
+                            logTable = new FSATable( expandedFileByteArray , headerParameters._hostName.GetData() , headerParameters._serverClientDelta.GetData() , headerParameters._version.GetData() );
                             break;
 
                         case "mog":
-                            logTable = new MogTable(expandedFileByteArray, headerParameters._hostName.GetData(), headerParameters._serverClientDelta.GetData(), headerParameters._version.GetData());
+                            logTable = new MogTable( expandedFileByteArray , headerParameters._hostName.GetData() , headerParameters._serverClientDelta.GetData() , headerParameters._version.GetData() );
                             break;
 
                         case "cimg":
-                            logTable = new DLLTable(expandedFileByteArray, headerParameters._hostName.GetData(), headerParameters._serverClientDelta.GetData());
+                            logTable = new DLLTable( expandedFileByteArray , headerParameters._hostName.GetData() , headerParameters._serverClientDelta.GetData() );
                             break;
                     }
 
                     //check if log table was created in the switch case above
-                    if (logTable != null)
-                        logTable.GetAsJson(dataAsString);
+                    if( logTable != null )
+                    {
+                        logTable.GetAsJson( dataAsString );
+                    }
                     else
-                        throw new Exception("log type string error. log table was not created");
+                    {
+                        throw new Exception( "log type string error. log table was not created" );
+                    }
+                    log.Debug( FilePath + " binary file has finished his parsing process" );
                 }
                 else
-                    throw new Exception("File Is Null");
+                {
+                    throw new Exception( "File Is Null" );
+                }
             }
-            catch (Exception ex)
+            catch( Exception ex )
             {
-                System.IO.StreamWriter logFile = new System.IO.StreamWriter(AppDomain.CurrentDomain.BaseDirectory + "log.txt", true);
-                logFile.WriteLine("problem with " + FilePath + " in parsing function" + ex.Message);
-                logFile.Close();
+                log.Error( "Problem in Parsing process with  " + FilePath , ex );
             }
         }
 
@@ -77,7 +86,7 @@ namespace LogSender.Utilities
         /// <param name="dataAsString"></param>
         public static void AddOutputHeader(StringBuilder dataAsString)
         {
-            dataAsString.Append("OS," +
+            dataAsString.Append( "OS," +
                 "HostName" +
                 "," +
                 "ClientTime" +
@@ -131,8 +140,8 @@ namespace LogSender.Utilities
                 "ParentPath" +
                 "," +
                 "ParentName" +
-                ",ChainArray");
-            dataAsString.Append("\n ");
+                ",ChainArray" );
+            dataAsString.Append( "\n " );
         }
     }
 }

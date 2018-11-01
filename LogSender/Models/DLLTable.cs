@@ -7,10 +7,12 @@ namespace BinaryFileToTextFile
 {
     public class DLLTable : Table
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger( "DLLTable.cs" );
+
         ///**********************************************
         ///             Members Section
         ///**********************************************
-        
+
         //Constant section
         const int BYTES_IN_ROW = 2064;
 
@@ -22,28 +24,25 @@ namespace BinaryFileToTextFile
         ///**********************************************
 
         //Ctor of DLLTable class
-        public DLLTable(byte[] expandedFileByteArray, string hostName, Int64 serverClientDelta)
+        public DLLTable(byte[] expandedFileByteArray , string hostName , Int64 serverClientDelta)
         {
             try
             {
                 //create new DLL list
                 _DLLTable = new List<DLLRow>();
-                
 
-                for (int loopIndex = 0; loopIndex < expandedFileByteArray.Length; loopIndex = loopIndex  + BYTES_IN_ROW)
+
+                for( int loopIndex = 0 ; loopIndex < expandedFileByteArray.Length ; loopIndex = loopIndex + BYTES_IN_ROW )
                 {
                     //create new row
-                    DLLRow row = new DLLRow(serverClientDelta);
-                    row.ExtractData(loopIndex, expandedFileByteArray);
-                    _DLLTable.Add(row);
+                    DLLRow row = new DLLRow( serverClientDelta );
+                    row.ExtractData( loopIndex , expandedFileByteArray );
+                    _DLLTable.Add( row );
                 }
             }
-            catch (Exception ex)
+            catch( Exception ex )
             {
-                //TODO:Create logger
-                System.IO.StreamWriter logFile = new System.IO.StreamWriter(AppDomain.CurrentDomain.BaseDirectory + "log.txt", true);
-                logFile.WriteLine("DLL Table exception\n" + ex.Message);
-                logFile.Close();
+                log.Error( "Problem with creating DLL table for one of the binary files" , ex );
             }
         }
 
@@ -53,9 +52,9 @@ namespace BinaryFileToTextFile
         /// <returns>json log array</returns>
         public override void GetAsJson(StringBuilder dataAsString)
         {
-            foreach (DLLRow row in _DLLTable)
+            foreach( DLLRow row in _DLLTable )
             {
-                row.AddRowToDataOutput(dataAsString);
+                row.AddRowToDataOutput( dataAsString );
             }
         }
     }

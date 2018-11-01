@@ -1,0 +1,21 @@
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\obj\Release\LogSender Tests.csprojAssemblyReference.cache
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\obj\Release\LogSender Tests.csproj.CoreCompileInputs.cache
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\bin\Release\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\bin\Release\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\bin\Release\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\bin\Release\LogSender Tests.dll
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\bin\Release\LogSender Tests.pdb
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\bin\Release\LogSender.exe
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\bin\Release\Microsoft.VisualStudio.TestPlatform.TestFramework.dll
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\bin\Release\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\bin\Release\log4net.dll
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\bin\Release\Newtonsoft.Json.dll
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\bin\Release\LogSender.pdb
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\bin\Release\LogSender.exe.config
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\bin\Release\Microsoft.VisualStudio.TestPlatform.TestFramework.xml
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\bin\Release\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\bin\Release\log4net.xml
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\bin\Release\Newtonsoft.Json.xml
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\obj\Release\LogSender Tests.csproj.CopyComplete
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\obj\Release\LogSender Tests.dll
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\obj\Release\LogSender Tests.pdb

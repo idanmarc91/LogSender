@@ -44,100 +44,112 @@ namespace LogSender
         /// </summary>
         public LogSender(string path)
         {
-            _config.CfgFile(path);
+            log.Debug( "Start creating log sender class" );
 
-            _dirCybLogs = new DirectoryInfo(path + "\\Packets");
-            _dirFSA = new DirectoryInfo(path + "\\FSAccess");
-            _dirImages = new DirectoryInfo(path + "\\Images");
-            _dirMOG = new DirectoryInfo(path+ "\\Multievent");
+            _config.CfgFile( path );
+
+            _dirCybLogs = new DirectoryInfo( path + "\\Packets" );
+            _dirFSA = new DirectoryInfo( path + "\\FSAccess" );
+            _dirImages = new DirectoryInfo( path + "\\Images" );
+            _dirMOG = new DirectoryInfo( path + "\\Multievent" );
+
+            log.Debug( "log sender class created" );
+
         }
 
         /// <summary>
-        /// 
+        /// This function run main service. create threads
         /// </summary>
         public void RunService()
         {
-            log.Error("error");
-            log.Error("error");
-            log.Error("error");
-            log.Error("error");
-            log.Error("error");
-            log.Error("error");
-            log.Error("error");
-            log.Error("error");
-            log.Error("error");
-            log.Error("error");
-            log.Error("error");
-            log.Error("error");
-            log.Error("error");
-            log.Error("error");
-            log.Error("error");
-            log.Error("error");
-            log.Error("error");
-            log.Error("error");
-            log.Error("error");
-            _threadCyb = new Thread(() => SendLogs("cyb", _dirCybLogs));
-            _threadCyb.Start();
+            log.Debug( "Service thread for each folder creation started" );
 
-            //_threadFSA = new Thread(() => SendLogs("fsa", _dirFSA));
-            //_threadFSA.Start();
+            try
+            {
 
-            //_threadImages = new Thread(() => SendLogs("cimg", _dirImages));
-            //_threadImages.Start();
+                _threadCyb = new Thread( () => SendLogs( "cyb" , _dirCybLogs ) );
+                _threadCyb.Start();
 
-            //_threadMOG = new Thread(() => SendLogs("mog", _dirMOG));
-            //_threadMOG.Start();
+                _threadFSA = new Thread( () => SendLogs( "fsa" , _dirFSA ) );
+                _threadFSA.Start();
+
+                _threadImages = new Thread( () => SendLogs( "cimg" , _dirImages ) );
+                _threadImages.Start();
+
+                _threadMOG = new Thread( () => SendLogs( "mog" , _dirMOG ) );
+                _threadMOG.Start();
+            }
+            catch( Exception ex )
+            {
+                log.Fatal( "Problem in thread creation" , ex );
+                Thread.CurrentThread.Abort();
+            }
 
         }
 
 
         /// <summary>
-        /// 
+        /// This function is the thread operation function
         /// </summary>
         /// <param name="logType"></param>
         /// <param name="currDir"></param>
-        private void SendLogs(string logType, DirectoryInfo currDir)
+        private void SendLogs(string logType , DirectoryInfo currDir)
         {
             try
             {
-                while(true)
+                log.Debug( logType + " thread started" );
+                while( true )
                 {
-                    //thread sleep for _threadSleepTime miliseconds - configurable
-                    //Thread.Sleep(_threadSleepTime);
-
-                    if (currDir.EnumerateFiles("*." + logType).Where(f => (f.Length <= _config.configData._binaryFileMaxSize) && (f.Length > 0)).ToArray().Length > NUM_OF_FILES)
+                    try
                     {
-                        FileInfo[] files = currDir.GetFiles();
+                        //thread sleep for _threadSleepTime miliseconds - configurable
+                        //Thread.Sleep( 2000 );
 
-                        //multifile string - hold data from few file
-                        StringBuilder dataAsString = new StringBuilder();
-
-                        ParsingBinaryFile.AddOutputHeader(dataAsString);
-
-                        //list of file name - hold file full name fot further action on the files like delete
-                        List<string> listOfFileNames = new List<string>();
-
-                        long fileSize = 0;
-
-                        //loop on files in folder
-                        foreach (FileInfo file in files)
+                        if( currDir.EnumerateFiles( "*." + logType ).Where( f => ( f.Length <= _config.configData._binaryFileMaxSize ) && ( f.Length > 0 ) ).ToArray().Length > NUM_OF_FILES )
                         {
-                            //check if file is locked Write mode
-                            if (FileMaintenance.IsFileLocked(file))
-                                continue;
+                            log.Debug( logType + " Thread strating his sending process" );
+                            FileInfo[] files = currDir.GetFiles();
 
-                            //add file path to the list.for tracking which file should be deleted 
-                            listOfFileNames.Add(file.FullName);
+                            //multifile string - hold data from few file
+                            StringBuilder dataAsString = new StringBuilder();
 
-                            //parsing oparation
-                            ParsingBinaryFile.Parse(file.FullName, dataAsString, logType);
+                            ParsingBinaryFile.AddOutputHeader( dataAsString );
+
+                            //list of file name - hold file full name fot further action on the files like delete
+                            List<string> listOfFileNames = new List<string>();
+
+                            long fileSize = 0;
+
+                            //loop on files in folder
+                            foreach( FileInfo file in files )
+                            {
+                                try
+                                {
+                                    //check if file is locked Write mode
+                                    if( FileMaintenance.IsFileLocked( file ) )
+                                    {
+                                        continue;
+                                    }
+
+                                    //add file path to the list.for tracking which file should be deleted 
+                                    listOfFileNames.Add( file.FullName );
+
+                                    //parsing oparation
+                                    ParsingBinaryFile.Parse( file.FullName , dataAsString , logType );
+                                }
+                                catch(Exception ex)
+                                {
+                                    log.Error("Problem While trying to read file -" + file.FullName , ex );
+                                }
+                            }
+
+
+
+                            log.Debug( "serialazation for " + logType + " files started" );
+                            //get json data from multiple log files as one string
+                            string multipleLogFileAsjsonString = JsonDataConvertion.JsonSerialization( dataAsString );
 
                         }
-
-                        //get json data from multiple log files as one string
-                        string multipleLogFileAsjsonString = JsonDataConvertion.JsonSerialization(dataAsString);
-
-
                         //check with aviad. how to check the size before sending the data.
                         //fileSize = System.Text.ASCIIEncoding.Unicode.GetByteCount(multipleLogFileAsjsonString);
 
@@ -147,13 +159,17 @@ namespace LogSender
                         //send to server
                         //SendToServer()
                     }
+                    
+                    catch( Exception ex )
+                    {
+                        log.Error( "Error occored while sending file to server" , ex );
+                    }
                 }
             }
-            catch (Exception ex)
+            catch( Exception ex )
             {
-                System.IO.StreamWriter logFile = new System.IO.StreamWriter(AppDomain.CurrentDomain.BaseDirectory + "log.txt", true);
-                logFile.WriteLine("\n" + ex.Message);
-                logFile.Close();
+                log.Fatal( logType + " Thread has stoped" , ex );
+                Thread.CurrentThread.Abort();
             }
         }
     }

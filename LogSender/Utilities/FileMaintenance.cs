@@ -10,9 +10,9 @@ namespace LogSender.Utilities
 
             try
             {
-                stream = file.Open(FileMode.Open, FileAccess.Read, FileShare.None);
+                stream = file.Open( FileMode.Open , FileAccess.Read , FileShare.None );
             }
-            catch (IOException)
+            catch( IOException )
             {
                 //the file is unavailable because it is:
                 //still being written to
@@ -22,8 +22,10 @@ namespace LogSender.Utilities
             }
             finally
             {
-                if (stream != null)
+                if( stream != null )
+                {
                     stream.Close();
+                }
             }
 
             //file is not locked
