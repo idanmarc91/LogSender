@@ -5,13 +5,14 @@ using System.Text;
 
 namespace BinaryFileToTextFile.Models
 {
-    class CybRow :LogRow
+    class CybRow : LogRow
     {
         ///**********************************************
         ///             Members Section
         ///**********************************************
-        enum _fileExtractDataIndexs {
-            PROTOCOL, STATUS, SOURCE_PORT ,DESTINATION_PORT, DIRECTION, ADDRESS_FAMILY, APPLICATION_NAME, FILE_PATH, FLOW_HANDLE, FLOW_STATE, X_CAST,
+        enum _fileExtractDataIndexs
+        {
+            PROTOCOL, STATUS, SOURCE_PORT, DESTINATION_PORT, DIRECTION, ADDRESS_FAMILY, APPLICATION_NAME, FILE_PATH, FLOW_HANDLE, FLOW_STATE, X_CAST,
             STATE, SOURCE_IP, DESTINATION_IP, SEQ_NUM, SUB_SEQ_NUM, USER_NAME
         };
 
@@ -26,13 +27,13 @@ namespace BinaryFileToTextFile.Models
         /// <param name="hostName"></param>
         /// <param name="headerVersion"></param>
         /// <param name="rowNumber"></param>
-        public CybRow(Int64 serverClientDelta, string hostName, ushort headerVersion)
+        public CybRow(Int64 serverClientDelta , string hostName , ushort headerVersion)
         {
             _expandSVCHost = new List<ExpandSVCHostRow>();
             //insert host name to row
             _hostName = hostName;
             _headerVersion = headerVersion;
-            _timeStamp = new TimeStamp(serverClientDelta);
+            _timeStamp = new TimeStamp( serverClientDelta );
 
             _fileExtractData = new List<FileData>
             {
@@ -61,28 +62,34 @@ namespace BinaryFileToTextFile.Models
         /// </summary>
         /// <param name="loopIndex"></param>
         /// <param name="expandedFileByteArray"></param>
-        public void ExtractData(int loopIndex, byte[] expandedFileByteArray)
+        public void ExtractData(int loopIndex , byte[] expandedFileByteArray)
         {
             //reset file index
             int fileIndex = 0;
 
             //extract time stamp from binary file
-            _timeStamp.ExtractData(loopIndex, expandedFileByteArray, ref fileIndex);
+            _timeStamp.ExtractData( loopIndex , expandedFileByteArray , ref fileIndex );
 
-            for (int index = 0; index < _fileExtractData.Count; index++)
+            for( int index = 0 ; index < _fileExtractData.Count ; index++ )
             {
 
-                if (index == (int)_fileExtractDataIndexs.SOURCE_IP)
-                    _fileExtractData[index] = new IP(_fileExtractData[(int)_fileExtractDataIndexs.ADDRESS_FAMILY].GetData());
+                if( index == ( int ) _fileExtractDataIndexs.SOURCE_IP )
+                {
+                    _fileExtractData[index] = new IP( _fileExtractData[( int ) _fileExtractDataIndexs.ADDRESS_FAMILY].GetData() );
+                }
 
-                if (index == (int)_fileExtractDataIndexs.DESTINATION_IP)
-                    _fileExtractData[index] = new IP(_fileExtractData[(int)_fileExtractDataIndexs.ADDRESS_FAMILY].GetData());
+                if( index == ( int ) _fileExtractDataIndexs.DESTINATION_IP )
+                {
+                    _fileExtractData[index] = new IP( _fileExtractData[( int ) _fileExtractDataIndexs.ADDRESS_FAMILY].GetData() );
+                }
 
-                _fileExtractData[index].ExtractData(loopIndex, expandedFileByteArray, ref fileIndex);
+                _fileExtractData[index].ExtractData( loopIndex , expandedFileByteArray , ref fileIndex );
             }
 
-            if (_fileExtractData[(int)_fileExtractDataIndexs.FLOW_STATE].GetData() == "END")
+            if( _fileExtractData[( int ) _fileExtractDataIndexs.FLOW_STATE].GetData() == "END" )
+            {
                 SetEmptyString();
+            }
         }
 
         /// <summary>
@@ -91,7 +98,7 @@ namespace BinaryFileToTextFile.Models
         /// <returns>boolean value true if == , false if !=</returns>
         public bool CheckSubSeqNum()
         {
-            return _fileExtractData[(int)_fileExtractDataIndexs.SUB_SEQ_NUM].GetData() == "0" ? true : false;
+            return _fileExtractData[( int ) _fileExtractDataIndexs.SUB_SEQ_NUM].GetData() == "0" ? true : false;
         }
 
         /// <summary>
@@ -99,17 +106,17 @@ namespace BinaryFileToTextFile.Models
         /// </summary>
         private void SetEmptyString()
         {
-            _fileExtractData[(int)_fileExtractDataIndexs.APPLICATION_NAME].SetData("");
-            _fileExtractData[(int)_fileExtractDataIndexs.DESTINATION_IP].SetData("");
-            _fileExtractData[(int)_fileExtractDataIndexs.DESTINATION_PORT].SetData("");
-            _fileExtractData[(int)_fileExtractDataIndexs.DIRECTION].SetData("");
-            _fileExtractData[(int)_fileExtractDataIndexs.PROTOCOL].SetData("");
-            _fileExtractData[(int)_fileExtractDataIndexs.SOURCE_IP].SetData("");
-            _fileExtractData[(int)_fileExtractDataIndexs.SOURCE_PORT].SetData("");
-            _fileExtractData[(int)_fileExtractDataIndexs.STATE].SetData("");
-            _fileExtractData[(int)_fileExtractDataIndexs.STATUS].SetData("");
-            _fileExtractData[(int)_fileExtractDataIndexs.X_CAST].SetData("");
-            _fileExtractData[(int)_fileExtractDataIndexs.FILE_PATH].SetData("");
+            _fileExtractData[( int ) _fileExtractDataIndexs.APPLICATION_NAME].SetData( "" );
+            _fileExtractData[( int ) _fileExtractDataIndexs.DESTINATION_IP].SetData( "" );
+            _fileExtractData[( int ) _fileExtractDataIndexs.DESTINATION_PORT].SetData( "" );
+            _fileExtractData[( int ) _fileExtractDataIndexs.DIRECTION].SetData( "" );
+            _fileExtractData[( int ) _fileExtractDataIndexs.PROTOCOL].SetData( "" );
+            _fileExtractData[( int ) _fileExtractDataIndexs.SOURCE_IP].SetData( "" );
+            _fileExtractData[( int ) _fileExtractDataIndexs.SOURCE_PORT].SetData( "" );
+            _fileExtractData[( int ) _fileExtractDataIndexs.STATE].SetData( "" );
+            _fileExtractData[( int ) _fileExtractDataIndexs.STATUS].SetData( "" );
+            _fileExtractData[( int ) _fileExtractDataIndexs.X_CAST].SetData( "" );
+            _fileExtractData[( int ) _fileExtractDataIndexs.FILE_PATH].SetData( "" );
         }
 
         /// <summary>
@@ -118,7 +125,7 @@ namespace BinaryFileToTextFile.Models
         /// <returns>string - sequence number</returns>
         public string GetSeqNum()
         {
-            return _fileExtractData[(int)_fileExtractDataIndexs.SEQ_NUM].GetData();
+            return _fileExtractData[( int ) _fileExtractDataIndexs.SEQ_NUM].GetData();
         }
 
         /// <summary>
@@ -127,7 +134,7 @@ namespace BinaryFileToTextFile.Models
         /// <returns>string - sub sequence number</returns>
         public string GetSubSeqNum()
         {
-            return _fileExtractData[(int)_fileExtractDataIndexs.SUB_SEQ_NUM].GetData();
+            return _fileExtractData[( int ) _fileExtractDataIndexs.SUB_SEQ_NUM].GetData();
         }
 
         /// <summary>
@@ -146,7 +153,7 @@ namespace BinaryFileToTextFile.Models
         public void AddRowToDataOutput(StringBuilder dataAsString)
         {
             List<string> paramList = GetAsList();
-            BuildAsCsv(paramList, dataAsString);
+            BuildAsCsv( paramList , dataAsString );
         }
 
         /// <summary>
@@ -205,7 +212,7 @@ namespace BinaryFileToTextFile.Models
         /// <returns>string - app name</returns>
         public string GetAppName()
         {
-            return _fileExtractData[(int)_fileExtractDataIndexs.APPLICATION_NAME].GetData();
+            return _fileExtractData[( int ) _fileExtractDataIndexs.APPLICATION_NAME].GetData();
         }
 
         /// <summary>
@@ -213,7 +220,7 @@ namespace BinaryFileToTextFile.Models
         /// </summary>
         public void ChangeAppName()
         {
-            _fileExtractData[(int)_fileExtractDataIndexs.APPLICATION_NAME].SetData(_fileExtractData[(int)_fileExtractDataIndexs.APPLICATION_NAME].GetData() + " (" + _expandSVCHost.Count + ")");
+            _fileExtractData[( int ) _fileExtractDataIndexs.APPLICATION_NAME].SetData( _fileExtractData[( int ) _fileExtractDataIndexs.APPLICATION_NAME].GetData() + " (" + _expandSVCHost.Count + ")" );
         }
 
         /// <summary>
@@ -224,11 +231,11 @@ namespace BinaryFileToTextFile.Models
         {
             ExpandSVCHostRow newExpandRow = new ExpandSVCHostRow
             {
-                _appName = serviceRow._fileExtractData[(int)_fileExtractDataIndexs.APPLICATION_NAME].GetData(),
-                _fullPath = serviceRow._fileExtractData[(int)_fileExtractDataIndexs.FILE_PATH].GetData(),
-                _status = serviceRow._fileExtractData[(int)_fileExtractDataIndexs.STATUS].GetData()
+                _appName = serviceRow._fileExtractData[( int ) _fileExtractDataIndexs.APPLICATION_NAME].GetData() ,
+                _fullPath = serviceRow._fileExtractData[( int ) _fileExtractDataIndexs.FILE_PATH].GetData() ,
+                _status = serviceRow._fileExtractData[( int ) _fileExtractDataIndexs.STATUS].GetData()
             };
-            _expandSVCHost.Add(newExpandRow);
+            _expandSVCHost.Add( newExpandRow );
         }
     }
 }

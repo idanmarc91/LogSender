@@ -17,7 +17,7 @@ namespace BinaryFileToTextFile
         const int BYTES_IN_ROW = 2064;
 
         //Private Section
-        private List<DLLRow> _DLLTable;
+        private readonly List<DLLRow> _DLLTable;
 
         ///**********************************************
         ///             Functions Section

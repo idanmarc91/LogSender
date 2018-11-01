@@ -5,7 +5,7 @@ using System.Text;
 
 namespace BinaryFileToTextFile.Models
 {
-    class DLLRow :Row
+    class DLLRow : Row
     {
         ///**********************************************
         ///             Members Section
@@ -24,9 +24,9 @@ namespace BinaryFileToTextFile.Models
         /// </summary>
         /// <param name="serverClientDelta"></param>
         /// <param name="rowNumber"></param>
-        public DLLRow (Int64 serverClientDelta)
+        public DLLRow(Int64 serverClientDelta)
         {
-            _timeStamp = new TimeStamp(serverClientDelta);
+            _timeStamp = new TimeStamp( serverClientDelta );
             _fileExtractData = new List<FileData>
             {
                 new ProcessId(),
@@ -43,20 +43,25 @@ namespace BinaryFileToTextFile.Models
         /// </summary>
         /// <param name="loopIndex"></param>
         /// <param name="expandedFileByteArray"></param>
-        public void ExtractData(int loopIndex,byte [] expandedFileByteArray)
+        public void ExtractData(int loopIndex , byte[] expandedFileByteArray)
         {
             int fileIndex = 0;
-            _timeStamp.ExtractData(loopIndex, expandedFileByteArray, ref fileIndex);
+            _timeStamp.ExtractData( loopIndex , expandedFileByteArray , ref fileIndex );
 
-            for(int index = 0; index < _fileExtractData.Count; index++)
+            for( int index = 0 ; index < _fileExtractData.Count ; index++ )
             {
-                if (index == (int)_fileExtractDataIndexs.IMAGE_NAME)
-                    _fileExtractData[index] = new ImageName(_fileExtractData[(int)_fileExtractDataIndexs.IMAGE_PATH].GetData());
-
-                else if (index == (int)_fileExtractDataIndexs.PARENT_NAME)
-                    _fileExtractData[index] = new ParentName(_fileExtractData[(int)_fileExtractDataIndexs.PARENT_PATH].GetData());
+                if( index == ( int ) _fileExtractDataIndexs.IMAGE_NAME )
+                {
+                    _fileExtractData[index] = new ImageName( _fileExtractData[( int ) _fileExtractDataIndexs.IMAGE_PATH].GetData() );
+                }
+                else if( index == ( int ) _fileExtractDataIndexs.PARENT_NAME )
+                {
+                    _fileExtractData[index] = new ParentName( _fileExtractData[( int ) _fileExtractDataIndexs.PARENT_PATH].GetData() );
+                }
                 else
-                    _fileExtractData[index].ExtractData(loopIndex, expandedFileByteArray, ref fileIndex);
+                {
+                    _fileExtractData[index].ExtractData( loopIndex , expandedFileByteArray , ref fileIndex );
+                }
             }
         }
 
@@ -106,7 +111,7 @@ namespace BinaryFileToTextFile.Models
         public void AddRowToDataOutput(StringBuilder dataAsString)
         {
             List<string> paramList = GetAsList();
-            BuildAsCsv(paramList, dataAsString);
+            BuildAsCsv( paramList , dataAsString );
         }
     }
 }

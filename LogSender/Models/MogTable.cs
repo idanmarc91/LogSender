@@ -16,8 +16,8 @@ namespace BinaryFileToTextFile.Models
         const int BYTES_IN_ROW = 1608;
 
         //Private Sction
-        private List<MogRow> _mogTable;
-        private List<MogRow> _serviceMogTable;
+        private readonly List<MogRow> _mogTable;
+        private readonly List<MogRow> _serviceMogTable;
 
         ///**********************************************
         ///             Functions Section

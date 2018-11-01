@@ -1,14 +1,22 @@
-2018-11-01 14:44:37,287 [1] Log_Level- FATAL File- LogSender.cs Function- RunService - Problem in thread creation
-System.Threading.ThreadAbortException: Thread was being aborted.
-   at System.Threading.Thread.AbortInternal()
-   at System.Threading.Thread.Abort()
-   at LogSender.LogSender.RunService() in C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\LogSender.cs:line 69
-2018-11-01 14:44:37,341 [1] Log_Level- FATAL File- LogSenderService.cs Function- OnStart - creation of log sender class problem
-System.Threading.ThreadAbortException: Thread was being aborted.
-   at LogSender.LogSender.RunService() in C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\LogSender.cs:line 86
-   at LogSender.LogSenderService.OnStart(String[] args) in C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\LogSenderService.cs:line 31
-2018-11-01 14:44:37,354 [1] Log_Level- FATAL File- Program.cs Function- Main - Problem with service creation
-System.Threading.ThreadAbortException: Thread was being aborted.
-   at LogSender.LogSenderService.OnStart(String[] args) in C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\LogSenderService.cs:line 36
-   at LogSender.LogSenderService.LogSenderServiceOnDebug() in C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\LogSenderService.cs:line 20
-   at LogSender.Program.Main() in C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\Program.cs:line 22
+2018-11-01 15:26:06,892 [4] Log_Level- ERROR File- ParsingBinaryFile.cs Function- Parse - Problem in Parsing process with  C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Debug\Packets\2.cyb
+System.OverflowException: Arithmetic operation resulted in an overflow.
+   at BinaryFileToTextFile.BinaryFileHandler.SeparateHeaderAndFile() in C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\Models\BinaryFileHandler.cs:line 60
+   at LogSender.Utilities.ParsingBinaryFile.Parse(FileInfo file, StringBuilder dataAsString, String logType) in C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\Utilities\ParsingBinaryFile.cs:line 31
+2018-11-01 15:38:21,525 [4] Log_Level-ERROR, File-ParsingBinaryFile.cs, Function-Parse, - Problem in Parsing process with  C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Debug\Packets\2.cyb
+System.ArgumentException: Destination array was not long enough. Check destIndex and length, and the array's lower bounds.
+   at System.Array.Copy(Array sourceArray, Int32 sourceIndex, Array destinationArray, Int32 destinationIndex, Int32 length, Boolean reliable)
+   at System.Array.Copy(Array sourceArray, Int32 sourceIndex, Array destinationArray, Int32 destinationIndex, Int32 length)
+   at BinaryFileToTextFile.BinaryFileHandler.SeparateHeaderAndFile() in C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\Models\BinaryFileHandler.cs:line 57
+   at LogSender.Utilities.ParsingBinaryFile.Parse(FileInfo file, StringBuilder dataAsString, String logType) in C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\Utilities\ParsingBinaryFile.cs:line 31
+2018-11-01 15:38:25,800 [4] Log_Level-ERROR, File-ParsingBinaryFile.cs, Function-Parse, - Problem in Parsing process with  C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Debug\Packets\21-10-18--13-24-32.cyb
+System.ArgumentException: Destination array was not long enough. Check destIndex and length, and the array's lower bounds.
+   at System.Array.Copy(Array sourceArray, Int32 sourceIndex, Array destinationArray, Int32 destinationIndex, Int32 length, Boolean reliable)
+   at System.Array.Copy(Array sourceArray, Int32 sourceIndex, Array destinationArray, Int32 destinationIndex, Int32 length)
+   at BinaryFileToTextFile.BinaryFileHandler.SeparateHeaderAndFile() in C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\Models\BinaryFileHandler.cs:line 57
+   at LogSender.Utilities.ParsingBinaryFile.Parse(FileInfo file, StringBuilder dataAsString, String logType) in C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\Utilities\ParsingBinaryFile.cs:line 31
+2018-11-01 15:38:27,472 [4] Log_Level-ERROR, File-ParsingBinaryFile.cs, Function-Parse, - Problem in Parsing process with  C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Debug\Packets\21-10-18--13-25-32.cyb
+System.ArgumentException: Destination array was not long enough. Check destIndex and length, and the array's lower bounds.
+   at System.Array.Copy(Array sourceArray, Int32 sourceIndex, Array destinationArray, Int32 destinationIndex, Int32 length, Boolean reliable)
+   at System.Array.Copy(Array sourceArray, Int32 sourceIndex, Array destinationArray, Int32 destinationIndex, Int32 length)
+   at BinaryFileToTextFile.BinaryFileHandler.SeparateHeaderAndFile() in C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\Models\BinaryFileHandler.cs:line 57
+   at LogSender.Utilities.ParsingBinaryFile.Parse(FileInfo file, StringBuilder dataAsString, String logType) in C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\Utilities\ParsingBinaryFile.cs:line 31

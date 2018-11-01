@@ -13,9 +13,9 @@ namespace BinaryFileToTextFile
         const int SIZE_OF_HEADER = 2;
 
         // Private section
-        private System.IO.FileStream _fs;
-        private int _fileLenght;
-        private byte[] _file;
+        //private System.IO.FileStream _fs;
+        private readonly int _fileLenght;
+        private readonly byte[] _file;
 
         ///**********************************************
         ///             Functions Section
@@ -24,16 +24,17 @@ namespace BinaryFileToTextFile
         /// <summary>
         /// Ctor of BinaryFileHandler Class
         /// </summary>
-        public BinaryFileHandler(string filePath)
+        public BinaryFileHandler(FileInfo file)
         {
+            _file = new byte[file.Length];
+            _file = File.ReadAllBytes( file.FullName );
+            _fileLenght = ( int ) file.Length;
 
-            _fs = new System.IO.FileStream(filePath, FileMode.Open);
-
-            _fileLenght = (int)_fs.Length;
-            _file = new byte[_fileLenght];
-            _fs.Read(_file, 0, _fileLenght);
-            _fs.Close();
-
+            //old code 
+            //_fs = new System.IO.FileStream( file.FullName , FileMode.Open );
+            //_file = new byte[_fileLenght];
+            //_fs.Read( _file , 0 , _fileLenght );
+            //_fs.Close();
         }
 
         /// <summary>
@@ -52,8 +53,6 @@ namespace BinaryFileToTextFile
             //copy bits from buffer to header array depend on size of header
             for (int i = 0; i < headerSize - 2; i++)
                 data._headerArray[i] = _file[i + 2];
-
-            //Array.Copy(_file, 0, data._headerArray, 0, headerSize);
 
             data._logArray = new byte[_fileLenght - headerSize];
 

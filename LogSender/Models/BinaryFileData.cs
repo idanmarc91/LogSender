@@ -31,10 +31,10 @@ namespace BinaryFileToTextFile.Models
                 else
                 {
                     int addSize = _logArray[i + 1]; //the number of zeros
-                    while (addSize != 0)
+
+                    while (addSize-- != 0)
                     {
                         newFile.Add(0);
-                        addSize--;
                     }
                     i++;
                 }

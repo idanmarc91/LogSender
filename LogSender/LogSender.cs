@@ -18,10 +18,10 @@ namespace LogSender
 
         private const int NUM_OF_FILES = 1;
 
-        private DirectoryInfo _dirCybLogs;
-        private DirectoryInfo _dirFSA;
-        private DirectoryInfo _dirImages;
-        private DirectoryInfo _dirMOG;
+        private readonly DirectoryInfo _dirCybLogs;
+        private readonly DirectoryInfo _dirFSA;
+        private readonly DirectoryInfo _dirImages;
+        private readonly DirectoryInfo _dirMOG;
         //private DirectoryInfo directoryRepository;
         //private DirectoryInfo directorySnapFreeze;
 
@@ -32,7 +32,7 @@ namespace LogSender
 
 
         //Data from config file
-        ConfigFile _config = new ConfigFile();
+        private readonly ConfigFile _config = new ConfigFile();
 
 
         ///**********************************************
@@ -54,7 +54,6 @@ namespace LogSender
             _dirMOG = new DirectoryInfo( path + "\\Multievent" );
 
             log.Debug( "log sender class created" );
-
         }
 
         /// <summary>
@@ -66,27 +65,24 @@ namespace LogSender
 
             try
             {
-
                 _threadCyb = new Thread( () => SendLogs( "cyb" , _dirCybLogs ) );
                 _threadCyb.Start();
 
-                _threadFSA = new Thread( () => SendLogs( "fsa" , _dirFSA ) );
-                _threadFSA.Start();
+                //_threadFSA = new Thread( () => SendLogs( "fsa" , _dirFSA ) );
+                //_threadFSA.Start();
 
-                _threadImages = new Thread( () => SendLogs( "cimg" , _dirImages ) );
-                _threadImages.Start();
+                //_threadImages = new Thread( () => SendLogs( "cimg" , _dirImages ) );
+                //_threadImages.Start();
 
-                _threadMOG = new Thread( () => SendLogs( "mog" , _dirMOG ) );
-                _threadMOG.Start();
+                //_threadMOG = new Thread( () => SendLogs( "mog" , _dirMOG ) );
+                //_threadMOG.Start();
             }
             catch( Exception ex )
             {
                 log.Fatal( "Problem in thread creation" , ex );
                 Thread.CurrentThread.Abort();
             }
-
         }
-
 
         /// <summary>
         /// This function is the thread operation function
@@ -108,11 +104,13 @@ namespace LogSender
                         if( currDir.EnumerateFiles( "*." + logType ).Where( f => ( f.Length <= _config.configData._binaryFileMaxSize ) && ( f.Length > 0 ) ).ToArray().Length > NUM_OF_FILES )
                         {
                             log.Debug( logType + " Thread strating his sending process" );
+                            //get files from directory
                             FileInfo[] files = currDir.GetFiles();
 
                             //multifile string - hold data from few file
                             StringBuilder dataAsString = new StringBuilder();
 
+                            //add the csv header to output string
                             ParsingBinaryFile.AddOutputHeader( dataAsString );
 
                             //list of file name - hold file full name fot further action on the files like delete
@@ -135,7 +133,7 @@ namespace LogSender
                                     listOfFileNames.Add( file.FullName );
 
                                     //parsing oparation
-                                    ParsingBinaryFile.Parse( file.FullName , dataAsString , logType );
+                                    ParsingBinaryFile.Parse( file , dataAsString , logType );
                                 }
                                 catch(Exception ex)
                                 {

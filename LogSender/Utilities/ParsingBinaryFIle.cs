@@ -1,6 +1,7 @@
 ﻿using BinaryFileToTextFile;
 using BinaryFileToTextFile.Models;
 using System;
+using System.IO;
 using System.Text;
 
 namespace LogSender.Utilities
@@ -16,16 +17,16 @@ namespace LogSender.Utilities
         /// <param name="FilePath"></param>
         /// <param name="jsonArray"></param>
         /// <param name="logType"></param>
-        public static void Parse(string FilePath , StringBuilder dataAsString , string logType)
+        public static void Parse(FileInfo file , StringBuilder dataAsString , string logType)
         {
             try
             {
 
-                BinaryFileHandler bFile = new BinaryFileHandler( FilePath );
+                BinaryFileHandler bFile = new BinaryFileHandler( file );
 
                 if( !bFile.IsFileNull() )
                 {
-                    log.Debug( FilePath + " started his parsing process" );
+                    log.Debug( file.FullName + " started his parsing process" );
                     //preprocessing file
                     BinaryFileData data = bFile.SeparateHeaderAndFile();
 
@@ -67,7 +68,7 @@ namespace LogSender.Utilities
                     {
                         throw new Exception( "log type string error. log table was not created" );
                     }
-                    log.Debug( FilePath + " binary file has finished his parsing process" );
+                    log.Debug( file.FullName + " binary file has finished his parsing process" );
                 }
                 else
                 {
@@ -76,7 +77,7 @@ namespace LogSender.Utilities
             }
             catch( Exception ex )
             {
-                log.Error( "Problem in Parsing process with  " + FilePath , ex );
+                log.Error( "Problem in Parsing process with  " + file.FullName , ex );
             }
         }
 

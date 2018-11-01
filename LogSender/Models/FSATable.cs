@@ -17,8 +17,8 @@ namespace BinaryFileToTextFile
         const int BYTES_IN_ROW = 2584;
 
         //Private Section
-        private List<FSARow> _FsaTable;
-        private List<FSARow> _servicesFsaTable;
+        private readonly List<FSARow> _FsaTable;
+        private readonly List<FSARow> _servicesFsaTable;
 
 
         ///**********************************************
