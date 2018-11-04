@@ -15,14 +15,13 @@ namespace LogSender.Utilities
         /// There are 4 different kind of parsing methods
         /// </summary>
         /// <param name="FilePath"></param>
-        /// <param name="jsonArray"></param>
         /// <param name="logType"></param>
-        public static void Parse(FileInfo file , StringBuilder dataAsString , string logType)
+        public static Table Parse(FileInfo file , string logType)
         {
             try
             {
-
                 BinaryFileHandler bFile = new BinaryFileHandler( file );
+                Table logTable = null;
 
                 if( !bFile.IsFileNull() )
                 {
@@ -37,7 +36,6 @@ namespace LogSender.Utilities
                     HeaderParameters headerParameters = new HeaderParameters();
                     headerParameters.ExtractData( data._headerArray );
 
-                    Table logTable = null;
 
                     //Build data table from binary file
                     switch( logType )
@@ -47,7 +45,7 @@ namespace LogSender.Utilities
                             break;
 
                         case "fsa":
-                            logTable = new FSATable( expandedFileByteArray , headerParameters._hostName.GetData() , headerParameters._serverClientDelta.GetData() , headerParameters._version.GetData() );
+                            logTable = new FsaTable( expandedFileByteArray , headerParameters._hostName.GetData() , headerParameters._serverClientDelta.GetData() , headerParameters._version.GetData() );
                             break;
 
                         case "mog":
@@ -58,26 +56,27 @@ namespace LogSender.Utilities
                             logTable = new DLLTable( expandedFileByteArray , headerParameters._hostName.GetData() , headerParameters._serverClientDelta.GetData() );
                             break;
                     }
-
-                    //check if log table was created in the switch case above
-                    if( logTable != null )
-                    {
-                        logTable.GetAsJson( dataAsString );
-                    }
-                    else
-                    {
-                        throw new Exception( "log type string error. log table was not created" );
-                    }
-                    log.Debug( file.FullName + " binary file has finished his parsing process" );
                 }
                 else
                 {
                     throw new Exception( "File Is Null" );
                 }
+
+                //check if log table was created in the switch case above
+                if( logTable != null )
+                {
+                    log.Debug( file.FullName + " binary file has finished his parsing process" );
+                    return logTable;
+                }
+                else
+                {
+                    throw new Exception( "log type string error. log table was not created" );
+                }
             }
             catch( Exception ex )
             {
                 log.Error( "Problem in Parsing process with  " + file.FullName , ex );
+                return null;
             }
         }
 

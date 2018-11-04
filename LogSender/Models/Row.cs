@@ -14,13 +14,16 @@ namespace BinaryFileToTextFile.Models
         protected TimeStamp _timeStamp;
 
 
-        public virtual void BuildAsCsv(List<string> paramList , StringBuilder dataAsString)
+        public virtual StringBuilder BuildAsCsv(List<string> paramList )
         {
+            StringBuilder dataAsString = new StringBuilder();
             dataAsString.Append( String.Join( "," , paramList ) );
 
             dataAsString.Append( "," );
 
             dataAsString.Append( "\n " );
+
+            return dataAsString;
         }
     }
 }

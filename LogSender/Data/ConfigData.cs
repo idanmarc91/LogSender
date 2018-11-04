@@ -6,5 +6,6 @@ namespace LogSender.Data
         public int _jsonDataMaxSize { get; set; }
         public int _binaryFileMaxSize { get; set; }
         public int _threadSleepTime { get; set; } //in miliseconds
+        public string _hostIp { get; set; }
     }
 }

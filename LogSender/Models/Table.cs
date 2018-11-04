@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System;
+using System.Text;
 
 namespace BinaryFileToTextFile
 {
@@ -9,8 +10,9 @@ namespace BinaryFileToTextFile
         ///**********************************************
 
         //Constant Section
-        const int NEW_VER_BYTE_EXTENTION = 512;
+        private const int NEW_VER_BYTE_EXTENTION = 512;
 
+        protected StringBuilder csvFormat;
         ///**********************************************
         ///             Functions Section
         ///**********************************************
@@ -25,6 +27,16 @@ namespace BinaryFileToTextFile
             return ( headerVersion > 2 ) ? ( byte_in_row + NEW_VER_BYTE_EXTENTION ) : byte_in_row;
         }
 
-        public abstract void GetAsJson(StringBuilder dataAsString);
+        public abstract void ConvertRowsToCsvFormat();
+
+        public StringBuilder GetDataAsString()
+        {
+            return csvFormat;
+        }
+
+        internal int GetDataSize()
+        {
+            return csvFormat.Length;
+        }
     }
 }

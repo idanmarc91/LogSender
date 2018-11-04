@@ -4,7 +4,6 @@ using LogSender.Utilities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.IO;
-using System.Text;
 
 namespace LogSender_Tests
 {
@@ -20,8 +19,6 @@ namespace LogSender_Tests
             FileInfo[] logFiles = _directory.GetFiles( "*.cyb" );
 
             BinaryFileHandler bf = new BinaryFileHandler( logFiles[0] );
-
-            StringBuilder dataAsString = new StringBuilder();
 
             string jsonTest = string.Empty;
             string jsonTrueOutput = File.ReadAllText( path + @"\Test Logs\" + "cyb true output.txt" );
@@ -41,9 +38,9 @@ namespace LogSender_Tests
 
                 //extract data from binary file
                 CybTable log = new CybTable( expandedFileByteArray , headerParameters._hostName.GetData() , headerParameters._serverClientDelta.GetData() , headerParameters._version.GetData() );
-                log.GetAsJson( dataAsString );
+                log.ConvertRowsToCsvFormat();
 
-                jsonTest = JsonDataConvertion.JsonSerialization( dataAsString );
+                jsonTest = JsonDataConvertion.JsonSerialization( log.GetDataAsString() );
             }
 
             //Assert
@@ -59,8 +56,6 @@ namespace LogSender_Tests
             FileInfo[] logFiles = _directory.GetFiles( "*.fsa" );
 
             BinaryFileHandler bf = new BinaryFileHandler( logFiles[0] );
-
-            StringBuilder dataAsString = new StringBuilder();
 
             string jsonTest = string.Empty;
             string jsonTrueOutput = File.ReadAllText( path + @"\Test Logs\" + "fsa true output.txt" );
@@ -79,10 +74,11 @@ namespace LogSender_Tests
                 headerParameters.ExtractData( data._headerArray );
 
                 //extract data from binary file
-                FSATable log = new FSATable( expandedFileByteArray , headerParameters._hostName.GetData() , headerParameters._serverClientDelta.GetData() , headerParameters._version.GetData() );
-                log.GetAsJson( dataAsString );
+                FsaTable log = new FsaTable( expandedFileByteArray , headerParameters._hostName.GetData() , headerParameters._serverClientDelta.GetData() , headerParameters._version.GetData() );
 
-                jsonTest = JsonDataConvertion.JsonSerialization( dataAsString );
+                log.ConvertRowsToCsvFormat();
+
+                jsonTest = JsonDataConvertion.JsonSerialization( log.GetDataAsString() );
             }
 
             //Assert
@@ -98,7 +94,6 @@ namespace LogSender_Tests
             FileInfo[] logFiles = _directory.GetFiles( "*.cimg" );
 
             BinaryFileHandler bf = new BinaryFileHandler( logFiles[0] );
-            StringBuilder dataAsString = new StringBuilder();
 
             string jsonTest = string.Empty;
             string jsonTrueOutput = File.ReadAllText( path + @"\Test Logs\" + "cimg true output.txt" );
@@ -118,9 +113,10 @@ namespace LogSender_Tests
 
                 //extract data from binary file
                 DLLTable log = new DLLTable( expandedFileByteArray , headerParameters._hostName.GetData() , headerParameters._serverClientDelta.GetData() );
-                log.GetAsJson( dataAsString );
 
-                jsonTest = JsonDataConvertion.JsonSerialization( dataAsString );
+                log.ConvertRowsToCsvFormat();
+
+                jsonTest = JsonDataConvertion.JsonSerialization( log.GetDataAsString() );
             }
 
             //Assert
@@ -136,7 +132,6 @@ namespace LogSender_Tests
             FileInfo[] logFiles = _directory.GetFiles( "*.mog" );
 
             BinaryFileHandler bf = new BinaryFileHandler( logFiles[0] );
-            StringBuilder dataAsString = new StringBuilder();
 
             string jsonTest = string.Empty;
             string jsonTrueOutput = File.ReadAllText( path + @"\Test Logs\" + "mog true output.txt" );
@@ -156,9 +151,9 @@ namespace LogSender_Tests
 
                 //extract data from binary file
                 MogTable log = new MogTable( expandedFileByteArray , headerParameters._hostName.GetData() , headerParameters._serverClientDelta.GetData() , headerParameters._version.GetData() );
-                log.GetAsJson( dataAsString );
+                log.ConvertRowsToCsvFormat();
 
-                jsonTest = JsonDataConvertion.JsonSerialization( dataAsString );
+                jsonTest = JsonDataConvertion.JsonSerialization( log.GetDataAsString() );
             }
 
             //Assert

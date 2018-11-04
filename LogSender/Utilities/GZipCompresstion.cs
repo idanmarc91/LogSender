@@ -5,7 +5,7 @@ using System.Text;
 
 namespace LogSender.Utilities
 {
-    class JsonCompress
+    public class GZipCompresstion
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger( "JsonCompress.cs" );
 
@@ -14,7 +14,7 @@ namespace LogSender.Utilities
         /// </summary>
         /// <param name="text"></param>
         /// <returns></returns>
-        public static string CompressString(string text)
+        public static byte[] CompressString(string text)
         {
             try
             {
@@ -31,16 +31,20 @@ namespace LogSender.Utilities
                 var compressedData = new byte[memoryStream.Length];
                 memoryStream.Read( compressedData , 0 , compressedData.Length );
 
-                var gZipBuffer = new byte[compressedData.Length + 4];
+                byte[] gZipBuffer = new byte[compressedData.Length + 4];
                 Buffer.BlockCopy( compressedData , 0 , gZipBuffer , 4 , compressedData.Length );
                 Buffer.BlockCopy( BitConverter.GetBytes( buffer.Length ) , 0 , gZipBuffer , 0 , 4 );
-                return Convert.ToBase64String( gZipBuffer );
+
+                log.Debug( "GZip compression prccess ended successfully" );
+
+                return gZipBuffer;
+                //return Convert.ToBase64String( gZipBuffer );
 
             }
             catch( Exception ex )
             {
                 log.Error( "Error occurred while compressing the data" , ex );
-                return "";
+                return null;
             }
         }
 
@@ -68,6 +72,8 @@ namespace LogSender.Utilities
                     {
                         gZipStream.Read( buffer , 0 , buffer.Length );
                     }
+
+                    log.Debug( "GZip decompression process ended successfully" );
 
                     return Encoding.UTF8.GetString( buffer );
                 }

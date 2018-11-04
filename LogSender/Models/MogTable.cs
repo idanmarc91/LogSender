@@ -54,17 +54,19 @@ namespace BinaryFileToTextFile.Models
             {
                 log.Error( "Problem with creating MOG table for one of the binary files" , ex );
             }
-        } 
+        }
 
         /// <summary>
-        /// This function convert table to json array
+        /// This function convert table to csv array
         /// </summary>
-        /// <returns>json log array</returns>
-        public override void GetAsJson(StringBuilder dataAsString)
+        public override void ConvertRowsToCsvFormat()
         {
+            csvFormat = new StringBuilder();
+
             foreach( MogRow row in _mogTable )
             {
-                row.AddRowToDataOutput( dataAsString );
+                csvFormat.Append( row.AddRowToDataOutput() );
+
             }
         }
     }

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace BinaryFileToTextFile
 {
-    public class FSATable : Table
+    public class FsaTable : Table
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger( "FSATable.cs" );
 
@@ -26,7 +26,7 @@ namespace BinaryFileToTextFile
         ///**********************************************
 
         //Ctor of FSATable
-        public FSATable(byte[] expandedFileByteArray , string hostName , Int64 serverClientDelta , UInt16 headerVersion)
+        public FsaTable(byte[] expandedFileByteArray , string hostName , Int64 serverClientDelta , UInt16 headerVersion)
         {
             try
             {
@@ -87,14 +87,15 @@ namespace BinaryFileToTextFile
         }
 
         /// <summary>
-        /// This function convert table to json array
+        /// This function convert table to csv array
         /// </summary>
-        /// <returns>json log array</returns>
-        public override void GetAsJson(StringBuilder dataAsString)
+        public override void ConvertRowsToCsvFormat()
         {
+            csvFormat = new StringBuilder();
+
             foreach( FSARow row in _FsaTable )
             {
-                row.AddRowToDataOutput( dataAsString );
+                csvFormat.Append( row.AddRowToDataOutput() );
             }
         }
     }

@@ -108,10 +108,10 @@ namespace BinaryFileToTextFile.Models
         /// This function add current row to data output
         /// </summary>
         /// <param name="dataAsString"></param>
-        public void AddRowToDataOutput(StringBuilder dataAsString)
+        public StringBuilder AddRowToDataOutput()
         {
             List<string> paramList = GetAsList();
-            BuildAsCsv( paramList , dataAsString );
+            return BuildAsCsv( paramList );
         }
     }
 }

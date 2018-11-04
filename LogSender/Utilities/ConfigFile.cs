@@ -96,6 +96,27 @@ namespace LogSender.Utilities
                             configData._threadSleepTime = 60000; // 60 Seconds by Default
                         }
                     }
+
+                    if( line.Contains( "host_ip=" ) )
+                    {
+                        try
+                        {
+                            startOffset = 8;
+                            if( line.Contains( "#" ) )
+                            {
+                                configData._threadSleepTime = int.Parse( line.Substring( startOffset , line.IndexOf( '#' ) - startOffset ).Trim() );
+                            }
+                            else
+                            {
+                                configData._threadSleepTime = int.Parse( line.Substring( startOffset , line.Length - startOffset ) );
+                            }
+                        }
+                        catch( Exception )
+                        {
+                            configData._hostIp = "http://10.0.0.174:8080/input"; // 60 Seconds by Default
+                        }
+                    }
+
                 }
             }
             catch( Exception ex )
@@ -137,6 +158,8 @@ namespace LogSender.Utilities
             strConfig += "binary_file_max_size=6291456 #max size of binary file - if file exceeded this value the log sender will not send it to the server" + Environment.NewLine;
 
             strConfig += "send_file_time=60000 #every 'value' miliseconds the log sender will check the log folders for new files" + Environment.NewLine;
+
+            strConfig += "host_ip=http://10.0.0.174:8080/input #The server IP address" + Environment.NewLine;
 
             return strConfig;
         }

@@ -14,8 +14,9 @@ namespace BinaryFileToTextFile.Models
         protected List<ExpandSVCHostRow> _expandSVCHost;
 
 
-        public override void BuildAsCsv(List<string> paramList,StringBuilder dataAsString)
+        public override StringBuilder BuildAsCsv(List<string> paramList)
         {
+            StringBuilder dataAsString = new StringBuilder();
             dataAsString.Append(String.Join(",", paramList));
 
             dataAsString.Append(",");
@@ -37,6 +38,7 @@ namespace BinaryFileToTextFile.Models
             else
                 dataAsString.Append(",");
             dataAsString.Append("\n ");
+            return dataAsString;
         }
     }
 }
