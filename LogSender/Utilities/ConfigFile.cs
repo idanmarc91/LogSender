@@ -77,11 +77,11 @@ namespace LogSender.Utilities
                         }
                     }
 
-                    if( line.Contains( "send_file_time=" ) )
+                    if( line.Contains( "sleep_time_cycle=" ) )
                     {
                         try
                         {
-                            startOffset = 15;
+                            startOffset = 17;
                             if( line.Contains( "#" ) )
                             {
                                 configData._threadSleepTime = int.Parse( line.Substring( startOffset , line.IndexOf( '#' ) - startOffset ).Trim() );
@@ -104,16 +104,92 @@ namespace LogSender.Utilities
                             startOffset = 8;
                             if( line.Contains( "#" ) )
                             {
-                                configData._threadSleepTime = int.Parse( line.Substring( startOffset , line.IndexOf( '#' ) - startOffset ).Trim() );
+                                configData._hostIp =  line.Substring( startOffset , line.IndexOf( '#' ) - startOffset ).Trim() ;
                             }
                             else
                             {
-                                configData._threadSleepTime = int.Parse( line.Substring( startOffset , line.Length - startOffset ) );
+                                configData._hostIp =  line.Substring( startOffset , line.Length - startOffset ) ;
                             }
                         }
                         catch( Exception )
                         {
-                            configData._hostIp = "http://10.0.0.174:8080/input"; // 60 Seconds by Default
+                            configData._hostIp = "http://10.0.0.174:8080"; // 60 Seconds by Default
+                        }
+                    }
+                    if( line.Contains( "minimum_number_of_file_to_send=" ) )
+                    {
+                        try
+                        {
+                            startOffset = 31;
+                            if( line.Contains( "#" ) )
+                            {
+                                configData._minNumOfFilesToSend = int.Parse( line.Substring( startOffset , line.IndexOf( '#' ) - startOffset ).Trim() );
+                            }
+                            else
+                            {
+                                configData._minNumOfFilesToSend = int.Parse( line.Substring( startOffset , line.Length - startOffset ) );
+                            }
+                        }
+                        catch( Exception )
+                        {
+                            configData._minNumOfFilesToSend = 2; 
+                        }
+                    }
+                    if( line.Contains( "number_of_times_to_retry_sending=" ) )
+                    {
+                        try
+                        {
+                            startOffset = 33;
+                            if( line.Contains( "#" ) )
+                            {
+                                configData._numberOfTimesToRetry = int.Parse( line.Substring( startOffset , line.IndexOf( '#' ) - startOffset ).Trim() );
+                            }
+                            else
+                            {
+                                configData._numberOfTimesToRetry = int.Parse( line.Substring( startOffset , line.Length - startOffset ) );
+                            }
+                        }
+                        catch( Exception )
+                        {
+                            configData._numberOfTimesToRetry = 5;
+                        }
+                    }
+                    if( line.Contains( "wait_time_before_retry=" ) )
+                    {
+                        try
+                        {
+                            startOffset = 23;
+                            if( line.Contains( "#" ) )
+                            {
+                                configData._waitTimeBeforeRetry = int.Parse( line.Substring( startOffset , line.IndexOf( '#' ) - startOffset ).Trim() );
+                            }
+                            else
+                            {
+                                configData._waitTimeBeforeRetry = int.Parse( line.Substring( startOffset , line.Length - startOffset ) );
+                            }
+                        }
+                        catch( Exception )
+                        {
+                            configData._waitTimeBeforeRetry = 2000;
+                        }
+                    }
+                    if( line.Contains( "max_binary_folder_size=" ) )
+                    {
+                        try
+                        {
+                            startOffset = 23;
+                            if( line.Contains( "#" ) )
+                            {
+                                configData._max_binary_folder_size = long.Parse( line.Substring( startOffset , line.IndexOf( '#' ) - startOffset ).Trim() );
+                            }
+                            else
+                            {
+                                configData._max_binary_folder_size = long.Parse( line.Substring( startOffset , line.Length - startOffset ) );
+                            }
+                        }
+                        catch( Exception )
+                        {
+                            configData._max_binary_folder_size = 104857600;
                         }
                     }
 
@@ -157,9 +233,19 @@ namespace LogSender.Utilities
 
             strConfig += "binary_file_max_size=6291456 #max size of binary file - if file exceeded this value the log sender will not send it to the server" + Environment.NewLine;
 
-            strConfig += "send_file_time=60000 #every 'value' miliseconds the log sender will check the log folders for new files" + Environment.NewLine;
+            strConfig += "sleep_time_cycle=60000 #every 'value' milliseconds the log sender will check the log folders for new files" + Environment.NewLine;
 
-            strConfig += "host_ip=http://10.0.0.174:8080/input #The server IP address" + Environment.NewLine;
+            strConfig += "host_ip=http://10.0.0.174:8080 #The server IP address" + Environment.NewLine;
+
+            strConfig += "minimum_number_of_file_to_send=2 #The minimum number of binary files in a folder to start sending process (sending trigger)" + Environment.NewLine;
+
+            strConfig += "number_of_times_to_retry_sending=10 #The number of time the log sender will try to send the data to the server " + Environment.NewLine;
+
+            strConfig += "wait_time_before_retry=2000 #time in milliseconds that the sending process pause before sending the data to the server(if first sending failed)" + Environment.NewLine;
+
+            strConfig += "max_binary_folder_size=10485 #Maximum Size of binary folder. when the server is offline the binary files are pileing up in the folder so this limit the number of files." + Environment.NewLine;
+
+            
 
             return strConfig;
         }

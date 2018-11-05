@@ -1,6 +1,7 @@
 ﻿using BinaryFileToTextFile;
 using BinaryFileToTextFile.Models;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
@@ -8,6 +9,9 @@ namespace LogSender.Utilities
 {
     abstract class ParsingBinaryFile
     {
+        ///**********************************************
+        ///             Functions Section
+        ///**********************************************
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger( "ParsingBinaryFile.cs" );
 
         /// <summary>
@@ -142,6 +146,66 @@ namespace LogSender.Utilities
                 "ParentName" +
                 ",ChainArray" );
             dataAsString.Append( "\n " );
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dataAsString"></param>
+        /// <param name="files"></param>
+        /// <returns></returns>
+        public static List<FileInfo> ParseFolder(StringBuilder dataAsString , KeyValuePair<string , DirectoryInfo> dir , int configJsonMaxDataSize )
+        {
+            AddOutputHeader( dataAsString );
+            //list of file name - hold file for further action on the files like delete
+            List<FileInfo> listOfFileToDelete = new List<FileInfo>();
+
+            //loop on files in folder
+            foreach( FileInfo file in dir.Value.GetFiles() )
+            {
+                try
+                {
+                    //check if file is locked Write mode
+                    if( FileMaintenance.IsFileLocked( file ) )
+                    {
+                        continue;
+                    }
+
+                    //parsing oparation
+                    Table logTable = ParsingBinaryFile.Parse( file , dir.Key );
+
+                    if( logTable == null )
+                    {
+                        throw new Exception();
+                    }
+
+                    logTable.ConvertRowsToCsvFormat();
+
+                    //Check if the current table will not cause size limit (configurable)
+                    if( dataAsString.Length + logTable.GetDataSize() < configJsonMaxDataSize )
+                    {
+                        dataAsString.Append( logTable.GetDataAsString() );
+                    }
+                    else
+                    {
+                        // save current table in some kind of stack and handle it next time we start sending
+                        break;//break from file loop
+                    }
+
+                    //add file path to the list.for tracking which file should be deleted 
+                    listOfFileToDelete.Add( file );
+
+
+                }
+                catch( Exception ex )
+                {
+                    log.Error( "Problem While trying to read file -" + file.FullName , ex );
+                }
+            }
+
+            return listOfFileToDelete;
+
         }
     }
 }
