@@ -180,16 +180,16 @@ namespace LogSender.Utilities
                             startOffset = 23;
                             if( line.Contains( "#" ) )
                             {
-                                configData._max_binary_folder_size = long.Parse( line.Substring( startOffset , line.IndexOf( '#' ) - startOffset ).Trim() );
+                                configData._maxBinaryFolderSize = long.Parse( line.Substring( startOffset , line.IndexOf( '#' ) - startOffset ).Trim() );
                             }
                             else
                             {
-                                configData._max_binary_folder_size = long.Parse( line.Substring( startOffset , line.Length - startOffset ) );
+                                configData._maxBinaryFolderSize = long.Parse( line.Substring( startOffset , line.Length - startOffset ) );
                             }
                         }
                         catch( Exception )
                         {
-                            configData._max_binary_folder_size = 104857600;
+                            configData._maxBinaryFolderSize = 104857600;
                         }
                     }
 

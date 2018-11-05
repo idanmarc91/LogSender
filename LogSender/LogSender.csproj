@@ -123,6 +123,7 @@
     <Compile Include="Models\Table.cs" />
     <Compile Include="Utilities\ConfigFile.cs" />
     <Compile Include="Utilities\FileMaintenance.cs" />
+    <Compile Include="Utilities\FolderWatcher.cs" />
     <Compile Include="Utilities\GZipCompresstion.cs" />
     <Compile Include="Utilities\JsonDataConvertion.cs" />
     <Compile Include="Utilities\ParsingBinaryFile.cs" />
