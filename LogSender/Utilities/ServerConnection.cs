@@ -80,7 +80,7 @@ namespace LogSender.Utilities
             }
             finally
             {
-                log.Debug( "exit server is alive function" );
+                log.Debug( "exit serverIsAlive function" );
             }
         }
     }

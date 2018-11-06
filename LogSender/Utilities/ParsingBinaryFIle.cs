@@ -157,6 +157,8 @@ namespace LogSender.Utilities
         /// <returns></returns>
         public static List<FileInfo> ParseFolder(StringBuilder dataAsString , KeyValuePair<string , DirectoryInfo> dir , int configJsonMaxDataSize )
         {
+            log.Debug( dir.Value.Name + "folder started his parsing process" );
+
             AddOutputHeader( dataAsString );
             //list of file name - hold file for further action on the files like delete
             List<FileInfo> listOfFileToDelete = new List<FileInfo>();

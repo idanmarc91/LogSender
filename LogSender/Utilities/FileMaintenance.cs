@@ -16,13 +16,13 @@ namespace LogSender.Utilities
             {
                 stream = file.Open( FileMode.Open , FileAccess.Read , FileShare.None );
             }
-            catch( IOException )
+            catch( IOException ex)
             {
                 //the file is unavailable because it is:
                 //still being written to
                 //or being processed by another thread
                 //or does not exist (has already been processed)
-                log.Error( file.Name + " file is in writing mode. cannot be access!" );
+                log.Error( file.Name + " file is in writing mode. cannot be access!",ex );
                 return true;
             }
             finally

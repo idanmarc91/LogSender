@@ -56,7 +56,6 @@ namespace LogSender.Utilities
                             configData._jsonDataMaxSize = 10000000;
                         }
                     }
-
                     if( line.Contains( "binary_file_max_size=" ) )
                     {
                         try
@@ -76,7 +75,6 @@ namespace LogSender.Utilities
                             configData._binaryFileMaxSize = 6291456; // 6 MB
                         }
                     }
-
                     if( line.Contains( "sleep_time_cycle=" ) )
                     {
                         try
@@ -96,7 +94,6 @@ namespace LogSender.Utilities
                             configData._threadSleepTime = 60000; // 60 Seconds by Default
                         }
                     }
-
                     if( line.Contains( "host_ip=" ) )
                     {
                         try

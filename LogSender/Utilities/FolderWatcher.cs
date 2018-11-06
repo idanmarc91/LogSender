@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LogSender.Utilities
 {
@@ -16,9 +13,15 @@ namespace LogSender.Utilities
         /// </summary>
         /// <param name="dir"></param>
         /// <returns>true if sending process should begin else false</returns>
-        public static bool FolderOnlineWatcher(KeyValuePair<string , DirectoryInfo> dir,int binaryFileMaxSize,int  minNumOfFilesToSend)
+        public static bool IsFolderReadyToSendWatcher(KeyValuePair<string , DirectoryInfo> dir , int binaryFileMaxSize , int minNumOfFilesToSend , long maxBinaryFolderSize)
         {
             log.Debug( "Watching online\'" + dir.Value.Name + "\' folder" );
+
+            if( FolderSizeWatcher( dir , maxBinaryFolderSize ) )
+            {
+                //folder size exceeded delete old files
+                FileMaintenance.DeleteOldFiles( dir.Value , maxBinaryFolderSize );
+            }
 
             if( dir.Value.EnumerateFiles( "*." + dir.Key )
                          .Where( file => ( file.Length <= binaryFileMaxSize ) && ( file.Length > 0 ) )
@@ -39,7 +42,9 @@ namespace LogSender.Utilities
         /// This function maintaine folder when server is offline 
         /// </summary>
         /// <param name="dir"></param>
-        public static void FolderOfflineWatcher(KeyValuePair<string , DirectoryInfo> dir, long maxBinaryFolderSize)
+        /// <param name="maxBinaryFolderSize"></param>
+        /// <returns>true if folder need maintenance false if not</returns>
+        public static bool FolderSizeWatcher(KeyValuePair<string , DirectoryInfo> dir , long maxBinaryFolderSize)
         {
             log.Debug( "Watching offline \'" + dir.Value.Name + "\' folder" );
 
@@ -48,8 +53,9 @@ namespace LogSender.Utilities
             if( lenght > maxBinaryFolderSize )
             {
                 log.Error( "The binary folder " + dir.Value.Name + " has reached size limit" );
-                FileMaintenance.DeleteOldFiles( dir.Value , maxBinaryFolderSize );
+                return true;
             }
+            return false;
         }
 
     }
