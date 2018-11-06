@@ -113,6 +113,25 @@ namespace LogSender.Utilities
                             configData._hostIp = "http://10.0.0.174:8080"; // 60 Seconds by Default
                         }
                     }
+                    if( line.Contains( "max_binary_folder_size=" ) )
+                    {
+                        try
+                        {
+                            startOffset = 23;
+                            if( line.Contains( "#" ) )
+                            {
+                                configData._maxBinaryFolderSize = long.Parse( line.Substring( startOffset , line.IndexOf( '#' ) - startOffset ).Trim() );
+                            }
+                            else
+                            {
+                                configData._maxBinaryFolderSize = long.Parse( line.Substring( startOffset , line.Length - startOffset ) );
+                            }
+                        }
+                        catch( Exception )
+                        {
+                            configData._maxBinaryFolderSize = 104857600;
+                        }
+                    }
                     if( line.Contains( "minimum_number_of_file_to_send=" ) )
                     {
                         try
@@ -130,25 +149,6 @@ namespace LogSender.Utilities
                         catch( Exception )
                         {
                             configData._minNumOfFilesToSend = 2; 
-                        }
-                    }
-                    if( line.Contains( "number_of_times_to_retry_sending=" ) )
-                    {
-                        try
-                        {
-                            startOffset = 33;
-                            if( line.Contains( "#" ) )
-                            {
-                                configData._numberOfTimesToRetry = int.Parse( line.Substring( startOffset , line.IndexOf( '#' ) - startOffset ).Trim() );
-                            }
-                            else
-                            {
-                                configData._numberOfTimesToRetry = int.Parse( line.Substring( startOffset , line.Length - startOffset ) );
-                            }
-                        }
-                        catch( Exception )
-                        {
-                            configData._numberOfTimesToRetry = 5;
                         }
                     }
                     if( line.Contains( "wait_time_before_retry=" ) )
@@ -170,23 +170,23 @@ namespace LogSender.Utilities
                             configData._waitTimeBeforeRetry = 2000;
                         }
                     }
-                    if( line.Contains( "max_binary_folder_size=" ) )
+                    if( line.Contains( "number_of_times_to_retry_sending=" ) )
                     {
                         try
                         {
-                            startOffset = 23;
+                            startOffset = 33;
                             if( line.Contains( "#" ) )
                             {
-                                configData._maxBinaryFolderSize = long.Parse( line.Substring( startOffset , line.IndexOf( '#' ) - startOffset ).Trim() );
+                                configData._numberOfTimesToRetry = int.Parse( line.Substring( startOffset , line.IndexOf( '#' ) - startOffset ).Trim() );
                             }
                             else
                             {
-                                configData._maxBinaryFolderSize = long.Parse( line.Substring( startOffset , line.Length - startOffset ) );
+                                configData._numberOfTimesToRetry = int.Parse( line.Substring( startOffset , line.Length - startOffset ) );
                             }
                         }
                         catch( Exception )
                         {
-                            configData._maxBinaryFolderSize = 104857600;
+                            configData._numberOfTimesToRetry = 5;
                         }
                     }
 

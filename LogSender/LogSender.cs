@@ -36,9 +36,9 @@ namespace LogSender
             _directory = new List<KeyValuePair<string , DirectoryInfo>>
             {
                 new KeyValuePair<string , DirectoryInfo>( "cyb" , new DirectoryInfo( path + "\\Packets" ) ) ,
-                new KeyValuePair<string , DirectoryInfo>( "fsa" , new DirectoryInfo( path + "\\FSAccess" ) ) ,
-                new KeyValuePair<string , DirectoryInfo>( "cimg" , new DirectoryInfo( path + "\\Images" ) ) ,
-                new KeyValuePair<string , DirectoryInfo>( "mog" , new DirectoryInfo( path + "\\Multievent" ) )
+                //new KeyValuePair<string , DirectoryInfo>( "fsa" , new DirectoryInfo( path + "\\FSAccess" ) ) ,
+                //new KeyValuePair<string , DirectoryInfo>( "cimg" , new DirectoryInfo( path + "\\Images" ) ) ,
+                //new KeyValuePair<string , DirectoryInfo>( "mog" , new DirectoryInfo( path + "\\Multievent" ) )
             };
 
             log.Debug( "log sender class created" );
@@ -62,7 +62,6 @@ namespace LogSender
 
                         foreach( KeyValuePair<string , DirectoryInfo> dir in _directory )//run on all log directories
                         {
-                            
                             //check folder status
                             if( FolderWatcher.IsFolderReadyToSendWatcher( dir , _config.configData._binaryFileMaxSize , _config.configData._minNumOfFilesToSend , _config.configData._maxBinaryFolderSize ) )
                             {
@@ -131,6 +130,9 @@ namespace LogSender
 
                 //gzip data
                 byte[] compressedData = GZipCompresstion.CompressString( multipleLogFileAsjsonString );
+
+                //export byte array to file (testing)
+                File.WriteAllBytes( "testfile.gz" , compressedData ); // Requires System.IO
 
                 int retry = _config.configData._numberOfTimesToRetry;
 

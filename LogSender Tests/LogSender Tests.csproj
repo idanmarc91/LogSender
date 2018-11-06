@@ -52,6 +52,7 @@
     <Compile Include="LogTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GZipCompressionTest.cs" />
+    <Compile Include="FileMaintenanceTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

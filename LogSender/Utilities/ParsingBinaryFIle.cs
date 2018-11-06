@@ -90,61 +90,64 @@ namespace LogSender.Utilities
         /// <param name="dataAsString"></param>
         public static void AddOutputHeader(StringBuilder dataAsString)
         {
-            dataAsString.Append( "OS," +
-                "HostName" +
+            dataAsString.Append( 
+                "os" +
                 "," +
-                "ClientTime" +
+                "host_name" +
                 "," +
-                "FullServerTime" +
+                "client_time" +
                 "," +
-                "ProcessID" +
+                "full_server_time" +
                 "," +
-                "ProcessName" +
+                "process_id" +
                 "," +
-                "ProcessPath" +
+                "process_name" +
                 "," +
-                "ApplicationName" +
+                "process_path" +
                 "," +
-                "Protocol" +
+                "application_name" +
                 "," +
-                "Status" +
+                "protocol" +
                 "," +
-                "SourcePort" +
+                "status" +
                 "," +
-                "DestinationPort" +
+                "source_port" +
                 "," +
-                "Direction" +
+                "destination_port" +
                 "," +
-                "FilePath" +
+                "direction" +
                 "," +
-                "XCast" +
+                "file_path" +
                 "," +
-                "State" +
+                "x_cast" +
                 "," +
-                "SourceIP" +
+                "state" +
                 "," +
-                "DestinationIP" +
+                "source_ip" +
                 "," +
-                "SequanceNumber" +
+                "destination_ip" +
                 "," +
-                "SubSequanceNumber" +
+                "sequance_number" +
                 "," +
-                "UserName" +
+                "sub_sequance_number" +
                 "," +
-                "MogCounter" +
+                "user_name" +
                 "," +
-                "DestinationPath" +
+                "mog_counter" +
                 "," +
-                "Reason" +
+                "destination_path" +
                 "," +
-                "ImagePath" +
+                "reason" +
                 "," +
-                "ImageName" +
+                "image_path" +
                 "," +
-                "ParentPath" +
+                "image_name" +
                 "," +
-                "ParentName" +
-                ",ChainArray" );
+                "parent_path" +
+                "," +
+                "parent_name" +
+                "," +
+                "chain_array" );
             dataAsString.Append( "\n " );
         }
 

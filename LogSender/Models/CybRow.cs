@@ -196,16 +196,6 @@ namespace BinaryFileToTextFile.Models
             return list;
         }
 
-        ///// <summary>
-        ///// This function return the parametersas csv format line
-        ///// </summary>
-        ///// <returns>csv format line</returns>
-        //public string GetLineAsCsv()
-        //{
-        //    List<string> paramList = GetAsList();
-
-        //}
-
         /// <summary>
         /// Get application name
         /// </summary>

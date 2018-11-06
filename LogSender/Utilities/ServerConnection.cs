@@ -28,14 +28,16 @@ namespace LogSender.Utilities
                           .Accept
                           .Add( new MediaTypeWithQualityHeaderValue( "application/json" ) );
 
+
                     using( HttpRequestMessage request = new HttpRequestMessage( HttpMethod.Post , hostIp + "/input" ) )
                     {
+                        //request.Headers.Add( "content-encoding" , "gzip" );
                         request.Method = HttpMethod.Post;
 
                         request.Content = new ByteArrayContent( compressedData );
 
                         //request.Headers.
-                        using( HttpResponseMessage response =  await client.SendAsync( request ) )
+                        using( HttpResponseMessage response = await client.SendAsync( request ) )
                         {
                             //check what to do when response is not 200.
                             log.Debug( "server response " + response.StatusCode );
@@ -66,16 +68,16 @@ namespace LogSender.Utilities
 
                 using( HttpClient client = new HttpClient() )
                 {
-                    using( HttpResponseMessage response = await client.GetAsync( hostIp +"/ping" ) )
+                    using( HttpResponseMessage response = await client.GetAsync( hostIp + "/ping" ) )
                     {
                         log.Info( "The server is online" );
                         return true;
                     }
                 }
             }
-            catch (Exception ex)
+            catch( Exception ex )
             {
-                log.Error( "The server is offline");
+                log.Error( "The server is offline" );
                 return false;
             }
             finally

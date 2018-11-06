@@ -38,6 +38,7 @@ namespace LogSender_Tests
 
                 //extract data from binary file
                 CybTable log = new CybTable( expandedFileByteArray , headerParameters._hostName.GetData() , headerParameters._serverClientDelta.GetData() , headerParameters._version.GetData() );
+
                 log.ConvertRowsToCsvFormat();
 
                 jsonTest = JsonDataConvertion.JsonSerialization( log.GetDataAsString() );

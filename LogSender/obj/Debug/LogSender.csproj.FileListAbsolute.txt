@@ -22,3 +22,4 @@ C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Debug\LogSender.pdb
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Debug\LogSender.exe.config
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Debug\log4net.dll
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Debug\log4net.xml
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\obj\Debug\LogSender.csprojAssemblyReference.cache

@@ -57,6 +57,5 @@ namespace LogSender.Utilities
             }
             return false;
         }
-
     }
 }
