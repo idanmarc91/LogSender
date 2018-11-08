@@ -17,11 +17,10 @@ namespace BinaryFileToTextFile.Models
         public virtual StringBuilder BuildAsCsv(List<string> paramList )
         {
             StringBuilder dataAsString = new StringBuilder();
-            dataAsString.Append( String.Join( "," , paramList ) );
 
-            dataAsString.Append( "," );
+            string test = ServiceStack.Text.CsvSerializer.SerializeToCsv(paramList);
 
-            dataAsString.Append( "\n " );
+            dataAsString.Append( test );
 
             return dataAsString;
         }

@@ -14,34 +14,53 @@ namespace LogSender.Utilities
         /// </summary>
         /// <param name="text"></param>
         /// <returns></returns>
-        public static byte[] CompressString(string text)
+        public static MemoryStream CompressString(string text)
         {
             try
             {
-                log.Debug( "starting GZip compression before sending data to server" );
-                byte[] buffer = Encoding.UTF8.GetBytes( text );
-                var memoryStream = new MemoryStream();
-                using( var gZipStream = new GZipStream( memoryStream , CompressionMode.Compress , true ) )
+
+                log.Debug("starting GZip compression before sending data to server");
+
+                byte[] jsonBytes = Encoding.UTF8.GetBytes(text);
+                MemoryStream ms = new MemoryStream();
+                using (GZipStream gzip = new GZipStream(ms, CompressionMode.Compress, true))
                 {
-                    gZipStream.Write( buffer , 0 , buffer.Length );
+                    gzip.Write(jsonBytes, 0, jsonBytes.Length);
                 }
+                ms.Position = 0;
 
-                memoryStream.Position = 0;
+                log.Debug("GZip compression prccess ended successfully");
 
-                var compressedData = new byte[memoryStream.Length];
-                memoryStream.Read( compressedData , 0 , compressedData.Length );
+                return ms;
+                
 
-                byte[] gZipBuffer = new byte[compressedData.Length + 4];
-                Buffer.BlockCopy( compressedData , 0 , gZipBuffer , 4 , compressedData.Length );
-                Buffer.BlockCopy( BitConverter.GetBytes( buffer.Length ) , 0 , gZipBuffer , 0 , 4 );
+                #region old compression code code
 
-                log.Debug( "GZip compression prccess ended successfully" );
+                //log.Debug( "starting GZip compression before sending data to server" );
+                //byte[] buffer = Encoding.UTF8.GetBytes( text );
+                //var memoryStream = new MemoryStream();
+                //using( var gZipStream = new GZipStream( memoryStream , CompressionMode.Compress , true ) )
+                //{
+                //    gZipStream.Write( buffer , 0 , buffer.Length );
+                //}
 
-                return gZipBuffer;
+                //memoryStream.Position = 0;
+
+                //var compressedData = new byte[memoryStream.Length];
+                //memoryStream.Read( compressedData , 0 , compressedData.Length );
+
+                //byte[] gZipBuffer = new byte[compressedData.Length + 4];
+                //Buffer.BlockCopy( compressedData , 0 , gZipBuffer , 4 , compressedData.Length );
+                //Buffer.BlockCopy( BitConverter.GetBytes( buffer.Length ) , 0 , gZipBuffer , 0 , 4 );
+
+                //log.Debug( "GZip compression prccess ended successfully" );
+
+                //return gZipBuffer;
                 //return Convert.ToBase64String( gZipBuffer );
+                #endregion
 
             }
-            catch( Exception ex )
+            catch ( Exception ex )
             {
                 log.Error( "Error occurred while compressing the data" , ex );
                 return null;
@@ -53,29 +72,32 @@ namespace LogSender.Utilities
         /// </summary>
         /// <param name="compressedText"></param>
         /// <returns></returns>
-        public static string DecompressString(string compressedText)
+        public static string DecompressString(byte [] compressedText)
         {
             try
             {
-                log.Debug( "starting GZip decompression the data " );
+                log.Debug("starting GZip decompression the data ");
 
-                byte[] gZipBuffer = Convert.FromBase64String( compressedText );
-                using( var memoryStream = new MemoryStream() )
+                using (GZipStream stream = new GZipStream(new MemoryStream(compressedText),
+                CompressionMode.Decompress))
                 {
-                    int dataLength = BitConverter.ToInt32( gZipBuffer , 0 );
-                    memoryStream.Write( gZipBuffer , 4 , gZipBuffer.Length - 4 );
-
-                    var buffer = new byte[dataLength];
-
-                    memoryStream.Position = 0;
-                    using( var gZipStream = new GZipStream( memoryStream , CompressionMode.Decompress ) )
+                    const int size = 4096;
+                    byte[] buffer = new byte[size];
+                    using (MemoryStream memory = new MemoryStream())
                     {
-                        gZipStream.Read( buffer , 0 , buffer.Length );
+                        int count = 0;
+                        do
+                        {
+                            count = stream.Read(buffer, 0, size);
+                            if (count > 0)
+                            {
+                                memory.Write(buffer, 0, count);
+                            }
+                        }
+                        while (count > 0);
+                        log.Debug( "GZip decompression process ended successfully" );
+                        return Encoding.Default.GetString(memory.ToArray());
                     }
-
-                    log.Debug( "GZip decompression process ended successfully" );
-
-                    return Encoding.UTF8.GetString( buffer );
                 }
             }
             catch( Exception ex )

@@ -4,6 +4,7 @@ using LogSender.Utilities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.IO;
+using System.Text;
 
 namespace LogSender_Tests
 {
@@ -21,7 +22,7 @@ namespace LogSender_Tests
             BinaryFileHandler bf = new BinaryFileHandler( logFiles[0] );
 
             string jsonTest = string.Empty;
-            string jsonTrueOutput = File.ReadAllText( path + @"\Test Logs\" + "cyb true output.txt" );
+            string jsonTrueOutput = File.ReadAllText( path + @"\Test Logs\" + "cyb json output.txt");
 
             //Act
             if( !bf.IsFileNull() )
@@ -59,7 +60,7 @@ namespace LogSender_Tests
             BinaryFileHandler bf = new BinaryFileHandler( logFiles[0] );
 
             string jsonTest = string.Empty;
-            string jsonTrueOutput = File.ReadAllText( path + @"\Test Logs\" + "fsa true output.txt" );
+            string jsonTrueOutput = File.ReadAllText( path + @"\Test Logs\" + "fsa json output.txt");
 
             //Act
             if( !bf.IsFileNull() )
@@ -97,7 +98,7 @@ namespace LogSender_Tests
             BinaryFileHandler bf = new BinaryFileHandler( logFiles[0] );
 
             string jsonTest = string.Empty;
-            string jsonTrueOutput = File.ReadAllText( path + @"\Test Logs\" + "cimg true output.txt" );
+            string jsonTrueOutput = File.ReadAllText( path + @"\Test Logs\" + "cimg json output.txt");
 
             //Act
             if( !bf.IsFileNull() )
@@ -117,6 +118,9 @@ namespace LogSender_Tests
 
                 log.ConvertRowsToCsvFormat();
 
+                StringBuilder test = new StringBuilder();
+                AddOutputHeader( dataAsString );
+
                 jsonTest = JsonDataConvertion.JsonSerialization( log.GetDataAsString() );
             }
 
@@ -135,7 +139,7 @@ namespace LogSender_Tests
             BinaryFileHandler bf = new BinaryFileHandler( logFiles[0] );
 
             string jsonTest = string.Empty;
-            string jsonTrueOutput = File.ReadAllText( path + @"\Test Logs\" + "mog true output.txt" );
+            string jsonTrueOutput = File.ReadAllText( path + @"\Test Logs\" + "mog json output.txt");
 
             //Act
             if( !bf.IsFileNull() )

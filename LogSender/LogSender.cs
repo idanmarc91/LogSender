@@ -9,13 +9,13 @@ namespace LogSender
 {
     class LogSender
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger( "LogSender.cs" );
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger("LogSender.cs");
 
         ///**********************************************
         ///             Members Section
         ///**********************************************
 
-        private readonly List<KeyValuePair<string , DirectoryInfo>> _directory;
+        private readonly List<KeyValuePair<string, DirectoryInfo>> _directory;
 
         //Data from config file
         private readonly ConfigFile _config = new ConfigFile();
@@ -29,19 +29,19 @@ namespace LogSender
         /// </summary>
         public LogSender(string path)
         {
-            log.Debug( "Start creating log sender class" );
+            log.Debug("Start creating log sender class");
 
-            _config.CfgFile( path );
+            _config.CfgFile(path);
 
-            _directory = new List<KeyValuePair<string , DirectoryInfo>>
+            _directory = new List<KeyValuePair<string, DirectoryInfo>>
             {
-                new KeyValuePair<string , DirectoryInfo>( "cyb" , new DirectoryInfo( path + "\\Packets" ) ) ,
+                //new KeyValuePair<string , DirectoryInfo>( "cyb" , new DirectoryInfo( path + "\\Packets" ) ) ,
                 //new KeyValuePair<string , DirectoryInfo>( "fsa" , new DirectoryInfo( path + "\\FSAccess" ) ) ,
                 //new KeyValuePair<string , DirectoryInfo>( "cimg" , new DirectoryInfo( path + "\\Images" ) ) ,
-                //new KeyValuePair<string , DirectoryInfo>( "mog" , new DirectoryInfo( path + "\\Multievent" ) )
+                new KeyValuePair<string , DirectoryInfo>( "mog" , new DirectoryInfo( path + "\\Multievent" ) )
             };
 
-            log.Debug( "log sender class created" );
+            log.Debug("log sender class created");
         }
 
         /// <summary>
@@ -49,33 +49,36 @@ namespace LogSender
         /// </summary>
         public async void RunService()
         {
-            log.Debug( "Main Service thread started" );
+            log.Debug("Main Service thread started");
 
             List<Thread> threadList = new List<Thread>();
             try
             {
-                while( true ) //main service loop
+                while (true) //main service loop
                 {
-                    if( await ServerConnection.IsServerAlive( _config.configData._hostIp ) ) //check if server is online
+                    if (await ServerConnection.IsServerAlive(_config.configData._hostIp)) //check if server is online
                     {
-                        log.Debug( "Server is online" );
+                        log.Debug("Server is online");
 
-                        foreach( KeyValuePair<string , DirectoryInfo> dir in _directory )//run on all log directories
+                        foreach (KeyValuePair<string, DirectoryInfo> dir in _directory)//run on all log directories
                         {
                             //check folder status
-                            if( FolderWatcher.IsFolderReadyToSendWatcher( dir , _config.configData._binaryFileMaxSize , _config.configData._minNumOfFilesToSend , _config.configData._maxBinaryFolderSize ) )
+                            if (FolderWatcher.IsFolderReadyToSendWatcher(dir, _config.configData._binaryFileMaxSize, _config.configData._minNumOfFilesToSend, _config.configData._maxBinaryFolderSize))
                             {
-                                log.Debug( "Sending process begin" );
-                                Thread thread = new Thread( () => SendLogs( dir ) );
-                                threadList.Add( thread );
+                                log.Debug("Sending process begin");
+                                Thread thread = new Thread(() => SendLogs(dir));
+                                threadList.Add(thread);
                                 thread.Name = dir.Value.Name;
                                 thread.Start();
 
-                                log.Debug( "thread created for " + dir.Value.Name + " folder and started his operation" );
+                                log.Debug("thread created for " + dir.Value.Name + " folder and started his operation");
                             }
                         }
                         //wait for threads to end
-                        foreach( Thread t in threadList )
+
+
+
+                        foreach (Thread t in threadList)
                         {
                             t.Join();
                         }
@@ -83,26 +86,26 @@ namespace LogSender
                     }
                     else //server is offline
                     {
-                        log.Debug( "Server is offline" );
+                        log.Debug("Server is offline");
 
-                        foreach( KeyValuePair<string , DirectoryInfo> dir in _directory )
+                        foreach (KeyValuePair<string, DirectoryInfo> dir in _directory)
                         {
-                            if( FolderWatcher.FolderSizeWatcher( dir , _config.configData._maxBinaryFolderSize ) )
+                            if (FolderWatcher.FolderSizeWatcher(dir, _config.configData._maxBinaryFolderSize))
                             {
                                 //folder size exceeded delete old files
-                                FileMaintenance.DeleteOldFiles( dir.Value , _config.configData._maxBinaryFolderSize );
+                                FileMaintenance.DeleteOldFiles(dir.Value, _config.configData._maxBinaryFolderSize);
                             }
                         }
                     }
 
-                    log.Debug( "main thread going to sleep for " + _config.configData._threadSleepTime / 1000 + " seconds" );
-                    Thread.Sleep( _config.configData._threadSleepTime );
+                    log.Debug("main thread going to sleep for " + _config.configData._threadSleepTime / 1000 + " seconds");
+                    Thread.Sleep(_config.configData._threadSleepTime);
                 }
             }
 
-            catch( Exception ex )
+            catch (Exception ex)
             {
-                log.Fatal( "Problem in thread creation" , ex );
+                log.Fatal("Problem in thread creation", ex);
                 Thread.CurrentThread.Abort();
             }
         }
@@ -111,48 +114,49 @@ namespace LogSender
         /// Main thread function
         /// </summary>
         /// <param name="dir"></param>
-        private async void SendLogs(KeyValuePair<string , DirectoryInfo> dir)
+        private async void SendLogs(KeyValuePair<string, DirectoryInfo> dir)
         {
             try
             {
-                log.Debug( dir.Key + " Thread strating his sending process" );
+                log.Debug(dir.Key + " Thread strating his sending process");
 
                 //multifile string - hold data from few file
                 StringBuilder dataAsString = new StringBuilder();
 
                 //start the parsing process on the folder
-                List<FileInfo> listOfFileToDelete = ParsingBinaryFile.ParseFolder( dataAsString , dir , _config.configData._jsonDataMaxSize );
+                List<FileInfo> listOfFileToDelete = ParsingBinaryFile.ParseFolder(dataAsString, dir, _config.configData._jsonDataMaxSize);
 
-                log.Debug( "serialazation for " + dir.Key + " files started" );
+                log.Debug("serialazation for " + dir.Key + " files started");
 
                 //get json data from multiple log files as one string
-                string multipleLogFileAsjsonString = JsonDataConvertion.JsonSerialization( dataAsString );
+                string multipleLogFileAsjsonString = JsonDataConvertion.JsonSerialization(dataAsString);
+                File.WriteAllText("mog", multipleLogFileAsjsonString);
 
                 //gzip data
-                byte[] compressedData = GZipCompresstion.CompressString( multipleLogFileAsjsonString );
+                MemoryStream compressedData = GZipCompresstion.CompressString(multipleLogFileAsjsonString);
 
                 //export byte array to file (testing)
-                File.WriteAllBytes( "testfile.gz" , compressedData ); // Requires System.IO
+                //File.WriteAllBytes( "testfile.gz" , compressedData ); // Requires System.IO
 
                 int retry = _config.configData._numberOfTimesToRetry;
 
-                while( retry-- != 0 )//retry loop
+                while (retry-- != 0)//retry loop
                 {
-                    if( await ServerConnection.SendDataToServer( _config.configData._hostIp , compressedData ) )
+                    if (await ServerConnection.SendDataToServer(_config.configData._hostIp, compressedData))
                     {
-                        log.Info( "log sender sent " + listOfFileToDelete.Count + " files to the server and the server recived them" );
-                        log.Debug( "begin deleteing the files that was sent to the server" );
+                        log.Info("log sender sent " + listOfFileToDelete.Count + " files to the server and the server recived them");
+                        log.Debug("begin deleteing the files that was sent to the server");
 
-                        FileMaintenance.FileDelete( listOfFileToDelete );
+                        //FileMaintenance.FileDelete( listOfFileToDelete );
 
                         break;//when file sent sucessfuly exit while loop
                     }
-                    Thread.Sleep( _config.configData._waitTimeBeforeRetry );
+                    Thread.Sleep(_config.configData._waitTimeBeforeRetry);
                 }
             }
-            catch( Exception ex )
+            catch (Exception ex)
             {
-                log.Error( "Sending process had stoped" , ex );
+                log.Error("Sending process had stoped", ex);
             }
         }
     }

@@ -76,10 +76,10 @@ namespace BinaryFileToTextFile
                     }
                     _servicesCybTable.RemoveAll( i => i.GetFullAccTime() == row.GetFullAccTime() && i.GetSubSeqNum() == row.GetSeqNum() );
                     //add counter of svchost process name
-                    if( row.GetAppName() != "" )
-                    {
-                        row.ChangeAppName();
-                    }
+                    //if( row.GetAppName() != "" )
+                    //{
+                    //    row.ChangeAppName();
+                    //}
                 }
             }
         }

@@ -1,6 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.IO.Compression;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace LogSender.Utilities
@@ -16,38 +21,32 @@ namespace LogSender.Utilities
         /// </summary>
         /// <param name="url"></param>
         /// <param name="data"></param>
-        public static async Task<bool> SendDataToServer(string hostIp , byte[] compressedData)
+        public static async Task<bool> SendDataToServer(string hostIp , MemoryStream compressedData)
         {
             try
             {
-                log.Debug( "Sending process has started" );
-                using( HttpClient client = new HttpClient() )
+                using (HttpClientHandler handler = new HttpClientHandler())
                 {
-                    client.BaseAddress = new Uri( hostIp + "/input" );
-                    client.DefaultRequestHeaders
-                          .Accept
-                          .Add( new MediaTypeWithQualityHeaderValue( "application/json" ) );
-
-
-                    using( HttpRequestMessage request = new HttpRequestMessage( HttpMethod.Post , hostIp + "/input" ) )
+                    handler.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
+                    using (HttpClient client = new HttpClient(handler, false))
                     {
-                        //request.Headers.Add( "content-encoding" , "gzip" );
-                        request.Method = HttpMethod.Post;
+                        //string json = JsonConvert.SerializeObject(people);
 
-                        request.Content = new ByteArrayContent( compressedData );
+                        StreamContent content = new StreamContent(compressedData);
+                        content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                        content.Headers.ContentEncoding.Add("gzip");
 
-                        //request.Headers.
-                        using( HttpResponseMessage response = await client.SendAsync( request ) )
+                        using (HttpResponseMessage response = await client.PostAsync(hostIp + "/input", content))
                         {
                             //check what to do when response is not 200.
-                            log.Debug( "server response " + response.StatusCode );
-                            log.Debug( "sending process ended" );
+                            log.Debug("server response " + response.StatusCode);
+                            log.Debug("sending process ended");
                             return response.IsSuccessStatusCode;
                         }
                     }
                 }
             }
-            catch( Exception ex )
+            catch ( Exception ex )
             {
                 log.Error( "problem occurred while sending data to the server " , ex );
                 return false;

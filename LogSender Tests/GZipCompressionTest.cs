@@ -2,7 +2,7 @@
 using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using LogSender.Utilities;
-
+using System.Text;
 
 namespace LogSender_Tests
 {
@@ -17,8 +17,8 @@ namespace LogSender_Tests
             string testStr = File.ReadAllText( path + @"\Compress Test\" + "CompressTest.txt" );
 
             //Act
-            string compressedString = Convert.ToBase64String(GZipCompresstion.CompressString( testStr ));
-            string decompessedString = GZipCompresstion.DecompressString( compressedString );
+            MemoryStream ms = GZipCompresstion.CompressString( testStr );
+            string decompessedString = GZipCompresstion.DecompressString( ms.ToArray() );
 
             ////Assert
             Assert.AreEqual( testStr , decompessedString );

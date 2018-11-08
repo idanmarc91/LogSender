@@ -208,10 +208,10 @@ namespace BinaryFileToTextFile.Models
         /// <summary>
         /// Change application name
         /// </summary>
-        public void ChangeAppName()
-        {
-            _fileExtractData[( int ) _fileExtractDataIndexs.APPLICATION_NAME].SetData( _fileExtractData[( int ) _fileExtractDataIndexs.APPLICATION_NAME].GetData() + " (" + _expandSVCHost.Count + ")" );
-        }
+        //public void ChangeAppName()
+        //{
+        //    _fileExtractData[( int ) _fileExtractDataIndexs.APPLICATION_NAME].SetData( _fileExtractData[( int ) _fileExtractDataIndexs.APPLICATION_NAME].GetData() + " (" + _expandSVCHost.Count + ")" );
+        //}
 
         /// <summary>
         /// expand svchost data - using the service table

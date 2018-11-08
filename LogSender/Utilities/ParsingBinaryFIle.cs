@@ -7,13 +7,47 @@ using System.Text;
 
 namespace LogSender.Utilities
 {
-    abstract class ParsingBinaryFile
+    public abstract class ParsingBinaryFile
     {
+        ///**********************************************
+        ///             Members Section
+        ///**********************************************
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger( "ParsingBinaryFile.cs" );
+        private static readonly List<string> _csvHeader = new List<string>
+        {
+            "os",
+            "host_name",
+            "client_time" ,
+            "full_server_time" ,
+            "process_id" ,
+            "process_name" ,
+            "process_path" ,
+            "application_name" ,
+            "protocol" ,
+            "status" ,
+            "source_port" ,
+            "destination_port" ,
+            "direction" ,
+            "file_path" ,
+            "state" ,
+            "source_ip" ,
+            "destination_ip" ,
+            "sequance_number" ,
+            "sub_sequance_number" ,
+            "user_name" ,
+            "mog_counter" ,
+            "destination_path" ,
+            "reason" ,
+            "image_path" ,
+            "image_name" ,
+            "parent_path" ,
+            "parent_name" ,
+            "chain_array"
+        };
+
         ///**********************************************
         ///             Functions Section
         ///**********************************************
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger( "ParsingBinaryFile.cs" );
-
         /// <summary>
         /// This function is parsing the binary file.
         /// There are 4 different kind of parsing methods
@@ -90,65 +124,7 @@ namespace LogSender.Utilities
         /// <param name="dataAsString"></param>
         public static void AddOutputHeader(StringBuilder dataAsString)
         {
-            dataAsString.Append( 
-                "os" +
-                "," +
-                "host_name" +
-                "," +
-                "client_time" +
-                "," +
-                "full_server_time" +
-                "," +
-                "process_id" +
-                "," +
-                "process_name" +
-                "," +
-                "process_path" +
-                "," +
-                "application_name" +
-                "," +
-                "protocol" +
-                "," +
-                "status" +
-                "," +
-                "source_port" +
-                "," +
-                "destination_port" +
-                "," +
-                "direction" +
-                "," +
-                "file_path" +
-                "," +
-                "x_cast" +
-                "," +
-                "state" +
-                "," +
-                "source_ip" +
-                "," +
-                "destination_ip" +
-                "," +
-                "sequance_number" +
-                "," +
-                "sub_sequance_number" +
-                "," +
-                "user_name" +
-                "," +
-                "mog_counter" +
-                "," +
-                "destination_path" +
-                "," +
-                "reason" +
-                "," +
-                "image_path" +
-                "," +
-                "image_name" +
-                "," +
-                "parent_path" +
-                "," +
-                "parent_name" +
-                "," +
-                "chain_array" );
-            dataAsString.Append( "\n " );
+            dataAsString.Append(ServiceStack.Text.CsvSerializer.SerializeToCsv(_csvHeader));
         }
 
 
@@ -208,9 +184,7 @@ namespace LogSender.Utilities
                     log.Error( "Problem While trying to read file -" + file.FullName , ex );
                 }
             }
-
             return listOfFileToDelete;
-
         }
     }
 }

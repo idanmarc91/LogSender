@@ -19,3 +19,15 @@ C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\bin\Debug\LogSender.pdb
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\bin\Debug\log4net.dll
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\bin\Debug\LogSender.exe.config
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\bin\Debug\log4net.xml
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\bin\Debug\System.Net.Http.dll
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\bin\Debug\ServiceStack.Text.dll
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\bin\Debug\System.Memory.dll
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\bin\Debug\netstandard.dll
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\bin\Debug\System.Numerics.Vectors.dll
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\bin\Debug\System.Buffers.dll
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\bin\Debug\ServiceStack.Text.xml
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\bin\Debug\System.Memory.xml
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\bin\Debug\System.Numerics.Vectors.xml
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\bin\Debug\System.Buffers.xml

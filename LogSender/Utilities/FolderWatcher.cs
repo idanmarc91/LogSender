@@ -26,7 +26,7 @@ namespace LogSender.Utilities
             if( dir.Value.EnumerateFiles( "*." + dir.Key )
                          .Where( file => ( file.Length <= binaryFileMaxSize ) && ( file.Length > 0 ) )
                          .ToArray()
-                         .Length > minNumOfFilesToSend )
+                         .Length >= minNumOfFilesToSend )
             {
                 log.Debug( "there are files to send in " + dir.Value.Name + " folder" );
                 return true;

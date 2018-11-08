@@ -78,10 +78,10 @@ namespace BinaryFileToTextFile
                     }
                     _servicesFsaTable.RemoveAll( i => i.GetFullAccTime() == row.GetFullAccTime() && i.GetSubSeqNum() == row.GetSeqNum() );
                     //add counter of svchost process name
-                    if( row.GetProcessName() != "" )
-                    {
-                        row.ChangeProcessName();
-                    }
+                    //if( row.GetProcessName() != "" )
+                    //{
+                    //    row.ChangeProcessName();
+                    //}
                 }
             }
         }
