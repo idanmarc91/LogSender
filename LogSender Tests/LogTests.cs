@@ -42,7 +42,11 @@ namespace LogSender_Tests
 
                 log.ConvertRowsToCsvFormat();
 
-                jsonTest = JsonDataConvertion.JsonSerialization( log.GetDataAsString() );
+                StringBuilder test = new StringBuilder();
+                ParsingBinaryFile.AddOutputHeader(test);
+                test.Append(log.GetDataAsString());
+
+                jsonTest = JsonDataConvertion.JsonSerialization(test);
             }
 
             //Assert
@@ -80,7 +84,11 @@ namespace LogSender_Tests
 
                 log.ConvertRowsToCsvFormat();
 
-                jsonTest = JsonDataConvertion.JsonSerialization( log.GetDataAsString() );
+                StringBuilder test = new StringBuilder();
+                ParsingBinaryFile.AddOutputHeader(test);
+                test.Append(log.GetDataAsString());
+
+                jsonTest = JsonDataConvertion.JsonSerialization(test);
             }
 
             //Assert
@@ -119,9 +127,10 @@ namespace LogSender_Tests
                 log.ConvertRowsToCsvFormat();
 
                 StringBuilder test = new StringBuilder();
-                AddOutputHeader( dataAsString );
+                ParsingBinaryFile.AddOutputHeader( test );
+                test.Append(log.GetDataAsString());
 
-                jsonTest = JsonDataConvertion.JsonSerialization( log.GetDataAsString() );
+                jsonTest = JsonDataConvertion.JsonSerialization( test );
             }
 
             //Assert
@@ -156,9 +165,14 @@ namespace LogSender_Tests
 
                 //extract data from binary file
                 MogTable log = new MogTable( expandedFileByteArray , headerParameters._hostName.GetData() , headerParameters._serverClientDelta.GetData() , headerParameters._version.GetData() );
+
                 log.ConvertRowsToCsvFormat();
 
-                jsonTest = JsonDataConvertion.JsonSerialization( log.GetDataAsString() );
+                StringBuilder test = new StringBuilder();
+                ParsingBinaryFile.AddOutputHeader(test);
+                test.Append(log.GetDataAsString());
+
+                jsonTest = JsonDataConvertion.JsonSerialization(test);
             }
 
             //Assert

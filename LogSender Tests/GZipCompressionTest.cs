@@ -2,7 +2,6 @@
 using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using LogSender.Utilities;
-using System.Text;
 
 namespace LogSender_Tests
 {

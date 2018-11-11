@@ -25,9 +25,7 @@ namespace LogSender
             try
             {
                 log.Debug( "Log Sender Service OnStart Fucntion" );
-
-                string path = AppDomain.CurrentDomain.BaseDirectory;
-                _logSender = new LogSender( path );
+                _logSender = new LogSender();
                 _logSender.RunService();
             }
             catch( Exception ex )

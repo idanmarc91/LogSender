@@ -10,10 +10,10 @@ using System.Threading.Tasks;
 
 namespace LogSender.Utilities
 {
-    class ServerConnection
+    public class ServerConnection
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger( "ServerConnection.cs" );
-
+        private static HttpClient _client;
         /// <summary>
         /// This function send the compressed data to the log stash server.
         /// data Content-Type must be application/json
@@ -28,15 +28,14 @@ namespace LogSender.Utilities
                 using (HttpClientHandler handler = new HttpClientHandler())
                 {
                     handler.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
-                    using (HttpClient client = new HttpClient(handler, false))
+                    using (_client = new HttpClient(handler, false))
                     {
-                        //string json = JsonConvert.SerializeObject(people);
 
                         StreamContent content = new StreamContent(compressedData);
                         content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
                         content.Headers.ContentEncoding.Add("gzip");
 
-                        using (HttpResponseMessage response = await client.PostAsync(hostIp + "/input", content))
+                        using (HttpResponseMessage response = await _client.PostAsync(hostIp + "/input", content))
                         {
                             //check what to do when response is not 200.
                             log.Debug("server response " + response.StatusCode);

@@ -134,7 +134,7 @@ namespace LogSender.Utilities
         /// <param name="dataAsString"></param>
         /// <param name="files"></param>
         /// <returns></returns>
-        public static List<FileInfo> ParseFolder(StringBuilder dataAsString , KeyValuePair<string , DirectoryInfo> dir , int configJsonMaxDataSize )
+        public static List<FileInfo> ParseFolder(StringBuilder dataAsString , KeyValuePair<string , DirectoryInfo> dir , long configJsonMaxDataSize )
         {
             log.Debug( dir.Value.Name + "folder started his parsing process" );
 
@@ -164,7 +164,7 @@ namespace LogSender.Utilities
                     logTable.ConvertRowsToCsvFormat();
 
                     //Check if the current table will not cause size limit (configurable)
-                    if( dataAsString.Length + logTable.GetDataSize() < configJsonMaxDataSize )
+                    if( dataAsString.Length + logTable.GetDataSize() < configJsonMaxDataSize || listOfFileToDelete.Count == 0)
                     {
                         dataAsString.Append( logTable.GetDataAsString() );
                     }

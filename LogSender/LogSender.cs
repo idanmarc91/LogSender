@@ -27,18 +27,19 @@ namespace LogSender
         /// <summary>
         /// Ctor of LogSender Class
         /// </summary>
-        public LogSender(string path)
+        public LogSender()
         {
+
             log.Debug("Start creating log sender class");
 
-            _config.CfgFile(path);
+            _config.CfgFile();
 
             _directory = new List<KeyValuePair<string, DirectoryInfo>>
             {
-                //new KeyValuePair<string , DirectoryInfo>( "cyb" , new DirectoryInfo( path + "\\Packets" ) ) ,
-                //new KeyValuePair<string , DirectoryInfo>( "fsa" , new DirectoryInfo( path + "\\FSAccess" ) ) ,
-                //new KeyValuePair<string , DirectoryInfo>( "cimg" , new DirectoryInfo( path + "\\Images" ) ) ,
-                new KeyValuePair<string , DirectoryInfo>( "mog" , new DirectoryInfo( path + "\\Multievent" ) )
+                new KeyValuePair<string , DirectoryInfo>( "cyb" , new DirectoryInfo( _config.configData._cybFolderPath ) ) ,
+                new KeyValuePair<string , DirectoryInfo>( "fsa" , new DirectoryInfo( _config.configData._fsaFolderPath) ) ,
+                new KeyValuePair<string , DirectoryInfo>( "cimg" , new DirectoryInfo( _config.configData._cimgFolderPath ) ) ,
+                new KeyValuePair<string , DirectoryInfo>( "mog" , new DirectoryInfo( _config.configData._mogFolderPath) )
             };
 
             log.Debug("log sender class created");
@@ -75,9 +76,6 @@ namespace LogSender
                             }
                         }
                         //wait for threads to end
-
-
-
                         foreach (Thread t in threadList)
                         {
                             t.Join();
@@ -130,13 +128,9 @@ namespace LogSender
 
                 //get json data from multiple log files as one string
                 string multipleLogFileAsjsonString = JsonDataConvertion.JsonSerialization(dataAsString);
-                File.WriteAllText("mog", multipleLogFileAsjsonString);
 
                 //gzip data
                 MemoryStream compressedData = GZipCompresstion.CompressString(multipleLogFileAsjsonString);
-
-                //export byte array to file (testing)
-                //File.WriteAllBytes( "testfile.gz" , compressedData ); // Requires System.IO
 
                 int retry = _config.configData._numberOfTimesToRetry;
 
@@ -147,7 +141,7 @@ namespace LogSender
                         log.Info("log sender sent " + listOfFileToDelete.Count + " files to the server and the server recived them");
                         log.Debug("begin deleteing the files that was sent to the server");
 
-                        //FileMaintenance.FileDelete( listOfFileToDelete );
+                        FileMaintenance.FileDelete( listOfFileToDelete );
 
                         break;//when file sent sucessfuly exit while loop
                     }

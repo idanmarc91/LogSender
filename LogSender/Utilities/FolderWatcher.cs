@@ -4,36 +4,36 @@ using System.Linq;
 
 namespace LogSender.Utilities
 {
-    class FolderWatcher
+    public class FolderWatcher
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger( "FolderWatcher.cs" );
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger("FolderWatcher.cs");
 
         /// <summary>
         /// This function watch the binary folder when server is online
         /// </summary>
         /// <param name="dir"></param>
         /// <returns>true if sending process should begin else false</returns>
-        public static bool IsFolderReadyToSendWatcher(KeyValuePair<string , DirectoryInfo> dir , int binaryFileMaxSize , int minNumOfFilesToSend , long maxBinaryFolderSize)
+        public static bool IsFolderReadyToSendWatcher(KeyValuePair<string, DirectoryInfo> dir, long binaryFileMaxSize, int minNumOfFilesToSend, long maxBinaryFolderSize)
         {
-            log.Debug( "Watching online\'" + dir.Value.Name + "\' folder" );
+            log.Debug("Watching online\'" + dir.Value.Name + "\' folder");
 
-            if( FolderSizeWatcher( dir , maxBinaryFolderSize ) )
+            if (FolderSizeWatcher(dir, maxBinaryFolderSize))
             {
                 //folder size exceeded delete old files
-                FileMaintenance.DeleteOldFiles( dir.Value , maxBinaryFolderSize );
+                FileMaintenance.DeleteOldFiles(dir.Value, maxBinaryFolderSize);
             }
 
-            if( dir.Value.EnumerateFiles( "*." + dir.Key )
-                         .Where( file => ( file.Length <= binaryFileMaxSize ) && ( file.Length > 0 ) )
+            if (dir.Value.EnumerateFiles("*." + dir.Key)
+                         .Where(file => (file.Length <= binaryFileMaxSize) && (file.Length > 0))
                          .ToArray()
-                         .Length >= minNumOfFilesToSend )
+                         .Length >= minNumOfFilesToSend)
             {
-                log.Debug( "there are files to send in " + dir.Value.Name + " folder" );
+                log.Debug("there are files to send in " + dir.Value.Name + " folder");
                 return true;
             }
             else
             {
-                log.Debug( "there are no enough files to send in " + dir.Value.Name + " folder" );
+                log.Debug("there are no enough files to send in " + dir.Value.Name + " folder");
                 return false;
             }
         }
@@ -44,15 +44,15 @@ namespace LogSender.Utilities
         /// <param name="dir"></param>
         /// <param name="maxBinaryFolderSize"></param>
         /// <returns>true if folder need maintenance false if not</returns>
-        public static bool FolderSizeWatcher(KeyValuePair<string , DirectoryInfo> dir , long maxBinaryFolderSize)
+        public static bool FolderSizeWatcher(KeyValuePair<string, DirectoryInfo> dir, long maxBinaryFolderSize)
         {
-            log.Debug( "Watching offline \'" + dir.Value.Name + "\' folder" );
+            log.Debug("Watching offline \'" + dir.Value.Name + "\' folder");
 
-            long lenght = FileMaintenance.DirSize( dir.Value.GetFiles() );
+            long lenght = FileMaintenance.DirSize(dir.Value.GetFiles());
 
-            if( lenght > maxBinaryFolderSize )
+            if (lenght > maxBinaryFolderSize)
             {
-                log.Error( "The binary folder " + dir.Value.Name + " has reached size limit" );
+                log.Error("The binary folder " + dir.Value.Name + " has reached size limit");
                 return true;
             }
             return false;

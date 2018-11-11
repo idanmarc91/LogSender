@@ -43,6 +43,8 @@ namespace LogSender.Utilities
 
             foreach( FileInfo file in listOfFileToDelete )
             {
+                if (IsFileLocked(file))
+                    continue;
                 file.Delete();
                 log.Debug( file.Name + " file has deleted" );
             }
@@ -52,9 +54,19 @@ namespace LogSender.Utilities
         {
             long size = 0;
             // Add file sizes.
-            foreach( FileInfo fi in fileArray )
+            foreach( FileInfo file in fileArray )
             {
-                size += fi.Length;
+                if (IsFileLocked(file))
+                    continue;
+
+                //delete file with zero size
+                if (file.Length == 0 )
+                {
+                    file.Delete();
+                    continue;
+                }
+
+                size += file.Length;
             }
             return size;
         }
@@ -67,6 +79,8 @@ namespace LogSender.Utilities
 
             for(int index = 0 ; FileMaintenance.DirSize( dir.GetFiles() ) > binaryFileMaxSize ; index++ )
             {
+                if (IsFileLocked(files[index]))
+                    continue;
                 files[index].Delete();
             }
         }
