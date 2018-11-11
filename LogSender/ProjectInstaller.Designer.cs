@@ -39,8 +39,11 @@
             // 
             // serviceInstaller1
             // 
-            this.serviceInstaller1.ServiceName = "Cyber 2.0 Log Sender";
+            this.serviceInstaller1.Description = "Cyber 2.0 Log Sender v5";
+            this.serviceInstaller1.DisplayName = "Cyber 2.0 Log Sender v5";
+            this.serviceInstaller1.ServiceName = "Cyber 2.0 Log Sender v5";
             this.serviceInstaller1.StartType = System.ServiceProcess.ServiceStartMode.Automatic;
+            this.serviceInstaller1.AfterInstall += new System.Configuration.Install.InstallEventHandler(this.serviceInstaller1_AfterInstall);
             // 
             // ProjectInstaller
             // 

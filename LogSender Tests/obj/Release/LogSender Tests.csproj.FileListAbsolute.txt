@@ -19,3 +19,15 @@ C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\bin\Release\Newtonsoft.Js
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\obj\Release\LogSender Tests.csproj.CopyComplete
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\obj\Release\LogSender Tests.dll
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\obj\Release\LogSender Tests.pdb
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\bin\Release\System.Net.Http.dll
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\bin\Release\ServiceStack.Text.dll
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\bin\Release\System.Memory.dll
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\bin\Release\netstandard.dll
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\bin\Release\System.Numerics.Vectors.dll
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\bin\Release\System.Runtime.CompilerServices.Unsafe.dll
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\bin\Release\System.Buffers.dll
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\bin\Release\ServiceStack.Text.xml
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\bin\Release\System.Memory.xml
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\bin\Release\System.Numerics.Vectors.xml
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\bin\Release\System.Runtime.CompilerServices.Unsafe.xml
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\bin\Release\System.Buffers.xml

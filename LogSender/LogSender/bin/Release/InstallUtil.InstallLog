@@ -1,0 +1,34 @@
+﻿
+Running a transacted installation.
+
+Beginning the Install phase of the installation.
+See the contents of the log file for the C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\LogSender\bin\Release\LogSender.exe assembly's progress.
+The file is located at C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\LogSender\bin\Release\LogSender.InstallLog.
+
+An exception occurred during the Install phase.
+System.ComponentModel.Win32Exception: The specified service has been marked for deletion
+
+The Rollback phase of the installation is beginning.
+See the contents of the log file for the C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\LogSender\bin\Release\LogSender.exe assembly's progress.
+The file is located at C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\LogSender\bin\Release\LogSender.InstallLog.
+
+The Rollback phase completed successfully.
+
+The transacted install has completed.
+
+Running a transacted installation.
+
+Beginning the Install phase of the installation.
+See the contents of the log file for the C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\LogSender\bin\Release\LogSender.exe assembly's progress.
+The file is located at C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\LogSender\bin\Release\LogSender.InstallLog.
+
+An exception occurred during the Install phase.
+System.ComponentModel.Win32Exception: The specified service has been marked for deletion
+
+The Rollback phase of the installation is beginning.
+See the contents of the log file for the C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\LogSender\bin\Release\LogSender.exe assembly's progress.
+The file is located at C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\LogSender\bin\Release\LogSender.InstallLog.
+
+The Rollback phase completed successfully.
+
+The transacted install has completed.

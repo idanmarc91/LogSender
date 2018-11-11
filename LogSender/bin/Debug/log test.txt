@@ -1070,3 +1070,73 @@ System.IO.IOException: The process cannot access the file 'C:\Program Files\Cybe
    at System.IO.FileInfo.Open(FileMode mode, FileAccess access, FileShare share)
    at LogSender.Utilities.FileMaintenance.IsFileLocked(FileInfo file) in C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\Utilities\FileMaintenance.cs:line 17
 2018-11-11 14:46:51,761 [16] Log_Level-DEBUG, File-FolderWatcher.cs, Function-IsFolderReadyToSendWatcher, - there are files to send in Packets folder
+2018-11-11 16:19:50,113 [1] Log_Level-DEBUG, File-LogSenderService.cs, Function-LogSenderServiceOnDebug, - Log Sender Service On Debug
+2018-11-11 16:19:50,142 [1] Log_Level-DEBUG, File-LogSenderService.cs, Function-OnStart, - Log Sender Service OnStart Fucntion
+2018-11-11 16:19:50,145 [1] Log_Level-DEBUG, File-LogSender.cs, Function-.ctor, - Start creating log sender class
+2018-11-11 16:19:50,151 [1] Log_Level-DEBUG, File-ConfigFile.cs, Function-CfgFile, - Log Sender Configuration file exist
+2018-11-11 16:19:50,158 [1] Log_Level-DEBUG, File-LogSender.cs, Function-.ctor, - log sender class created
+2018-11-11 16:19:50,165 [1] Log_Level-DEBUG, File-LogSender.cs, Function-MoveNext, - Main Service thread started
+2018-11-11 16:19:50,240 [1] Log_Level-DEBUG, File-ServerConnection.cs, Function-MoveNext, - check if server is alive
+2018-11-11 16:19:50,425 [9] Log_Level-INFO, File-ServerConnection.cs, Function-MoveNext, - The server is online
+2018-11-11 16:19:50,429 [9] Log_Level-DEBUG, File-ServerConnection.cs, Function-MoveNext, - exit serverIsAlive function
+2018-11-11 16:19:50,430 [9] Log_Level-DEBUG, File-LogSender.cs, Function-MoveNext, - Server is online
+2018-11-11 16:19:56,822 [9] Log_Level-DEBUG, File-FolderWatcher.cs, Function-IsFolderReadyToSendWatcher, - Watching online'Packets' folder
+2018-11-11 16:19:56,828 [9] Log_Level-DEBUG, File-FolderWatcher.cs, Function-FolderSizeWatcher, - Watching offline 'Packets' folder
+2018-11-11 16:19:56,877 [9] Log_Level-ERROR, File-FileMaintenance.cs, Function-IsFileLocked, - 11-11-18--16-19-09.cyb file is in writing mode. cannot be access!
+System.IO.IOException: The process cannot access the file 'C:\Program Files\Cyber 2.0\Cyber 2.0 Agent\Packets\11-11-18--16-19-09.cyb' because it is being used by another process.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.FileInfo.Open(FileMode mode, FileAccess access, FileShare share)
+   at LogSender.Utilities.FileMaintenance.IsFileLocked(FileInfo file) in C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\Utilities\FileMaintenance.cs:line 17
+2018-11-11 16:19:56,881 [9] Log_Level-DEBUG, File-FolderWatcher.cs, Function-IsFolderReadyToSendWatcher, - there are files to send in Packets folder
+2018-11-11 16:19:56,881 [9] Log_Level-DEBUG, File-LogSender.cs, Function-MoveNext, - Sending process begin
+2018-11-11 16:19:56,882 [9] Log_Level-DEBUG, File-LogSender.cs, Function-MoveNext, - thread created for Packets folder and started his operation
+2018-11-11 16:19:58,549 [9] Log_Level-DEBUG, File-FolderWatcher.cs, Function-IsFolderReadyToSendWatcher, - Watching online'FSAccess' folder
+2018-11-11 16:19:58,549 [9] Log_Level-DEBUG, File-FolderWatcher.cs, Function-FolderSizeWatcher, - Watching offline 'FSAccess' folder
+2018-11-11 16:19:58,551 [Packets] Log_Level-DEBUG, File-LogSender.cs, Function-MoveNext, - cyb Thread strating his sending process
+2018-11-11 16:20:44,374 [1] Log_Level-DEBUG, File-LogSenderService.cs, Function-LogSenderServiceOnDebug, - Log Sender Service On Debug
+2018-11-11 16:20:44,417 [1] Log_Level-DEBUG, File-LogSenderService.cs, Function-OnStart, - Log Sender Service OnStart Fucntion
+2018-11-11 16:20:44,419 [1] Log_Level-DEBUG, File-LogSender.cs, Function-.ctor, - Start creating log sender class
+2018-11-11 16:20:44,426 [1] Log_Level-DEBUG, File-ConfigFile.cs, Function-CfgFile, - Log Sender Configuration file exist
+2018-11-11 16:20:44,429 [1] Log_Level-DEBUG, File-LogSender.cs, Function-.ctor, - log sender class created
+2018-11-11 16:20:44,435 [1] Log_Level-DEBUG, File-LogSender.cs, Function-MoveNext, - Main Service thread started
+2018-11-11 16:20:44,478 [1] Log_Level-DEBUG, File-ServerConnection.cs, Function-MoveNext, - check if server is alive
+2018-11-11 16:20:44,931 [3] Log_Level-INFO, File-ServerConnection.cs, Function-MoveNext, - The server is online
+2018-11-11 16:20:44,936 [3] Log_Level-DEBUG, File-ServerConnection.cs, Function-MoveNext, - exit serverIsAlive function
+2018-11-11 16:20:44,936 [3] Log_Level-DEBUG, File-LogSender.cs, Function-MoveNext, - Server is online
+2018-11-11 16:21:19,610 [3] Log_Level-DEBUG, File-FolderWatcher.cs, Function-IsFolderReadyToSendWatcher, - Watching online'Packets' folder
+2018-11-11 16:21:19,615 [3] Log_Level-DEBUG, File-FolderWatcher.cs, Function-FolderSizeWatcher, - Watching offline 'Packets' folder
+2018-11-11 16:21:39,282 [3] Log_Level-ERROR, File-FileMaintenance.cs, Function-IsFileLocked, - 11-11-18--16-21-09.cyb file is in writing mode. cannot be access!
+System.IO.IOException: The process cannot access the file 'C:\Program Files\Cyber 2.0\Cyber 2.0 Agent\Packets\11-11-18--16-21-09.cyb' because it is being used by another process.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.FileInfo.Open(FileMode mode, FileAccess access, FileShare share)
+   at LogSender.Utilities.FileMaintenance.IsFileLocked(FileInfo file) in C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\Utilities\FileMaintenance.cs:line 17
+2018-11-11 16:21:39,286 [3] Log_Level-DEBUG, File-FolderWatcher.cs, Function-IsFolderReadyToSendWatcher, - there are files to send in Packets folder
+2018-11-11 16:21:39,286 [3] Log_Level-DEBUG, File-LogSender.cs, Function-MoveNext, - Sending process begin
+2018-11-11 16:21:39,287 [3] Log_Level-DEBUG, File-LogSender.cs, Function-MoveNext, - thread created for Packets folder and started his operation
+2018-11-11 16:21:40,915 [3] Log_Level-DEBUG, File-FolderWatcher.cs, Function-IsFolderReadyToSendWatcher, - Watching online'FSAccess' folder
+2018-11-11 16:21:40,916 [3] Log_Level-DEBUG, File-FolderWatcher.cs, Function-FolderSizeWatcher, - Watching offline 'FSAccess' folder
+2018-11-11 16:21:40,917 [Packets] Log_Level-DEBUG, File-LogSender.cs, Function-MoveNext, - cyb Thread strating his sending process
+2018-11-11 16:21:53,011 [Packets] Log_Level-DEBUG, File-ParsingBinaryFile.cs, Function-ParseFolder, - Packetsfolder started his parsing process
+2018-11-11 16:24:51,260 [1] Log_Level-DEBUG, File-LogSenderService.cs, Function-LogSenderServiceOnDebug, - Log Sender Service On Debug
+2018-11-11 16:24:51,302 [1] Log_Level-DEBUG, File-LogSenderService.cs, Function-OnStart, - Log Sender Service OnStart Fucntion
+2018-11-11 16:24:51,306 [1] Log_Level-DEBUG, File-LogSender.cs, Function-.ctor, - Start creating log sender class
+2018-11-11 16:24:51,310 [1] Log_Level-DEBUG, File-ConfigFile.cs, Function-CfgFile, - Log Sender Configuration file exist
+2018-11-11 16:24:51,314 [1] Log_Level-DEBUG, File-LogSender.cs, Function-.ctor, - log sender class created
+2018-11-11 16:24:51,318 [1] Log_Level-DEBUG, File-LogSender.cs, Function-MoveNext, - Main Service thread started
+2018-11-11 16:24:51,365 [1] Log_Level-DEBUG, File-ServerConnection.cs, Function-MoveNext, - check if server is alive
+2018-11-11 16:24:51,581 [8] Log_Level-INFO, File-ServerConnection.cs, Function-MoveNext, - The server is online
+2018-11-11 16:24:51,587 [8] Log_Level-DEBUG, File-ServerConnection.cs, Function-MoveNext, - exit serverIsAlive function
+2018-11-11 16:24:51,588 [8] Log_Level-DEBUG, File-LogSender.cs, Function-MoveNext, - Server is online
+2018-11-11 16:24:55,107 [8] Log_Level-DEBUG, File-FolderWatcher.cs, Function-IsFolderReadyToSendWatcher, - Watching online'Packets' folder
+2018-11-11 16:24:55,114 [8] Log_Level-DEBUG, File-FolderWatcher.cs, Function-FolderSizeWatcher, - Watching offline 'Packets' folder
+2018-11-11 16:25:10,020 [8] Log_Level-DEBUG, File-FolderWatcher.cs, Function-IsFolderReadyToSendWatcher, - there are files to send in Packets folder
+2018-11-11 16:25:10,021 [8] Log_Level-DEBUG, File-LogSender.cs, Function-MoveNext, - Sending process begin
+2018-11-11 16:25:10,022 [8] Log_Level-DEBUG, File-LogSender.cs, Function-MoveNext, - thread created for Packets folder and started his operation
+2018-11-11 16:25:11,143 [8] Log_Level-DEBUG, File-FolderWatcher.cs, Function-IsFolderReadyToSendWatcher, - Watching online'FSAccess' folder
+2018-11-11 16:25:11,143 [8] Log_Level-DEBUG, File-FolderWatcher.cs, Function-FolderSizeWatcher, - Watching offline 'FSAccess' folder
+2018-11-11 16:25:11,145 [Packets] Log_Level-DEBUG, File-LogSender.cs, Function-MoveNext, - cyb Thread strating his sending process
+2018-11-11 16:25:14,489 [Packets] Log_Level-DEBUG, File-ParsingBinaryFile.cs, Function-ParseFolder, - Packetsfolder started his parsing process
