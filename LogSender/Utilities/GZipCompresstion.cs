@@ -7,7 +7,7 @@ namespace LogSender.Utilities
 {
     public class GZipCompresstion
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger( "JsonCompress.cs" );
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger("GZipCompresstion.cs");
 
         /// <summary>
         /// This function copmpress as Gzip
@@ -32,37 +32,10 @@ namespace LogSender.Utilities
                 log.Debug("GZip compression prccess ended successfully");
 
                 return ms;
-                
-
-                #region old compression code code
-
-                //log.Debug( "starting GZip compression before sending data to server" );
-                //byte[] buffer = Encoding.UTF8.GetBytes( text );
-                //var memoryStream = new MemoryStream();
-                //using( var gZipStream = new GZipStream( memoryStream , CompressionMode.Compress , true ) )
-                //{
-                //    gZipStream.Write( buffer , 0 , buffer.Length );
-                //}
-
-                //memoryStream.Position = 0;
-
-                //var compressedData = new byte[memoryStream.Length];
-                //memoryStream.Read( compressedData , 0 , compressedData.Length );
-
-                //byte[] gZipBuffer = new byte[compressedData.Length + 4];
-                //Buffer.BlockCopy( compressedData , 0 , gZipBuffer , 4 , compressedData.Length );
-                //Buffer.BlockCopy( BitConverter.GetBytes( buffer.Length ) , 0 , gZipBuffer , 0 , 4 );
-
-                //log.Debug( "GZip compression prccess ended successfully" );
-
-                //return gZipBuffer;
-                //return Convert.ToBase64String( gZipBuffer );
-                #endregion
-
             }
-            catch ( Exception ex )
+            catch (Exception ex)
             {
-                log.Error( "Error occurred while compressing the data" , ex );
+                log.Error("Error occurred while compressing the data", ex);
                 return null;
             }
         }
@@ -72,7 +45,7 @@ namespace LogSender.Utilities
         /// </summary>
         /// <param name="compressedText"></param>
         /// <returns></returns>
-        public static string DecompressString(byte [] compressedText)
+        public static string DecompressString(byte[] compressedText)
         {
             try
             {
@@ -95,14 +68,14 @@ namespace LogSender.Utilities
                             }
                         }
                         while (count > 0);
-                        log.Debug( "GZip decompression process ended successfully" );
+                        log.Debug("GZip decompression process ended successfully");
                         return Encoding.Default.GetString(memory.ToArray());
                     }
                 }
             }
-            catch( Exception ex )
+            catch (Exception ex)
             {
-                log.Error( "Error occurred while decompressing the data" , ex );
+                log.Error("Error occurred while decompressing the data", ex);
 
                 return "";
             }

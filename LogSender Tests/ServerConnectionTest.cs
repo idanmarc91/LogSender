@@ -23,10 +23,9 @@ namespace LogSender_Tests
         public async Task SendDataToServerTest()
         {
             //Arrange
-
             string path = AppDomain.CurrentDomain.BaseDirectory;
 
-            string testString = File.ReadAllText(path + "Server Connection Test\file_to_send.txt");
+            string testString = File.ReadAllText(path + "\\Server Connection Test\\file_to_send.txt");
 
             MemoryStream stringAsStream = new MemoryStream();
             var writer = new StreamWriter(stringAsStream);
@@ -34,11 +33,13 @@ namespace LogSender_Tests
             writer.Flush();
             stringAsStream.Position = 0;
 
+            MemoryStream compressedData = GZipCompresstion.CompressString(testString);
             //Act
-            bool isServerOnline = await ServerConnection.SendDataToServer("http://10.0.0.174:8080", stringAsStream);
+            bool isServerOnline = await ServerConnection.SendDataToServer("http://10.0.0.174:8080", compressedData);
 
             //Assert
             Assert.IsTrue(isServerOnline);
+  
         }
     }
 }

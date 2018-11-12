@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace LogSender
 {
@@ -36,12 +37,11 @@ namespace LogSender
 
             _directory = new List<KeyValuePair<string, DirectoryInfo>>
             {
-                new KeyValuePair<string , DirectoryInfo>( "cyb" , new DirectoryInfo( _config.configData._cybFolderPath ) ) ,
-                new KeyValuePair<string , DirectoryInfo>( "fsa" , new DirectoryInfo( _config.configData._fsaFolderPath) ) ,
-                new KeyValuePair<string , DirectoryInfo>( "cimg" , new DirectoryInfo( _config.configData._cimgFolderPath ) ) ,
+                //new KeyValuePair<string , DirectoryInfo>( "cyb" , new DirectoryInfo( _config.configData._cybFolderPath ) ) ,
+                //new KeyValuePair<string , DirectoryInfo>( "fsa" , new DirectoryInfo( _config.configData._fsaFolderPath) ) ,
+                //new KeyValuePair<string , DirectoryInfo>( "cimg" , new DirectoryInfo( _config.configData._cimgFolderPath ) ) ,
                 new KeyValuePair<string , DirectoryInfo>( "mog" , new DirectoryInfo( _config.configData._mogFolderPath) )
             };
-
             log.Debug("log sender class created");
         }
 
@@ -52,7 +52,7 @@ namespace LogSender
         {
             log.Debug("Main Service thread started");
 
-            List<Thread> threadList = new List<Thread>();
+            List<Task> taskList = new List<Task>();
             try
             {
                 while (true) //main service loop
@@ -61,31 +61,28 @@ namespace LogSender
                     {
                         foreach (KeyValuePair<string, DirectoryInfo> dir in _directory)//run on all log directories
                         {
-                          /* PREF - thread created for each folder */
+                            FileMaintenance.ZeroSizeFileCleanup(dir.Value.GetFiles());
+                            /* PREF - Task created for each folder */
                             //check folder status
                             if (FolderWatcher.IsFolderReadyToSendWatcher(dir, _config.configData._binaryFileMaxSize, _config.configData._minNumOfFilesToSend, _config.configData._maxBinaryFolderSize))
                             {
-                                log.Debug("Sending process can begin, creating sending process thread for " + dir.Value.Name + " log folder");
-                                Thread thread = new Thread(() => SendLogs(dir));
-                                threadList.Add(thread);
-                                thread.Name = dir.Value.Name;
-                                thread.Start();
+                                log.Debug("Sending process can begin, creating sending process Task for " + dir.Value.Name + " log folder");
 
-                                log.Debug("thread created for " + dir.Value.Name + " folder and started his operation");
+                                //create task for the current folder
+                                taskList.Add(SendLogs(dir)); 
+
+                                log.Debug("Task created for " + dir.Value.Name + " folder and started his operation");
                             }
                         }
-                        //wait for threads to end
-                        foreach (Thread t in threadList)
-                        {
-                            t.Join();
-                        }
-                        threadList.Clear();
-                        log.Debug("Thread list deleted, main loop has finished the current iteration going to sleep");
+                        /*PREF - the program is not really parallel because main threasis wating - wating for the folders to be updated - if not updated th log sender can send the same log to the server.*/
+                        log.Debug("Main thread is wating for all task to finish there operation");
+                        Task.WaitAll(taskList.ToArray());
+
+                        taskList.Clear();
+                        log.Debug("Task list deleted, main loop has finished the current iteration, going to sleep");
                     }
                     else //server is offline
                     {
-                        log.Debug("Server is offline");
-
                         foreach (KeyValuePair<string, DirectoryInfo> dir in _directory)
                         {
                             if (FolderWatcher.FolderSizeWatcher(dir, _config.configData._maxBinaryFolderSize))
@@ -94,10 +91,12 @@ namespace LogSender
                                 FileMaintenance.DeleteOldFiles(dir.Value, _config.configData._maxBinaryFolderSize);
                             }
                         }
+                        log.Debug("Folder managment finished, main loop has finished the current iteration, going to sleep");
                     }
 
-                    log.Debug("main thread going to sleep for " + _config.configData._threadSleepTime / 1000 + " seconds");
+                    log.Debug("Main thread going to sleep for " + _config.configData._threadSleepTime / 1000 + " seconds");
                     Thread.Sleep(_config.configData._threadSleepTime);
+                    log.Debug("Main thread wake's up");
                 }
             }
 
@@ -112,19 +111,19 @@ namespace LogSender
         /// Main thread function
         /// </summary>
         /// <param name="dir"></param>
-        private async void SendLogs(KeyValuePair<string, DirectoryInfo> dir)
+        private async Task SendLogs(KeyValuePair<string, DirectoryInfo> dir)
         {
             try
             {
-                log.Debug(dir.Key + " Thread strating his sending process");
+                log.Debug(dir.Value.Name + " Folder strating his sending process task");
 
-                //multifile string - hold data from few file
+                //Multifile string - hold data from few file
                 StringBuilder dataAsString = new StringBuilder();
 
-                //start the parsing process on the folder
+                //Start the parsing process on the folder
                 List<FileInfo> listOfFileToDelete = ParsingBinaryFile.ParseFolder(dataAsString, dir, _config.configData._jsonDataMaxSize);
 
-                log.Debug("serialazation for " + dir.Key + " files started");
+                log.Debug("json serialazation for " + dir.Value.Name + " files started");
 
                 //get json data from multiple log files as one string
                 string multipleLogFileAsjsonString = JsonDataConvertion.JsonSerialization(dataAsString);
@@ -132,20 +131,16 @@ namespace LogSender
                 //gzip data
                 MemoryStream compressedData = GZipCompresstion.CompressString(multipleLogFileAsjsonString);
 
-                int retry = _config.configData._numberOfTimesToRetry;
-
-                while (retry-- != 0)//retry loop
+                if (ServerConnection.ServerManager(_config.configData._numberOfTimesToRetry, _config.configData._hostIp, _config.configData._waitTimeBeforeRetry, compressedData).Result)
                 {
-                    if (await ServerConnection.SendDataToServer(_config.configData._hostIp, compressedData))
-                    {
-                        log.Info("log sender sent " + listOfFileToDelete.Count + " files to the server and the server recived them");
-                        log.Debug("begin deleteing the files that was sent to the server");
+                    log.Info("log sender sent " + listOfFileToDelete.Count + " files to the server and the server recived them");
+                    log.Debug("begin deleteing the files that was sent to the server");
 
-                        FileMaintenance.FileDelete(listOfFileToDelete);
-
-                        break;//when file sent sucessfuly exit while loop
-                    }
-                    Thread.Sleep(_config.configData._waitTimeBeforeRetry);
+                    FileMaintenance.FileDelete(listOfFileToDelete);
+                }
+                else
+                {
+                    log.Error("Task failed. problem occured while trying to send data to server.");
                 }
             }
             catch (Exception ex)

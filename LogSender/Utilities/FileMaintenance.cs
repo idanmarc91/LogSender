@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
@@ -6,28 +7,37 @@ namespace LogSender.Utilities
 {
     public class FileMaintenance
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger( "FileMaintenance.cs" );
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger("FileMaintenance.cs");
 
+        ///**********************************************
+        ///             Functions Section
+        ///**********************************************
+        
+        /// <summary>
+        /// This function check if the current file can be access
+        /// </summary>
+        /// <param name="file"></param>
+        /// <returns>true - if the file is locked and cannot be access at the moment, false if the file can be access</returns>
         public static bool IsFileLocked(FileInfo file)
         {
             FileStream stream = null;
 
             try
             {
-                stream = file.Open( FileMode.Open , FileAccess.Read , FileShare.None );
+                stream = file.Open(FileMode.Open, FileAccess.Read, FileShare.None);
             }
-            catch( IOException ex)
+            catch (IOException ex)
             {
                 //the file is unavailable because it is:
                 //still being written to
                 //or being processed by another thread
                 //or does not exist (has already been processed)
-                log.Error( file.Name + " file is in writing mode. cannot be access!",ex );
+                log.Warn(file.Name + " file is in writing mode. cannot be access!");
                 return true;
             }
             finally
             {
-                if( stream != null )
+                if (stream != null)
                 {
                     stream.Close();
                 }
@@ -37,32 +47,41 @@ namespace LogSender.Utilities
             return false;
         }
 
+        /// <summary>
+        /// This fuction delete a file
+        /// </summary>
+        /// <param name="listOfFileToDelete"></param>
         public static void FileDelete(List<FileInfo> listOfFileToDelete)
         {
-            log.Debug( "starting delete files process" );
+            log.Debug("starting delete files process");
 
-            foreach( FileInfo file in listOfFileToDelete )
+            foreach (FileInfo file in listOfFileToDelete)
             {
+                //check if file can be access to
                 if (IsFileLocked(file))
+                {
                     continue;
+                }
+
                 file.Delete();
-                log.Debug( file.Name + " file has deleted" );
+                log.Debug(file.Name + " file has deleted");
             }
         }
 
+        /// <summary>
+        /// This function calculate the directory size
+        /// </summary>
+        /// <param name="fileArray"></param>
+        /// <returns>long - directory size in bytes</returns>
         public static long DirSize(FileInfo[] fileArray)
         {
             long size = 0;
             // Add file sizes.
-            foreach( FileInfo file in fileArray )
+            foreach (FileInfo file in fileArray)
             {
+                //cannot access file- cant add his vale to counter
                 if (IsFileLocked(file))
-                    continue;
-
-                //delete file with zero size
-                if (file.Length == 0 )
                 {
-                    file.Delete();
                     continue;
                 }
 
@@ -71,17 +90,59 @@ namespace LogSender.Utilities
             return size;
         }
 
-        public static void DeleteOldFiles(DirectoryInfo dir , long binaryFileMaxSize)
+        /// <summary>
+        /// This function cleanup the empty log files from a directory
+        /// </summary>
+        /// <param name="fileArray"></param>
+        public static void ZeroSizeFileCleanup(FileInfo[] fileArray)
         {
-            log.Debug(dir.Name+ " Folder size exceeded starting delete old file");
-
-            FileInfo[] files = dir.GetFiles().OrderByDescending( p => p.CreationTime ).ToArray();
-
-            for(int index = 0 ; FileMaintenance.DirSize( dir.GetFiles() ) > binaryFileMaxSize ; index++ )
+            try
             {
-                if (IsFileLocked(files[index]))
-                    continue;
-                files[index].Delete();
+                foreach (FileInfo file in fileArray)
+                {
+                    //cannot access file- cant add his vale to counter
+                    if (IsFileLocked(file))
+                    {
+                        continue;
+                    }
+
+                    //delete file with zero size
+                    if (file.Length == 0)
+                    {
+                        file.Delete();
+                        continue;
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                log.Error("Problem occured while trying to delete an empty file",ex);
+            }
+        }
+
+        /// <summary>
+        /// This function oparete when the folder has exceeded limit size and delete the old log 
+        /// files from it
+        /// </summary>
+        /// <param name="dir"></param>
+        /// <param name="binaryFileMaxSize"></param>
+        public static void DeleteOldFiles(DirectoryInfo dir, long binaryFileMaxSize)
+        {
+            log.Debug(dir.Name + " Folder size exceeded starting delete old file");
+
+            FileInfo[] files = dir.GetFiles().OrderByDescending(p => p.CreationTime).ToArray();
+
+            //if directory size is bigger then the limit configure in the config file
+            if (FileMaintenance.DirSize(dir.GetFiles()) > binaryFileMaxSize)
+            {
+                foreach(FileInfo file in files)
+                {
+                    if (IsFileLocked(file))
+                    {
+                        continue;
+                    }
+                    file.Delete();
+                }
             }
         }
     }

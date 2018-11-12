@@ -12,7 +12,7 @@ namespace LogSender.Utilities
         ///**********************************************
         ///             Members Section
         ///**********************************************
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger( "ParsingBinaryFile.cs" );
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger("ParsingBinaryFile.cs");
         private static readonly List<string> _csvHeader = new List<string>
         {
             "os",
@@ -54,16 +54,16 @@ namespace LogSender.Utilities
         /// </summary>
         /// <param name="FilePath"></param>
         /// <param name="logType"></param>
-        public static Table Parse(FileInfo file , string logType)
+        public static Table Parse(FileInfo file, string logType)
         {
             try
             {
-                BinaryFileHandler bFile = new BinaryFileHandler( file );
+                BinaryFileHandler bFile = new BinaryFileHandler(file);
                 Table logTable = null;
 
-                if( !bFile.IsFileNull() )
+                if (!bFile.IsFileNull())
                 {
-                    log.Debug( file.FullName + " started his parsing process" );
+                    log.Debug(file.Name + " log file started his parsing process");
                     //preprocessing file
                     BinaryFileData data = bFile.SeparateHeaderAndFile();
 
@@ -72,48 +72,47 @@ namespace LogSender.Utilities
 
                     //get header parameters
                     HeaderParameters headerParameters = new HeaderParameters();
-                    headerParameters.ExtractData( data._headerArray );
-
+                    headerParameters.ExtractData(data._headerArray);
 
                     //Build data table from binary file
-                    switch( logType )
+                    switch (logType)
                     {
                         case "cyb":
-                            logTable = new CybTable( expandedFileByteArray , headerParameters._hostName.GetData() , headerParameters._serverClientDelta.GetData() , headerParameters._version.GetData() );
+                            logTable = new CybTable(expandedFileByteArray, headerParameters._hostName.GetData(), headerParameters._serverClientDelta.GetData(), headerParameters._version.GetData());
                             break;
 
                         case "fsa":
-                            logTable = new FsaTable( expandedFileByteArray , headerParameters._hostName.GetData() , headerParameters._serverClientDelta.GetData() , headerParameters._version.GetData() );
+                            logTable = new FsaTable(expandedFileByteArray, headerParameters._hostName.GetData(), headerParameters._serverClientDelta.GetData(), headerParameters._version.GetData());
                             break;
 
                         case "mog":
-                            logTable = new MogTable( expandedFileByteArray , headerParameters._hostName.GetData() , headerParameters._serverClientDelta.GetData() , headerParameters._version.GetData() );
+                            logTable = new MogTable(expandedFileByteArray, headerParameters._hostName.GetData(), headerParameters._serverClientDelta.GetData(), headerParameters._version.GetData());
                             break;
 
                         case "cimg":
-                            logTable = new DLLTable( expandedFileByteArray , headerParameters._hostName.GetData() , headerParameters._serverClientDelta.GetData() );
+                            logTable = new DLLTable(expandedFileByteArray, headerParameters._hostName.GetData(), headerParameters._serverClientDelta.GetData());
                             break;
                     }
                 }
                 else
                 {
-                    throw new Exception( "File Is Null" );
+                    throw new Exception("File Is Null");
                 }
 
                 //check if log table was created in the switch case above
-                if( logTable != null )
+                if (logTable != null)
                 {
-                    log.Debug( file.FullName + " binary file has finished his parsing process" );
+                    log.Debug(file.Name + " log file has successfuly finished his parsing process");
                     return logTable;
                 }
                 else
                 {
-                    throw new Exception( "log type string error. log table was not created" );
+                    throw new Exception("Problem with table creation. log table was not created");
                 }
             }
-            catch( Exception ex )
+            catch (Exception ex)
             {
-                log.Error( "Problem in Parsing process with  " + file.FullName , ex );
+                log.Error("Problem in Parsing process with  " + file.Name, ex);
                 return null;
             }
         }
@@ -129,61 +128,66 @@ namespace LogSender.Utilities
 
 
         /// <summary>
-        /// 
+        /// This function parse the binary logs inside current folder
         /// </summary>
         /// <param name="dataAsString"></param>
         /// <param name="files"></param>
-        /// <returns></returns>
-        public static List<FileInfo> ParseFolder(StringBuilder dataAsString , KeyValuePair<string , DirectoryInfo> dir , long configJsonMaxDataSize )
+        /// <returns>list<fileifno> - files that was finish parsing process and should be deleted</returns>
+        public static List<FileInfo> ParseFolder(StringBuilder dataAsString,
+                                                 KeyValuePair<string, DirectoryInfo> dir,
+                                                 long configJsonMaxDataSize)
         {
-            log.Debug( dir.Value.Name + "folder started his parsing process" );
+            log.Debug(dir.Value.Name + "folder started his parsing process");
 
-            AddOutputHeader( dataAsString );
+            //add csv format data headers line
+            AddOutputHeader(dataAsString);
+
             //list of file name - hold file for further action on the files like delete
             List<FileInfo> listOfFileToDelete = new List<FileInfo>();
 
             //loop on files in folder
-            foreach( FileInfo file in dir.Value.GetFiles() )
+            foreach (FileInfo file in dir.Value.GetFiles())
             {
                 try
                 {
-                    //check if file is locked Write mode
-                    if( FileMaintenance.IsFileLocked( file ) )
+                    //check if file is locked Write mode or empty
+                    if (FileMaintenance.IsFileLocked(file) || file.Length == 0)
                     {
                         continue;
                     }
 
                     //parsing oparation
-                    Table logTable = ParsingBinaryFile.Parse( file , dir.Key );
+                    Table logTable = ParsingBinaryFile.Parse(file, dir.Key);
 
-                    if( logTable == null )
+                    if (logTable == null)
                     {
+                        log.Error("parsing process failed, log table is null. file \"" + file.Name + "\" skiped");
                         throw new Exception();
                     }
 
                     logTable.ConvertRowsToCsvFormat();
 
                     //Check if the current table will not cause size limit (configurable)
-                    if( dataAsString.Length + logTable.GetDataSize() < configJsonMaxDataSize || listOfFileToDelete.Count == 0)
+                    //if dataAsString reached size limit stop parsing the folder and send the data
+                    if (dataAsString.Length + logTable.GetDataSize() < configJsonMaxDataSize || listOfFileToDelete.Count == 0)
                     {
-                        dataAsString.Append( logTable.GetDataAsString() );
+                        dataAsString.Append(logTable.GetDataAsString());
                     }
                     else
                     {
-                        // save current table in some kind of stack and handle it next time we start sending
                         break;//break from file loop
                     }
 
-                    //add file path to the list.for tracking which file should be deleted 
-                    listOfFileToDelete.Add( file );
-
-
+                    //add file to the list.for tracking which file should be deleted 
+                    listOfFileToDelete.Add(file);
                 }
-                catch( Exception ex )
+                catch (Exception ex)
                 {
-                    log.Error( "Problem While trying to read file -" + file.FullName , ex );
+                    log.Error("Problem While trying to read file -" + file.Name, ex);
                 }
             }
+            log.Debug(dir.Value.Name + "folder finished his parsing process");
+
             return listOfFileToDelete;
         }
     }
