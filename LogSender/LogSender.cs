@@ -59,14 +59,13 @@ namespace LogSender
                 {
                     if (await ServerConnection.IsServerAlive(_config.configData._hostIp)) //check if server is online
                     {
-                        log.Debug("Server is online");
-
                         foreach (KeyValuePair<string, DirectoryInfo> dir in _directory)//run on all log directories
                         {
+                          /* PREF - thread created for each folder */
                             //check folder status
                             if (FolderWatcher.IsFolderReadyToSendWatcher(dir, _config.configData._binaryFileMaxSize, _config.configData._minNumOfFilesToSend, _config.configData._maxBinaryFolderSize))
                             {
-                                log.Debug("Sending process begin");
+                                log.Debug("Sending process can begin, creating sending process thread for " + dir.Value.Name + " log folder");
                                 Thread thread = new Thread(() => SendLogs(dir));
                                 threadList.Add(thread);
                                 thread.Name = dir.Value.Name;
@@ -81,6 +80,7 @@ namespace LogSender
                             t.Join();
                         }
                         threadList.Clear();
+                        log.Debug("Thread list deleted, main loop has finished the current iteration going to sleep");
                     }
                     else //server is offline
                     {
@@ -141,7 +141,7 @@ namespace LogSender
                         log.Info("log sender sent " + listOfFileToDelete.Count + " files to the server and the server recived them");
                         log.Debug("begin deleteing the files that was sent to the server");
 
-                        FileMaintenance.FileDelete( listOfFileToDelete );
+                        FileMaintenance.FileDelete(listOfFileToDelete);
 
                         break;//when file sent sucessfuly exit while loop
                     }

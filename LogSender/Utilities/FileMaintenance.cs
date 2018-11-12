@@ -73,7 +73,7 @@ namespace LogSender.Utilities
 
         public static void DeleteOldFiles(DirectoryInfo dir , long binaryFileMaxSize)
         {
-            log.Debug( "starting delete old file" );
+            log.Debug(dir.Name+ " Folder size exceeded starting delete old file");
 
             FileInfo[] files = dir.GetFiles().OrderByDescending( p => p.CreationTime ).ToArray();
 

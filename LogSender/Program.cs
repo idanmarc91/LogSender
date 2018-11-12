@@ -23,8 +23,6 @@ namespace LogSender
                 Thread.Sleep(Timeout.Infinite );
 
 #else
-
-          
             ServiceBase[] ServicesToRun;
             ServicesToRun = new ServiceBase[]
             {
