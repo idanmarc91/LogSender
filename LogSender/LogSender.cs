@@ -62,19 +62,19 @@ namespace LogSender
                         foreach (KeyValuePair<string, DirectoryInfo> dir in _directory)//run on all log directories
                         {
                             FileMaintenance.ZeroSizeFileCleanup(dir.Value.GetFiles());
-                            /* PREF - Task created for each folder */
+                            /* PREF: Task created for each folder */
                             //check folder status
                             if (FolderWatcher.IsFolderReadyToSendWatcher(dir, _config.configData._binaryFileMaxSize, _config.configData._minNumOfFilesToSend, _config.configData._maxBinaryFolderSize))
                             {
                                 log.Debug("Sending process can begin, creating sending process Task for " + dir.Value.Name + " log folder");
 
                                 //create task for the current folder
-                                taskList.Add(SendLogs(dir)); 
+                                taskList.Add(SendLogs(dir));
 
                                 log.Debug("Task created for " + dir.Value.Name + " folder and started his operation");
                             }
                         }
-                        /*PREF - the program is not really parallel because main threasis wating - wating for the folders to be updated - if not updated th log sender can send the same log to the server.*/
+                        /*PREF: the program is not really parallel because main threasis wating - wating for the folders to be updated - if not updated th log sender can send the same log to the server.*/
                         log.Debug("Main thread is wating for all task to finish there operation");
                         Task.WaitAll(taskList.ToArray());
 
