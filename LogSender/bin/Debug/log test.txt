@@ -5499,3 +5499,42 @@
 2018-11-12 16:24:41,010 [9] Log_Level-DEBUG, File-LogSender.cs, Function-MoveNext, - Main thread is wating for all task to finish there operation
 2018-11-12 16:24:41,010 [9] Log_Level-DEBUG, File-LogSender.cs, Function-MoveNext, - Task list deleted, main loop has finished the current iteration, going to sleep
 2018-11-12 16:24:41,010 [9] Log_Level-DEBUG, File-LogSender.cs, Function-MoveNext, - Main thread going to sleep for 2 seconds
+2018-11-13 13:31:22,720 [1] Log_Level-DEBUG, File-LogSenderService.cs, Function-LogSenderServiceOnDebug, - Log Sender Service On Debug
+2018-11-13 13:31:22,918 [1] Log_Level-DEBUG, File-LogSenderService.cs, Function-OnStart, - Log Sender Service OnStart Fucntion
+2018-11-13 13:31:22,920 [1] Log_Level-DEBUG, File-LogSender.cs, Function-.ctor, - Start creating log sender class
+2018-11-13 13:31:22,941 [1] Log_Level-DEBUG, File-ConfigFile.cs, Function-CfgFile, - Log Sender Configuration file exist
+2018-11-13 13:31:23,039 [1] Log_Level-DEBUG, File-LogSender.cs, Function-.ctor, - log sender class created
+2018-11-13 13:31:23,043 [1] Log_Level-DEBUG, File-LogSender.cs, Function-MoveNext, - Main Service thread started
+2018-11-13 13:31:23,105 [1] Log_Level-DEBUG, File-ServerConnection.cs, Function-MoveNext, - check if server is alive
+2018-11-13 13:31:23,579 [9] Log_Level-INFO, File-ServerConnection.cs, Function-MoveNext, - The server is online
+2018-11-13 13:31:23,585 [9] Log_Level-DEBUG, File-ServerConnection.cs, Function-MoveNext, - exit serverIsAlive function
+2018-11-14 08:32:37,303 [1] Log_Level-DEBUG, File-LogSenderService.cs, Function-LogSenderServiceOnDebug, - Log Sender Service On Debug
+2018-11-14 08:32:37,350 [1] Log_Level-DEBUG, File-LogSenderService.cs, Function-OnStart, - Log Sender Service OnStart Fucntion
+2018-11-14 08:32:37,352 [1] Log_Level-DEBUG, File-LogSender.cs, Function-.ctor, - Start creating log sender class
+2018-11-14 08:32:37,357 [1] Log_Level-DEBUG, File-ConfigFile.cs, Function-CfgFile, - Log Sender Configuration file exist
+2018-11-14 08:32:37,372 [1] Log_Level-DEBUG, File-LogSender.cs, Function-.ctor, - log sender class created
+2018-11-14 08:35:30,941 [1] Log_Level-DEBUG, File-LogSenderService.cs, Function-LogSenderServiceOnDebug, - Log Sender Service On Debug
+2018-11-14 08:35:31,015 [1] Log_Level-DEBUG, File-LogSenderService.cs, Function-OnStart, - Log Sender Service OnStart Fucntion
+2018-11-14 08:35:31,017 [1] Log_Level-DEBUG, File-LogSender.cs, Function-.ctor, - Start creating log sender class
+2018-11-14 08:35:31,022 [1] Log_Level-DEBUG, File-ConfigFile.cs, Function-CfgFile, - Log Sender Configuration file exist
+2018-11-14 08:35:31,026 [1] Log_Level-DEBUG, File-LogSender.cs, Function-.ctor, - log sender class created
+2018-11-14 08:36:24,094 [1] Log_Level-DEBUG, File-LogSenderService.cs, Function-LogSenderServiceOnDebug, - Log Sender Service On Debug
+2018-11-14 08:36:24,136 [1] Log_Level-DEBUG, File-LogSenderService.cs, Function-OnStart, - Log Sender Service OnStart Fucntion
+2018-11-14 08:36:24,138 [1] Log_Level-DEBUG, File-LogSender.cs, Function-.ctor, - Start creating log sender class
+2018-11-14 08:36:24,144 [1] Log_Level-DEBUG, File-ConfigFile.cs, Function-CfgFile, - Log Sender Configuration file exist
+2018-11-14 08:36:24,148 [1] Log_Level-DEBUG, File-LogSender.cs, Function-.ctor, - log sender class created
+2018-11-14 08:50:22,773 [1] Log_Level-DEBUG, File-LogSenderService.cs, Function-LogSenderServiceOnDebug, - Log Sender Service On Debug
+2018-11-14 08:50:22,827 [1] Log_Level-DEBUG, File-LogSenderService.cs, Function-OnStart, - Log Sender Service OnStart Fucntion
+2018-11-14 08:50:22,829 [1] Log_Level-DEBUG, File-LogSender.cs, Function-.ctor, - Start creating log sender class
+2018-11-14 08:50:22,837 [1] Log_Level-DEBUG, File-ConfigFile.cs, Function-CfgFile, - Log Sender Configuration file exist
+2018-11-14 08:50:22,842 [1] Log_Level-DEBUG, File-LogSender.cs, Function-.ctor, - log sender class created
+2018-11-14 08:52:01,307 [1] Log_Level-DEBUG, File-LogSenderService.cs, Function-LogSenderServiceOnDebug, - Log Sender Service On Debug
+2018-11-14 08:52:01,396 [1] Log_Level-DEBUG, File-LogSenderService.cs, Function-OnStart, - Log Sender Service OnStart Fucntion
+2018-11-14 08:52:01,399 [1] Log_Level-DEBUG, File-LogSender.cs, Function-.ctor, - Start creating log sender class
+2018-11-14 08:52:01,408 [1] Log_Level-DEBUG, File-ConfigFile.cs, Function-CfgFile, - Log Sender Configuration file exist
+2018-11-14 08:52:01,413 [1] Log_Level-DEBUG, File-LogSender.cs, Function-.ctor, - log sender class created
+2018-11-14 08:54:35,947 [1] Log_Level-DEBUG, File-LogSenderService.cs, Function-LogSenderServiceOnDebug, - Log Sender Service On Debug
+2018-11-14 08:54:36,121 [1] Log_Level-DEBUG, File-LogSenderService.cs, Function-OnStart, - Log Sender Service OnStart Fucntion
+2018-11-14 08:54:36,123 [1] Log_Level-DEBUG, File-LogSender.cs, Function-.ctor, - Start creating log sender class
+2018-11-14 08:54:36,131 [1] Log_Level-DEBUG, File-ConfigFile.cs, Function-CfgFile, - Log Sender Configuration file exist
+2018-11-14 08:54:36,135 [1] Log_Level-DEBUG, File-LogSender.cs, Function-.ctor, - log sender class created

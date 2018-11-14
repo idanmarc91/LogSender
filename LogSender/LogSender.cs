@@ -30,16 +30,15 @@ namespace LogSender
         /// </summary>
         public LogSender()
         {
-
             log.Debug("Start creating log sender class");
 
             _config.CfgFile();
 
             _directory = new List<KeyValuePair<string, DirectoryInfo>>
             {
-                //new KeyValuePair<string , DirectoryInfo>( "cyb" , new DirectoryInfo( _config.configData._cybFolderPath ) ) ,
-                //new KeyValuePair<string , DirectoryInfo>( "fsa" , new DirectoryInfo( _config.configData._fsaFolderPath) ) ,
-                //new KeyValuePair<string , DirectoryInfo>( "cimg" , new DirectoryInfo( _config.configData._cimgFolderPath ) ) ,
+                new KeyValuePair<string , DirectoryInfo>( "cyb" , new DirectoryInfo( _config.configData._cybFolderPath ) ) ,
+                new KeyValuePair<string , DirectoryInfo>( "fsa" , new DirectoryInfo( _config.configData._fsaFolderPath) ) ,
+                new KeyValuePair<string , DirectoryInfo>( "cimg" , new DirectoryInfo( _config.configData._cimgFolderPath ) ) ,
                 new KeyValuePair<string , DirectoryInfo>( "mog" , new DirectoryInfo( _config.configData._mogFolderPath) )
             };
             log.Debug("log sender class created");
@@ -50,6 +49,7 @@ namespace LogSender
         /// </summary>
         public async void RunService()
         {
+
             log.Debug("Main Service thread started");
 
             List<Task> taskList = new List<Task>();

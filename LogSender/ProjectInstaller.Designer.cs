@@ -1,7 +1,12 @@
-﻿namespace LogSender
+﻿using System;
+using System.Configuration.Install;
+using System.Diagnostics;
+
+namespace LogSender
 {
     partial class ProjectInstaller
     {
+
         /// <summary>
         /// Required designer variable.
         /// </summary>
