@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogSender", "LogSender\LogS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogSender Tests", "LogSender Tests\LogSender Tests.csproj", "{9022F9D3-A96C-4483-A9B0-EFFC5045978A}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Service Setup", "Service Setup\Service Setup.vdproj", "{8E345397-58F5-44DE-AFB8-4B37BA6ED69F}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Service Installer", "Service Installer\Service Installer.vdproj", "{32C98975-CE7B-4AC3-9E20-081ABED4C7D9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,16 +43,12 @@ Global
 		{9022F9D3-A96C-4483-A9B0-EFFC5045978A}.Release|x64.Build.0 = Release|x64
 		{9022F9D3-A96C-4483-A9B0-EFFC5045978A}.Release|x86.ActiveCfg = Release|x86
 		{9022F9D3-A96C-4483-A9B0-EFFC5045978A}.Release|x86.Build.0 = Release|x86
-		{8E345397-58F5-44DE-AFB8-4B37BA6ED69F}.Debug|Any CPU.ActiveCfg = Debug
-		{8E345397-58F5-44DE-AFB8-4B37BA6ED69F}.Debug|x64.ActiveCfg = Debug
-		{8E345397-58F5-44DE-AFB8-4B37BA6ED69F}.Debug|x64.Build.0 = Debug
-		{8E345397-58F5-44DE-AFB8-4B37BA6ED69F}.Debug|x86.ActiveCfg = Debug
-		{8E345397-58F5-44DE-AFB8-4B37BA6ED69F}.Debug|x86.Build.0 = Debug
-		{8E345397-58F5-44DE-AFB8-4B37BA6ED69F}.Release|Any CPU.ActiveCfg = Release
-		{8E345397-58F5-44DE-AFB8-4B37BA6ED69F}.Release|x64.ActiveCfg = Release
-		{8E345397-58F5-44DE-AFB8-4B37BA6ED69F}.Release|x64.Build.0 = Release
-		{8E345397-58F5-44DE-AFB8-4B37BA6ED69F}.Release|x86.ActiveCfg = Release
-		{8E345397-58F5-44DE-AFB8-4B37BA6ED69F}.Release|x86.Build.0 = Release
+		{32C98975-CE7B-4AC3-9E20-081ABED4C7D9}.Debug|Any CPU.ActiveCfg = Debug
+		{32C98975-CE7B-4AC3-9E20-081ABED4C7D9}.Debug|x64.ActiveCfg = Debug
+		{32C98975-CE7B-4AC3-9E20-081ABED4C7D9}.Debug|x86.ActiveCfg = Debug
+		{32C98975-CE7B-4AC3-9E20-081ABED4C7D9}.Release|Any CPU.ActiveCfg = Release
+		{32C98975-CE7B-4AC3-9E20-081ABED4C7D9}.Release|x64.ActiveCfg = Release
+		{32C98975-CE7B-4AC3-9E20-081ABED4C7D9}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -9,6 +9,10 @@ namespace LogSender.Utilities
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger("FolderWatcher.cs");
 
+        ///**********************************************
+        ///             Functions Section
+        ///**********************************************
+
         /// <summary>
         /// This function watch the binary folder when server is online
         /// </summary>
@@ -18,7 +22,7 @@ namespace LogSender.Utilities
         {
             try
             {
-                log.Debug("Watching online\'" + dir.Value.Name + "\' folder");
+                log.Debug("Watching online \'" + dir.Value.Name + "\' folder");
 
                 if (FolderSizeWatcher(dir, maxBinaryFolderSize))
                 {
@@ -42,7 +46,7 @@ namespace LogSender.Utilities
             }
             catch (Exception ex)
             {
-                log.Debug("Problem with "+ dir.Value.Name +" folder", ex);
+                log.Debug("Problem with " + dir.Value.Name + " folder", ex);
                 return false;
             }
         }
@@ -55,18 +59,26 @@ namespace LogSender.Utilities
         /// <returns>true if folder need maintenance false if not</returns>
         public static bool FolderSizeWatcher(KeyValuePair<string, DirectoryInfo> dir, long maxBinaryFolderSize)
         {
-            log.Debug("Watching size of \'" + dir.Value.Name + "\' folder");
-
-            long lenght = FileMaintenance.DirSize(dir.Value.GetFiles());
-
-            if (lenght > maxBinaryFolderSize)
+            try
             {
-                log.Error("The binary folder " + dir.Value.Name + " has reached size limit");
+                log.Debug("Watching size of \'" + dir.Value.Name + "\' folder");
+
+                long lenght = FileMaintenance.DirSize(dir.Value.GetFiles());
+
+                if (lenght > maxBinaryFolderSize)
+                {
+                    log.Error("The binary folder " + dir.Value.Name + " has reached size limit");
+                    return true;
+                }
+                log.Debug("folder size is " + lenght + " within the limit (" + maxBinaryFolderSize + " bytes)");
+
+                return false;
+            }
+            catch (Exception ex)
+            {
+                log.Error("error occurred while checking " + dir.Value.Name + " folder size", ex);
                 return true;
             }
-            log.Debug("folder size is within the limit ("+maxBinaryFolderSize+" bytes)");
-
-            return false;
         }
     }
 }

@@ -1,19 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.IO.Compression;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace LogSender.Utilities
 {
     public class ServerConnection
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger( "ServerConnection.cs" );
+        ///**********************************************
+        ///             Members Section
+        ///**********************************************
+
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger("ServerConnection.cs");
         private static HttpClient _client;
+
+        ///**********************************************
+        ///             Functions Section
+        ///**********************************************
+
         /// <summary>
         /// This function send the compressed data to the log stash server.
         /// data Content-Type must be application/json
@@ -21,7 +27,7 @@ namespace LogSender.Utilities
         /// </summary>
         /// <param name="url"></param>
         /// <param name="data"></param>
-        public static async Task<bool> SendDataToServer(string hostIp , MemoryStream compressedData)
+        public static async Task<bool> SendDataToServer(string hostIp, MemoryStream compressedData)
         {
             try
             {
@@ -45,9 +51,9 @@ namespace LogSender.Utilities
                     }
                 }
             }
-            catch ( Exception ex )
+            catch (Exception ex)
             {
-                log.Error( "problem occurred while sending data to the server " , ex );
+                log.Error("problem occurred while sending data to the server ", ex);
                 return false;
             }
 
@@ -62,26 +68,46 @@ namespace LogSender.Utilities
         {
             try
             {
-                log.Debug( "check if server is alive" );
+                log.Debug("check if server is alive");
 
-                using( HttpClient client = new HttpClient() )
+                using (HttpClient client = new HttpClient())
                 {
-                    using( HttpResponseMessage response = await client.GetAsync( hostIp + "/ping" ) )
+                    using (HttpResponseMessage response = await client.GetAsync(hostIp + "/ping"))
                     {
-                        log.Info( "The server is online" );
+                        log.Info("The server is online");
                         return true;
                     }
                 }
             }
-            catch( Exception ex )
+            catch (Exception ex)
             {
-                log.Error( "The server is offline" );
+                log.Error("The server is offline");
                 return false;
             }
             finally
             {
-                log.Debug( "exit serverIsAlive function" );
+                log.Debug("exit serverIsAlive function");
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="retry"></param>
+        /// <param name="hostIp"></param>
+        /// <param name="compressedData"></param>
+        /// <returns></returns>
+        public static async Task<bool> ServerManager(int retry, string hostIp, int delayTime, MemoryStream compressedData )
+        {
+            while (retry-- != 0)//retry loop
+            {
+                if (await ServerConnection.SendDataToServer(hostIp, compressedData))
+                {
+                    return true;//when file sent sucessfuly exit while loop
+                }
+                await Task.Delay(delayTime);
+            }
+            return false;
         }
     }
 }
