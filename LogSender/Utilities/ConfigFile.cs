@@ -7,13 +7,14 @@ namespace LogSender.Utilities
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger("ConfigFile.cs");
 
-        public ConfigData configData = new ConfigData();
+        public ConfigData _configData = new ConfigData();
+
 
         /// <summary>
         /// This function read from configuration data
         /// </summary>
-        /// <param name="path"></param>
-        public void CfgFile()
+        /// <returns>bool - true if config file reading process succeded </returns>
+        public bool ReadConfigFile()
         {
             try
             {
@@ -30,11 +31,12 @@ namespace LogSender.Utilities
                     log.Debug("Log Sender Configuration file exist");
                 }
 
+                int startOffset;
+
+                #region Read from LogSender config file
 
                 //Read Log Sender Configuration file
                 string[] lineArr = System.IO.File.ReadAllLines(path + "\\LogSenderConfiguration.cfg");
-
-                int startOffset;
 
                 //Check lines in cfg file
                 foreach (string line in lineArr)
@@ -46,16 +48,16 @@ namespace LogSender.Utilities
                             startOffset = 16;
                             if (line.Contains("#"))
                             {
-                                configData._cybFolderPath = line.Substring(startOffset, line.IndexOf('#') - startOffset).Trim();
+                                _configData._cybFolderPath = line.Substring(startOffset, line.IndexOf('#') - startOffset).Trim();
                             }
                             else
                             {
-                                configData._cybFolderPath = line.Substring(startOffset, line.Length - startOffset);
+                                _configData._cybFolderPath = line.Substring(startOffset, line.Length - startOffset);
                             }
                         }
                         catch (Exception)
                         {
-                            configData._cybFolderPath = "C:\\Program Files\\Cyber 2.0\\Cyber 2.0 Agent\\Packets";
+                            _configData._cybFolderPath = "C:\\Program Files\\Cyber 2.0\\Cyber 2.0 Agent\\Packets";
                         }
                     }
                     if (line.Contains("fsa_folder_path="))
@@ -65,16 +67,16 @@ namespace LogSender.Utilities
                             startOffset = 16;
                             if (line.Contains("#"))
                             {
-                                configData._fsaFolderPath = line.Substring(startOffset, line.IndexOf('#') - startOffset).Trim();
+                                _configData._fsaFolderPath = line.Substring(startOffset, line.IndexOf('#') - startOffset).Trim();
                             }
                             else
                             {
-                                configData._fsaFolderPath = line.Substring(startOffset, line.Length - startOffset);
+                                _configData._fsaFolderPath = line.Substring(startOffset, line.Length - startOffset);
                             }
                         }
                         catch (Exception)
                         {
-                            configData._fsaFolderPath = "C:\\Program Files\\Cyber 2.0\\Cyber 2.0 Agent\\FSAccess";
+                            _configData._fsaFolderPath = "C:\\Program Files\\Cyber 2.0\\Cyber 2.0 Agent\\FSAccess";
                         }
                     }
                     if (line.Contains("cimg_folder_path="))
@@ -84,16 +86,16 @@ namespace LogSender.Utilities
                             startOffset = 17;
                             if (line.Contains("#"))
                             {
-                                configData._cimgFolderPath = line.Substring(startOffset, line.IndexOf('#') - startOffset).Trim();
+                                _configData._cimgFolderPath = line.Substring(startOffset, line.IndexOf('#') - startOffset).Trim();
                             }
                             else
                             {
-                                configData._cimgFolderPath = line.Substring(startOffset, line.Length - startOffset);
+                                _configData._cimgFolderPath = line.Substring(startOffset, line.Length - startOffset);
                             }
                         }
                         catch (Exception)
                         {
-                            configData._cimgFolderPath = "C:\\Program Files\\Cyber 2.0\\Cyber 2.0 Agent\\Images";
+                            _configData._cimgFolderPath = "C:\\Program Files\\Cyber 2.0\\Cyber 2.0 Agent\\Images";
                         }
                     }
                     if (line.Contains("mog_folder_path="))
@@ -103,16 +105,16 @@ namespace LogSender.Utilities
                             startOffset = 16;
                             if (line.Contains("#"))
                             {
-                                configData._mogFolderPath = line.Substring(startOffset, line.IndexOf('#') - startOffset).Trim();
+                                _configData._mogFolderPath = line.Substring(startOffset, line.IndexOf('#') - startOffset).Trim();
                             }
                             else
                             {
-                                configData._mogFolderPath = line.Substring(startOffset, line.Length - startOffset);
+                                _configData._mogFolderPath = line.Substring(startOffset, line.Length - startOffset);
                             }
                         }
                         catch (Exception)
                         {
-                            configData._mogFolderPath = "C:\\Program Files\\Cyber 2.0\\Cyber 2.0 Agent\\Multievent";
+                            _configData._mogFolderPath = "C:\\Program Files\\Cyber 2.0\\Cyber 2.0 Agent\\Multievent";
                         }
                     }
                     if (line.Contains("json_data_max_size="))
@@ -122,16 +124,16 @@ namespace LogSender.Utilities
                             startOffset = 19;
                             if (line.Contains("#"))
                             {
-                                configData._jsonDataMaxSize = long.Parse(line.Substring(startOffset, line.IndexOf('#') - startOffset).Trim());
+                                _configData._jsonDataMaxSize = long.Parse(line.Substring(startOffset, line.IndexOf('#') - startOffset).Trim());
                             }
                             else
                             {
-                                configData._jsonDataMaxSize = long.Parse(line.Substring(startOffset, line.Length - startOffset));
+                                _configData._jsonDataMaxSize = long.Parse(line.Substring(startOffset, line.Length - startOffset));
                             }
                         }
                         catch (Exception)
                         {
-                            configData._jsonDataMaxSize = 10000000;
+                            _configData._jsonDataMaxSize = 10000000;
                         }
                     }
                     if (line.Contains("binary_file_max_size="))
@@ -141,16 +143,16 @@ namespace LogSender.Utilities
                             startOffset = 21;
                             if (line.Contains("#"))
                             {
-                                configData._binaryFileMaxSize = long.Parse(line.Substring(startOffset, line.IndexOf('#') - startOffset).Trim());
+                                _configData._binaryFileMaxSize = long.Parse(line.Substring(startOffset, line.IndexOf('#') - startOffset).Trim());
                             }
                             else
                             {
-                                configData._binaryFileMaxSize = long.Parse(line.Substring(startOffset, line.Length - startOffset));
+                                _configData._binaryFileMaxSize = long.Parse(line.Substring(startOffset, line.Length - startOffset));
                             }
                         }
                         catch (Exception)
                         {
-                            configData._binaryFileMaxSize = 6291456; // 6 MB
+                            _configData._binaryFileMaxSize = 6291456; // 6 MB
                         }
                     }
                     if (line.Contains("sleep_time_cycle="))
@@ -160,35 +162,35 @@ namespace LogSender.Utilities
                             startOffset = 17;
                             if (line.Contains("#"))
                             {
-                                configData._threadSleepTime = int.Parse(line.Substring(startOffset, line.IndexOf('#') - startOffset).Trim());
+                                _configData._threadSleepTime = int.Parse(line.Substring(startOffset, line.IndexOf('#') - startOffset).Trim());
                             }
                             else
                             {
-                                configData._threadSleepTime = int.Parse(line.Substring(startOffset, line.Length - startOffset));
+                                _configData._threadSleepTime = int.Parse(line.Substring(startOffset, line.Length - startOffset));
                             }
                         }
                         catch (Exception)
                         {
-                            configData._threadSleepTime = 60000; // 60 Seconds by Default
+                            _configData._threadSleepTime = 60000; // 60 Seconds by Default
                         }
                     }
-                    if (line.Contains("host_ip="))
+                    if (line.Contains("host_port="))
                     {
                         try
                         {
-                            startOffset = 8;
+                            startOffset = 10;
                             if (line.Contains("#"))
                             {
-                                configData._hostIp = line.Substring(startOffset, line.IndexOf('#') - startOffset).Trim();
+                                _configData._hostPort = line.Substring(startOffset, line.IndexOf('#') - startOffset).Trim();
                             }
                             else
                             {
-                                configData._hostIp = line.Substring(startOffset, line.Length - startOffset);
+                                _configData._hostPort = line.Substring(startOffset, line.Length - startOffset);
                             }
                         }
                         catch (Exception)
                         {
-                            configData._hostIp = ""; // default host ip
+                            _configData._hostPort = ""; // default host port
                         }
                     }
                     if (line.Contains("max_binary_folder_size="))
@@ -198,16 +200,16 @@ namespace LogSender.Utilities
                             startOffset = 23;
                             if (line.Contains("#"))
                             {
-                                configData._maxBinaryFolderSize = long.Parse(line.Substring(startOffset, line.IndexOf('#') - startOffset).Trim());
+                                _configData._maxBinaryFolderSize = long.Parse(line.Substring(startOffset, line.IndexOf('#') - startOffset).Trim());
                             }
                             else
                             {
-                                configData._maxBinaryFolderSize = long.Parse(line.Substring(startOffset, line.Length - startOffset));
+                                _configData._maxBinaryFolderSize = long.Parse(line.Substring(startOffset, line.Length - startOffset));
                             }
                         }
                         catch (Exception)
                         {
-                            configData._maxBinaryFolderSize = 104857600;
+                            _configData._maxBinaryFolderSize = 104857600;
                         }
                     }
                     if (line.Contains("minimum_number_of_file_to_send="))
@@ -217,16 +219,16 @@ namespace LogSender.Utilities
                             startOffset = 31;
                             if (line.Contains("#"))
                             {
-                                configData._minNumOfFilesToSend = int.Parse(line.Substring(startOffset, line.IndexOf('#') - startOffset).Trim());
+                                _configData._minNumOfFilesToSend = int.Parse(line.Substring(startOffset, line.IndexOf('#') - startOffset).Trim());
                             }
                             else
                             {
-                                configData._minNumOfFilesToSend = int.Parse(line.Substring(startOffset, line.Length - startOffset));
+                                _configData._minNumOfFilesToSend = int.Parse(line.Substring(startOffset, line.Length - startOffset));
                             }
                         }
                         catch (Exception)
                         {
-                            configData._minNumOfFilesToSend = 2;
+                            _configData._minNumOfFilesToSend = 2;
                         }
                     }
                     if (line.Contains("wait_time_before_retry="))
@@ -236,16 +238,16 @@ namespace LogSender.Utilities
                             startOffset = 23;
                             if (line.Contains("#"))
                             {
-                                configData._waitTimeBeforeRetry = int.Parse(line.Substring(startOffset, line.IndexOf('#') - startOffset).Trim());
+                                _configData._waitTimeBeforeRetry = int.Parse(line.Substring(startOffset, line.IndexOf('#') - startOffset).Trim());
                             }
                             else
                             {
-                                configData._waitTimeBeforeRetry = int.Parse(line.Substring(startOffset, line.Length - startOffset));
+                                _configData._waitTimeBeforeRetry = int.Parse(line.Substring(startOffset, line.Length - startOffset));
                             }
                         }
                         catch (Exception)
                         {
-                            configData._waitTimeBeforeRetry = 2000;
+                            _configData._waitTimeBeforeRetry = 2000;
                         }
                     }
                     if (line.Contains("number_of_times_to_retry_sending="))
@@ -255,23 +257,60 @@ namespace LogSender.Utilities
                             startOffset = 33;
                             if (line.Contains("#"))
                             {
-                                configData._numberOfTimesToRetry = int.Parse(line.Substring(startOffset, line.IndexOf('#') - startOffset).Trim());
+                                _configData._numberOfTimesToRetry = int.Parse(line.Substring(startOffset, line.IndexOf('#') - startOffset).Trim());
                             }
                             else
                             {
-                                configData._numberOfTimesToRetry = int.Parse(line.Substring(startOffset, line.Length - startOffset));
+                                _configData._numberOfTimesToRetry = int.Parse(line.Substring(startOffset, line.Length - startOffset));
                             }
                         }
                         catch (Exception)
                         {
-                            configData._numberOfTimesToRetry = 5;
+                            _configData._numberOfTimesToRetry = 5;
                         }
                     }
                 }
+                #endregion
+
+
+#if DEBUG
+                _configData._hostIp = "http://10.0.0.40:8080";
+#else
+                #region Read from Agent config file
+
+                log.Info("reading host ip from Agent config file");
+
+                string[] AgentCfgFile = System.IO.File.ReadAllLines(path + @"\..\Config.cfg");
+                string tempIp;
+                foreach (string line in AgentCfgFile)
+                {
+                    if (line.Contains("host="))
+                    {
+                        startOffset = 5;
+
+                        if (line.Contains("#"))
+                        {
+                            tempIp = line.Substring(startOffset, line.IndexOf('#') - startOffset).Trim();
+                        }
+                        else
+                        {
+                            tempIp = line.Substring(startOffset, line.Length - startOffset);
+                        }
+                        _configData._hostIp = "http://" + tempIp +":" + _configData._hostPort;
+                    }
+                }
+                #endregion
+                if (_configData._hostIp == string.Empty)
+                    log.Error("No host ip");
+#endif
+
+
+                return true;
             }
             catch (Exception ex)
             {
                 log.Fatal("Fatal error config file in creation or reading process", ex);
+                return false;
             }
         }
 
@@ -280,7 +319,7 @@ namespace LogSender.Utilities
         /// This Function create configuration file with default values if not exist
         /// </summary>
         /// <returns></returns>
-        private static string CreateCfgFile()
+        private string CreateCfgFile()
         {
             string strConfig;
 
@@ -316,7 +355,7 @@ namespace LogSender.Utilities
 
             strConfig += "sleep_time_cycle=60000 #every 'value' milliseconds the log sender will check the log folders for new files" + Environment.NewLine + Environment.NewLine;
 
-            strConfig += "host_ip=http://10.0.0.174:8080 #The server IP address" + Environment.NewLine + Environment.NewLine;
+            strConfig += "host_port=8080 #The server port number" + Environment.NewLine + Environment.NewLine;
 
             strConfig += "minimum_number_of_file_to_send=2 #The minimum number of binary files in a folder to start sending process (sending trigger)" + Environment.NewLine + Environment.NewLine;
 

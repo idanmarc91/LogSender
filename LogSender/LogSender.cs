@@ -19,7 +19,7 @@ namespace LogSender
         private readonly List<KeyValuePair<string, DirectoryInfo>> _directory;
 
         //Data from config file
-        private readonly ConfigFile _config = new ConfigFile();
+        private readonly ConfigFile _configFile = new ConfigFile();
 
         ///**********************************************
         ///             Functions Section
@@ -30,18 +30,23 @@ namespace LogSender
         /// </summary>
         public LogSender()
         {
+
             log.Debug("Start creating log sender class");
 
-            _config.CfgFile();
+            if(!_configFile.ReadConfigFile())
+            {
+                throw new Exception("Problem with config files");
+            }
 
             _directory = new List<KeyValuePair<string, DirectoryInfo>>
             {
-                new KeyValuePair<string , DirectoryInfo>( "cyb" , new DirectoryInfo( _config.configData._cybFolderPath ) ) ,
-                new KeyValuePair<string , DirectoryInfo>( "fsa" , new DirectoryInfo( _config.configData._fsaFolderPath) ) ,
-                new KeyValuePair<string , DirectoryInfo>( "cimg" , new DirectoryInfo( _config.configData._cimgFolderPath ) ) ,
-                new KeyValuePair<string , DirectoryInfo>( "mog" , new DirectoryInfo( _config.configData._mogFolderPath) )
+                new KeyValuePair<string , DirectoryInfo>( "cyb" , new DirectoryInfo( _configFile._configData._cybFolderPath ) ) ,
+                new KeyValuePair<string , DirectoryInfo>( "fsa" , new DirectoryInfo( _configFile._configData._fsaFolderPath) ) ,
+                new KeyValuePair<string , DirectoryInfo>( "cimg" , new DirectoryInfo( _configFile._configData._cimgFolderPath ) ) ,
+                new KeyValuePair<string , DirectoryInfo>( "mog" , new DirectoryInfo( _configFile._configData._mogFolderPath) )
             };
             log.Debug("log sender class created");
+
         }
 
         /// <summary>
@@ -57,14 +62,14 @@ namespace LogSender
             {
                 while (true) //main service loop
                 {
-                    if (await ServerConnection.IsServerAlive(_config.configData._hostIp)) //check if server is online
+                    if (await ServerConnection.IsServerAlive(_configFile._configData._hostIp)) //check if server is online
                     {
                         foreach (KeyValuePair<string, DirectoryInfo> dir in _directory)//run on all log directories
                         {
                             FileMaintenance.ZeroSizeFileCleanup(dir.Value.GetFiles());
                             /* PREF: Task created for each folder */
                             //check folder status
-                            if (FolderWatcher.IsFolderReadyToSendWatcher(dir, _config.configData._binaryFileMaxSize, _config.configData._minNumOfFilesToSend, _config.configData._maxBinaryFolderSize))
+                            if (FolderWatcher.IsFolderReadyToSendWatcher(dir, _configFile._configData._binaryFileMaxSize, _configFile._configData._minNumOfFilesToSend, _configFile._configData._maxBinaryFolderSize))
                             {
                                 log.Debug("Sending process can begin, creating sending process Task for " + dir.Value.Name + " log folder");
 
@@ -85,17 +90,17 @@ namespace LogSender
                     {
                         foreach (KeyValuePair<string, DirectoryInfo> dir in _directory)
                         {
-                            if (FolderWatcher.FolderSizeWatcher(dir, _config.configData._maxBinaryFolderSize))
+                            if (FolderWatcher.FolderSizeWatcher(dir, _configFile._configData._maxBinaryFolderSize))
                             {
                                 //folder size exceeded delete old files
-                                FileMaintenance.DeleteOldFiles(dir.Value, _config.configData._maxBinaryFolderSize);
+                                FileMaintenance.DeleteOldFiles(dir.Value, _configFile._configData._maxBinaryFolderSize);
                             }
                         }
                         log.Debug("Folder managment finished, main loop has finished the current iteration, going to sleep");
                     }
 
-                    log.Debug("Main thread going to sleep for " + _config.configData._threadSleepTime / 1000 + " seconds");
-                    Thread.Sleep(_config.configData._threadSleepTime);
+                    log.Debug("Main thread going to sleep for " + _configFile._configData._threadSleepTime / 1000 + " seconds");
+                    Thread.Sleep(_configFile._configData._threadSleepTime);
                     log.Debug("Main thread wake's up");
                 }
             }
@@ -121,7 +126,7 @@ namespace LogSender
                 StringBuilder dataAsString = new StringBuilder();
 
                 //Start the parsing process on the folder
-                List<FileInfo> listOfFileToDelete = ParsingBinaryFile.ParseFolder(dataAsString, dir, _config.configData._jsonDataMaxSize);
+                List<FileInfo> listOfFileToDelete = ParsingBinaryFile.ParseFolder(dataAsString, dir, _configFile._configData._jsonDataMaxSize);
 
                 log.Debug("json serialazation for " + dir.Value.Name + " files started");
 
@@ -131,7 +136,7 @@ namespace LogSender
                 //gzip data
                 MemoryStream compressedData = GZipCompresstion.CompressString(multipleLogFileAsjsonString);
 
-                if (ServerConnection.ServerManager(_config.configData._numberOfTimesToRetry, _config.configData._hostIp, _config.configData._waitTimeBeforeRetry, compressedData).Result)
+                if (ServerConnection.ServerManager(_configFile._configData._numberOfTimesToRetry, _configFile._configData._hostIp, _configFile._configData._waitTimeBeforeRetry, compressedData).Result)
                 {
                     log.Info("log sender sent " + listOfFileToDelete.Count + " files to the server and the server recived them");
                     log.Debug("begin deleteing the files that was sent to the server");

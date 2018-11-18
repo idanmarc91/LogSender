@@ -68,20 +68,20 @@ namespace LogSender.Utilities
         {
             try
             {
-                log.Debug("check if server is alive");
+                log.Debug("check if server (" + hostIp + ") is alive");
 
                 using (HttpClient client = new HttpClient())
                 {
                     using (HttpResponseMessage response = await client.GetAsync(hostIp + "/ping"))
                     {
-                        log.Info("The server is online");
+                        log.Info("The server (" + hostIp + ") is online");
                         return true;
                     }
                 }
             }
             catch (Exception ex)
             {
-                log.Error("The server is offline");
+                log.Error("The server (" + hostIp + ") is offline");
                 return false;
             }
             finally
@@ -97,7 +97,7 @@ namespace LogSender.Utilities
         /// <param name="hostIp"></param>
         /// <param name="compressedData"></param>
         /// <returns></returns>
-        public static async Task<bool> ServerManager(int retry, string hostIp, int delayTime, MemoryStream compressedData )
+        public static async Task<bool> ServerManager(int retry, string hostIp, int delayTime, MemoryStream compressedData)
         {
             while (retry != 0)//retry loop
             {

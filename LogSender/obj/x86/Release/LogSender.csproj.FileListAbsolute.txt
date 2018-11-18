@@ -21,5 +21,3 @@ C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\obj\x86\Release\LogSender.cspro
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\obj\x86\Release\LogSender.csproj.CopyComplete
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\obj\x86\Release\LogSender.exe
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\obj\x86\Release\LogSender.pdb
-C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\x86\Release\LogSender.exe.CodeAnalysisLog.xml
-C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\x86\Release\LogSender.exe.lastcodeanalysissucceeded
