@@ -33,7 +33,10 @@ C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\obj\x86\Release\LogSender
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\obj\x86\Release\LogSender Tests.pdb
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\bin\x86\Release\LogSender Tests.dll.config
+=======
+>>>>>>> parent of 80e4aa2... stable version for x86 and x64
 =======
 >>>>>>> parent of 80e4aa2... stable version for x86 and x64
 =======
