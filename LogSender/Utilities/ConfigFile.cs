@@ -33,7 +33,12 @@ namespace LogSender.Utilities
 
                 int startOffset;
 
+<<<<<<< HEAD
                 #region Read from LogSender config file
+=======
+                //Read Log Sender Configuration file
+                string[] lineArr = System.IO.File.ReadAllLines(path + "\\Log Sender Configuration.cfg");
+>>>>>>> parent of 80e4aa2... stable version for x86 and x64
 
                 //Read Log Sender Configuration file
                 string[] lineArr = System.IO.File.ReadAllLines(path + "\\Log Sender Configuration.cfg");
