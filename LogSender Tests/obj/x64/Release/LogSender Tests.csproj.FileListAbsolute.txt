@@ -29,4 +29,34 @@ C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\obj\x64\Release\LogSender
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\obj\x64\Release\LogSender Tests.csproj.CopyComplete
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\obj\x64\Release\LogSender Tests.dll
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\obj\x64\Release\LogSender Tests.pdb
-C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\bin\x64\Release\LogSender Tests.dll.config
+C:\Users\idanm\Desktop\v5-LogSender-Client-80e4aa28207172e10de534b1f9443b3b024e4698\LogSender Tests\bin\x64\Release\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+C:\Users\idanm\Desktop\v5-LogSender-Client-80e4aa28207172e10de534b1f9443b3b024e4698\LogSender Tests\bin\x64\Release\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+C:\Users\idanm\Desktop\v5-LogSender-Client-80e4aa28207172e10de534b1f9443b3b024e4698\LogSender Tests\bin\x64\Release\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+C:\Users\idanm\Desktop\v5-LogSender-Client-80e4aa28207172e10de534b1f9443b3b024e4698\LogSender Tests\bin\x64\Release\LogSender Tests.dll
+C:\Users\idanm\Desktop\v5-LogSender-Client-80e4aa28207172e10de534b1f9443b3b024e4698\LogSender Tests\bin\x64\Release\LogSender Tests.pdb
+C:\Users\idanm\Desktop\v5-LogSender-Client-80e4aa28207172e10de534b1f9443b3b024e4698\LogSender Tests\bin\x64\Release\LogSender.exe
+C:\Users\idanm\Desktop\v5-LogSender-Client-80e4aa28207172e10de534b1f9443b3b024e4698\LogSender Tests\bin\x64\Release\Microsoft.VisualStudio.TestPlatform.TestFramework.dll
+C:\Users\idanm\Desktop\v5-LogSender-Client-80e4aa28207172e10de534b1f9443b3b024e4698\LogSender Tests\bin\x64\Release\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll
+C:\Users\idanm\Desktop\v5-LogSender-Client-80e4aa28207172e10de534b1f9443b3b024e4698\LogSender Tests\bin\x64\Release\log4net.dll
+C:\Users\idanm\Desktop\v5-LogSender-Client-80e4aa28207172e10de534b1f9443b3b024e4698\LogSender Tests\bin\x64\Release\Newtonsoft.Json.dll
+C:\Users\idanm\Desktop\v5-LogSender-Client-80e4aa28207172e10de534b1f9443b3b024e4698\LogSender Tests\bin\x64\Release\ServiceStack.Text.dll
+C:\Users\idanm\Desktop\v5-LogSender-Client-80e4aa28207172e10de534b1f9443b3b024e4698\LogSender Tests\bin\x64\Release\System.Memory.dll
+C:\Users\idanm\Desktop\v5-LogSender-Client-80e4aa28207172e10de534b1f9443b3b024e4698\LogSender Tests\bin\x64\Release\System.Numerics.Vectors.dll
+C:\Users\idanm\Desktop\v5-LogSender-Client-80e4aa28207172e10de534b1f9443b3b024e4698\LogSender Tests\bin\x64\Release\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\idanm\Desktop\v5-LogSender-Client-80e4aa28207172e10de534b1f9443b3b024e4698\LogSender Tests\bin\x64\Release\System.Buffers.dll
+C:\Users\idanm\Desktop\v5-LogSender-Client-80e4aa28207172e10de534b1f9443b3b024e4698\LogSender Tests\bin\x64\Release\LogSender.pdb
+C:\Users\idanm\Desktop\v5-LogSender-Client-80e4aa28207172e10de534b1f9443b3b024e4698\LogSender Tests\bin\x64\Release\LogSender.exe.config
+C:\Users\idanm\Desktop\v5-LogSender-Client-80e4aa28207172e10de534b1f9443b3b024e4698\LogSender Tests\bin\x64\Release\Microsoft.VisualStudio.TestPlatform.TestFramework.xml
+C:\Users\idanm\Desktop\v5-LogSender-Client-80e4aa28207172e10de534b1f9443b3b024e4698\LogSender Tests\bin\x64\Release\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml
+C:\Users\idanm\Desktop\v5-LogSender-Client-80e4aa28207172e10de534b1f9443b3b024e4698\LogSender Tests\bin\x64\Release\log4net.xml
+C:\Users\idanm\Desktop\v5-LogSender-Client-80e4aa28207172e10de534b1f9443b3b024e4698\LogSender Tests\bin\x64\Release\Newtonsoft.Json.xml
+C:\Users\idanm\Desktop\v5-LogSender-Client-80e4aa28207172e10de534b1f9443b3b024e4698\LogSender Tests\bin\x64\Release\ServiceStack.Text.xml
+C:\Users\idanm\Desktop\v5-LogSender-Client-80e4aa28207172e10de534b1f9443b3b024e4698\LogSender Tests\bin\x64\Release\System.Memory.xml
+C:\Users\idanm\Desktop\v5-LogSender-Client-80e4aa28207172e10de534b1f9443b3b024e4698\LogSender Tests\bin\x64\Release\System.Numerics.Vectors.xml
+C:\Users\idanm\Desktop\v5-LogSender-Client-80e4aa28207172e10de534b1f9443b3b024e4698\LogSender Tests\bin\x64\Release\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\idanm\Desktop\v5-LogSender-Client-80e4aa28207172e10de534b1f9443b3b024e4698\LogSender Tests\bin\x64\Release\System.Buffers.xml
+C:\Users\idanm\Desktop\v5-LogSender-Client-80e4aa28207172e10de534b1f9443b3b024e4698\LogSender Tests\obj\x64\Release\LogSender Tests.csprojAssemblyReference.cache
+C:\Users\idanm\Desktop\v5-LogSender-Client-80e4aa28207172e10de534b1f9443b3b024e4698\LogSender Tests\obj\x64\Release\LogSender Tests.csproj.CoreCompileInputs.cache
+C:\Users\idanm\Desktop\v5-LogSender-Client-80e4aa28207172e10de534b1f9443b3b024e4698\LogSender Tests\obj\x64\Release\LogSender Tests.csproj.CopyComplete
+C:\Users\idanm\Desktop\v5-LogSender-Client-80e4aa28207172e10de534b1f9443b3b024e4698\LogSender Tests\obj\x64\Release\LogSender Tests.dll
+C:\Users\idanm\Desktop\v5-LogSender-Client-80e4aa28207172e10de534b1f9443b3b024e4698\LogSender Tests\obj\x64\Release\LogSender Tests.pdb

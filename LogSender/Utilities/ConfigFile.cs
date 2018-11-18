@@ -21,9 +21,9 @@ namespace LogSender.Utilities
                 string path = AppDomain.CurrentDomain.BaseDirectory;
 
                 //create config file if not exist
-                if (!(System.IO.File.Exists(path + "\\Log Sender Configuration.cfg")))
+                if (!(System.IO.File.Exists(path + "\\LogSenderConfiguration.cfg")))
                 {
-                    System.IO.File.WriteAllText(path + "\\Log Sender Configuration.cfg", CreateCfgFile());
+                    System.IO.File.WriteAllText(path + "\\LogSenderConfiguration.cfg", CreateCfgFile());
                     log.Debug("Log Sender Configuration file is created");
                 }
                 else
@@ -33,23 +33,15 @@ namespace LogSender.Utilities
 
                 int startOffset;
 
-<<<<<<< HEAD
                 #region Read from LogSender config file
-=======
-                //Read Log Sender Configuration file
-                string[] lineArr = System.IO.File.ReadAllLines(path + "\\Log Sender Configuration.cfg");
-<<<<<<< HEAD
->>>>>>> parent of 80e4aa2... stable version for x86 and x64
-=======
->>>>>>> parent of 80e4aa2... stable version for x86 and x64
 
                 //Read Log Sender Configuration file
-                string[] lineArr = System.IO.File.ReadAllLines(path + "\\Log Sender Configuration.cfg");
+                string[] lineArr = System.IO.File.ReadAllLines(path + "\\LogSenderConfiguration.cfg");
 
                 //Check lines in cfg file
                 foreach (string line in lineArr)
                 {
-                    if (line.Contains("cyb Folder Path="))
+                    if (line.Contains("cyb_folder_path="))
                     {
                         try
                         {
@@ -68,7 +60,7 @@ namespace LogSender.Utilities
                             _configData._cybFolderPath = "C:\\Program Files\\Cyber 2.0\\Cyber 2.0 Agent\\Packets";
                         }
                     }
-                    if (line.Contains("fsa Folder Path="))
+                    if (line.Contains("fsa_folder_path="))
                     {
                         try
                         {
@@ -87,7 +79,7 @@ namespace LogSender.Utilities
                             _configData._fsaFolderPath = "C:\\Program Files\\Cyber 2.0\\Cyber 2.0 Agent\\FSAccess";
                         }
                     }
-                    if (line.Contains("cimg Folder Path="))
+                    if (line.Contains("cimg_folder_path="))
                     {
                         try
                         {
@@ -106,7 +98,7 @@ namespace LogSender.Utilities
                             _configData._cimgFolderPath = "C:\\Program Files\\Cyber 2.0\\Cyber 2.0 Agent\\Images";
                         }
                     }
-                    if (line.Contains("mog Folder Path="))
+                    if (line.Contains("mog_folder_path="))
                     {
                         try
                         {
@@ -304,7 +296,7 @@ namespace LogSender.Utilities
                         {
                             tempIp = line.Substring(startOffset, line.Length - startOffset);
                         }
-                        _configData._hostIp = "http://" + tempIp +":" + _configData._hostPort;
+                        _configData._hostIp = "http://" + tempIp + ":" + _configData._hostPort;
                     }
                 }
                 #endregion
@@ -349,13 +341,13 @@ namespace LogSender.Utilities
 
             strConfig += "[Options]" + Environment.NewLine + Environment.NewLine;
 
-            strConfig += "cyb Folder Path=C:\\Program Files\\Cyber 2.0\\Cyber 2.0 Agent\\Packets #The folder path of cyb logs" + Environment.NewLine + Environment.NewLine;
+            strConfig += "cyb_folder_path=C:\\Program Files\\Cyber 2.0\\Cyber 2.0 Agent\\Packets #The folder path of cyb logs" + Environment.NewLine + Environment.NewLine;
 
-            strConfig += "fsa Folder Path=C:\\Program Files\\Cyber 2.0\\Cyber 2.0 Agent\\FSAccess #The folder path of fsa logs" + Environment.NewLine + Environment.NewLine;
+            strConfig += "fsa_folder_path=C:\\Program Files\\Cyber 2.0\\Cyber 2.0 Agent\\FSAccess #The folder path of fsa logs" + Environment.NewLine + Environment.NewLine;
 
-            strConfig += "cimg Folder Path=C:\\Program Files\\Cyber 2.0\\Cyber 2.0 Agent\\Images #The folder path of cimg logs" + Environment.NewLine + Environment.NewLine;
+            strConfig += "cimg_folder_path=C:\\Program Files\\Cyber 2.0\\Cyber 2.0 Agent\\Images #The folder path of cimg logs" + Environment.NewLine + Environment.NewLine;
 
-            strConfig += "mog Folder Path=C:\\Program Files\\Cyber 2.0\\Cyber 2.0 Agent\\Multievent #The folder path of mog logs" + Environment.NewLine + Environment.NewLine;
+            strConfig += "mog_folder_path=C:\\Program Files\\Cyber 2.0\\Cyber 2.0 Agent\\Multievent #The folder path of mog logs" + Environment.NewLine + Environment.NewLine;
 
             strConfig += "json_data_max_size=5000000 #max size of json data string before sending to server" + Environment.NewLine + Environment.NewLine;
 

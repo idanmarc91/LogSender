@@ -1,0 +1,117 @@
+﻿Installing assembly 'C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\LogSender.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\LogSender.InstallLog
+   assemblypath = C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\LogSender.exe
+Installing service Cyber 2.0 Log Sender...
+Creating EventLog source Cyber 2.0 Log Sender in log Application...
+Rolling back assembly 'C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\LogSender.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\LogSender.InstallLog
+   assemblypath = C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\LogSender.exe
+Restoring event log to previous state for source Cyber 2.0 Log Sender.
+An exception occurred during the Rollback phase of the System.Diagnostics.EventLogInstaller installer.
+System.Security.SecurityException: The source was not found, but some or all event logs could not be searched.  Inaccessible logs: Security.
+An exception occurred during the Rollback phase of the installation. This exception will be ignored and the rollback will continue. However, the machine might not fully revert to its initial state after the rollback is complete.
+Installing assembly 'C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\LogSender.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\LogSender.InstallLog
+   assemblypath = C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\LogSender.exe
+Installing service Log Sender v5...
+Creating EventLog source Log Sender v5 in log Application...
+Rolling back assembly 'C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\LogSender.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\LogSender.InstallLog
+   assemblypath = C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\LogSender.exe
+Restoring event log to previous state for source Log Sender v5.
+An exception occurred during the Rollback phase of the System.Diagnostics.EventLogInstaller installer.
+System.Security.SecurityException: The source was not found, but some or all event logs could not be searched.  Inaccessible logs: Security.
+An exception occurred during the Rollback phase of the installation. This exception will be ignored and the rollback will continue. However, the machine might not fully revert to its initial state after the rollback is complete.
+Installing assembly 'C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\LogSender.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\LogSender.InstallLog
+   assemblypath = C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\LogSender.exe
+Installing service Log Sender v5...
+Service Log Sender v5 has been successfully installed.
+Creating EventLog source Log Sender v5 in log Application...
+Committing assembly 'C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\LogSender.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\LogSender.InstallLog
+   assemblypath = C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\LogSender.exe
+Installing assembly 'C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\LogSender.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\LogSender.InstallLog
+   assemblypath = C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\LogSender.exe
+Installing service Log Sender v5...
+Creating EventLog source Log Sender v5 in log Application...
+Rolling back assembly 'C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\LogSender.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\LogSender.InstallLog
+   assemblypath = C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\LogSender.exe
+Restoring event log to previous state for source Log Sender v5.
+Installing assembly 'C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\LogSender.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\LogSender.InstallLog
+   assemblypath = C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\LogSender.exe
+Installing service Log Sender v5...
+Creating EventLog source Log Sender v5 in log Application...
+Rolling back assembly 'C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\LogSender.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\LogSender.InstallLog
+   assemblypath = C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\LogSender.exe
+Restoring event log to previous state for source Log Sender v5.
+Installing assembly 'C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\LogSender.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\LogSender.InstallLog
+   assemblypath = C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\LogSender.exe
+Installing service Log Sender v5...
+Creating EventLog source Log Sender v5 in log Application...
+Rolling back assembly 'C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\LogSender.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\LogSender.InstallLog
+   assemblypath = C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\LogSender.exe
+Restoring event log to previous state for source Log Sender v5.
+Uninstalling assembly 'C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\LogSender.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\LogSender.InstallLog
+   assemblypath = C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\LogSender.exe
+Removing EventLog source Cyber 2.0 Log Sender v5.
+Warning: The source Cyber 2.0 Log Sender v5 is not registered on the local machine.
+Service Cyber 2.0 Log Sender v5 is being removed from the system...
+An exception occurred during the uninstallation of the System.ServiceProcess.ServiceInstaller installer.
+System.ComponentModel.Win32Exception: The specified service does not exist as an installed service
+An exception occurred while uninstalling. This exception will be ignored and the uninstall will continue. However, the application might not be fully uninstalled after the uninstall is complete.
+Installing assembly 'C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\LogSender.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\LogSender.InstallLog
+   assemblypath = C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\LogSender.exe
+Installing service Cyber 2.0 Log Sender v5...
+Service Cyber 2.0 Log Sender v5 has been successfully installed.
+Creating EventLog source Cyber 2.0 Log Sender v5 in log Application...
+Committing assembly 'C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\LogSender.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\LogSender.InstallLog
+   assemblypath = C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\LogSender.exe
+Uninstalling assembly 'C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\LogSender.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\LogSender.InstallLog
+   assemblypath = C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\LogSender.exe
+Removing EventLog source Cyber 2.0 Log Sender v5.
+Service Cyber 2.0 Log Sender v5 is being removed from the system...
+Service Cyber 2.0 Log Sender v5 was successfully removed from the system.
+Attempt to stop service Cyber 2.0 Log Sender v5.

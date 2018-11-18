@@ -99,13 +99,14 @@ namespace LogSender.Utilities
         /// <returns></returns>
         public static async Task<bool> ServerManager(int retry, string hostIp, int delayTime, MemoryStream compressedData)
         {
-            while (retry-- != 0)//retry loop
+            while (retry != 0)//retry loop
             {
                 if (await ServerConnection.SendDataToServer(hostIp, compressedData))
                 {
                     return true;//when file sent sucessfuly exit while loop
                 }
                 await Task.Delay(delayTime);
+                retry--;
             }
             return false;
         }

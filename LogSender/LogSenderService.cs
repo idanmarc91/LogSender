@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ServiceProcess;
-using System.Threading;
 
 namespace LogSender
 {
@@ -27,14 +26,11 @@ namespace LogSender
             {
                 log.Debug( "Log Sender Service OnStart Fucntion" );
                 _logSender = new LogSender();
-                if (_logSender == null )
-                    throw new Exception("log sender could not be created");
                 _logSender.RunService();
             }
             catch( Exception ex )
             {
-                log.Fatal( "creation of log sender class problem "+ ex.Message , ex );
-                Thread.CurrentThread.Abort();
+                log.Fatal( "creation of log sender class problem" , ex );
             }
         }
 

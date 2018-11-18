@@ -1,0 +1,1 @@
+2018-11-14 14:22:03,849 [1] Log_Level-ERROR, File-LogSender.cs, Function-MoveNext, - error test

@@ -29,4 +29,3 @@ C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\obj\x64\Debug\LogSender T
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\obj\x64\Debug\LogSender Tests.csproj.CopyComplete
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\obj\x64\Debug\LogSender Tests.dll
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\obj\x64\Debug\LogSender Tests.pdb
-C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\bin\x64\Debug\LogSender Tests.dll.config
