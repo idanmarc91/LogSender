@@ -74,7 +74,7 @@ namespace LogSender
                                 log.Debug("Sending process can begin, creating sending process Task for " + dir.Value.Name + " log folder");
 
                                 //create task for the current folder
-                                taskList.Add(SendLogs(dir));
+                                taskList.Add(Task.Run(() => SendLogs(dir)));
 
                                 log.Debug("Task created for " + dir.Value.Name + " folder and started his operation");
                             }
@@ -101,7 +101,7 @@ namespace LogSender
 
                     log.Debug("Main thread going to sleep for " + _configFile._configData._threadSleepTime / 1000 + " seconds");
                     Thread.Sleep(_configFile._configData._threadSleepTime);
-                    log.Debug("Main thread wake's up");
+                    log.Debug("Main thread wake's up, starting new iteration");
                 }
             }
 
@@ -128,7 +128,7 @@ namespace LogSender
                 //Start the parsing process on the folder
                 List<FileInfo> listOfFileToDelete = ParsingBinaryFile.ParseFolder(dataAsString, dir, _configFile._configData._jsonDataMaxSize);
 
-                log.Debug("json serialazation for " + dir.Value.Name + " files started");
+                log.Debug("Json serialazation for " + dir.Value.Name + " files started");
 
                 //get json data from multiple log files as one string
                 string multipleLogFileAsjsonString = JsonDataConvertion.JsonSerialization(dataAsString);
@@ -136,11 +136,13 @@ namespace LogSender
                 //gzip data
                 MemoryStream compressedData = GZipCompresstion.CompressString(multipleLogFileAsjsonString);
 
-                if (ServerConnection.ServerManager(_configFile._configData._numberOfTimesToRetry, _configFile._configData._hostIp, _configFile._configData._waitTimeBeforeRetry, compressedData).Result)
-                {
-                    log.Info("log sender sent " + listOfFileToDelete.Count + " files to the server and the server recived them");
-                    log.Debug("begin deleteing the files that was sent to the server");
+                ServerConnection con = new ServerConnection();
 
+                if (con.ServerManager(_configFile._configData._numberOfTimesToRetry, _configFile._configData._hostIp, _configFile._configData._waitTimeBeforeRetry, compressedData).Result)
+                {
+                    log.Info("Log sender sent " + listOfFileToDelete.Count + " files to the server and the server recived them");
+
+                    log.Debug("Begin deleteing the files that was sent to the server");
                     FileMaintenance.FileDelete(listOfFileToDelete);
                 }
                 else

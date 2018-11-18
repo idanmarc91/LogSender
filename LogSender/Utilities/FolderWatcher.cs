@@ -22,7 +22,7 @@ namespace LogSender.Utilities
         {
             try
             {
-                log.Debug("Watching online \'" + dir.Value.Name + "\' folder");
+                log.Debug("Watching \'" + dir.Value.Name + "\' folder");
 
                 if (FolderSizeWatcher(dir, maxBinaryFolderSize))
                 {
@@ -35,12 +35,12 @@ namespace LogSender.Utilities
                              .ToArray()
                              .Length >= minNumOfFilesToSend)
                 {
-                    log.Debug("there are files to send in " + dir.Value.Name + " folder");
+                    log.Debug("There are files to send in " + dir.Value.Name + " folder");
                     return true;
                 }
                 else
                 {
-                    log.Debug("there are not enough files to send in " + dir.Value.Name + " folder");
+                    log.Debug("There are not enough files to send in " + dir.Value.Name + " folder");
                     return false;
                 }
             }
@@ -70,13 +70,13 @@ namespace LogSender.Utilities
                     log.Error("The binary folder " + dir.Value.Name + " has reached size limit");
                     return true;
                 }
-                log.Debug("folder size is " + lenght + " within the limit (" + maxBinaryFolderSize + " bytes)");
+                log.Debug("Folder size is " + lenght + " within the limit (" + maxBinaryFolderSize + " bytes)");
 
                 return false;
             }
             catch (Exception ex)
             {
-                log.Error("error occurred while checking " + dir.Value.Name + " folder size", ex);
+                log.Error("Error occurred while checking " + dir.Value.Name + " folder size", ex);
                 return true;
             }
         }

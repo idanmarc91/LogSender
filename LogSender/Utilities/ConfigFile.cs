@@ -337,7 +337,8 @@ namespace LogSender.Utilities
 #		represtants two values: 'A' and 'B'.
 #			[Example]
 #			A B
-#		represents one value: 'A B'." + Environment.NewLine + Environment.NewLine;
+#		represents one value: 'A B'.
+#   6. host ip address is taken from the agent config file (Config.cfg) located in Cyber 2.0 folder" + Environment.NewLine + Environment.NewLine;
 
             strConfig += "[Options]" + Environment.NewLine + Environment.NewLine;
 

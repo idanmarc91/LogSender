@@ -14,7 +14,7 @@ namespace LogSender.Utilities
         ///**********************************************
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger("ServerConnection.cs");
-        private static HttpClient _client;
+        private HttpClient _client;
 
         ///**********************************************
         ///             Functions Section
@@ -27,7 +27,7 @@ namespace LogSender.Utilities
         /// </summary>
         /// <param name="url"></param>
         /// <param name="data"></param>
-        public static async Task<bool> SendDataToServer(string hostIp, MemoryStream compressedData)
+        public async Task<bool> SendDataToServer(string hostIp, MemoryStream compressedData)
         {
             try
             {
@@ -97,11 +97,11 @@ namespace LogSender.Utilities
         /// <param name="hostIp"></param>
         /// <param name="compressedData"></param>
         /// <returns></returns>
-        public static async Task<bool> ServerManager(int retry, string hostIp, int delayTime, MemoryStream compressedData)
+        public async Task<bool> ServerManager(int retry, string hostIp, int delayTime, MemoryStream compressedData)
         {
             while (retry != 0)//retry loop
             {
-                if (await ServerConnection.SendDataToServer(hostIp, compressedData))
+                if (await SendDataToServer(hostIp, compressedData))
                 {
                     return true;//when file sent sucessfuly exit while loop
                 }

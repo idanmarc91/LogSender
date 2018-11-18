@@ -13,7 +13,7 @@ namespace LogSender_Tests
         public async Task CheckIfServerIsAliveTest()
         {
             //Act
-            bool isServerOnline = await ServerConnection.IsServerAlive("http://10.0.0.174:8080");
+            bool isServerOnline = await ServerConnection.IsServerAlive("http://10.0.0.40:8080");
             
             //Assert
             Assert.IsTrue(isServerOnline);
@@ -35,7 +35,9 @@ namespace LogSender_Tests
 
             MemoryStream compressedData = GZipCompresstion.CompressString(testString);
             //Act
-            bool isServerOnline = await ServerConnection.SendDataToServer("http://10.0.0.174:8080", compressedData);
+            ServerConnection con = new ServerConnection();
+
+            bool isServerOnline = await con.SendDataToServer("http://10.0.0.40:8080", compressedData);
 
             //Assert
             Assert.IsTrue(isServerOnline);
