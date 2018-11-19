@@ -44,3 +44,4 @@ C:\Users\idanm\Desktop\v5-LogSender-Client-80e4aa28207172e10de534b1f9443b3b024e4
 C:\Users\idanm\Desktop\v5-LogSender-Client-80e4aa28207172e10de534b1f9443b3b024e4698\LogSender\obj\x64\Release\LogSender.csproj.CopyComplete
 C:\Users\idanm\Desktop\v5-LogSender-Client-80e4aa28207172e10de534b1f9443b3b024e4698\LogSender\obj\x64\Release\LogSender.exe
 C:\Users\idanm\Desktop\v5-LogSender-Client-80e4aa28207172e10de534b1f9443b3b024e4698\LogSender\obj\x64\Release\LogSender.pdb
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\obj\x64\Release\LogSender.csprojAssemblyReference.cache

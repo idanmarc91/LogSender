@@ -13,14 +13,14 @@ namespace LogSender_Tests
         {
             //Arrange
             string path = AppDomain.CurrentDomain.BaseDirectory;
-            string testStr = File.ReadAllText( path + @"\Compress Test\" + "CompressTest.txt" );
+            string testStr = File.ReadAllText(path + @"\\..\\..\\Compress Test\\" + "CompressTest.txt");
 
             //Act
-            MemoryStream ms = GZipCompresstion.CompressString( testStr );
-            string decompessedString = GZipCompresstion.DecompressString( ms.ToArray() );
+            MemoryStream ms = GZipCompresstion.CompressString(testStr);
+            string decompessedString = GZipCompresstion.DecompressString(ms.ToArray());
 
             ////Assert
-            Assert.AreEqual( testStr , decompessedString );
+            Assert.AreEqual(testStr, decompessedString);
         }
     }
 }

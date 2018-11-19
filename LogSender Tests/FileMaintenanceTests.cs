@@ -3,7 +3,7 @@ using System.IO;
 using LogSender.Utilities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace LogSender_Tests
+namespace UnitTestProject5
 {
     [TestClass]
     public class FileMaintenanceTests
@@ -13,14 +13,14 @@ namespace LogSender_Tests
         {
             //Arrange
             string path = AppDomain.CurrentDomain.BaseDirectory;
-            DirectoryInfo _directory = new DirectoryInfo( path + @"\\Maintenance Test" + "\\FolderSizeTest\\" );
+            DirectoryInfo _directory = new DirectoryInfo(path + @"\\..\\..\\Maintenance Test" + "\\FolderSizeTest\\");
 
             //Act
-            long folderSize = FileMaintenance.DirSize( _directory.GetFiles() );
+            long folderSize = FileMaintenance.DirSize(_directory.GetFiles());
 
             long trueFolderSize = 2744474;
             ////Assert
-            Assert.AreEqual( folderSize , trueFolderSize );
+            Assert.AreEqual(folderSize, trueFolderSize);
         }
     }
 }

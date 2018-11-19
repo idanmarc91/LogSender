@@ -14,7 +14,7 @@ namespace LogSender_Tests
         {
             //Act
             bool isServerOnline = await ServerConnection.IsServerAlive("http://10.0.0.40:8080");
-            
+
             //Assert
             Assert.IsTrue(isServerOnline);
         }
@@ -25,7 +25,7 @@ namespace LogSender_Tests
             //Arrange
             string path = AppDomain.CurrentDomain.BaseDirectory;
 
-            string testString = File.ReadAllText(path + "\\Server Connection Test\\file_to_send.txt");
+            string testString = File.ReadAllText(path + "\\..\\..\\Server Connection Test\\file_to_send.txt");
 
             MemoryStream stringAsStream = new MemoryStream();
             var writer = new StreamWriter(stringAsStream);
@@ -41,7 +41,7 @@ namespace LogSender_Tests
 
             //Assert
             Assert.IsTrue(isServerOnline);
-  
+
         }
     }
 }

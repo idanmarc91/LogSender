@@ -3346,7 +3346,7 @@
             }
             "{3C67513D-01DD-4637-8A68-80971EB9504F}:_5AC1E27DC71B4F96B4A27B9AAEA7C3FF"
             {
-            "DefaultLocation" = "8:[ProgramFilesFolder][Manufacturer]\\[ProductName]"
+            "DefaultLocation" = "8:[ProgramFiles64Folder][Manufacturer]\\[ProductName]"
             "Name" = "8:#1925"
             "AlwaysCreate" = "11:FALSE"
             "Condition" = "8:"
@@ -3384,7 +3384,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Cyber 2.0 Agent\\LogSender v5"
         "ProductCode" = "8:{C20B6522-5234-4B5E-8EC9-56072619E707}"
-        "PackageCode" = "8:{B781D6EA-7520-432B-8088-EA4709944DA6}"
+        "PackageCode" = "8:{5AEAAB0D-735D-4B86-81C0-D8C7E7B69D73}"
         "UpgradeCode" = "8:{3828475C-C811-4C32-AEB4-7B38D97D26DF}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -3405,7 +3405,7 @@
         "ARPIconIndex" = "3:0"
         "SearchPath" = "8:"
         "UseSystemSearchPath" = "11:TRUE"
-        "TargetPlatform" = "3:0"
+        "TargetPlatform" = "3:1"
         "PreBuildEvent" = "8:"
         "PostBuildEvent" = "8:"
         "RunPostBuildEvent" = "3:0"
@@ -3905,7 +3905,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_7588D65989FC452593813806FB3D4CC3"
             {
-            "SourcePath" = "8:..\\LogSender\\obj\\x64\\Release\\LogSender.exe"
+            "SourcePath" = "8:..\\LogSender\\obj\\x86\\Release\\LogSender.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_5AC1E27DC71B4F96B4A27B9AAEA7C3FF"

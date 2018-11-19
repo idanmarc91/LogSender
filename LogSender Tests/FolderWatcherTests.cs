@@ -20,9 +20,9 @@ namespace LogSender_Tests
             long maxBinaryFolderSize = 104857600; //100 mega
 
             KeyValuePair<string, DirectoryInfo> FolderReady = new KeyValuePair<string, DirectoryInfo>
-                                                            ("fsa", new DirectoryInfo(path + @"\Watcher Tests\FolderReady"));
+                                                            ("fsa", new DirectoryInfo(path + @"\\..\\..\\Watcher Tests\FolderReady"));
             KeyValuePair<string, DirectoryInfo> FolderNotReady = new KeyValuePair<string, DirectoryInfo>
-                                                           ("fsa", new DirectoryInfo(path + @"\Watcher Tests\FolderNotReady"));
+                                                           ("fsa", new DirectoryInfo(path + @"\\..\\..\\Watcher Tests\FolderNotReady"));
             //Act
             bool folderReadyValueTrue = FolderWatcher.IsFolderReadyToSendWatcher(FolderReady, binaryFileMaxSize, minNumOfFilesToSend, maxBinaryFolderSize);
             bool folderReadyValueFalse = FolderWatcher.IsFolderReadyToSendWatcher(FolderNotReady, binaryFileMaxSize, minNumOfFilesToSend, maxBinaryFolderSize);
@@ -42,7 +42,7 @@ namespace LogSender_Tests
             long maxBinaryFolderSize = 104857600; ////100 mega
 
             KeyValuePair<string, DirectoryInfo> overWeightFileInFolder = new KeyValuePair<string, DirectoryInfo>
-                                                            ("fsa", new DirectoryInfo(path + @"\Watcher Tests\FolderReady"));
+                                                            ("fsa", new DirectoryInfo(path + @"\\..\\..\\Watcher Tests\FolderReady"));
 
             //Act
             bool FileOverWeightFalse = FolderWatcher.IsFolderReadyToSendWatcher(overWeightFileInFolder, binaryFileMaxSize, minNumOfFilesToSend, maxBinaryFolderSize);
@@ -58,7 +58,7 @@ namespace LogSender_Tests
             string path = AppDomain.CurrentDomain.BaseDirectory;
             long maxBinaryFolderSize = 1000; //100 bytes
             KeyValuePair<string, DirectoryInfo> overWeightFolder = new KeyValuePair<string, DirectoryInfo>
-                                                            ("fsa", new DirectoryInfo(path + @"\Watcher Tests\FolderReady"));
+                                                            ("fsa", new DirectoryInfo(path + @"\\..\\..\\Watcher Tests\FolderReady"));
             //Act
             bool FolderOverWeightTrue = FolderWatcher.FolderSizeWatcher(overWeightFolder, maxBinaryFolderSize);
 
