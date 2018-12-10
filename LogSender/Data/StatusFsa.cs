@@ -1,4 +1,4 @@
-﻿namespace BinaryFileToTextFile.Data
+﻿namespace LogSender.Data
 {
     class StatusFsa : FileData
     {
@@ -31,7 +31,7 @@
                     _status = "Blocked";
                     break;
                 default:
-                    _status = "ERROR";
+                    _status = builder.ToString();
                     break;
             }
 

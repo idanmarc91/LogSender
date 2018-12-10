@@ -9,6 +9,7 @@ namespace LogSender
     [RunInstaller(true)]
     public partial class ProjectInstaller : System.Configuration.Install.Installer
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger("ProjectInstaller.cs");
         public ProjectInstaller()
         {
             InitializeComponent();
@@ -17,6 +18,8 @@ namespace LogSender
         private void serviceInstaller1_AfterInstall(object sender, InstallEventArgs e)
         {
             int exitCode;
+            log.Debug("After install event started");
+            //add recovery option to log sender service
             using (var process = new Process())
             {
                 var startInfo = process.StartInfo;
@@ -36,7 +39,13 @@ namespace LogSender
                 throw new InvalidOperationException();
             }
 
+            //start the service right afte installation process complete
             new ServiceController(serviceInstaller1.ServiceName).Start();
+        }
+
+        private void serviceProcessInstaller1_AfterInstall(object sender, InstallEventArgs e)
+        {
+
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿
-namespace BinaryFileToTextFile.Data
+namespace LogSender.Data
 {
     class Protocol : FileData
     {

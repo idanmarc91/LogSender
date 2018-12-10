@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Linq;
 
-namespace BinaryFileToTextFile.Data
+namespace LogSender.Data
 {
-    class ImageName :FileData
+    class DllName :FileData
     {
         ///**********************************************
         ///             Members Section
         ///**********************************************
-        private string _imageName;
+        private string _dllName;
 
         ///**********************************************
         ///             Functions Section
@@ -17,16 +17,16 @@ namespace BinaryFileToTextFile.Data
         /// <summary>
         /// empty ctor for image name class
         /// </summary>
-        public ImageName()
+        public DllName()
         {}
 
         /// <summary>
         /// ctor for ImmageName class
         /// </summary>
         /// <param name="imagePath"></param>
-        public ImageName(string imagePath)
+        public DllName(string imagePath)
         {
-            _imageName = imagePath.Split('\\').LastOrDefault();
+            _dllName = imagePath.Split('\\').LastOrDefault();
         }
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace BinaryFileToTextFile.Data
         /// <returns></returns>
         public override string GetData()
         {
-            return _imageName;
+            return _dllName;
         }
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace BinaryFileToTextFile.Data
         /// <param name="data"></param>
         public override void SetData(string data)
         {
-            _imageName = data;
+            _dllName = data;
         }
 
         

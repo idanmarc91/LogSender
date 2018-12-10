@@ -1,5 +1,5 @@
-﻿using BinaryFileToTextFile;
-using BinaryFileToTextFile.Models;
+﻿using LogSender;
+using LogSender.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,19 +16,18 @@ namespace LogSender.Utilities
         private static readonly List<string> _csvHeader = new List<string>
         {
             "os",
-            "host_name",
+            "reported_computer",
             "client_time" ,
             "full_server_time" ,
             "process_id" ,
             "process_name" ,
             "process_path" ,
-            "application_name" ,
             "protocol" ,
             "status" ,
             "source_port" ,
             "destination_port" ,
             "direction" ,
-            "file_path" ,
+            "cast_type",
             "state" ,
             "source_ip" ,
             "destination_ip" ,
@@ -38,8 +37,8 @@ namespace LogSender.Utilities
             "mog_counter" ,
             "destination_path" ,
             "reason" ,
-            "image_path" ,
-            "image_name" ,
+            "dll_path" ,
+            "dll_name" ,
             "parent_path" ,
             "parent_name" ,
             "chain_array"
@@ -78,19 +77,19 @@ namespace LogSender.Utilities
                     switch (logType)
                     {
                         case "cyb":
-                            logTable = new CybTable(expandedFileByteArray, headerParameters._hostName.GetData(), headerParameters._serverClientDelta.GetData(), headerParameters._version.GetData());
+                            logTable = new CybTable(expandedFileByteArray, headerParameters._reportingComputer.GetData(), headerParameters._serverClientDelta.GetData(), headerParameters._version.GetData());
                             break;
 
                         case "fsa":
-                            logTable = new FsaTable(expandedFileByteArray, headerParameters._hostName.GetData(), headerParameters._serverClientDelta.GetData(), headerParameters._version.GetData());
+                            logTable = new FsaTable(expandedFileByteArray, headerParameters._reportingComputer.GetData(), headerParameters._serverClientDelta.GetData(), headerParameters._version.GetData());
                             break;
 
                         case "mog":
-                            logTable = new MogTable(expandedFileByteArray, headerParameters._hostName.GetData(), headerParameters._serverClientDelta.GetData(), headerParameters._version.GetData());
+                            logTable = new MogTable(expandedFileByteArray, headerParameters._reportingComputer.GetData(), headerParameters._serverClientDelta.GetData(), headerParameters._version.GetData());
                             break;
 
                         case "cimg":
-                            logTable = new DLLTable(expandedFileByteArray, headerParameters._hostName.GetData(), headerParameters._serverClientDelta.GetData());
+                            logTable = new DLLTable(expandedFileByteArray, headerParameters._reportingComputer.GetData(), headerParameters._serverClientDelta.GetData());
                             break;
                     }
                 }

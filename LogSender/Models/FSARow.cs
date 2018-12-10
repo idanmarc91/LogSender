@@ -1,9 +1,9 @@
-﻿using BinaryFileToTextFile.Data;
+﻿using LogSender.Data;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace BinaryFileToTextFile.Models
+namespace LogSender.Models
 {
     class FSARow :LogRow
     {
@@ -15,18 +15,22 @@ namespace BinaryFileToTextFile.Models
             PROCESS_ID, PROCESS_NAME, PROCESS_PATH, DESTINATION_PATH, USER_NAME, STATUS, REASON, 
             SEQ_NUM, SUB_SEQ_NUM
         };
+        private string _protocol = "SMB";
+        private string _direction = "outgoing";
+        private string _destinationPort = "445";
+
 
         ///**********************************************
         ///             Functions Section
         ///**********************************************
 
 
-        public FSARow(Int64 serverClientDelta, string hostName, ushort headerVersion)
+        public FSARow(Int64 serverClientDelta, string reportingComputer, ushort headerVersion)
         {
             _expandSVCHost = new List<ExpandSVCHostRow>();
 
             //insert host name to row
-            _hostName = hostName;
+            _reportingComputer = reportingComputer;
             _timeStamp = new TimeStamp(serverClientDelta);
             _headerVersion = headerVersion;
             _fileExtractData = new List<FileData>
@@ -78,7 +82,7 @@ namespace BinaryFileToTextFile.Models
             List<string> list = new List<string>
             {
                 "win",
-                _hostName,
+                _reportingComputer,
                 _timeStamp.GetClientTime(),
                 _timeStamp.GetFullServerTime(),
                 _fileExtractData[(int)_fileExtractDataIndexs.PROCESS_ID].GetData(),

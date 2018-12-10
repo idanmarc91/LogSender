@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BinaryFileToTextFile.Data
+namespace LogSender.Data
 {
     class SquenceNumber :FileData
     {

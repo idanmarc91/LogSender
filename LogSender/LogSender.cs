@@ -41,9 +41,9 @@ namespace LogSender
             _directory = new List<KeyValuePair<string, DirectoryInfo>>
             {
                 new KeyValuePair<string , DirectoryInfo>( "cyb" , new DirectoryInfo( _configFile._configData._cybFolderPath ) ) ,
-                new KeyValuePair<string , DirectoryInfo>( "fsa" , new DirectoryInfo( _configFile._configData._fsaFolderPath) ) ,
-                new KeyValuePair<string , DirectoryInfo>( "cimg" , new DirectoryInfo( _configFile._configData._cimgFolderPath ) ) ,
-                new KeyValuePair<string , DirectoryInfo>( "mog" , new DirectoryInfo( _configFile._configData._mogFolderPath) )
+                //new KeyValuePair<string , DirectoryInfo>( "fsa" , new DirectoryInfo( _configFile._configData._fsaFolderPath) ) ,
+                //new KeyValuePair<string , DirectoryInfo>( "cimg" , new DirectoryInfo( _configFile._configData._cimgFolderPath ) ) ,
+                //new KeyValuePair<string , DirectoryInfo>( "mog" , new DirectoryInfo( _configFile._configData._mogFolderPath) )
             };
             log.Debug("log sender class created");
 
@@ -133,6 +133,9 @@ namespace LogSender
                 //get json data from multiple log files as one string
                 string multipleLogFileAsjsonString = JsonDataConvertion.JsonSerialization(dataAsString);
 
+                //for testing the string
+                //File.WriteAllText(@"C:\Users\idanm\Desktop\test.txt", multipleLogFileAsjsonString);
+                
                 //gzip data
                 MemoryStream compressedData = GZipCompresstion.CompressString(multipleLogFileAsjsonString);
 
@@ -143,7 +146,7 @@ namespace LogSender
                     log.Info("Log sender sent " + listOfFileToDelete.Count + " files to the server and the server recived them");
 
                     log.Debug("Begin deleteing the files that was sent to the server");
-                    FileMaintenance.FileDelete(listOfFileToDelete);
+                    //FileMaintenance.FileDelete(listOfFileToDelete);
                 }
                 else
                 {

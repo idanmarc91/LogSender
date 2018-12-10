@@ -1,9 +1,9 @@
-﻿using BinaryFileToTextFile.Models;
+﻿using LogSender.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace BinaryFileToTextFile
+namespace LogSender
 {
     public class DLLTable : Table
     {
@@ -24,7 +24,7 @@ namespace BinaryFileToTextFile
         ///**********************************************
 
         //Ctor of DLLTable class
-        public DLLTable(byte[] expandedFileByteArray , string hostName , Int64 serverClientDelta)
+        public DLLTable(byte[] expandedFileByteArray , string reportingComputer , Int64 serverClientDelta)
         {
             try
             {
@@ -35,7 +35,7 @@ namespace BinaryFileToTextFile
                 for( int loopIndex = 0 ; loopIndex < expandedFileByteArray.Length ; loopIndex = loopIndex + BYTES_IN_ROW )
                 {
                     //create new row
-                    DLLRow row = new DLLRow( serverClientDelta );
+                    DLLRow row = new DLLRow( serverClientDelta, reportingComputer);
                     row.ExtractData( loopIndex , expandedFileByteArray );
                     _DLLTable.Add( row );
                 }

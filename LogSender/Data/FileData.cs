@@ -1,7 +1,7 @@
 ﻿
 using System;
 
-namespace BinaryFileToTextFile.Data
+namespace LogSender.Data
 {
     abstract class FileData
     {

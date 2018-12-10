@@ -1,9 +1,9 @@
-﻿using BinaryFileToTextFile.Models;
+﻿using LogSender.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace BinaryFileToTextFile
+namespace LogSender
 {
     public class FsaTable : Table
     {
@@ -26,7 +26,7 @@ namespace BinaryFileToTextFile
         ///**********************************************
 
         //Ctor of FSATable
-        public FsaTable(byte[] expandedFileByteArray , string hostName , Int64 serverClientDelta , UInt16 headerVersion)
+        public FsaTable(byte[] expandedFileByteArray , string reportingComputer , Int64 serverClientDelta , UInt16 headerVersion)
         {
             try
             {
@@ -39,7 +39,7 @@ namespace BinaryFileToTextFile
                 //main loop itaration binary file and extract data from it
                 for( int loopIndex = 0 ; loopIndex < expandedFileByteArray.Length ; loopIndex = loopIndex + bytesInRow )
                 {
-                    FSARow row = new FSARow( serverClientDelta , hostName , headerVersion );
+                    FSARow row = new FSARow( serverClientDelta , reportingComputer , headerVersion );
                     row.ExtractData( loopIndex , expandedFileByteArray );
 
                     if( row.GetSubSeqNum() == "0" )

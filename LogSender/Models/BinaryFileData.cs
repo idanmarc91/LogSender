@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace BinaryFileToTextFile.Models
+namespace LogSender.Models
 {
     public class BinaryFileData
     {

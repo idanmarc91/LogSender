@@ -1,0 +1,62 @@
+2018-11-20 16:03:23,531 [9] Log_Level-ERROR, File-FileMaintenance.cs, Function-ZeroSizeFileCleanup, - Problem occured while trying to delete an empty file
+System.UnauthorizedAccessException: Access to the path '20-11-18--15-04-48.fsa' is denied.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileInfo.Delete()
+   at LogSender.Utilities.FileMaintenance.ZeroSizeFileCleanup(FileInfo[] fileArray) in C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\Utilities\FileMaintenance.cs:line 112
+2018-11-20 17:02:37,912 [3] Log_Level-ERROR, File-FileMaintenance.cs, Function-ZeroSizeFileCleanup, - Problem occured while trying to delete an empty file
+System.UnauthorizedAccessException: Access to the path '20-11-18--16-02-48.fsa' is denied.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileInfo.Delete()
+   at LogSender.Utilities.FileMaintenance.ZeroSizeFileCleanup(FileInfo[] fileArray) in C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\Utilities\FileMaintenance.cs:line 112
+2018-11-20 17:03:39,769 [10] Log_Level-ERROR, File-FileMaintenance.cs, Function-ZeroSizeFileCleanup, - Problem occured while trying to delete an empty file
+System.UnauthorizedAccessException: Access to the path '20-11-18--16-03-48.fsa' is denied.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileInfo.Delete()
+   at LogSender.Utilities.FileMaintenance.ZeroSizeFileCleanup(FileInfo[] fileArray) in C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\Utilities\FileMaintenance.cs:line 112
+2018-11-21 09:38:22,886 [8] Log_Level-ERROR, File-FileMaintenance.cs, Function-ZeroSizeFileCleanup, - Problem occured while trying to delete an empty file
+System.UnauthorizedAccessException: Access to the path '20-11-18--16-04-48.fsa' is denied.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileInfo.Delete()
+   at LogSender.Utilities.FileMaintenance.ZeroSizeFileCleanup(FileInfo[] fileArray) in C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\Utilities\FileMaintenance.cs:line 112
+2018-11-21 09:38:23,506 [8] Log_Level-ERROR, File-FileMaintenance.cs, Function-ZeroSizeFileCleanup, - Problem occured while trying to delete an empty file
+System.UnauthorizedAccessException: Access to the path '20-11-18--17-05-48.cimg' is denied.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileInfo.Delete()
+   at LogSender.Utilities.FileMaintenance.ZeroSizeFileCleanup(FileInfo[] fileArray) in C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\Utilities\FileMaintenance.cs:line 112
+2018-11-21 09:39:08,163 [6] Log_Level-ERROR, File-LogSender.cs, Function-MoveNext, - Sending process had stoped
+System.UnauthorizedAccessException: Access to the path '20-11-18--17-18-48.fsa' is denied.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileInfo.Delete()
+   at LogSender.Utilities.FileMaintenance.FileDelete(List`1 listOfFileToDelete) in C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\Utilities\FileMaintenance.cs:line 66
+   at LogSender.LogSender.<SendLogs>d__5.MoveNext() in C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\LogSender.cs:line 150
+2018-11-21 09:39:39,631 [11] Log_Level-ERROR, File-LogSender.cs, Function-MoveNext, - Sending process had stoped
+System.UnauthorizedAccessException: Access to the path '20-11-18--17-03-48.cimg' is denied.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileInfo.Delete()
+   at LogSender.Utilities.FileMaintenance.FileDelete(List`1 listOfFileToDelete) in C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\Utilities\FileMaintenance.cs:line 66
+   at LogSender.LogSender.<SendLogs>d__5.MoveNext() in C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\LogSender.cs:line 150
+2018-11-21 09:39:41,682 [5] Log_Level-ERROR, File-LogSender.cs, Function-MoveNext, - Sending process had stoped
+System.UnauthorizedAccessException: Access to the path '20-11-18--17-03-49.cyb' is denied.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileInfo.Delete()
+   at LogSender.Utilities.FileMaintenance.FileDelete(List`1 listOfFileToDelete) in C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\Utilities\FileMaintenance.cs:line 66
+   at LogSender.LogSender.<SendLogs>d__5.MoveNext() in C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\LogSender.cs:line 150
+2018-11-21 09:39:44,368 [8] Log_Level-ERROR, File-FileMaintenance.cs, Function-ZeroSizeFileCleanup, - Problem occured while trying to delete an empty file
+System.UnauthorizedAccessException: Access to the path '21-11-18--09-38-31.mog' is denied.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileInfo.Delete()
+   at LogSender.Utilities.FileMaintenance.ZeroSizeFileCleanup(FileInfo[] fileArray) in C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\Utilities\FileMaintenance.cs:line 112
+2018-11-21 09:39:48,068 [5] Log_Level-ERROR, File-LogSender.cs, Function-MoveNext, - Sending process had stoped
+System.UnauthorizedAccessException: Access to the path '20-11-18--17-04-48.mog' is denied.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileInfo.Delete()
+   at LogSender.Utilities.FileMaintenance.FileDelete(List`1 listOfFileToDelete) in C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\Utilities\FileMaintenance.cs:line 66
+   at LogSender.LogSender.<SendLogs>d__5.MoveNext() in C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\LogSender.cs:line 150
+2018-11-21 09:46:06,781 [5] Log_Level-ERROR, File-LogSender.cs, Function-MoveNext, - Sending process had stoped
+System.UnauthorizedAccessException: Access to the path '20-11-18--17-03-49.cyb' is denied.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileInfo.Delete()
+   at LogSender.Utilities.FileMaintenance.FileDelete(List`1 listOfFileToDelete) in C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\Utilities\FileMaintenance.cs:line 66
+   at LogSender.LogSender.<SendLogs>d__5.MoveNext() in C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\LogSender.cs:line 150
+2018-12-10 16:23:35,109 [3] Log_Level-ERROR, File-ServerConnection.cs, Function-MoveNext, - The server (http://10.0.0.40:8080) is offline
+2018-12-10 16:24:56,313 [3] Log_Level-ERROR, File-ServerConnection.cs, Function-MoveNext, - The server (http://10.0.0.40:8080) is offline

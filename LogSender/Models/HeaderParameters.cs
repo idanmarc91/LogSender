@@ -1,6 +1,6 @@
-﻿using BinaryFileToTextFile.Data;
+﻿using LogSender.Data;
 
-namespace BinaryFileToTextFile.Models
+namespace LogSender.Models
 {
     public class HeaderParameters
     {
@@ -11,7 +11,7 @@ namespace BinaryFileToTextFile.Models
         public HeaderDllMode _dllMode = new HeaderDllMode();
         public HeaderClientZValue _clientZValue = new HeaderClientZValue();
         public HeaderServerClientDelta _serverClientDelta = new HeaderServerClientDelta();
-        public HeaderHostName _hostName = new HeaderHostName();
+        public HeaderReportingComputer _reportingComputer = new HeaderReportingComputer();
         public HeaderMacAddress _macAddress = new HeaderMacAddress();
 
         ///**********************************************
@@ -25,7 +25,7 @@ namespace BinaryFileToTextFile.Models
             _dllMode.ExtractData( headerArray , ref fileIndex );
             _clientZValue.ExtractData( headerArray , ref fileIndex );
             _serverClientDelta.ExtractData( headerArray , ref fileIndex );
-            _hostName.ExtractData( headerArray , ref fileIndex );
+            _reportingComputer.ExtractData( headerArray , ref fileIndex );
             _macAddress.ExtractData( headerArray , ref fileIndex );
         }
     }

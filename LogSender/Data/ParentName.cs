@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace BinaryFileToTextFile.Data
+namespace LogSender.Data
 {
     class ParentName :FileData
     {

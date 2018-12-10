@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BinaryFileToTextFile.Models
+namespace LogSender.Models
 {
     public class MogTable : Table
     {
@@ -24,7 +24,7 @@ namespace BinaryFileToTextFile.Models
         ///**********************************************
 
         //Ctor of MogTable Class
-        public MogTable(byte[] expandedFileByteArray , string hostName , Int64 serverClientDelta , UInt16 headerVersion)
+        public MogTable(byte[] expandedFileByteArray , string reportingComputer , Int64 serverClientDelta , UInt16 headerVersion)
         {
             try
             {
@@ -36,7 +36,7 @@ namespace BinaryFileToTextFile.Models
                 for( int loopIndex = 0 ; loopIndex < expandedFileByteArray.Length ; loopIndex = loopIndex + bytesInRow )
                 {
                     //create new row
-                    MogRow row = new MogRow( serverClientDelta , hostName , headerVersion );
+                    MogRow row = new MogRow( serverClientDelta , reportingComputer , headerVersion );
 
                     row.ExtractData( loopIndex , expandedFileByteArray );
 

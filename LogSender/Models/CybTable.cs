@@ -1,9 +1,9 @@
-﻿using BinaryFileToTextFile.Models;
+﻿using LogSender.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace BinaryFileToTextFile
+namespace LogSender
 {
     public class CybTable : Table
     {
@@ -25,7 +25,7 @@ namespace BinaryFileToTextFile
         ///**********************************************
 
         //Ctor of CybTable Class
-        public CybTable(byte[] expandedFileByteArray, string hostName, Int64 serverClientDelta, UInt16 headerVersion)
+        public CybTable(byte[] expandedFileByteArray, string reportinComputer, Int64 serverClientDelta, UInt16 headerVersion)
         {
             try
             {
@@ -37,7 +37,7 @@ namespace BinaryFileToTextFile
                 for (int loopIndex = 0; loopIndex < expandedFileByteArray.Length; loopIndex = loopIndex + bytesInRow)
                 {
                     //create new row
-                    CybRow row = new CybRow(serverClientDelta, hostName, headerVersion);
+                    CybRow row = new CybRow(serverClientDelta, reportinComputer, headerVersion);
                     row.ExtractData(loopIndex, expandedFileByteArray);
 
                     if (row.CheckSubSeqNum())

@@ -1,20 +1,23 @@
-﻿using BinaryFileToTextFile.Data;
+﻿using LogSender.Data;
+using LogSender.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace BinaryFileToTextFile.Models
+namespace LogSender.Models
 {
     class MogRow : LogRow
-    {        
+    {
         ///**********************************************
         ///             Members Section
         ///**********************************************
         enum _fileExtractDataIndexs
         {
-            PROTOCOL, STATUS, SOURCE_PORT, DESTINATION_PORT, DIRECTION, ADDRESS_FAMILY, APPLICATION_NAME, FILE_PATH, FLOW_HANDLE, FLOW_STATE, X_CAST,
+            PROTOCOL, STATUS_REASON_LOG, SOURCE_PORT, DESTINATION_PORT, DIRECTION, ADDRESS_FAMILY, PROCESS_NAME, PROCESS_PATH, FLOW_HANDLE, FLOW_STATE, CAST_TYPE,
             STATE, SOURCE_IP, DESTINATION_IP, SEQ_NUM, SUB_SEQ_NUM, USER_NAME, MOG_COUNTER
         };
+        private ReasonLog _reasonMog = new ReasonLog();
+        private string _realStatusMog = "";
 
         ///**********************************************
         ///             Functions Section
@@ -24,21 +27,21 @@ namespace BinaryFileToTextFile.Models
         /// ctor of LogRow class
         /// </summary>
         /// <param name="serverClientDelta"></param>
-        /// <param name="hostName"></param>
+        /// <param name="reportingComputer"></param>
         /// <param name="headerVersion"></param>
         /// <param name="rowNumber"></param>
-        public MogRow(Int64 serverClientDelta, string hostName, ushort headerVersion)
+        public MogRow(Int64 serverClientDelta, string reportingComputer, ushort headerVersion)
         {
             _expandSVCHost = new List<ExpandSVCHostRow>();
             //insert host name to row
-            _hostName = hostName;
+            _reportingComputer = reportingComputer;
             _headerVersion = headerVersion;
             _timeStamp = new TimeStamp(serverClientDelta);
 
             _fileExtractData = new List<FileData>
             {
                 new Protocol(),
-                new StatusLog(),
+                new StatusReasonLog(),
                 new Port(), //source port
                 new Port(), //destination port
                 new Direction(),
@@ -47,8 +50,8 @@ namespace BinaryFileToTextFile.Models
                 new FilePath(),
                 new FlowHandle(),
                 new FlowState(),
-                new XCast(),
-                new State(),
+                new CastType(),
+                new ScrambleState(),
                 new IP(), //source ip
                 new IP(), //destination ip
                 new SquenceNumber(),
@@ -76,17 +79,28 @@ namespace BinaryFileToTextFile.Models
             {
                 //source ip need address family for extraction
                 if (index == (int)_fileExtractDataIndexs.SOURCE_IP)
+                {
                     _fileExtractData[index] = new IP(_fileExtractData[(int)_fileExtractDataIndexs.ADDRESS_FAMILY].GetData());
-                
+                }
+
                 //destination ip need address family for extraction
                 if (index == (int)_fileExtractDataIndexs.DESTINATION_IP)
+                {
                     _fileExtractData[index] = new IP(_fileExtractData[(int)_fileExtractDataIndexs.ADDRESS_FAMILY].GetData());
+                }
 
                 _fileExtractData[index].ExtractData(loopIndex, expandedFileByteArray, ref fileIndex);
             }
 
+            //The agent is suppling us with status and reason in the same field we need to seperate them to 2 fields: reason, real status.(the extracted status is not the real status)
+            _reasonMog.GetReasonFromExtractedData(_fileExtractData[(int)_fileExtractDataIndexs.STATUS_REASON_LOG].GetData());
+
+            _realStatusMog = StatusReasonMap.Map(_fileExtractData[(int)_fileExtractDataIndexs.STATUS_REASON_LOG].GetData());
+
             if (_fileExtractData[(int)_fileExtractDataIndexs.FLOW_STATE].GetData() == "END")
+            {
                 SetEmptyString();
+            }
         }
 
         /// <summary>
@@ -103,7 +117,8 @@ namespace BinaryFileToTextFile.Models
         /// </summary>
         private void SetEmptyString()
         {
-            _fileExtractData[(int)_fileExtractDataIndexs.APPLICATION_NAME].SetData("");
+            _fileExtractData[(int)_fileExtractDataIndexs.PROCESS_NAME].SetData("");
+            _fileExtractData[(int)_fileExtractDataIndexs.PROCESS_PATH].SetData("");
             _fileExtractData[(int)_fileExtractDataIndexs.DESTINATION_IP].SetData("");
             _fileExtractData[(int)_fileExtractDataIndexs.DESTINATION_PORT].SetData("");
             _fileExtractData[(int)_fileExtractDataIndexs.DIRECTION].SetData("");
@@ -111,9 +126,8 @@ namespace BinaryFileToTextFile.Models
             _fileExtractData[(int)_fileExtractDataIndexs.SOURCE_IP].SetData("");
             _fileExtractData[(int)_fileExtractDataIndexs.SOURCE_PORT].SetData("");
             _fileExtractData[(int)_fileExtractDataIndexs.STATE].SetData("");
-            _fileExtractData[(int)_fileExtractDataIndexs.STATUS].SetData("");
-            _fileExtractData[(int)_fileExtractDataIndexs.X_CAST].SetData("");
-            _fileExtractData[(int)_fileExtractDataIndexs.FILE_PATH].SetData("");
+            _fileExtractData[(int)_fileExtractDataIndexs.STATUS_REASON_LOG].SetData("");
+            _fileExtractData[(int)_fileExtractDataIndexs.CAST_TYPE].SetData("");
         }
 
         /// <summary>
@@ -136,20 +150,18 @@ namespace BinaryFileToTextFile.Models
             List<string> list = new List<string>
             {
                 "win", //OS field
-                _hostName,
+                _reportingComputer,
                 _timeStamp.GetClientTime(),
                 _timeStamp.GetFullServerTime(),
-                "",
-                "",
-                "",
-                _fileExtractData[(int)_fileExtractDataIndexs.APPLICATION_NAME].GetData(),
+                "",//process id
+                _fileExtractData[(int)_fileExtractDataIndexs.PROCESS_NAME].GetData(),
+                _fileExtractData[(int)_fileExtractDataIndexs.PROCESS_PATH].GetData(),
                 _fileExtractData[(int)_fileExtractDataIndexs.PROTOCOL].GetData(),
-                _fileExtractData[(int)_fileExtractDataIndexs.STATUS].GetData(),
+                _fileExtractData[(int)_fileExtractDataIndexs.STATUS_REASON_LOG].GetData(),
                 _fileExtractData[(int)_fileExtractDataIndexs.SOURCE_PORT].GetData(),
                 _fileExtractData[(int)_fileExtractDataIndexs.DESTINATION_PORT].GetData(),
                 _fileExtractData[(int)_fileExtractDataIndexs.DIRECTION].GetData(),
-                _fileExtractData[(int)_fileExtractDataIndexs.FILE_PATH].GetData(),
-                _fileExtractData[(int)_fileExtractDataIndexs.X_CAST].GetData(),
+                _fileExtractData[(int)_fileExtractDataIndexs.CAST_TYPE].GetData(),
                 _fileExtractData[(int)_fileExtractDataIndexs.STATE].GetData(),
                 _fileExtractData[(int)_fileExtractDataIndexs.SOURCE_IP].GetData(),
                 _fileExtractData[(int)_fileExtractDataIndexs.DESTINATION_IP].GetData(),
@@ -157,12 +169,13 @@ namespace BinaryFileToTextFile.Models
                 _fileExtractData[(int)_fileExtractDataIndexs.SUB_SEQ_NUM].GetData(),
                 _fileExtractData[(int)_fileExtractDataIndexs.USER_NAME].GetData(),
                 _fileExtractData[(int)_fileExtractDataIndexs.MOG_COUNTER].GetData(),
-                "",
-                "",
-                "",
-                "",
-                "",
-                ""
+                "",//destination path
+                "",//reason
+                "",//dll path
+                "",//dll name
+                "",//parent path
+                "",//parent name
+                ""//chain array
             };
             return list;
         }
@@ -173,16 +186,16 @@ namespace BinaryFileToTextFile.Models
         /// <returns>string - app name</returns>
         public string GetAppName()
         {
-            return _fileExtractData[(int)_fileExtractDataIndexs.APPLICATION_NAME].GetData();
+            return _fileExtractData[(int)_fileExtractDataIndexs.PROCESS_NAME].GetData();
         }
 
-        /// <summary>
-        /// Change application name
-        /// </summary>
-        public void ChangeAppName()
-        {
-            _fileExtractData[(int)_fileExtractDataIndexs.APPLICATION_NAME].SetData(_fileExtractData[(int)_fileExtractDataIndexs.APPLICATION_NAME].GetData() + " (" + _expandSVCHost.Count + ")");
-        }
+        ///// <summary>
+        ///// Change application name
+        ///// </summary>
+        //public void ChangeAppName()
+        //{
+        //    _fileExtractData[(int)_fileExtractDataIndexs.Pro].SetData(_fileExtractData[(int)_fileExtractDataIndexs.APPLICATION_NAME].GetData() + " (" + _expandSVCHost.Count + ")");
+        //}
 
 
         /// <summary>
@@ -220,9 +233,9 @@ namespace BinaryFileToTextFile.Models
         {
             ExpandSVCHostRow newExpandRow = new ExpandSVCHostRow
             {
-                _appName = serviceRow._fileExtractData[(int)_fileExtractDataIndexs.APPLICATION_NAME].GetData(),
-                _fullPath = serviceRow._fileExtractData[(int)_fileExtractDataIndexs.FILE_PATH].GetData(),
-                _status = serviceRow._fileExtractData[(int)_fileExtractDataIndexs.STATUS].GetData()
+                _appName = serviceRow._fileExtractData[(int)_fileExtractDataIndexs.PROCESS_NAME].GetData(),
+                _fullPath = serviceRow._fileExtractData[(int)_fileExtractDataIndexs.PROCESS_PATH].GetData(),
+                _status = serviceRow._fileExtractData[(int)_fileExtractDataIndexs.STATUS_REASON_LOG].GetData()
             };
             _expandSVCHost.Add(newExpandRow);
         }

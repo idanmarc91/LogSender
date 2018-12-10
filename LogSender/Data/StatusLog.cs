@@ -1,5 +1,4 @@
-﻿
-namespace BinaryFileToTextFile.Data
+﻿namespace LogSender.Data
 {
     class StatusLog : FileData
     {
@@ -36,6 +35,9 @@ namespace BinaryFileToTextFile.Data
                     break;
                 case "4":
                     _status = "Off";
+                    break;
+                default:
+                    _status = builder.ToString();
                     break;
             }
         }

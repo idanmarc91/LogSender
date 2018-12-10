@@ -1,14 +1,14 @@
 ﻿using System.Text;
 
-namespace BinaryFileToTextFile.Data
+namespace LogSender.Data
 {
-    class ImagePath : FileData
+    class DllPath : FileData
     {
         ///**********************************************
         ///             Members Section
         ///**********************************************
         const int IMG_PATH_STR_LEN = 1024;
-        private string _imagePath;
+        private string _dllPath;
 
         ///**********************************************
         ///             Functions Section
@@ -23,7 +23,7 @@ namespace BinaryFileToTextFile.Data
         public override void ExtractData(int loopIndex, byte[] expandedFileByteArray, ref int fileIndex)
         {
             byte [] data = GetData(loopIndex, expandedFileByteArray, ref fileIndex, IMG_PATH_STR_LEN);
-            _imagePath = Encoding.Unicode.GetString(data).TrimEnd('\0');
+            _dllPath = Encoding.Unicode.GetString(data).TrimEnd('\0');
         }
 
         /// <summary>
@@ -32,16 +32,16 @@ namespace BinaryFileToTextFile.Data
         /// <returns>string - image path</returns>
         public override string GetData()
         {
-            return _imagePath;
+            return _dllPath;
         }
 
         /// <summary>
         /// set new image path
         /// </summary>
-        /// <param name="imagePath"></param>
-        public override void SetData(string imagePath)
+        /// <param name="dllPath"></param>
+        public override void SetData(string dllPath)
         {
-            _imagePath = imagePath;
+            _dllPath = dllPath;
         }
     }
 }

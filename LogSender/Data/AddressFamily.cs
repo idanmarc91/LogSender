@@ -1,6 +1,6 @@
 ﻿
 
-namespace BinaryFileToTextFile.Data
+namespace LogSender.Data
 {
     class AddressFamily:FileData
     {

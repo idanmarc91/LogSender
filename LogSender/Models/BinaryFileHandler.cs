@@ -1,8 +1,8 @@
-﻿using BinaryFileToTextFile.Models;
+﻿using LogSender.Models;
 using System;
 using System.IO;
 
-namespace BinaryFileToTextFile
+namespace LogSender
 {
     public class BinaryFileHandler
     {

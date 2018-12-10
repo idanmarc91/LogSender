@@ -1,19 +1,19 @@
-﻿namespace BinaryFileToTextFile.Data
+﻿
+namespace LogSender.Data
 {
-    class XCast :FileData
+    class ScrambleState : FileData
     {
         ///**********************************************
         ///             Members Section
         ///**********************************************
-        const int X_CAST_LEN = 1;
-        private string _xCast;
+        const int STATE_LEN = 1;
+        private string _state;
 
         ///**********************************************
         ///             Functions Section
-        ///**********************************************
-
+        ///**********************************************   
         /// <summary>
-        /// This function extract x cast string 
+        /// This function extract state string 
         /// </summary>
         /// <param name="loopIndex"></param>
         /// <param name="expandedFileByteArray"></param>
@@ -21,36 +21,42 @@
         public override void ExtractData(int loopIndex, byte[] expandedFileByteArray, ref int fileIndex)
         {
             System.Text.StringBuilder builder = new System.Text.StringBuilder();
-            builder.Append(GetData(loopIndex, expandedFileByteArray, ref fileIndex, X_CAST_LEN)[0]);
+            builder.Append(GetData(loopIndex, expandedFileByteArray, ref fileIndex, STATE_LEN)[0]);
             switch (builder.ToString())
             {
-                case "0":
-                    _xCast = "Unicast";
-                    break;
                 case "1":
-                    _xCast = "NotUnicast";
+                    _state = "On";
+                    break;
+                case "2":
+                    _state = "Off";
+                    break;
+                case "3":
+                    _state = "NoKey";
                     break;
                 default:
-                    _xCast = "ERROR";
+                    _state = "ERROR";
                     break;
             }
+            
+            //ignore one byte
+            fileIndex++;
         }
 
         /// <summary>
-        /// get X cast
+        /// get state
         /// </summary>
-        /// <returns>string - x cast</returns>
+        /// <returns>string - state</returns>
         public override string GetData()
         {
-            return _xCast;
+            return _state;
         }
 
         /// <summary>
-        /// set xCast
+        /// set state 
         /// </summary>
-        public override void SetData(string xCast)
+        public override void SetData(string state)
         {
-            _xCast = xCast;
+            _state = state;
         }
     }
 }

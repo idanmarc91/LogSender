@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Text;
 
-namespace BinaryFileToTextFile.Data
+namespace LogSender.Data
 {
-    public class HeaderHostName
+    public class HeaderReportingComputer
     {
         ///**********************************************
         ///             Members Section
         ///**********************************************
 
-        private string _hostName;
+        private string _reportingComputer;
 
         ///**********************************************
         ///             Functions Section
@@ -22,30 +22,30 @@ namespace BinaryFileToTextFile.Data
         /// <param name="fileIndex"></param>
         public void ExtractData(byte[] headerArray, ref int fileIndex)
         {
-            int hostNameLenght = 0;
+            int reportingComputerLen = 0;
             int tempIndex = fileIndex;
             while (!((headerArray[tempIndex] == '\0') && (headerArray[tempIndex + 1] == '\0')))
             {
-                hostNameLenght = hostNameLenght + 2;
+                reportingComputerLen = reportingComputerLen + 2;
                 tempIndex = tempIndex + 2;
             }
 
-            byte[] tempHostName = new byte[hostNameLenght];
+            byte[] tempReportingComputer = new byte[reportingComputerLen];
 
-            Array.Copy(headerArray, fileIndex, tempHostName, 0, hostNameLenght);
+            Array.Copy(headerArray, fileIndex, tempReportingComputer, 0, reportingComputerLen);
 
             //update curr index
-            fileIndex += hostNameLenght + 2;
-            _hostName = Encoding.Unicode.GetString(tempHostName);
+            fileIndex += reportingComputerLen + 2;
+            _reportingComputer = Encoding.Unicode.GetString(tempReportingComputer);
         }
 
         /// <summary>
-        /// get host name data
+        /// get reporting computer data
         /// </summary>
-        /// <returns>string - host name</returns>
+        /// <returns>string - _reportingComputer</returns>
         public string GetData()
         {
-            return _hostName;
+            return _reportingComputer;
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace BinaryFileToTextFile
+namespace LogSender
 {
     public abstract class Table
     {

@@ -154,8 +154,8 @@
     <Compile Include="Data\HeaderMacAddress.cs" />
     <Compile Include="Data\HeaderServerClientDelta.cs" />
     <Compile Include="Data\HeaderVersion.cs" />
-    <Compile Include="Data\ImageName.cs" />
-    <Compile Include="Data\ImagePath.cs" />
+    <Compile Include="Data\DllName.cs" />
+    <Compile Include="Data\DllPath.cs" />
     <Compile Include="Data\IP.cs" />
     <Compile Include="Data\MogCounter.cs" />
     <Compile Include="Data\ParentName.cs" />
@@ -165,15 +165,17 @@
     <Compile Include="Data\ProcessName.cs" />
     <Compile Include="Data\ProcessPath.cs" />
     <Compile Include="Data\Protocol.cs" />
+    <Compile Include="Data\ReasonLog.cs" />
     <Compile Include="Data\ReasonDll.cs" />
     <Compile Include="Data\ReasonFsa.cs" />
     <Compile Include="Data\SquenceNumber.cs" />
-    <Compile Include="Data\State.cs" />
+    <Compile Include="Data\ScrambleState.cs" />
+    <Compile Include="Data\StatusReasonLog.cs" />
     <Compile Include="Data\StatusFsa.cs" />
     <Compile Include="Data\StatusLog.cs" />
     <Compile Include="Data\TimeStamp.cs" />
     <Compile Include="Data\UserName.cs" />
-    <Compile Include="Data\XCast.cs" />
+    <Compile Include="Data\CastType.cs" />
     <Compile Include="Models\BinaryFileData.cs" />
     <Compile Include="Models\BinaryFileHandler.cs" />
     <Compile Include="Models\CybRow.cs" />
@@ -217,6 +219,7 @@
     <Compile Include="Utilities\JsonDataConvertion.cs" />
     <Compile Include="Utilities\ParsingBinaryFile.cs" />
     <Compile Include="Utilities\ServerConnection.cs" />
+    <Compile Include="Utilities\StatusReasonMap.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
