@@ -13,7 +13,7 @@ namespace LogSender.Models
         ///**********************************************
         enum _fileExtractDataIndexs
         {
-            PROCESS_ID, DLL_PATH, DLL_NAME, PARENT_PATH, PARENT_NAME, REASON, STATUS_REASON_LOG
+            PROCESS_ID, DLL_PATH, DLL_NAME, PARENT_PATH, PARENT_NAME, STATUS_REASON_LOG
         };
 
         private ReasonLog _reasonDll = new ReasonLog();
@@ -39,8 +39,7 @@ namespace LogSender.Models
                 new DllName(),
                 new ParentPath(),
                 new ParentName(),
-                new ReasonDll(),
-                new StatusReasonLog()
+                new StatusReasonDll()
             };
         }
 
@@ -70,12 +69,13 @@ namespace LogSender.Models
                 }
             }
 
-            //The agent is suppling us with status and reason in the same field we need to seperate them to 2 fields: reason, real status.(the extracted status is not the real status)
+            //The agent is suppling us with status and reason in the same field
+            //we need to seperate them to 2 fields: reason, real status.(the
+            //extracted status is not the real status)
+
             _reasonDll.GetReasonFromExtractedData(_fileExtractData[(int)_fileExtractDataIndexs.STATUS_REASON_LOG].GetData());
 
             _realStatusDll = StatusReasonMap.Map(_fileExtractData[(int)_fileExtractDataIndexs.STATUS_REASON_LOG].GetData());
-
-
         }
 
         /// <summary>
@@ -94,24 +94,25 @@ namespace LogSender.Models
                 "",//process_name
                 "",//process_path
                 "",//protocol
-                "",//status
+                _realStatusDll,//status
                 "",//source_port
-                "",//
-                "",//
-                "",//
-                "",//
-                "",//
-                "",//
-                "",//
-                "",//
-                "",//
-                "",//
-                "",//
-                _fileExtractData[(int)_fileExtractDataIndexs.REASON].GetData(),
+                "",//destination_port
+                "",//direction
+                "",//cast_type
+                "",//scramble_state
+                "",//source_ip
+                "",//destination_ip
+                "",//sequance_number
+                "",//sub_sequance_number
+                "",//user_name
+                "",//mog_counter
+                "",//destination_path
+                _reasonDll._reason,
                 _fileExtractData[(int)_fileExtractDataIndexs.DLL_PATH].GetData(),
                 _fileExtractData[(int)_fileExtractDataIndexs.DLL_NAME].GetData(),
                 _fileExtractData[(int)_fileExtractDataIndexs.PARENT_PATH].GetData(),
                 _fileExtractData[(int)_fileExtractDataIndexs.PARENT_NAME].GetData(),
+                "",//chain_array
             };
             return list;
         }

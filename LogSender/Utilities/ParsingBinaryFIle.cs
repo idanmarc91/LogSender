@@ -28,7 +28,7 @@ namespace LogSender.Utilities
             "destination_port" ,
             "direction" ,
             "cast_type",
-            "state" ,
+            "scramble_state" ,
             "source_ip" ,
             "destination_ip" ,
             "sequance_number" ,

@@ -88,27 +88,26 @@ namespace LogSender.Models
                 _fileExtractData[(int)_fileExtractDataIndexs.PROCESS_ID].GetData(),
                 _fileExtractData[(int)_fileExtractDataIndexs.PROCESS_NAME].GetData(),
                 _fileExtractData[(int)_fileExtractDataIndexs.PROCESS_PATH].GetData(),
-                "",
-                "",
+                _protocol,//protocol
                 _fileExtractData[(int)_fileExtractDataIndexs.STATUS].GetData(),
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
+                "",//source_port
+                _destinationPort,//destination_port
+                _direction,//direction
+                "",//cast_type
+                "",//scramble_state
+                "",//source_ip
+                "",//destination_ip
                 _fileExtractData[(int)_fileExtractDataIndexs.SEQ_NUM].GetData(),
                 _fileExtractData[(int)_fileExtractDataIndexs.SUB_SEQ_NUM].GetData(),
                 _fileExtractData[(int)_fileExtractDataIndexs.USER_NAME].GetData(),
-                "",
+                "",//mog_counter
                 _fileExtractData[(int)_fileExtractDataIndexs.DESTINATION_PATH].GetData(),
                 _fileExtractData[(int)_fileExtractDataIndexs.REASON].GetData(),
-                "",
-                "",
-                "",
-                "",
+                "",//dll path
+                "",//dll name
+                "",//parent_path
+                "",//parent_name
+                "",//chain_array
             };
             return list;
         }

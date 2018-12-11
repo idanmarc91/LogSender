@@ -274,7 +274,7 @@ namespace LogSender.Utilities
 
 
 #if DEBUG
-                _configData._hostIp = "http://10.0.0.88:8080";
+                _configData._hostIp = "http://10.0.0.40:8080";
 #else
                 #region Read from Agent config file
 

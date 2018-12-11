@@ -40,10 +40,10 @@ namespace LogSender
 
             _directory = new List<KeyValuePair<string, DirectoryInfo>>
             {
-                new KeyValuePair<string , DirectoryInfo>( "cyb" , new DirectoryInfo( _configFile._configData._cybFolderPath ) ) ,
+                //new KeyValuePair<string , DirectoryInfo>( "cyb" , new DirectoryInfo( _configFile._configData._cybFolderPath ) ) ,
                 //new KeyValuePair<string , DirectoryInfo>( "fsa" , new DirectoryInfo( _configFile._configData._fsaFolderPath) ) ,
                 //new KeyValuePair<string , DirectoryInfo>( "cimg" , new DirectoryInfo( _configFile._configData._cimgFolderPath ) ) ,
-                //new KeyValuePair<string , DirectoryInfo>( "mog" , new DirectoryInfo( _configFile._configData._mogFolderPath) )
+                new KeyValuePair<string , DirectoryInfo>( "mog" , new DirectoryInfo( _configFile._configData._mogFolderPath) )
             };
             log.Debug("log sender class created");
 
@@ -62,19 +62,23 @@ namespace LogSender
             {
                 while (true) //main service loop
                 {
-                    if (await ServerConnection.IsServerAlive(_configFile._configData._hostIp)) //check if server is online
+                    if (await ServerConnection.IsServerAliveAsync(_configFile._configData._hostIp)) //check if server is online
                     {
                         foreach (KeyValuePair<string, DirectoryInfo> dir in _directory)//run on all log directories
                         {
                             FileMaintenance.ZeroSizeFileCleanup(dir.Value.GetFiles());
                             /* PREF: Task created for each folder */
                             //check folder status
-                            if (FolderWatcher.IsFolderReadyToSendWatcher(dir, _configFile._configData._binaryFileMaxSize, _configFile._configData._minNumOfFilesToSend, _configFile._configData._maxBinaryFolderSize))
+                            if (FolderWatcher
+                                .IsFolderReadyToSendWatcher(dir,
+                                                            _configFile._configData._binaryFileMaxSize,
+                                                            _configFile._configData._minNumOfFilesToSend,
+                                                            _configFile._configData._maxBinaryFolderSize))
                             {
                                 log.Debug("Sending process can begin, creating sending process Task for " + dir.Value.Name + " log folder");
 
                                 //create task for the current folder
-                                taskList.Add(Task.Run(() => SendLogs(dir)));
+                                taskList.Add(Task.Run(() => SendLogsAsync(dir)));
 
                                 log.Debug("Task created for " + dir.Value.Name + " folder and started his operation");
                             }
@@ -116,7 +120,7 @@ namespace LogSender
         /// Main thread function
         /// </summary>
         /// <param name="dir"></param>
-        private async Task SendLogs(KeyValuePair<string, DirectoryInfo> dir)
+        private async Task SendLogsAsync(KeyValuePair<string, DirectoryInfo> dir)
         {
             try
             {
@@ -135,13 +139,18 @@ namespace LogSender
 
                 //for testing the string
                 //File.WriteAllText(@"C:\Users\idanm\Desktop\test.txt", multipleLogFileAsjsonString);
-                
+
                 //gzip data
                 MemoryStream compressedData = GZipCompresstion.CompressString(multipleLogFileAsjsonString);
 
-                ServerConnection con = new ServerConnection();
+                ServerConnection serverConnection = new ServerConnection();
 
-                if (con.ServerManager(_configFile._configData._numberOfTimesToRetry, _configFile._configData._hostIp, _configFile._configData._waitTimeBeforeRetry, compressedData).Result)
+                if (serverConnection.
+                    ServerManagerAsync(_configFile._configData._numberOfTimesToRetry,
+                                       _configFile._configData._hostIp,
+                                       _configFile._configData._waitTimeBeforeRetry,
+                                       compressedData)
+                    .Result)
                 {
                     log.Info("Log sender sent " + listOfFileToDelete.Count + " files to the server and the server recived them");
 

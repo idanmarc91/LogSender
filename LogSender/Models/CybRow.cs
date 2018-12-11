@@ -13,7 +13,9 @@ namespace LogSender.Models
         ///**********************************************
         enum _fileExtractDataIndexs
         {
-            PROTOCOL, STATUS_REASON_LOG, SOURCE_PORT, DESTINATION_PORT, DIRECTION, ADDRESS_FAMILY, PROCESS_NAME, PROCESS_PATH, FLOW_HANDLE, FLOW_STATE, CAST_TYPE, STATE, SOURCE_IP, DESTINATION_IP, SEQ_NUM, SUB_SEQ_NUM, USER_NAME, REASON
+            PROTOCOL, STATUS_REASON_LOG, SOURCE_PORT, DESTINATION_PORT, DIRECTION, ADDRESS_FAMILY,
+            PROCESS_NAME, PROCESS_PATH, FLOW_HANDLE, FLOW_STATE, CAST_TYPE, SCRAMBLE_STATE, SOURCE_IP,
+            DESTINATION_IP, SEQ_NUM, SUB_SEQ_NUM, USER_NAME, REASON
         };
 
         private ReasonLog _reasonCyb = new ReasonLog();
@@ -37,7 +39,7 @@ namespace LogSender.Models
             _reportingComputer = reportingComputer;
             _headerVersion = headerVersion;
             _timeStamp = new TimeStamp(serverClientDelta);
-            
+
             _fileExtractData = new List<FileData>
             {
                 new Protocol(),
@@ -89,7 +91,10 @@ namespace LogSender.Models
                 _fileExtractData[index].ExtractData(loopIndex, expandedFileByteArray, ref fileIndex);
             }
 
-            //The agent is suppling us with status and reason in the same field we need to seperate them to 2 fields: reason, real status.(the extracted status is not the real status)
+            //The agent is suppling us with status and reason in the same field
+            //we need to seperate them to 2 fields: reason, real status.(the
+            //extracted status is not the real status)
+            
             _reasonCyb.GetReasonFromExtractedData(_fileExtractData[(int)_fileExtractDataIndexs.STATUS_REASON_LOG].GetData());
 
             _realStatusCyb = StatusReasonMap.Map(_fileExtractData[(int)_fileExtractDataIndexs.STATUS_REASON_LOG].GetData());
@@ -99,7 +104,6 @@ namespace LogSender.Models
                 SetEmptyString();
             }
         }
-
 
         /// <summary>
         /// check if sub sequence number == 0 
@@ -122,7 +126,7 @@ namespace LogSender.Models
             _fileExtractData[(int)_fileExtractDataIndexs.PROTOCOL].SetData("");
             _fileExtractData[(int)_fileExtractDataIndexs.SOURCE_IP].SetData("");
             _fileExtractData[(int)_fileExtractDataIndexs.SOURCE_PORT].SetData("");
-            _fileExtractData[(int)_fileExtractDataIndexs.STATE].SetData("");
+            _fileExtractData[(int)_fileExtractDataIndexs.SCRAMBLE_STATE].SetData("");
             _fileExtractData[(int)_fileExtractDataIndexs.STATUS_REASON_LOG].SetData("");
             _realStatusCyb = "";
             _reasonCyb._reason = "";
@@ -188,7 +192,7 @@ namespace LogSender.Models
                 _fileExtractData[(int)_fileExtractDataIndexs.DESTINATION_PORT].GetData(),
                 _fileExtractData[(int)_fileExtractDataIndexs.DIRECTION].GetData(),
                 _fileExtractData[(int)_fileExtractDataIndexs.CAST_TYPE].GetData(),
-                _fileExtractData[(int)_fileExtractDataIndexs.STATE].GetData(),
+                _fileExtractData[(int)_fileExtractDataIndexs.SCRAMBLE_STATE].GetData(),
                 _fileExtractData[(int)_fileExtractDataIndexs.SOURCE_IP].GetData(),
                 _fileExtractData[(int)_fileExtractDataIndexs.DESTINATION_IP].GetData(),
                 _fileExtractData[(int)_fileExtractDataIndexs.SEQ_NUM].GetData(),

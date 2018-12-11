@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using LogSender.Utilities;
+using System.Collections.Generic;
 using System.Text;
 
 namespace LogSender.Models
@@ -26,11 +27,11 @@ namespace LogSender.Models
 
             if (_expandSVCHost.Count > 0)
             {
-                paramList.Add(BuildSvcChainString());
+                paramList[(int)Constant.ParamListIndexs.CHAIN_ARRAY] = BuildSvcChainString();
             }
             else
             {
-                paramList.Add("");
+                paramList[(int)Constant.ParamListIndexs.CHAIN_ARRAY] = "";
             }
 
             string test = ServiceStack.Text.CsvSerializer.SerializeToCsv(paramList);

@@ -25,16 +25,16 @@ namespace LogSender.Data
             switch (builder.ToString())
             {
                 case "1":
-                    _state = "On";
+                    _state = "Defense";
                     break;
                 case "2":
-                    _state = "Off";
+                    _state = "Monitor";
                     break;
                 case "3":
                     _state = "NoKey";
                     break;
                 default:
-                    _state = "ERROR";
+                    _state = "Error";
                     break;
             }
             

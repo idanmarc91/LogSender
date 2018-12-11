@@ -166,7 +166,7 @@
     <Compile Include="Data\ProcessPath.cs" />
     <Compile Include="Data\Protocol.cs" />
     <Compile Include="Data\ReasonLog.cs" />
-    <Compile Include="Data\ReasonDll.cs" />
+    <Compile Include="Data\StatusReasonDll.cs" />
     <Compile Include="Data\ReasonFsa.cs" />
     <Compile Include="Data\SquenceNumber.cs" />
     <Compile Include="Data\ScrambleState.cs" />
@@ -213,6 +213,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Utilities\ConfigFile.cs" />
+    <Compile Include="Utilities\Constant.cs" />
     <Compile Include="Utilities\FileMaintenance.cs" />
     <Compile Include="Utilities\FolderWatcher.cs" />
     <Compile Include="Utilities\GZipCompresstion.cs" />

@@ -8,9 +8,9 @@
         {
             switch (status)
             {
-                case "OK":
-                case "ERROR":
-                case "UNKNOWN":
+                case "Ok":
+                case "Error":
+                case "Unknown":
                 case "Dropped":
                 case "Exculuded":
                     _reason = status;

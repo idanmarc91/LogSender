@@ -27,7 +27,7 @@ namespace LogSender.Utilities
         /// </summary>
         /// <param name="url"></param>
         /// <param name="data"></param>
-        public async Task<bool> SendDataToServer(string hostIp, MemoryStream compressedData)
+        public async Task<bool> SendDataToServerAsync(string hostIp, MemoryStream compressedData)
         {
             try
             {
@@ -64,7 +64,7 @@ namespace LogSender.Utilities
         /// </summary>
         /// <param name="hostIp"></param>
         /// <returns>true if online, false if offline</returns>
-        public static async Task<bool> IsServerAlive(string hostIp)
+        public static async Task<bool> IsServerAliveAsync(string hostIp)
         {
             try
             {
@@ -91,17 +91,19 @@ namespace LogSender.Utilities
         }
 
         /// <summary>
-        /// 
+        /// This function is responsible for server connection logic.
+        /// if the sending process fail this function will manage the delay and resend process 
+        /// depent on the configuration file data
         /// </summary>
         /// <param name="retry"></param>
         /// <param name="hostIp"></param>
         /// <param name="compressedData"></param>
         /// <returns></returns>
-        public async Task<bool> ServerManager(int retry, string hostIp, int delayTime, MemoryStream compressedData)
+        public async Task<bool> ServerManagerAsync(int retry, string hostIp, int delayTime, MemoryStream compressedData)
         {
             while (retry != 0)//retry loop
             {
-                if (await SendDataToServer(hostIp, compressedData))
+                if (await SendDataToServerAsync(hostIp, compressedData))
                 {
                     return true;//when file sent sucessfuly exit while loop
                 }

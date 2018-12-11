@@ -6,24 +6,29 @@ namespace LogSender.Utilities
     {
         private static Dictionary<string, string> _map = new Dictionary<string, string>
         {
-            {"NotWL","Blocked"},
-            {"WLMM","Blocked"},
-            {"NEP","Blocked"},
-            {"WLMM DATE","Blocked"},
-            {"WLMM MD5","Blocked"},
-            {"WLMM MD5 COR","Blocked"},
-            {"WLMM SIZE COR","Blocked"},
-            {"CHAIN","Blocked"},
+            {"Not in policy","Blocked"},
+            {"Policy MM","Blocked"},
+            {"Not enough params","Blocked"},
+            {"Policy MM date","Blocked"},
+            {"Policy MM MD5","Blocked"},
+            {"Policy MM MD5 corrupt","Blocked"},
+            {"Policy MM size corrupt","Blocked"},
+            {"Policy MM size","Blocked"},
             {"Chain","Blocked"},
-            {"WLMM DLL MM","Blocked"},
-            {"WLMM DLL AMBG","Blocked"},
-            {"ChainBreak","Blocked"},
-            {"FAKE","Blocked"},
-            {"WFS","UNKNOWN"},
-            {"NotPD","UNKNOWN"},
-            {"Other","UNKNOWN"},
-            {"ERROR VAL","ERROR"},
-            {"POL","ERROR"}
+            {"Policy MM DLL MM","Blocked"},
+            {"Policy MM DLL ambiguity","Blocked"},
+            {"Chain block","Blocked"},
+            {"Fake localhost","Blocked"},
+            {"Network no check","Blocked"},
+            {"Wait for SUP","Unknown"},
+            {"NotPD","Unknown"},
+            {"Other","Unknown"},
+            {"Error val","Error"},
+            {"TCP MM","Error"},
+            {"UDP MM","Error"},
+            {"Path overflow","Error"},
+            {"Config exculuded", "Excluded"}
+
         };
 
         public static string Map(string reason)

@@ -26,61 +26,67 @@ namespace LogSender.Data
             switch (builder.ToString())
             {
                 case "0":
-                    _reason = "OK";
+                    _reason = "Ok";
                     break;
                 case "1":
-                    _reason = "NotWL";
+                    _reason = "Not in policy";
                     break;
                 case "2":
-                    _reason = "UNKNOWN";
+                    _reason = "Unknown";
                     break;
                 case "3":
-                    _reason = "POL";
+                    _reason = "Path overflow";
                     break;
                 case "5":
-                    _reason = "WLMM DATE";
+                    _reason = "Policy MM date";
                     break;
                 case "6":
-                    _reason = "WLMM SIZE";
+                    _reason = "Policy MM size";
                     break;
                 case "7":
-                    _reason = "WLMM MD5";
+                    _reason = "Policy MM MD5";
                     break;
                 case "8":
-                    _reason = "EXCLUDED";
+                    _reason = "Dropped";
                     break;
                 case "9":
-                    _reason = "FAKE";
+                    _reason = "Fake localhost";
                     break;
                 case "10":
-                    _reason = "CHAIN";
+                    _reason = "Chain";
                     break;
                 case "11":
-                    _reason = "WLMM MD5 COR";
+                    _reason = "Policy MM MD5 corrupt";
                     break;
                 case "12":
-                    _reason = "WLMM SIZE COR";
+                    _reason = "Policy MM size corrupt";
                     break;
                 case "13":
-                    _reason = "WFS";
+                    _reason = "Wait for SUP";
                     break;
                 case "14":
-                    _reason = "WLMM DLL MM";
+                    _reason = "Policy MM DLL MM";
                     break;
                 case "15":
-                    _reason = "WLMM DLL AMBG";
+                    _reason = "Policy MM DLL ambiguity";
                     break;
                 case "16":
-                    _reason = "WFS";
+                    _reason = "Wait for SUP";
                     break;
                 case "17":
-                    _reason = "ChainBreak";
+                    _reason = "Chain block";
                     break;
                 case "18":
                     _reason = "NotPD";
                     break;
+                case "19":
+                    _reason = "Error";
+                    break;
+                case "20":
+                    _reason = "Service MM";
+                    break;
                 default:
-                    _reason = "ERROR";
+                    _reason = "ErrorVal";
                     break;
             }
         }

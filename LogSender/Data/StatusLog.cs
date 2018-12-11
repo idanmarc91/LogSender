@@ -25,10 +25,10 @@
             switch (builder.ToString())
             {
                 case "1":
-                    _status = "OK";
+                    _status = "Ok";
                     break;
                 case "2":
-                    _status = "NotWL";
+                    _status = "Not in policy";
                     break;
                 case "3":
                     _status = "Exculuded";

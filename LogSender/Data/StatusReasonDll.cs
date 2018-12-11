@@ -1,7 +1,7 @@
 ﻿
 namespace LogSender.Data
 {
-    class ReasonDll : FileData
+    class StatusReasonDll : FileData
     {
         ///**********************************************
         ///             Members Section
@@ -26,40 +26,40 @@ namespace LogSender.Data
             switch (builder.ToString())
             {
                 case "0":
-                    _reason = "OK";
+                    _reason = "Ok";
                     break;
                 case "1":
-                    _reason = "NotWL";
+                    _reason = "Not in policy";
                     break;
                 case "2":
-                    _reason = "WLMM DATE";
+                    _reason = "Policy MM date";
                     break;
                 case "3":
-                    _reason = "WLMM SIZE";
+                    _reason = "Policy MM size";
                     break;
                 case "4":
-                    _reason = "WLMM MD5";
+                    _reason = "Policy MM MD5";
                     break;
                 case "5":
-                    _reason = "WLMM MD5 COR";
+                    _reason = "Policy MM MD5 corrupt";
                     break;
                 case "6":
-                    _reason = "WLMM SIZE COR";
+                    _reason = "Policy MM size corrupt";
                     break;
                 case "7":
-                    _reason = "WLMM DLL MM";
+                    _reason = "Policy MM DLL MM";
                     break;
                 case "8":
-                    _reason = "WLMM DLL AMBG";
+                    _reason = "Policy MM DLL ambiguity";
                     break;
                 case "9":
                     _reason = "Chain";
                     break;
                 case "10":
-                    _reason = "Error";
+                    _reason = "Flow error";
                     break;
                 case "11":
-                    _reason = "WFS";
+                    _reason = "Wait fot SUP";
                     break;
                 case "12":
                     _reason = "NoCheck";
@@ -68,9 +68,8 @@ namespace LogSender.Data
                     _reason = "Other";
                     break;
                 default:
-                    _reason = "ERROR VAL";
+                    _reason = "Error Val";
                     break;
-
             }
         }
 
