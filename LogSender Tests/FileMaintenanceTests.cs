@@ -3,7 +3,7 @@ using System.IO;
 using LogSender.Utilities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace UnitTestProject5
+namespace LogSender_Tests
 {
     [TestClass]
     public class FileMaintenanceTests

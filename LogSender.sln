@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogSender", "LogSender\LogS
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Service Installer", "Service Installer\Service Installer.vdproj", "{32C98975-CE7B-4AC3-9E20-081ABED4C7D9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogSender Tests", "UnitTestProject5\LogSender Tests.csproj", "{7C7F4D6D-63F1-4818-B8B0-169A55F312DD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogSender Tests", "LogSender Tests\LogSender Tests.csproj", "{7C7F4D6D-63F1-4818-B8B0-169A55F312DD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

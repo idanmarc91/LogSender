@@ -1,5 +1,5 @@
-﻿using BinaryFileToTextFile;
-using BinaryFileToTextFile.Models;
+﻿using LogSender;
+using LogSender.Models;
 using LogSender.Utilities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
@@ -38,7 +38,7 @@ namespace LogSender_Tests
                 headerParameters.ExtractData(data._headerArray);
 
                 //extract data from binary file
-                CybTable log = new CybTable(expandedFileByteArray, headerParameters._hostName.GetData(), headerParameters._serverClientDelta.GetData(), headerParameters._version.GetData());
+                CybTable log = new CybTable(expandedFileByteArray, headerParameters._reportingComputer.GetData(), headerParameters._serverClientDelta.GetData(), headerParameters._version.GetData());
 
                 log.ConvertRowsToCsvFormat();
 
@@ -80,7 +80,7 @@ namespace LogSender_Tests
                 headerParameters.ExtractData(data._headerArray);
 
                 //extract data from binary file
-                FsaTable log = new FsaTable(expandedFileByteArray, headerParameters._hostName.GetData(), headerParameters._serverClientDelta.GetData(), headerParameters._version.GetData());
+                FsaTable log = new FsaTable(expandedFileByteArray, headerParameters._reportingComputer.GetData(), headerParameters._serverClientDelta.GetData(), headerParameters._version.GetData());
 
                 log.ConvertRowsToCsvFormat();
 
@@ -122,7 +122,7 @@ namespace LogSender_Tests
                 headerParameters.ExtractData(data._headerArray);
 
                 //extract data from binary file
-                DLLTable log = new DLLTable(expandedFileByteArray, headerParameters._hostName.GetData(), headerParameters._serverClientDelta.GetData());
+                DLLTable log = new DLLTable(expandedFileByteArray, headerParameters._reportingComputer.GetData(), headerParameters._serverClientDelta.GetData());
 
                 log.ConvertRowsToCsvFormat();
 
@@ -164,7 +164,7 @@ namespace LogSender_Tests
                 headerParameters.ExtractData(data._headerArray);
 
                 //extract data from binary file
-                MogTable log = new MogTable(expandedFileByteArray, headerParameters._hostName.GetData(), headerParameters._serverClientDelta.GetData(), headerParameters._version.GetData());
+                MogTable log = new MogTable(expandedFileByteArray, headerParameters._reportingComputer.GetData(), headerParameters._serverClientDelta.GetData(), headerParameters._version.GetData());
 
                 log.ConvertRowsToCsvFormat();
 
