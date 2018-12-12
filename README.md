@@ -37,7 +37,7 @@ To install a production ready application you can follow the [Dev Installing](#d
 
 See vestion notes [Version notes Google docs](https://docs.google.com/document/u/1/d/15fN9bL6YFy0ZJIrxfmFL691V4POe_7zb4SqEcy7h5pk/edit?usp=drive_web&ouid=107850385867994278819) 
 
-## Documantaion
+## Documentaion
 
 [link to SRS\SDD\Project Docs in Google Drive](https://drive.google.com/drive/u/1/folders/1vfT1gL1AlZhlDlGf4ZXBqHlhSjwlgPEK)
 
