@@ -11,7 +11,7 @@ See deployment for notes on how to deploy the project on a live system.
 
 ### Prerequisites
 
-* Visual studio
+* Visual studio 2017
 * log4net
 * newtonsoft.Json
 * Cyber 2.0 managment server for logs receiving
