@@ -64,50 +64,46 @@ namespace LogSender.Utilities
         /// </summary>
         /// <param name="hostIp"></param>
         /// <returns>true if online, false if offline</returns>
-        public static async Task<bool> IsServerAliveAsync(string hostIp)
+        public static async Task<bool> IsServerAliveAsync()
         {
             try
             {
-                log.Debug("check if server (" + hostIp + ") is alive");
+                log.Debug("check if server (" + ConfigFile.Instance._configData._hostIp + ") is alive");
 
                 using (HttpClient client = new HttpClient())
                 {
-                    using (HttpResponseMessage response = await client.GetAsync(hostIp + "/ping"))
+                    using (HttpResponseMessage response = await client.GetAsync(ConfigFile.Instance._configData._hostIp + "/ping"))
                     {
-                        log.Info("The server (" + hostIp + ") is online");
+                        log.Info("The server (" + ConfigFile.Instance._configData._hostIp + ") is online");
                         return true;
                     }
                 }
             }
             catch (Exception ex)
             {
-                log.Error("The server (" + hostIp + ") is offline");
+                log.Error("The server (" + ConfigFile.Instance._configData._hostIp + ") is offline");
                 return false;
             }
-            finally
-            {
-                log.Debug("exit serverIsAlive function");
-            }
         }
+
 
         /// <summary>
         /// This function is responsible for server connection logic.
         /// if the sending process fail this function will manage the delay and resend process 
         /// depent on the configuration file data
         /// </summary>
-        /// <param name="retry"></param>
-        /// <param name="hostIp"></param>
         /// <param name="compressedData"></param>
         /// <returns></returns>
-        public async Task<bool> ServerManagerAsync(int retry, string hostIp, int delayTime, MemoryStream compressedData)
+        public async Task<bool> ServerManagerAsync(MemoryStream compressedData)
         {
+            int retry = ConfigFile.Instance._configData._numberOfTimesToRetry;
             while (retry != 0)//retry loop
             {
-                if (await SendDataToServerAsync(hostIp, compressedData))
+                if (await SendDataToServerAsync(ConfigFile.Instance._configData._hostIp, compressedData))
                 {
                     return true;//when file sent sucessfuly exit while loop
                 }
-                await Task.Delay(delayTime);
+                await Task.Delay(ConfigFile.Instance._configData._waitTimeBeforeRetry);
                 retry--;
             }
             return false;

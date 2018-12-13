@@ -11,7 +11,7 @@ namespace LogSender.Data
         public int _minNumOfFilesToSend { get; set; }
         public int _numberOfTimesToRetry { get; set; }
         public int _waitTimeBeforeRetry { get; set; } //in milliseconds
-        public long _maxBinaryFolderSize { get; set; }
+        public long _binaryFolderMaxSize { get; set; }
         public string _fsaFolderPath { get; set; }
         public string _cybFolderPath { get; set; }
         public string _mogFolderPath { get; set; }

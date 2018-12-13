@@ -1,9 +1,0 @@
-C:\Users\idanm\source\repos\LogSender\LogSender\bin\Release\LogSender.exe.config
-C:\Users\idanm\source\repos\LogSender\LogSender\bin\Release\LogSender.exe
-C:\Users\idanm\source\repos\LogSender\LogSender\bin\Release\LogSender.pdb
-C:\Users\idanm\source\repos\LogSender\LogSender\obj\Release\LogSender.ProjectInstaller.resources
-C:\Users\idanm\source\repos\LogSender\LogSender\obj\Release\LogSender.csproj.GenerateResource.cache
-C:\Users\idanm\source\repos\LogSender\LogSender\obj\Release\LogSender.csproj.CoreCompileInputs.cache
-C:\Users\idanm\source\repos\LogSender\LogSender\obj\Release\LogSender.exe
-C:\Users\idanm\source\repos\LogSender\LogSender\obj\Release\LogSender.pdb
-C:\Users\idanm\source\repos\LogSender\LogSender\obj\Release\LogSender.csprojAssemblyReference.cache

@@ -18,29 +18,27 @@ namespace LogSender.Utilities
         /// </summary>
         /// <param name="dir"></param>
         /// <returns>true if sending process should begin else false</returns>
-        public static bool IsFolderReadyToSendWatcher(KeyValuePair<string, DirectoryInfo> dir, long binaryFileMaxSize, int minNumOfFilesToSend, long maxBinaryFolderSize)
+        public static bool IsFolderReadyToSendWatcher(KeyValuePair<string, DirectoryInfo> dir)
         {
             try
             {
-                log.Debug("Watching \'" + dir.Value.Name + "\' folder");
+                log.Info("Watching \'" + dir.Value.Name + "\' folder");
 
-                if (FolderSizeWatcher(dir, maxBinaryFolderSize))
+                if (FolderSizeWatcher(dir))
                 {
                     //folder size exceeded delete old files
-                    FileMaintenance.DeleteOldFiles(dir.Value, maxBinaryFolderSize);
+                    FileMaintenance.DeleteOldFiles(dir);
                 }
 
-                if (dir.Value.EnumerateFiles("*." + dir.Key)
-                             .Where(file => (file.Length <= binaryFileMaxSize) && (file.Length > 0))
-                             .ToArray()
-                             .Length >= minNumOfFilesToSend)
+                if (FileSorting.GetAllFilesByConfigSettings(dir)
+                               .Length >= ConfigFile.Instance._configData._minNumOfFilesToSend)
                 {
-                    log.Debug("There are files to send in " + dir.Value.Name + " folder");
+                    log.Info("There are files to send in " + dir.Value.Name + " folder");
                     return true;
                 }
                 else
                 {
-                    log.Debug("There are not enough files to send in " + dir.Value.Name + " folder");
+                    log.Info("There are not enough files that pass configuration settings in " + dir.Value.Name + " folder");
                     return false;
                 }
             }
@@ -52,12 +50,13 @@ namespace LogSender.Utilities
         }
 
         /// <summary>
-        /// This function maintaine folder when server is offline 
+        /// This function maintaine folder when server is offline
+        /// the function check if the folder size is bigger or smaller then "_maxBinaryFolderSize" set in config file
         /// </summary>
         /// <param name="dir"></param>
         /// <param name="maxBinaryFolderSize"></param>
         /// <returns>true if folder need maintenance false if not</returns>
-        public static bool FolderSizeWatcher(KeyValuePair<string, DirectoryInfo> dir, long maxBinaryFolderSize)
+        public static bool FolderSizeWatcher(KeyValuePair<string, DirectoryInfo> dir)
         {
             try
             {
@@ -65,12 +64,12 @@ namespace LogSender.Utilities
 
                 long lenght = FileMaintenance.DirSize(dir.Value.GetFiles());
 
-                if (lenght > maxBinaryFolderSize)
+                if (lenght > ConfigFile.Instance._configData._binaryFolderMaxSize)
                 {
                     log.Error("The binary folder " + dir.Value.Name + " has reached size limit");
                     return true;
                 }
-                log.Debug("Folder size is " + lenght + " within the limit (" + maxBinaryFolderSize + " bytes)");
+                log.Debug("Folder size is " + lenght + " within the limit (" + ConfigFile.Instance._configData._binaryFolderMaxSize + " bytes)");
 
                 return false;
             }

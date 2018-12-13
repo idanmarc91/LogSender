@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LogSender.Utilities;
+using System;
 using System.ComponentModel;
 using System.Configuration.Install;
 using System.Diagnostics;
@@ -39,7 +40,10 @@ namespace LogSender
                 throw new InvalidOperationException();
             }
 
-            //start the service right afte installation process complete
+            //create config file
+            ConfigFile cnf = ConfigFile.Instance;
+
+            //start the service right after installation process complete
             new ServiceController(serviceInstaller1.ServiceName).Start();
         }
 

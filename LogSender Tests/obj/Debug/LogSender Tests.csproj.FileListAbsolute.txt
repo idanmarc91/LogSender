@@ -1,7 +1,3 @@
-C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\obj\Debug\LogSender Tests.csprojAssemblyReference.cache
-C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\obj\Debug\LogSender Tests.csproj.CoreCompileInputs.cache
-C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\obj\Debug\UnitTestProject5.dll
-C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\obj\Debug\UnitTestProject5.pdb
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
@@ -26,4 +22,8 @@ C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\bin\Debug\log4net.xml
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\bin\Debug\Newtonsoft.Json.xml
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\bin\Debug\ServiceStack.Text.xml
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\bin\Debug\System.Memory.xml
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\obj\Debug\LogSender Tests.csprojAssemblyReference.cache
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\obj\Debug\LogSender Tests.csproj.CoreCompileInputs.cache
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\obj\Debug\LogSender Tests.csproj.CopyComplete
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\obj\Debug\UnitTestProject5.dll
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\obj\Debug\UnitTestProject5.pdb

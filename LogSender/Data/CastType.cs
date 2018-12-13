@@ -1,6 +1,9 @@
-﻿namespace LogSender.Data
+﻿using System;
+using System.Net;
+
+namespace LogSender.Data
 {
-    class CastType :FileData
+    class CastType : FileData
     {
         ///**********************************************
         ///             Members Section
@@ -51,6 +54,46 @@
         public override void SetData(string xCast)
         {
             _castType = xCast;
+        }
+
+        /// <summary>
+        /// The agent provide us with not accurate data about the cast type so we calculate it from
+        /// the destination ip addres
+        /// </summary>
+        /// <param name="destIpAddress"></param>
+        internal static void CalcTypeFromDestIp(string destIpAddress)
+        {
+            try
+            {
+                IPAddress address;
+
+                //check if ip address is IPV6 or IPV4
+                if (IPAddress.TryParse(destIpAddress, out address))
+                {
+                    switch (address.AddressFamily)
+                    {
+                        case System.Net.Sockets.AddressFamily.InterNetwork:
+                            IsIpMulticast(destIpAddress);
+                            break;
+
+                        case System.Net.Sockets.AddressFamily.InterNetworkV6:
+                            break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        public static bool IsIpMulticast(string ip)
+        {
+            string[] ipArr = ip.Split('.');
+            int i = int.Parse(ipArr[0]);
+
+            return (i >= 224 && i <= 239) ? true : false;
+
         }
     }
 }

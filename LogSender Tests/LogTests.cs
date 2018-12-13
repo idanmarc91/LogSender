@@ -47,6 +47,11 @@ namespace LogSender_Tests
                 test.Append(log.GetDataAsString());
 
                 jsonTest = JsonDataConvertion.JsonSerialization(test);
+
+                //**  USE ONLY WHEN OUTPUT IS CHANGE **
+                //for creating new output file
+                //File.WriteAllText(@"C:\Users\idanm\Desktop\cyb.txt", jsonTest);
+
             }
 
             //Assert
@@ -89,6 +94,11 @@ namespace LogSender_Tests
                 test.Append(log.GetDataAsString());
 
                 jsonTest = JsonDataConvertion.JsonSerialization(test);
+
+                //**  USE ONLY WHEN OUTPUT IS CHANGE **
+                //for creating new output file
+                //File.WriteAllText(@"C:\Users\idanm\Desktop\fsa.txt", jsonTest);
+
             }
 
             //Assert
@@ -131,6 +141,11 @@ namespace LogSender_Tests
                 test.Append(log.GetDataAsString());
 
                 jsonTest = JsonDataConvertion.JsonSerialization(test);
+
+                //**  USE ONLY WHEN OUTPUT IS CHANGE **
+                //for creating new output file
+                //File.WriteAllText(@"C:\Users\idanm\Desktop\cimg.txt", jsonTest);
+
             }
 
             //Assert
@@ -173,6 +188,11 @@ namespace LogSender_Tests
                 test.Append(log.GetDataAsString());
 
                 jsonTest = JsonDataConvertion.JsonSerialization(test);
+
+                //**  USE ONLY WHEN OUTPUT IS CHANGE **
+                //for creating new output file
+                //File.WriteAllText(@"C:\Users\idanm\Desktop\mog.txt", jsonTest);
+
             }
 
             //Assert

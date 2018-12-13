@@ -6,18 +6,35 @@ namespace LogSender.Utilities
     public class ConfigFile
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger("ConfigFile.cs");
+        private static ConfigFile instance;
 
-        public ConfigData _configData = new ConfigData();
+        public readonly ConfigData _configData;
 
+
+        ///**********************************************
+        ///             Functions Section
+        ///**********************************************
 
         /// <summary>
-        /// This function read from configuration data
+        /// This function create the Config file as a singletone, the ConfigFile instance is accessible through this function
         /// </summary>
-        /// <returns>bool - true if config file reading process succeded </returns>
-        public bool ReadConfigFile()
+        public static ConfigFile Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new ConfigFile();
+                }
+                return instance;
+            }
+        }
+
+        private ConfigFile()
         {
             try
             {
+                _configData = new ConfigData();
                 string path = AppDomain.CurrentDomain.BaseDirectory;
 
                 //create config file if not exist
@@ -31,8 +48,25 @@ namespace LogSender.Utilities
                     log.Debug("Log Sender Configuration file exist");
                 }
 
-                int startOffset;
+                ReadConfigFile(path);
+            }
+            catch (Exception ex)
+            {
+                log.Fatal("config file create or read fail. service cannot start", ex);
+                System.Threading.Thread.CurrentThread.Abort();
+            }
+        }
 
+        /// <summary>
+        /// This function read from configuration data
+        /// </summary>
+        /// <returns>bool - true if config file reading process succeded </returns>
+        public void ReadConfigFile(string path)
+        {
+            try
+            {
+                int startOffset;
+                bool hostFromAgent = false;
                 #region Read from LogSender config file
 
                 //Read Log Sender Configuration file
@@ -193,6 +227,31 @@ namespace LogSender.Utilities
                             _configData._hostPort = ""; // default host port
                         }
                     }
+                    if (line.Contains("host_ip="))
+                    {
+                        try
+                        {
+                            startOffset = 8;
+                            if (line.Contains("#"))
+                            {
+                                _configData._hostIp = line.Substring(startOffset, line.IndexOf('#') - startOffset).Trim();
+                            }
+                            else
+                            {
+                                _configData._hostIp = line.Substring(startOffset, line.Length - startOffset);
+                            }
+
+                            if(String.IsNullOrEmpty(_configData._hostIp))
+                            {
+                                hostFromAgent = true;
+                            }
+
+                        }
+                        catch (Exception)
+                        {
+                            _configData._hostIp = ""; // default host port
+                        }
+                    }
                     if (line.Contains("max_binary_folder_size="))
                     {
                         try
@@ -200,16 +259,16 @@ namespace LogSender.Utilities
                             startOffset = 23;
                             if (line.Contains("#"))
                             {
-                                _configData._maxBinaryFolderSize = long.Parse(line.Substring(startOffset, line.IndexOf('#') - startOffset).Trim());
+                                _configData._binaryFolderMaxSize = long.Parse(line.Substring(startOffset, line.IndexOf('#') - startOffset).Trim());
                             }
                             else
                             {
-                                _configData._maxBinaryFolderSize = long.Parse(line.Substring(startOffset, line.Length - startOffset));
+                                _configData._binaryFolderMaxSize = long.Parse(line.Substring(startOffset, line.Length - startOffset));
                             }
                         }
                         catch (Exception)
                         {
-                            _configData._maxBinaryFolderSize = 104857600;
+                            _configData._binaryFolderMaxSize = 104857600;
                         }
                     }
                     if (line.Contains("minimum_number_of_file_to_send="))
@@ -273,45 +332,41 @@ namespace LogSender.Utilities
                 #endregion
 
 
-#if DEBUG
-                _configData._hostIp = "http://10.0.0.40:8080";
-#else
-                #region Read from Agent config file
-
-                log.Info("reading host ip from Agent config file");
-
-                string[] AgentCfgFile = System.IO.File.ReadAllLines(path + @"\..\Config.cfg");
-                string tempIp;
-                foreach (string line in AgentCfgFile)
+                if (hostFromAgent)
                 {
-                    if (line.Contains("host="))
-                    {
-                        startOffset = 5;
+                    log.Info("reading host ip from Agent config file");
 
-                        if (line.Contains("#"))
+                    string[] AgentCfgFile = System.IO.File.ReadAllLines(path + @"\..\Config.cfg");
+                    string tempIp;
+                    foreach (string line in AgentCfgFile)
+                    {
+                        if (line.Contains("host="))
                         {
-                            tempIp = line.Substring(startOffset, line.IndexOf('#') - startOffset).Trim();
+                            startOffset = 5;
+
+                            if (line.Contains("#"))
+                            {
+                                tempIp = line.Substring(startOffset, line.IndexOf('#') - startOffset).Trim();
+                            }
+                            else
+                            {
+                                tempIp = line.Substring(startOffset, line.Length - startOffset);
+                            }
+                            _configData._hostIp = "http://" + tempIp + ":" + _configData._hostPort;
                         }
-                        else
-                        {
-                            tempIp = line.Substring(startOffset, line.Length - startOffset);
-                        }
-                        _configData._hostIp = "http://" + tempIp + ":" + _configData._hostPort;
                     }
                 }
-                #endregion
-                if (_configData._hostIp == string.Empty)
+                else //assmble ip adress from log sender config file with port number
+                {
+                    _configData._hostIp = "http://" + _configData._hostIp + ":" + _configData._hostPort;
+                }
+
+                if (String.IsNullOrEmpty(_configData._hostIp))
                     log.Error("No host ip");
-
-#endif
-
-
-                return true;
             }
             catch (Exception ex)
             {
                 log.Fatal("Fatal error config file in creation or reading process", ex);
-                return false;
             }
         }
 
@@ -358,6 +413,8 @@ namespace LogSender.Utilities
             strConfig += "sleep_time_cycle=60000 #every 'value' milliseconds the log sender will check the log folders for new files" + Environment.NewLine + Environment.NewLine;
 
             strConfig += "host_port=8080 #The server port number" + Environment.NewLine + Environment.NewLine;
+
+            strConfig += "host_ip=10.0.0.40 #The server IP number. if this field is empty the ip is taken from Agent config" + Environment.NewLine + Environment.NewLine;
 
             strConfig += "minimum_number_of_file_to_send=2 #The minimum number of binary files in a folder to start sending process (sending trigger)" + Environment.NewLine + Environment.NewLine;
 

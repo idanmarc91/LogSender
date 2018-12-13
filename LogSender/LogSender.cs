@@ -19,7 +19,7 @@ namespace LogSender
         private readonly List<KeyValuePair<string, DirectoryInfo>> _directory;
 
         //Data from config file
-        private readonly ConfigFile _configFile = new ConfigFile();
+        private readonly ConfigFile _configFile = ConfigFile.Instance;
 
         ///**********************************************
         ///             Functions Section
@@ -33,17 +33,17 @@ namespace LogSender
 
             log.Debug("Start creating log sender class");
 
-            if (!_configFile.ReadConfigFile())
-            {
-                throw new Exception("Problem with config files");
-            }
+            //if (!_configFile.ReadConfigFile())
+            //{
+            //    throw new Exception("Problem with config files");
+            //}
 
             _directory = new List<KeyValuePair<string, DirectoryInfo>>
             {
-                //new KeyValuePair<string , DirectoryInfo>( "cyb" , new DirectoryInfo( _configFile._configData._cybFolderPath ) ) ,
-                //new KeyValuePair<string , DirectoryInfo>( "fsa" , new DirectoryInfo( _configFile._configData._fsaFolderPath) ) ,
-                //new KeyValuePair<string , DirectoryInfo>( "cimg" , new DirectoryInfo( _configFile._configData._cimgFolderPath ) ) ,
-                new KeyValuePair<string , DirectoryInfo>( "mog" , new DirectoryInfo( _configFile._configData._mogFolderPath) )
+                new KeyValuePair<string , DirectoryInfo>( "cyb" , new DirectoryInfo( ConfigFile.Instance._configData._cybFolderPath ) ) ,
+                new KeyValuePair<string , DirectoryInfo>( "fsa" , new DirectoryInfo( ConfigFile.Instance._configData._fsaFolderPath) ) ,
+                new KeyValuePair<string , DirectoryInfo>( "cimg" , new DirectoryInfo( ConfigFile.Instance._configData._cimgFolderPath ) ) ,
+                new KeyValuePair<string , DirectoryInfo>( "mog" , new DirectoryInfo( ConfigFile.Instance._configData._mogFolderPath) )
             };
             log.Debug("log sender class created");
 
@@ -54,62 +54,59 @@ namespace LogSender
         /// </summary>
         public async void RunService()
         {
-
             log.Debug("Main Service thread started");
 
-            List<Task> taskList = new List<Task>();
+            while (true) //main service loop
+            {
+                //check if server is online
+                if (await ServerConnection.IsServerAliveAsync()) 
+                {
+                    OnlineProcessLogFolders();
+                }
+                //server is offline
+                else
+                {
+                    OfflineProcessLogFolders();
+                }
+
+                log.Debug("Main thread going to sleep for " + ConfigFile.Instance._configData._threadSleepTime / 1000 + " seconds");
+                Thread.Sleep(ConfigFile.Instance._configData._threadSleepTime);
+                log.Debug("Main thread wake's up, starting new iteration");
+            }
+        }
+
+        /// <summary>
+        /// This function is processing the log folders when server is online
+        /// </summary>
+        private void OnlineProcessLogFolders()
+        {
             try
             {
-                while (true) //main service loop
+                List<Task> taskList = new List<Task>();
+
+                foreach (KeyValuePair<string, DirectoryInfo> dir in _directory)//run on all log directories
                 {
-                    if (await ServerConnection.IsServerAliveAsync(_configFile._configData._hostIp)) //check if server is online
+                    FileMaintenance.ZeroSizeFileCleanup(dir.Value);
+                    /* PREF: Task created for each folder */
+                    //check folder status
+                    if (FolderWatcher.IsFolderReadyToSendWatcher(dir))
                     {
-                        foreach (KeyValuePair<string, DirectoryInfo> dir in _directory)//run on all log directories
-                        {
-                            FileMaintenance.ZeroSizeFileCleanup(dir.Value.GetFiles());
-                            /* PREF: Task created for each folder */
-                            //check folder status
-                            if (FolderWatcher
-                                .IsFolderReadyToSendWatcher(dir,
-                                                            _configFile._configData._binaryFileMaxSize,
-                                                            _configFile._configData._minNumOfFilesToSend,
-                                                            _configFile._configData._maxBinaryFolderSize))
-                            {
-                                log.Debug("Sending process can begin, creating sending process Task for " + dir.Value.Name + " log folder");
+                        log.Debug("Sending process can begin, creating sending process Task for " + dir.Value.Name + " log folder");
 
-                                //create task for the current folder
-                                taskList.Add(Task.Run(() => SendLogsAsync(dir)));
+                        //create task for the current folder
+                        taskList.Add(Task.Run(() => SendFolderLogsAsync(dir)));
 
-                                log.Debug("Task created for " + dir.Value.Name + " folder and started his operation");
-                            }
-                        }
-                        /*PREF: the program is not really parallel because main threasis wating - wating for the folders to be updated - if not updated th log sender can send the same log to the server.*/
-                        log.Debug("Main thread is wating for all task to finish there operation");
-                        Task.WaitAll(taskList.ToArray());
-
-                        taskList.Clear();
-                        log.Debug("Task list deleted, main loop has finished the current iteration, going to sleep");
+                        log.Debug("Task created for " + dir.Value.Name + " folder and started his operation");
                     }
-                    else //server is offline
-                    {
-                        foreach (KeyValuePair<string, DirectoryInfo> dir in _directory)
-                        {
-                            if (FolderWatcher.FolderSizeWatcher(dir, _configFile._configData._maxBinaryFolderSize))
-                            {
-                                //folder size exceeded delete old files
-                                FileMaintenance.DeleteOldFiles(dir.Value, _configFile._configData._maxBinaryFolderSize);
-                            }
-                        }
-                        log.Debug("Folder managment finished, main loop has finished the current iteration, going to sleep");
-                    }
-
-                    log.Debug("Main thread going to sleep for " + _configFile._configData._threadSleepTime / 1000 + " seconds");
-                    Thread.Sleep(_configFile._configData._threadSleepTime);
-                    log.Debug("Main thread wake's up, starting new iteration");
                 }
-            }
+                /*PREF: the program is not really parallel because main threasis wating - wating for the folders to be updated - if not updated th log sender can send the same log to the server.*/
+                log.Debug("Main thread is wating for all task to finish there operation");
+                Task.WaitAll(taskList.ToArray());
 
-            catch (Exception ex)
+                taskList.Clear();
+                log.Debug("Task list deleted, main loop has finished the current iteration, going to sleep");
+            }
+            catch(Exception ex)
             {
                 log.Fatal("Problem in thread creation", ex);
                 Thread.CurrentThread.Abort();
@@ -117,10 +114,35 @@ namespace LogSender
         }
 
         /// <summary>
+        /// This function is processing the log folders when server is offline
+        /// </summary>
+        private void OfflineProcessLogFolders()
+        {
+            try
+            {
+                foreach (KeyValuePair<string, DirectoryInfo> dir in _directory)
+                {
+                    FileMaintenance.ZeroSizeFileCleanup(dir.Value);
+                    if (FolderWatcher.FolderSizeWatcher(dir))
+                    {
+                        //folder size exceeded delete old files
+                        FileMaintenance.DeleteOldFiles(dir);
+                    }
+                }
+                log.Debug("Folder managment finished, main loop has finished the current iteration, going to sleep");
+            }
+            catch(Exception ex)
+            {
+                log.Error("Error occured in log folders offline process" ,ex);
+            }
+        }
+
+
+        /// <summary>
         /// Main thread function
         /// </summary>
         /// <param name="dir"></param>
-        private async Task SendLogsAsync(KeyValuePair<string, DirectoryInfo> dir)
+        private async Task SendFolderLogsAsync(KeyValuePair<string, DirectoryInfo> dir)
         {
             try
             {
@@ -130,7 +152,7 @@ namespace LogSender
                 StringBuilder dataAsString = new StringBuilder();
 
                 //Start the parsing process on the folder
-                List<FileInfo> listOfFileToDelete = ParsingBinaryFile.ParseFolder(dataAsString, dir, _configFile._configData._jsonDataMaxSize);
+                List<FileInfo> listOfFileToDelete = ParsingBinaryFile.ParseFolder(dataAsString, dir);
 
                 log.Debug("Json serialazation for " + dir.Value.Name + " files started");
 
@@ -146,16 +168,13 @@ namespace LogSender
                 ServerConnection serverConnection = new ServerConnection();
 
                 if (serverConnection.
-                    ServerManagerAsync(_configFile._configData._numberOfTimesToRetry,
-                                       _configFile._configData._hostIp,
-                                       _configFile._configData._waitTimeBeforeRetry,
-                                       compressedData)
+                    ServerManagerAsync(compressedData)
                     .Result)
                 {
                     log.Info("Log sender sent " + listOfFileToDelete.Count + " files to the server and the server recived them");
 
                     log.Debug("Begin deleteing the files that was sent to the server");
-                    //FileMaintenance.FileDelete(listOfFileToDelete);
+                    FileMaintenance.FileDelete(listOfFileToDelete);
                 }
                 else
                 {

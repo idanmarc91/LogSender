@@ -3,6 +3,7 @@ using LogSender.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace LogSender.Utilities
@@ -133,10 +134,9 @@ namespace LogSender.Utilities
         /// <param name="files"></param>
         /// <returns>list<fileifno> - files that was finish parsing process and should be deleted</returns>
         public static List<FileInfo> ParseFolder(StringBuilder dataAsString,
-                                                 KeyValuePair<string, DirectoryInfo> dir,
-                                                 long configJsonMaxDataSize)
+                                                 KeyValuePair<string, DirectoryInfo> directory)
         {
-            log.Debug(dir.Value.Name + "folder started his parsing process");
+            log.Debug(directory.Value.Name + "folder started his parsing process");
 
             //add csv format data headers line
             AddOutputHeader(dataAsString);
@@ -145,7 +145,7 @@ namespace LogSender.Utilities
             List<FileInfo> listOfFileToDelete = new List<FileInfo>();
 
             //loop on files in folder
-            foreach (FileInfo file in dir.Value.GetFiles())
+            foreach (FileInfo file in FileSorting.GetAllFilesByConfigSettings(directory))
             {
                 try
                 {
@@ -156,7 +156,7 @@ namespace LogSender.Utilities
                     }
 
                     //parsing oparation
-                    Table logTable = ParsingBinaryFile.Parse(file, dir.Key);
+                    Table logTable = ParsingBinaryFile.Parse(file, directory.Key);
 
                     if (logTable == null)
                     {
@@ -168,7 +168,7 @@ namespace LogSender.Utilities
 
                     //Check if the current table will not cause size limit (configurable)
                     //if dataAsString reached size limit stop parsing the folder and send the data
-                    if (dataAsString.Length + logTable.GetDataSize() < configJsonMaxDataSize || listOfFileToDelete.Count == 0)
+                    if (dataAsString.Length + logTable.GetDataSize() < ConfigFile.Instance._configData._jsonDataMaxSize || listOfFileToDelete.Count == 0)
                     {
                         dataAsString.Append(logTable.GetDataAsString());
                     }
@@ -185,7 +185,7 @@ namespace LogSender.Utilities
                     log.Error("Problem While trying to read file -" + file.Name, ex);
                 }
             }
-            log.Debug(dir.Value.Name + "folder finished his parsing process");
+            log.Debug(directory.Value.Name + "folder finished his parsing process");
 
             return listOfFileToDelete;
         }

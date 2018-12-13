@@ -103,6 +103,10 @@ namespace LogSender.Models
             {
                 SetEmptyString();
             }
+
+            //DEPT
+            //The agent provide us with not accurate cast type so we calculate it manually by the destenation ip
+            //CastType.CalcTypeFromDestIp(_fileExtractData[(int)_fileExtractDataIndexs.DESTINATION_IP].GetData());
         }
 
         /// <summary>

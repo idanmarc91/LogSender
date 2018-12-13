@@ -94,23 +94,24 @@ namespace LogSender.Utilities
         /// This function cleanup the empty log files from a directory
         /// </summary>
         /// <param name="fileArray"></param>
-        public static void ZeroSizeFileCleanup(FileInfo[] fileArray)
+        public static void ZeroSizeFileCleanup(DirectoryInfo directory)
         {
             try
             {
-                foreach (FileInfo file in fileArray)
+                log.Debug("Cleaning all zero size files in " + directory.Name + " directory");
+                foreach (FileInfo file in directory.GetFiles())
                 {
-                    //cannot access file- cant add his vale to counter
-                    if (IsFileLocked(file))
-                    {
-                        continue;
-                    }
+                    ////cannot access file- cant add his vale to counter
+                    //if (IsFileLocked(file))
+                    //{
+                    //    continue;
+                    //}
 
                     //delete file with zero size
-                    if (file.Length == 0)
+                    if (file.Length == 0 && !IsFileLocked(file))
                     {
                         file.Delete();
-                        continue;
+                        //continue;
                     }
                 }
             }
@@ -126,23 +127,32 @@ namespace LogSender.Utilities
         /// </summary>
         /// <param name="dir"></param>
         /// <param name="binaryFileMaxSize"></param>
-        public static void DeleteOldFiles(DirectoryInfo dir, long binaryFileMaxSize)
+        public static void DeleteOldFiles(KeyValuePair<string, DirectoryInfo> dir)
         {
-            log.Debug(dir.Name + " Folder size exceeded starting delete old file");
-
-            FileInfo[] files = dir.GetFiles().OrderByDescending(p => p.CreationTime).ToArray();
-
-            //if directory size is bigger then the limit configure in the config file
-            if (FileMaintenance.DirSize(dir.GetFiles()) > binaryFileMaxSize)
+            try
             {
-                foreach(FileInfo file in files)
+                log.Debug(dir.Value.Name + " Folder size exceeded starting delete old file");
+
+                //get all files by date. first one in the array is the oldes
+                FileInfo[] files = dir.Value.GetFiles().OrderBy(f => f.CreationTime).ToArray();
+
+                foreach (FileInfo file in files)
                 {
                     if (IsFileLocked(file))
                     {
                         continue;
                     }
                     file.Delete();
+
+                    if (!FolderWatcher.FolderSizeWatcher(dir))
+                    {
+                        break;
+                    }
                 }
+            }
+            catch(Exception ex)
+            {
+                log.Error("Problem occured while trying to delete old log file", ex);
             }
         }
     }
