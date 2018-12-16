@@ -1,9 +1,7 @@
-﻿using LogSender;
-using LogSender.Models;
+﻿using LogSender.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
 
 namespace LogSender.Utilities
@@ -17,7 +15,7 @@ namespace LogSender.Utilities
         private static readonly List<string> _csvHeader = new List<string>
         {
             "os",
-            "reported_computer",
+            "reporting_computer",
             "client_time" ,
             "full_server_time" ,
             "process_id" ,
@@ -82,6 +80,7 @@ namespace LogSender.Utilities
                             break;
 
                         case "fsa":
+                            string sourceIP = ServerConnection.GetLocalIPAddress();
                             logTable = new FsaTable(expandedFileByteArray, headerParameters._reportingComputer.GetData(), headerParameters._serverClientDelta.GetData(), headerParameters._version.GetData());
                             break;
 

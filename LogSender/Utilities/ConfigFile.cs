@@ -414,7 +414,7 @@ namespace LogSender.Utilities
 
             strConfig += "host_port=8080 #The server port number" + Environment.NewLine + Environment.NewLine;
 
-            strConfig += "host_ip=10.0.0.40 #The server IP number. if this field is empty the ip is taken from Agent config" + Environment.NewLine + Environment.NewLine;
+            strConfig += "host_ip=#The server IP number. if this field is empty the ip is taken from Agent config" + Environment.NewLine + Environment.NewLine;
 
             strConfig += "minimum_number_of_file_to_send=2 #The minimum number of binary files in a folder to start sending process (sending trigger)" + Environment.NewLine + Environment.NewLine;
 

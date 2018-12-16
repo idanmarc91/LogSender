@@ -30,7 +30,7 @@ namespace LogSender.Models
         /// <param name="rowNumber"></param>
         public DLLRow(Int64 serverClientDelta, string reportingComputer)
         {
-            _timeStamp = new TimeStamp( serverClientDelta );
+            _timeStamp = new TimeStamp(serverClientDelta);
             _reportingComputer = reportingComputer;
             _fileExtractData = new List<FileData>
             {
@@ -48,24 +48,24 @@ namespace LogSender.Models
         /// </summary>
         /// <param name="loopIndex"></param>
         /// <param name="expandedFileByteArray"></param>
-        public void ExtractData(int loopIndex , byte[] expandedFileByteArray)
+        public void ExtractData(int loopIndex, byte[] expandedFileByteArray)
         {
             int fileIndex = 0;
-            _timeStamp.ExtractData( loopIndex , expandedFileByteArray , ref fileIndex );
+            _timeStamp.ExtractData(loopIndex, expandedFileByteArray, ref fileIndex);
 
-            for( int index = 0 ; index < _fileExtractData.Count ; index++ )
+            for (int index = 0; index < _fileExtractData.Count; index++)
             {
-                if( index == ( int ) _fileExtractDataIndexs.DLL_NAME )
+                if (index == (int)_fileExtractDataIndexs.DLL_NAME)
                 {
-                    _fileExtractData[index] = new DllName( _fileExtractData[( int ) _fileExtractDataIndexs.DLL_PATH].GetData() );
+                    _fileExtractData[index] = new DllName(_fileExtractData[(int)_fileExtractDataIndexs.DLL_PATH].GetData());
                 }
-                else if( index == ( int ) _fileExtractDataIndexs.PARENT_NAME )
+                else if (index == (int)_fileExtractDataIndexs.PARENT_NAME)
                 {
-                    _fileExtractData[index] = new ParentName( _fileExtractData[( int ) _fileExtractDataIndexs.PARENT_PATH].GetData() );
+                    _fileExtractData[index] = new ParentName(_fileExtractData[(int)_fileExtractDataIndexs.PARENT_PATH].GetData());
                 }
                 else
                 {
-                    _fileExtractData[index].ExtractData( loopIndex , expandedFileByteArray , ref fileIndex );
+                    _fileExtractData[index].ExtractData(loopIndex, expandedFileByteArray, ref fileIndex);
                 }
             }
 
@@ -124,7 +124,7 @@ namespace LogSender.Models
         public StringBuilder AddRowToDataOutput()
         {
             List<string> paramList = GetAsList();
-            return BuildAsCsv( paramList );
+            return BuildAsCsv(paramList);
         }
     }
 }

@@ -160,13 +160,13 @@
         "Entry"
         {
         "MsmKey" = "8:_2AD7A5307416DBB3C612084F8AF4FD78"
-        "OwnerKey" = "8:_A31DFD1CEFBA82937621422740B98D32"
+        "OwnerKey" = "8:_7588D65989FC452593813806FB3D4CC3"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_2AD7A5307416DBB3C612084F8AF4FD78"
-        "OwnerKey" = "8:_7588D65989FC452593813806FB3D4CC3"
+        "OwnerKey" = "8:_A31DFD1CEFBA82937621422740B98D32"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -316,13 +316,13 @@
         "Entry"
         {
         "MsmKey" = "8:_68CA7C53343FC1E70241357A717DC2C4"
-        "OwnerKey" = "8:_A31DFD1CEFBA82937621422740B98D32"
+        "OwnerKey" = "8:_7588D65989FC452593813806FB3D4CC3"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_68CA7C53343FC1E70241357A717DC2C4"
-        "OwnerKey" = "8:_7588D65989FC452593813806FB3D4CC3"
+        "OwnerKey" = "8:_A31DFD1CEFBA82937621422740B98D32"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -334,13 +334,13 @@
         "Entry"
         {
         "MsmKey" = "8:_6DDEBCA34D890449248CD63AB941A146"
-        "OwnerKey" = "8:_A31DFD1CEFBA82937621422740B98D32"
+        "OwnerKey" = "8:_7588D65989FC452593813806FB3D4CC3"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_6DDEBCA34D890449248CD63AB941A146"
-        "OwnerKey" = "8:_7588D65989FC452593813806FB3D4CC3"
+        "OwnerKey" = "8:_A31DFD1CEFBA82937621422740B98D32"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -3431,7 +3431,7 @@
             }
             "{3C67513D-01DD-4637-8A68-80971EB9504F}:_5AC1E27DC71B4F96B4A27B9AAEA7C3FF"
             {
-            "DefaultLocation" = "8:[ProgramFiles64Folder][Manufacturer]\\Cyber 2.0 Agent\\[ProductName]"
+            "DefaultLocation" = "8:[ProgramFilesFolder][Manufacturer]\\Cyber 2.0 Agent\\[ProductName]"
             "Name" = "8:#1925"
             "AlwaysCreate" = "11:FALSE"
             "Condition" = "8:"
@@ -3467,30 +3467,30 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:LogSender v5"
-        "ProductCode" = "8:{C20B6522-5234-4B5E-8EC9-56072619E707}"
-        "PackageCode" = "8:{6551BD7F-E570-4FB2-ACC2-CD9F9FBDB134}"
+        "ProductName" = "8:v5 LogSender"
+        "ProductCode" = "8:{513928BF-3C83-4EE0-8AF6-4A6F49F46862}"
+        "PackageCode" = "8:{D58D9090-3E8B-4F45-A06F-1F3215549ED5}"
         "UpgradeCode" = "8:{3828475C-C811-4C32-AEB4-7B38D97D26DF}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.0.0"
+        "ProductVersion" = "8:1.1.0"
         "Manufacturer" = "8:Cyber 2.0"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:www.cyber20.com"
-        "Title" = "8:Log Sender v5 install"
+        "Title" = "8:v5 Log Sender  v1.1.0 install"
         "Subject" = "8:"
         "ARPCONTACT" = "8:Cyber 2.0"
         "Keywords" = "8:"
-        "ARPCOMMENTS" = "8:Cyber 2.0 Log Sender Service v5"
+        "ARPCOMMENTS" = "8:Cyber 2.0 v5 Log Sender Service "
         "ARPURLINFOABOUT" = "8:www.cyber20.com"
         "ARPPRODUCTICON" = "8:"
         "ARPIconIndex" = "3:0"
         "SearchPath" = "8:"
         "UseSystemSearchPath" = "11:TRUE"
-        "TargetPlatform" = "3:1"
+        "TargetPlatform" = "3:0"
         "PreBuildEvent" = "8:"
         "PostBuildEvent" = "8:"
         "RunPostBuildEvent" = "3:0"
@@ -3990,7 +3990,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_7588D65989FC452593813806FB3D4CC3"
             {
-            "SourcePath" = "8:..\\LogSender\\obj\\x64\\Release\\LogSender.exe"
+            "SourcePath" = "8:..\\LogSender\\obj\\x86\\Release\\LogSender.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_5AC1E27DC71B4F96B4A27B9AAEA7C3FF"

@@ -18,14 +18,16 @@ namespace LogSender.Models
         private string _protocol = "SMB";
         private string _direction = "outgoing";
         private string _destinationPort = "445";
-
+        private string _sourceIP;
 
         ///**********************************************
         ///             Functions Section
         ///**********************************************
 
-
-        public FSARow(Int64 serverClientDelta, string reportingComputer, ushort headerVersion)
+        /// <summary>
+        /// Ctor of FSARow
+        /// </summary>
+        public FSARow(Int64 serverClientDelta, string reportingComputer, ushort headerVersion, string sourceIP)
         {
             _expandSVCHost = new List<ExpandSVCHostRow>();
 
@@ -33,6 +35,9 @@ namespace LogSender.Models
             _reportingComputer = reportingComputer;
             _timeStamp = new TimeStamp(serverClientDelta);
             _headerVersion = headerVersion;
+
+            _sourceIP = sourceIP;
+
             _fileExtractData = new List<FileData>
             {
                 new ProcessId(),
@@ -95,7 +100,7 @@ namespace LogSender.Models
                 _direction,//direction
                 "",//cast_type
                 "",//scramble_state
-                "",//source_ip
+                _sourceIP,//source_ip
                 "",//destination_ip
                 _fileExtractData[(int)_fileExtractDataIndexs.SEQ_NUM].GetData(),
                 _fileExtractData[(int)_fileExtractDataIndexs.SUB_SEQ_NUM].GetData(),

@@ -5,7 +5,7 @@
         public enum ParamListIndexs
         {
             OS,
-            REPORTED_COMPUTER,
+            REPORTING_COMPUTER,
             CLIENT_TIME ,
             FULL_SERVER_TIME ,
             PROCESS_ID ,

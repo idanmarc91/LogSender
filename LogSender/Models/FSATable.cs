@@ -1,4 +1,5 @@
 ﻿using LogSender.Models;
+using LogSender.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -35,11 +36,12 @@ namespace LogSender
 
                 //define how much bytes in each FSA row 
                 int bytesInRow = DefineRowSize( headerVersion , BYTES_IN_ROW );
+                string _sourceIP = ServerConnection.GetLocalIPAddress();
 
                 //main loop itaration binary file and extract data from it
                 for( int loopIndex = 0 ; loopIndex < expandedFileByteArray.Length ; loopIndex = loopIndex + bytesInRow )
                 {
-                    FSARow row = new FSARow( serverClientDelta , reportingComputer , headerVersion );
+                    FSARow row = new FSARow( serverClientDelta , reportingComputer , headerVersion, _sourceIP);
                     row.ExtractData( loopIndex , expandedFileByteArray );
 
                     if( row.GetSubSeqNum() == "0" )
@@ -77,11 +79,6 @@ namespace LogSender
                         }
                     }
                     _servicesFsaTable.RemoveAll( i => i.GetFullAccTime() == row.GetFullAccTime() && i.GetSubSeqNum() == row.GetSeqNum() );
-                    //add counter of svchost process name
-                    //if( row.GetProcessName() != "" )
-                    //{
-                    //    row.ChangeProcessName();
-                    //}
                 }
             }
         }
