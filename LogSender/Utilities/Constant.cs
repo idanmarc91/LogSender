@@ -28,8 +28,8 @@
             REASON ,
             DLL_PATH ,
             DLL_NAME ,
-            PARENT_PATH ,
-            PARENT_NAME ,
+            //PARENT_PATH ,
+            //PARENT_NAME ,
             CHAIN_ARRAY
         }
     }

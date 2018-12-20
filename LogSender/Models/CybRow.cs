@@ -92,7 +92,7 @@ namespace LogSender.Models
             }
 
             //The agent is suppling us with status and reason in the same field
-            //we need to seperate them to 2 fields: reason, real status.(the
+            //we need to separate them to 2 fields: reason, real status.(the
             //extracted status is not the real status)
             
             _reasonCyb.GetReasonFromExtractedData(_fileExtractData[(int)_fileExtractDataIndexs.STATUS_REASON_LOG].GetData());
@@ -105,7 +105,7 @@ namespace LogSender.Models
             }
 
             //DEPT
-            //The agent provide us with not accurate cast type so we calculate it manually by the destenation ip
+            //The agent provide us with not accurate cast type so we calculate it manually by the destination ip
             //CastType.CalcTypeFromDestIp(_fileExtractData[(int)_fileExtractDataIndexs.DESTINATION_IP].GetData());
         }
 
@@ -119,7 +119,7 @@ namespace LogSender.Models
         }
 
         /// <summary>
-        /// when flow state parameter == END resert some parameters to empty string
+        /// when flow state parameter == END reset some parameters to empty string
         /// </summary>
         private void SetEmptyString()
         {
@@ -207,8 +207,6 @@ namespace LogSender.Models
                 _reasonCyb._reason,//reason
                 "",//dll_path
                 "",//dll_name
-                "",//parent_path
-                "",//parent_name
                 ""//chain_array
             };
             return list;

@@ -184,3 +184,76 @@ System.UnauthorizedAccessException: Access to the path '16-12-18--09-54-44.mog' 
    at System.IO.FileInfo.Delete()
    at LogSender.Utilities.FileMaintenance.FileDelete(List`1 listOfFileToDelete) in C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\Utilities\FileMaintenance.cs:line 66
    at LogSender.LogSender.<SendFolderLogsAsync>d__7.MoveNext() in C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\LogSender.cs:line 177
+2018-12-20 14:28:06,646 [8] Log_Level-ERROR, File-FileMaintenance.cs, Function-ZeroSizeFileCleanup, - Problem occured while trying to delete an empty file
+System.UnauthorizedAccessException: Access to the path '20-12-18--10-53-06.fsa' is denied.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileInfo.Delete()
+   at LogSender.Utilities.FileMaintenance.ZeroSizeFileCleanup(DirectoryInfo directory) in C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\Utilities\FileMaintenance.cs:line 113
+2018-12-20 15:08:03,492 [8] Log_Level-ERROR, File-FileMaintenance.cs, Function-ZeroSizeFileCleanup, - Problem occured while trying to delete an empty file
+System.UnauthorizedAccessException: Access to the path '20-12-18--10-53-06.fsa' is denied.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileInfo.Delete()
+   at LogSender.Utilities.FileMaintenance.ZeroSizeFileCleanup(DirectoryInfo directory) in C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\Utilities\FileMaintenance.cs:line 113
+2018-12-20 15:08:50,148 [8] Log_Level-ERROR, File-FileMaintenance.cs, Function-ZeroSizeFileCleanup, - Problem occured while trying to delete an empty file
+System.UnauthorizedAccessException: Access to the path '20-12-18--10-56-05.cimg' is denied.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileInfo.Delete()
+   at LogSender.Utilities.FileMaintenance.ZeroSizeFileCleanup(DirectoryInfo directory) in C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\Utilities\FileMaintenance.cs:line 113
+2018-12-20 15:08:51,145 [6] Log_Level-ERROR, File-LogSender.cs, Function-MoveNext, - Sending process had stopped
+System.UnauthorizedAccessException: Access to the path '20-12-18--10-55-06.fsa' is denied.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileInfo.Delete()
+   at LogSender.Utilities.FileMaintenance.FileDelete(List`1 listOfFileToDelete) in C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\Utilities\FileMaintenance.cs:line 66
+   at LogSender.LogSender.<SendFolderLogsAsync>d__7.MoveNext() in C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\LogSender.cs:line 180
+2018-12-20 15:08:54,100 [6] Log_Level-ERROR, File-LogSender.cs, Function-MoveNext, - Sending process had stopped
+System.UnauthorizedAccessException: Access to the path '20-12-18--10-55-05.cimg' is denied.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileInfo.Delete()
+   at LogSender.Utilities.FileMaintenance.FileDelete(List`1 listOfFileToDelete) in C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\Utilities\FileMaintenance.cs:line 66
+   at LogSender.LogSender.<SendFolderLogsAsync>d__7.MoveNext() in C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\LogSender.cs:line 180
+2018-12-20 15:09:00,064 [5] Log_Level-ERROR, File-LogSender.cs, Function-MoveNext, - Sending process had stopped
+System.UnauthorizedAccessException: Access to the path '20-12-18--10-55-05.cyb' is denied.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileInfo.Delete()
+   at LogSender.Utilities.FileMaintenance.FileDelete(List`1 listOfFileToDelete) in C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\Utilities\FileMaintenance.cs:line 66
+   at LogSender.LogSender.<SendFolderLogsAsync>d__7.MoveNext() in C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\LogSender.cs:line 180
+2018-12-20 15:09:02,188 [6] Log_Level-ERROR, File-LogSender.cs, Function-MoveNext, - Sending process had stopped
+System.UnauthorizedAccessException: Access to the path '20-12-18--10-55-05.mog' is denied.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileInfo.Delete()
+   at LogSender.Utilities.FileMaintenance.FileDelete(List`1 listOfFileToDelete) in C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\Utilities\FileMaintenance.cs:line 66
+   at LogSender.LogSender.<SendFolderLogsAsync>d__7.MoveNext() in C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\LogSender.cs:line 180
+2018-12-20 15:24:09,708 [3] Log_Level-ERROR, File-FileMaintenance.cs, Function-ZeroSizeFileCleanup, - Problem occured while trying to delete an empty file
+System.UnauthorizedAccessException: Access to the path '20-12-18--10-53-06.fsa' is denied.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileInfo.Delete()
+   at LogSender.Utilities.FileMaintenance.ZeroSizeFileCleanup(DirectoryInfo directory) in C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\Utilities\FileMaintenance.cs:line 113
+2018-12-20 15:24:10,087 [3] Log_Level-ERROR, File-FileMaintenance.cs, Function-ZeroSizeFileCleanup, - Problem occured while trying to delete an empty file
+System.UnauthorizedAccessException: Access to the path '20-12-18--10-56-05.cimg' is denied.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileInfo.Delete()
+   at LogSender.Utilities.FileMaintenance.ZeroSizeFileCleanup(DirectoryInfo directory) in C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\Utilities\FileMaintenance.cs:line 113
+2018-12-20 15:24:12,741 [6] Log_Level-ERROR, File-LogSender.cs, Function-MoveNext, - Sending process had stopped
+System.UnauthorizedAccessException: Access to the path '20-12-18--10-55-06.fsa' is denied.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileInfo.Delete()
+   at LogSender.Utilities.FileMaintenance.FileDelete(List`1 listOfFileToDelete) in C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\Utilities\FileMaintenance.cs:line 66
+   at LogSender.LogSender.<SendFolderLogsAsync>d__7.MoveNext() in C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\LogSender.cs:line 180
+2018-12-20 15:24:14,417 [10] Log_Level-ERROR, File-LogSender.cs, Function-MoveNext, - Sending process had stopped
+System.UnauthorizedAccessException: Access to the path '20-12-18--10-55-05.cimg' is denied.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileInfo.Delete()
+   at LogSender.Utilities.FileMaintenance.FileDelete(List`1 listOfFileToDelete) in C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\Utilities\FileMaintenance.cs:line 66
+   at LogSender.LogSender.<SendFolderLogsAsync>d__7.MoveNext() in C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\LogSender.cs:line 180
+2018-12-20 15:24:15,378 [12] Log_Level-ERROR, File-LogSender.cs, Function-MoveNext, - Sending process had stopped
+System.UnauthorizedAccessException: Access to the path '20-12-18--10-55-05.mog' is denied.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileInfo.Delete()
+   at LogSender.Utilities.FileMaintenance.FileDelete(List`1 listOfFileToDelete) in C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\Utilities\FileMaintenance.cs:line 66
+   at LogSender.LogSender.<SendFolderLogsAsync>d__7.MoveNext() in C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\LogSender.cs:line 180
+2018-12-20 15:24:19,827 [5] Log_Level-ERROR, File-LogSender.cs, Function-MoveNext, - Sending process had stopped
+System.UnauthorizedAccessException: Access to the path '20-12-18--10-55-05.cyb' is denied.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileInfo.Delete()
+   at LogSender.Utilities.FileMaintenance.FileDelete(List`1 listOfFileToDelete) in C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\Utilities\FileMaintenance.cs:line 66
+   at LogSender.LogSender.<SendFolderLogsAsync>d__7.MoveNext() in C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\LogSender.cs:line 180

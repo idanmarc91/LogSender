@@ -16,7 +16,7 @@ namespace LogSender.Utilities
         ///**********************************************
 
         /// <summary>
-        /// This function create the Config file as a singletone, the ConfigFile instance is accessible through this function
+        /// This function create the Config file as a singleton, the ConfigFile instance is accessible through this function
         /// </summary>
         public static ConfigFile Instance
         {
@@ -60,7 +60,7 @@ namespace LogSender.Utilities
         /// <summary>
         /// This function read from configuration data
         /// </summary>
-        /// <returns>bool - true if config file reading process succeded </returns>
+        /// <returns>boolean - true if config file reading process succeeded </returns>
         public void ReadConfigFile(string path)
         {
             try
@@ -356,7 +356,7 @@ namespace LogSender.Utilities
                         }
                     }
                 }
-                else //assmble ip adress from log sender config file with port number
+                else //assemble ip address from log sender config file with port number
                 {
                     _configData._hostIp = "http://" + _configData._hostIp + ":" + _configData._hostPort;
                 }

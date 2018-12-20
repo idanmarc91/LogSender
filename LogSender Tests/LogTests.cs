@@ -1,4 +1,7 @@
-﻿using LogSender;
+﻿//#define WRITE_NEW_TEST
+#undef WRITE_NEW_TEST
+
+using LogSender;
 using LogSender.Models;
 using LogSender.Utilities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -15,14 +18,14 @@ namespace LogSender_Tests
         public void TestCybLog()
         {
             //Arrange
-            string path = AppDomain.CurrentDomain.BaseDirectory;
-            DirectoryInfo _directory = new DirectoryInfo(path + @"\\..\\..\\Test Logs\");
+            string path = AppDomain.CurrentDomain.BaseDirectory + @"\\..\\..\\Test Logs\";
+            DirectoryInfo _directory = new DirectoryInfo(path);
             FileInfo[] logFiles = _directory.GetFiles("*.cyb");
 
             BinaryFileHandler bf = new BinaryFileHandler(logFiles[0]);
 
             string jsonTest = string.Empty;
-            string jsonTrueOutput = File.ReadAllText(path + @"\\..\\..\\Test Logs\" + "cyb json output.txt");
+            string jsonTrueOutput = File.ReadAllText(path + "cyb json output.txt");
 
             //Act
             if (!bf.IsFileNull())
@@ -43,15 +46,17 @@ namespace LogSender_Tests
                 log.ConvertRowsToCsvFormat();
 
                 StringBuilder test = new StringBuilder();
-                ParsingBinaryFile.AddOutputHeader(test);
+                //ParsingBinaryFile.AddOutputHeader(test);
                 test.Append(log.GetDataAsString());
 
                 jsonTest = JsonDataConvertion.JsonSerialization(test);
 
                 //**  USE ONLY WHEN OUTPUT IS CHANGE **
                 //for creating new output file
-                //File.WriteAllText(@"C:\Users\idanm\Desktop\cyb.txt", jsonTest);
-
+#if WRITE_NEW_TEST
+File.Delete(path + @"\\cyb json output.txt");
+File.WriteAllText(path + @"\\cyb json output.txt", jsonTest);
+#endif
             }
 
             //Assert
@@ -62,14 +67,15 @@ namespace LogSender_Tests
         public void TestFsaLog()
         {
             //Arrange
-            string path = AppDomain.CurrentDomain.BaseDirectory;
-            DirectoryInfo _directory = new DirectoryInfo(path + @"\\..\\..\\Test Logs\");
+            string path = AppDomain.CurrentDomain.BaseDirectory + @"\\..\\..\\Test Logs\";
+
+            DirectoryInfo _directory = new DirectoryInfo(path);
             FileInfo[] logFiles = _directory.GetFiles("*.fsa");
 
             BinaryFileHandler bf = new BinaryFileHandler(logFiles[0]);
 
             string jsonTest = string.Empty;
-            string jsonTrueOutput = File.ReadAllText(path + @"\\..\\..\\Test Logs\" + "fsa json output.txt");
+            string jsonTrueOutput = File.ReadAllText(path + "fsa json output.txt");
 
             //Act
             if (!bf.IsFileNull())
@@ -90,15 +96,17 @@ namespace LogSender_Tests
                 log.ConvertRowsToCsvFormat();
 
                 StringBuilder test = new StringBuilder();
-                ParsingBinaryFile.AddOutputHeader(test);
+                // ParsingBinaryFile.AddOutputHeader(test);
                 test.Append(log.GetDataAsString());
 
                 jsonTest = JsonDataConvertion.JsonSerialization(test);
 
                 //**  USE ONLY WHEN OUTPUT IS CHANGE **
                 //for creating new output file
-                //File.WriteAllText(@"C:\Users\idanm\Desktop\fsa.txt", jsonTest);
-
+#if WRITE_NEW_TEST
+File.Delete(path + "\\fsa json output.txt");
+File.WriteAllText(path + "\\fsa json output.txt", jsonTest);
+#endif
             }
 
             //Assert
@@ -109,14 +117,15 @@ namespace LogSender_Tests
         public void TestCimgLog()
         {
             //Arrange
-            string path = AppDomain.CurrentDomain.BaseDirectory;
-            DirectoryInfo _directory = new DirectoryInfo(path + @"\\..\\..\\Test Logs\");
+            string path = AppDomain.CurrentDomain.BaseDirectory + @"\\..\\..\\Test Logs\";
+
+            DirectoryInfo _directory = new DirectoryInfo(path);
             FileInfo[] logFiles = _directory.GetFiles("*.cimg");
 
             BinaryFileHandler bf = new BinaryFileHandler(logFiles[0]);
 
             string jsonTest = string.Empty;
-            string jsonTrueOutput = File.ReadAllText(path + @"\\..\\..\\Test Logs\" + "cimg json output.txt");
+            string jsonTrueOutput = File.ReadAllText(path + "cimg json output.txt");
 
             //Act
             if (!bf.IsFileNull())
@@ -137,15 +146,17 @@ namespace LogSender_Tests
                 log.ConvertRowsToCsvFormat();
 
                 StringBuilder test = new StringBuilder();
-                ParsingBinaryFile.AddOutputHeader(test);
+                //ParsingBinaryFile.AddOutputHeader(test);
                 test.Append(log.GetDataAsString());
 
                 jsonTest = JsonDataConvertion.JsonSerialization(test);
 
                 //**  USE ONLY WHEN OUTPUT IS CHANGE **
                 //for creating new output file
-                //File.WriteAllText(@"C:\Users\idanm\Desktop\cimg.txt", jsonTest);
-
+#if WRITE_NEW_TEST
+File.Delete(path + "\\cimg json output.txt");
+File.WriteAllText(path + "\\cimg json output.txt", jsonTest);
+#endif
             }
 
             //Assert
@@ -156,14 +167,15 @@ namespace LogSender_Tests
         public void TestMogLog()
         {
             //Arrange
-            string path = AppDomain.CurrentDomain.BaseDirectory;
-            DirectoryInfo _directory = new DirectoryInfo(path + @"\\..\\..\\Test Logs\");
+            string path = AppDomain.CurrentDomain.BaseDirectory + @"\\..\\..\\Test Logs\";
+
+            DirectoryInfo _directory = new DirectoryInfo(path);
             FileInfo[] logFiles = _directory.GetFiles("*.mog");
 
             BinaryFileHandler bf = new BinaryFileHandler(logFiles[0]);
 
             string jsonTest = string.Empty;
-            string jsonTrueOutput = File.ReadAllText(path + @"\\..\\..\\Test Logs\" + "mog json output.txt");
+            string jsonTrueOutput = File.ReadAllText(path + "mog json output.txt");
 
             //Act
             if (!bf.IsFileNull())
@@ -184,15 +196,17 @@ namespace LogSender_Tests
                 log.ConvertRowsToCsvFormat();
 
                 StringBuilder test = new StringBuilder();
-                ParsingBinaryFile.AddOutputHeader(test);
+                //ParsingBinaryFile.AddOutputHeader(test);
                 test.Append(log.GetDataAsString());
 
                 jsonTest = JsonDataConvertion.JsonSerialization(test);
 
                 //**  USE ONLY WHEN OUTPUT IS CHANGE **
                 //for creating new output file
-                //File.WriteAllText(@"C:\Users\idanm\Desktop\mog.txt", jsonTest);
-
+#if WRITE_NEW_TEST
+File.Delete(path + "\\mog json output.txt");
+File.WriteAllText(path + "\\mog json output.txt", jsonTest);
+#endif
             }
 
             //Assert

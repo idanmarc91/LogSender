@@ -1,14 +1,16 @@
-﻿using System;
+﻿using LogSender.Utilities;
+using System;
 using System.Net;
 
 namespace LogSender.Data
 {
-    class CastType : FileData
+    internal class CastType : FileData
     {
         ///**********************************************
         ///             Members Section
         ///**********************************************
-        const int CAST_TYPE_LEN = 1;
+        private const int CAST_TYPE_LEN = 1;
+
         private string _castType;
 
         ///**********************************************
@@ -16,7 +18,7 @@ namespace LogSender.Data
         ///**********************************************
 
         /// <summary>
-        /// This function extract x cast string 
+        /// This function extract x cast string
         /// </summary>
         /// <param name="loopIndex"></param>
         /// <param name="expandedFileByteArray"></param>
@@ -30,9 +32,11 @@ namespace LogSender.Data
                 case "0":
                     _castType = "Unicast";
                     break;
+
                 case "1":
                     _castType = "NotUnicast";
                     break;
+
                 default:
                     _castType = "ERROR";
                     break;
@@ -73,7 +77,19 @@ namespace LogSender.Data
                     switch (address.AddressFamily)
                     {
                         case System.Net.Sockets.AddressFamily.InterNetwork:
-                            IsIpMulticast(destIpAddress);
+                            if(IsIpBroadcast(destIpAddress))
+                            {
+
+                            }
+                            else if(IsIpMulticast(destIpAddress))
+                            {
+
+                            }
+                            else
+                            {
+                                //unicast
+                            }
+                           
                             break;
 
                         case System.Net.Sockets.AddressFamily.InterNetworkV6:
@@ -83,8 +99,13 @@ namespace LogSender.Data
             }
             catch (Exception ex)
             {
-
             }
+        }
+
+        public static bool IsIpBroadcast(string destIpAddress)
+        {
+            IPAddress subNetMask = IpAddressCalculator.GetSubnetMask(IPAddress.Parse("255.255.255.0"));
+            throw new NotImplementedException();
         }
 
         public static bool IsIpMulticast(string ip)
@@ -93,7 +114,8 @@ namespace LogSender.Data
             int i = int.Parse(ipArr[0]);
 
             return (i >= 224 && i <= 239) ? true : false;
-
         }
+
+
     }
 }

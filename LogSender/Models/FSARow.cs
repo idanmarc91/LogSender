@@ -5,24 +5,33 @@ using System.Text;
 
 namespace LogSender.Models
 {
-    class FSARow :LogRow
+    internal class FSARow : LogRow
     {
         ///**********************************************
         ///             Members Section
         ///**********************************************
-        enum _fileExtractDataIndexs
+        ///
+
+        #region Member section
+
+        private enum _fileExtractDataIndexs
         {
-            PROCESS_ID, PROCESS_NAME, PROCESS_PATH, DESTINATION_PATH, USER_NAME, STATUS, REASON, 
+            PROCESS_ID, PROCESS_NAME, PROCESS_PATH, DESTINATION_PATH, USER_NAME, STATUS, REASON,
             SEQ_NUM, SUB_SEQ_NUM
         };
-        private string _protocol = "SMB";
-        private string _direction = "outgoing";
-        private string _destinationPort = "445";
+
+        private readonly string _protocol = "SMB";
+        private readonly string _direction = "outgoing";
+        private readonly string _destinationPort = "445";
         private string _sourceIP;
+
+        #endregion Member section
 
         ///**********************************************
         ///             Functions Section
         ///**********************************************
+
+        #region Function section
 
         /// <summary>
         /// Ctor of FSARow
@@ -64,7 +73,7 @@ namespace LogSender.Models
 
             _timeStamp.ExtractData(loopIndex, expandedFileByteArray, ref fileIndex);
 
-            for (int index = 0; index < _fileExtractData.Count; index++ )
+            for (int index = 0; index < _fileExtractData.Count; index++)
             {
                 //if we are in process path iteration make new process path object with process name
                 if (index == (int)_fileExtractDataIndexs.PROCESS_PATH)
@@ -74,9 +83,7 @@ namespace LogSender.Models
                 //extract data from expandedFileByteArray
                 _fileExtractData[index].ExtractData(loopIndex, expandedFileByteArray, ref fileIndex);
             }
-
         }
-
 
         /// <summary>
         /// Get fsa row parameters as List of string
@@ -110,8 +117,6 @@ namespace LogSender.Models
                 _fileExtractData[(int)_fileExtractDataIndexs.REASON].GetData(),
                 "",//dll path
                 "",//dll name
-                "",//parent_path
-                "",//parent_name
                 "",//chain_array
             };
             return list;
@@ -185,5 +190,7 @@ namespace LogSender.Models
         {
             return _timeStamp.GetFullServerTime();
         }
+
+        #endregion Function section
     }
 }

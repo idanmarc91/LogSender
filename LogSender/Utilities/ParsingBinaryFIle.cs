@@ -11,7 +11,11 @@ namespace LogSender.Utilities
         ///**********************************************
         ///             Members Section
         ///**********************************************
+
+        #region Members section
+
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger("ParsingBinaryFile.cs");
+
         private static readonly List<string> _csvHeader = new List<string>
         {
             "os",
@@ -38,14 +42,19 @@ namespace LogSender.Utilities
             "reason" ,
             "dll_path" ,
             "dll_name" ,
-            "parent_path" ,
-            "parent_name" ,
+            //"parent_path" ,
+            //"parent_name" ,
             "chain_array"
         };
+
+        #endregion Members section
 
         ///**********************************************
         ///             Functions Section
         ///**********************************************
+
+        #region Function section
+
         /// <summary>
         /// This function is parsing the binary file.
         /// There are 4 different kind of parsing methods
@@ -125,7 +134,6 @@ namespace LogSender.Utilities
             dataAsString.Append(ServiceStack.Text.CsvSerializer.SerializeToCsv(_csvHeader));
         }
 
-
         /// <summary>
         /// This function parse the binary logs inside current folder
         /// </summary>
@@ -176,7 +184,7 @@ namespace LogSender.Utilities
                         break;//break from file loop
                     }
 
-                    //add file to the list.for tracking which file should be deleted 
+                    //add file to the list.for tracking which file should be deleted
                     listOfFileToDelete.Add(file);
                 }
                 catch (Exception ex)
@@ -188,5 +196,7 @@ namespace LogSender.Utilities
 
             return listOfFileToDelete;
         }
+
+        #endregion Function section
     }
 }

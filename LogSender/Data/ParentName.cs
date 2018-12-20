@@ -15,7 +15,7 @@ namespace LogSender.Data
         ///**********************************************
 
         /// <summary>
-        /// empty Ctor fot Parent name class
+        /// empty Ctor for Parent name class
         /// </summary>
         public ParentName()
         {}
@@ -30,7 +30,7 @@ namespace LogSender.Data
         }
 
         /// <summary>
-        /// retrun parent name
+        /// return parent name
         /// </summary>
         /// <returns>string - parent name</returns>
         public override string GetData()

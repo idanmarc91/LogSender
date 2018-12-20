@@ -177,8 +177,6 @@ namespace LogSender.Models
                _reasonMog._reason,//reason
                 "",//dll path
                 "",//dll name
-                "",//parent path
-                "",//parent name
                 ""//chain array
             };
             return list;

@@ -91,8 +91,8 @@ namespace LogSender.Models
                 _timeStamp.GetClientTime(),
                 _timeStamp.GetFullServerTime(),
                 _fileExtractData[(int)_fileExtractDataIndexs.PROCESS_ID].GetData(),
-                "",//process_name
-                "",//process_path
+                _fileExtractData[(int)_fileExtractDataIndexs.PARENT_NAME].GetData(),//process name  = parent name
+                _fileExtractData[(int)_fileExtractDataIndexs.PARENT_PATH].GetData(),//process path = parent path
                 "",//protocol
                 _realStatusDll,//status
                 "",//source_port
@@ -110,8 +110,6 @@ namespace LogSender.Models
                 _reasonDll._reason,
                 _fileExtractData[(int)_fileExtractDataIndexs.DLL_PATH].GetData(),
                 _fileExtractData[(int)_fileExtractDataIndexs.DLL_NAME].GetData(),
-                _fileExtractData[(int)_fileExtractDataIndexs.PARENT_PATH].GetData(),
-                _fileExtractData[(int)_fileExtractDataIndexs.PARENT_NAME].GetData(),
                 "",//chain_array
             };
             return list;

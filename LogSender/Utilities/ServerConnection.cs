@@ -87,6 +87,27 @@ namespace LogSender.Utilities
             }
         }
 
+        public static async Task<bool> IsServerAliveAsync(string ip)
+        {
+            try
+            {
+                log.Debug("check if server (" + ip + ") is alive");
+
+                using (HttpClient client = new HttpClient())
+                {
+                    using (HttpResponseMessage response = await client.GetAsync(ip + "/ping"))
+                    {
+                        log.Info("The server (" + ip + ") is online");
+                        return true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error("The server (" + ip + ") is offline");
+                return false;
+            }
+        }
 
         /// <summary>
         /// This function is responsible for server connection logic.

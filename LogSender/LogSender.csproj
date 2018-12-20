@@ -218,6 +218,7 @@
     <Compile Include="Utilities\FileSorting.cs" />
     <Compile Include="Utilities\FolderWatcher.cs" />
     <Compile Include="Utilities\GZipCompresstion.cs" />
+    <Compile Include="Utilities\IpAddressCalculator.cs" />
     <Compile Include="Utilities\JsonDataConvertion.cs" />
     <Compile Include="Utilities\ParsingBinaryFile.cs" />
     <Compile Include="Utilities\ServerConnection.cs" />
