@@ -32,7 +32,7 @@ namespace LogSender.Utilities
                 //still being written to
                 //or being processed by another thread
                 //or does not exist (has already been processed)
-                log.Warn(file.Name + " file is in writing mode. cannot be access!");
+                log.Warn(file.Name + " file is in writing mode. cannot be access!", ex);
                 return true;
             }
             finally

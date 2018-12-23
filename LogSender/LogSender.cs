@@ -66,7 +66,6 @@ namespace LogSender
                 //check if server is online
                 if (await ServerConnection.IsServerAliveAsync())
                 {
-                    //CastType.IsIpBroadcast("255.255.255.0");
                     OnlineProcessLogFolders();
                 }
                 //server is offline

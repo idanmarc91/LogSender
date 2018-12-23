@@ -54,3 +54,4 @@ C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\obj\x64\Release\LogSender.cspro
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\obj\x64\Release\LogSender.csproj.CopyComplete
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\obj\x64\Release\LogSender.exe
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\obj\x64\Release\LogSender.pdb
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\x64\Release\Newtonsoft.Json.pdb

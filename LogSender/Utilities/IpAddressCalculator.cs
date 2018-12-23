@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LogSender.Utilities
 {
@@ -28,6 +24,5 @@ namespace LogSender.Utilities
             }
             throw new ArgumentException(string.Format("Can't find subnetmask for IP address '{0}'", address));
         }
-
     }
 }

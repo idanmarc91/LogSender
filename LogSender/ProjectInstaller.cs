@@ -46,10 +46,5 @@ namespace LogSender
             //start the service right after installation process complete
             new ServiceController(serviceInstaller1.ServiceName).Start();
         }
-
-        private void serviceProcessInstaller1_AfterInstall(object sender, InstallEventArgs e)
-        {
-
-        }
     }
 }

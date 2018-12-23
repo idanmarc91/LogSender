@@ -82,7 +82,7 @@ namespace LogSender.Utilities
             }
             catch (Exception ex)
             {
-                log.Error("The server (" + ConfigFile.Instance._configData._hostIp + ") is offline");
+                log.Error("The server (" + ConfigFile.Instance._configData._hostIp + ") is offline", ex);
                 return false;
             }
         }
@@ -104,7 +104,7 @@ namespace LogSender.Utilities
             }
             catch (Exception ex)
             {
-                log.Error("The server (" + ip + ") is offline");
+                log.Error("The server (" + ip + ") is offline", ex);
                 return false;
             }
         }

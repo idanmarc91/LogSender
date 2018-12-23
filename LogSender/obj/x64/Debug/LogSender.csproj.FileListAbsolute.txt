@@ -31,4 +31,3 @@ C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\obj\x64\Debug\LogSender.csproj.
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\obj\x64\Debug\LogSender.csproj.CopyComplete
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\obj\x64\Debug\LogSender.exe
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\obj\x64\Debug\LogSender.pdb
-C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\obj\x64\Debug\LogSender.csprojAssemblyReference.cache

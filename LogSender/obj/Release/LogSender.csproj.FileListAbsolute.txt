@@ -30,3 +30,14 @@ C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\obj\Release\LogSender.csproj.Co
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\obj\Release\LogSender.csproj.CopyComplete
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\obj\Release\LogSender.exe
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\obj\Release\LogSender.pdb
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\NUnit3.TestAdapter.dll
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\NUnit3.TestAdapter.pdb
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\nunit.engine.dll
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\nunit.engine.api.dll
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\nunit.framework.dll
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\nunit.framework.pdb
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\nunit.framework.xml
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\Newtonsoft.Json.pdb

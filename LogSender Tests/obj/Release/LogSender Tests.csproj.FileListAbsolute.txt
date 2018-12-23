@@ -27,3 +27,5 @@ C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\obj\Release\LogSender Tes
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\obj\Release\LogSender Tests.csproj.CopyComplete
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\obj\Release\UnitTestProject5.dll
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\obj\Release\UnitTestProject5.pdb
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\bin\Release\UnitTestProject5.dll.config
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender Tests\bin\Release\Newtonsoft.Json.pdb

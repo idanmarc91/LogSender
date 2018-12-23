@@ -60,6 +60,9 @@ namespace LogSender.Data
             _castType = xCast;
         }
 
+
+        #region Future features
+
         /// <summary>
         /// The agent provide us with not accurate data about the cast type so we calculate it from
         /// the destination ip addres
@@ -77,11 +80,11 @@ namespace LogSender.Data
                     switch (address.AddressFamily)
                     {
                         case System.Net.Sockets.AddressFamily.InterNetwork:
-                            if(IsIpBroadcast(destIpAddress))
+                            if (IsIpBroadcast(destIpAddress))
                             {
 
                             }
-                            else if(IsIpMulticast(destIpAddress))
+                            else if (IsIpMulticast(destIpAddress))
                             {
 
                             }
@@ -89,7 +92,7 @@ namespace LogSender.Data
                             {
                                 //unicast
                             }
-                           
+
                             break;
 
                         case System.Net.Sockets.AddressFamily.InterNetworkV6:
@@ -102,6 +105,8 @@ namespace LogSender.Data
             }
         }
 
+
+        
         public static bool IsIpBroadcast(string destIpAddress)
         {
             IPAddress subNetMask = IpAddressCalculator.GetSubnetMask(IPAddress.Parse("255.255.255.0"));
@@ -116,6 +121,6 @@ namespace LogSender.Data
             return (i >= 224 && i <= 239) ? true : false;
         }
 
-
+        #endregion
     }
 }
