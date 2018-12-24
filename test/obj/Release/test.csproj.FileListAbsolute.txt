@@ -1,7 +1,0 @@
-C:\_DEV\workspace\Client-Log-Sender-v5\test\bin\Release\test.exe.config
-C:\_DEV\workspace\Client-Log-Sender-v5\test\bin\Release\test.exe
-C:\_DEV\workspace\Client-Log-Sender-v5\test\bin\Release\test.pdb
-C:\_DEV\workspace\Client-Log-Sender-v5\test\obj\Release\test.csproj.CoreCompileInputs.cache
-C:\_DEV\workspace\Client-Log-Sender-v5\test\obj\Release\test.exe
-C:\_DEV\workspace\Client-Log-Sender-v5\test\obj\Release\test.pdb
-C:\_DEV\workspace\Client-Log-Sender-v5\test\obj\Release\test.csprojAssemblyReference.cache

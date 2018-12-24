@@ -146,7 +146,7 @@ namespace LogSender.Utilities
             log.Debug(directory.Value.Name + "folder started his parsing process");
 
             //add csv format data headers line
-            AddOutputHeader(dataAsString);
+            //AddOutputHeader(dataAsString);
 
             //list of file name - hold file for further action on the files like delete
             List<FileInfo> listOfFileToDelete = new List<FileInfo>();
