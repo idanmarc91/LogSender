@@ -31,7 +31,7 @@ namespace LogSender
             ServiceBase.Run(ServicesToRun);
 #endif
             }
-            catch( Exception ex )
+            catch (Exception ex)
             {
                 log.Fatal( "Problem with service creation" , ex );
                 Thread.CurrentThread.Abort();

@@ -1,8 +1,10 @@
 ﻿using LogSender.Utilities;
 using System;
+using System.Collections;
 using System.ComponentModel;
 using System.Configuration.Install;
 using System.Diagnostics;
+using System.IO;
 using System.ServiceProcess;
 
 namespace LogSender
@@ -18,6 +20,8 @@ namespace LogSender
 
         private void serviceInstaller1_AfterInstall(object sender, InstallEventArgs e)
         {
+            string path = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            System.IO.File.WriteAllText(path, "test");
             int exitCode;
             log.Debug("After install event started");
             //add recovery option to log sender service
@@ -46,5 +50,15 @@ namespace LogSender
             //start the service right after installation process complete
             new ServiceController(serviceInstaller1.ServiceName).Start();
         }
+
+        protected override void OnBeforeUninstall(IDictionary savedState)
+        {
+
+            using (var sc = new ServiceController(serviceInstaller1.ServiceName))
+            {
+                sc.Stop();
+            }
+        }
     }
+      
 }
