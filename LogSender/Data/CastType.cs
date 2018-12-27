@@ -100,7 +100,7 @@ namespace LogSender.Data
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
             }
         }

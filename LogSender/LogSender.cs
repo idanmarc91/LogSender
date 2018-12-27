@@ -1,5 +1,4 @@
-﻿using LogSender.Data;
-using LogSender.Utilities;
+﻿using LogSender.Utilities;
 using System;
 using System.Collections.Generic;
 using System.IO;
