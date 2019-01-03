@@ -14,20 +14,24 @@ namespace LogSender.Utilities
             {"Policy MM MD5 corrupt","Blocked"},
             {"Policy MM size corrupt","Blocked"},
             {"Policy MM size","Blocked"},
+            {"Policy MM bad MD5","Blocked"},
             {"Chain","Blocked"},
             {"Policy MM DLL MM","Blocked"},
             {"Policy MM DLL ambiguity","Blocked"},
             {"Chain block","Blocked"},
             {"Fake localhost","Blocked"},
             {"Network no check","Blocked"},
+            {"Svchost MM", "Blocked"},
+            {"Service MM", "Blocked"},
             {"Wait for SUP","Unknown"},
             {"NotPD","Unknown"},
             {"Other","Unknown"},
+            {"NoCheck", "Error"},
             {"Error val","Error"},
             {"TCP MM","Error"},
             {"UDP MM","Error"},
             {"Path overflow","Error"},
-            {"Config exculuded", "Excluded"}
+            {"Config excluded", "Excluded"}
         };
 
         public static string Map(string reason)
