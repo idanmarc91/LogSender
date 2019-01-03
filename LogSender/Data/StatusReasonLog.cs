@@ -31,7 +31,7 @@
                     _status = "Not in policy";
                     break;
                 case "3":
-                    _status = "Config exculuded";
+                    _status = "Config excluded";
                     break;
                 case "4":
                     _status = "Scramble off";
@@ -103,7 +103,7 @@
                     _status = "Svchost MM";
                     break;
                 default:
-                    _status = "Error Val";
+                    _status = "Error val";
                     break;
             }
         }

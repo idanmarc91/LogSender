@@ -12,7 +12,7 @@
                 case "Error":
                 case "Unknown":
                 case "Dropped":
-                case "Exculuded":
+                case "Excluded":
                     _reason = status;
                     break;
                 default:

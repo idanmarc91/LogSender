@@ -59,7 +59,7 @@ namespace LogSender.Data
                     _reason = "Flow error";
                     break;
                 case "11":
-                    _reason = "Wait fot SUP";
+                    _reason = "Wait for SUP";
                     break;
                 case "12":
                     _reason = "NoCheck";
@@ -68,7 +68,7 @@ namespace LogSender.Data
                     _reason = "Other";
                     break;
                 default:
-                    _reason = "Error Val";
+                    _reason = "Error val";
                     break;
             }
         }

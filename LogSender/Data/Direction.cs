@@ -26,7 +26,7 @@ namespace LogSender.Data
                     _direction = "Inbound";
                     break;
                 default:
-                    _direction = "ERROR!!!!!!!";
+                    _direction = "Error";
                     break;
             }
         }
