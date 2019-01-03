@@ -25,7 +25,7 @@ namespace LogSender
             ConfigFile cnf = ConfigFile.Instance;
 
             //start the service
-            InstallService.StartService(serviceInstaller1.ServiceName);
+            //InstallService.StartService(serviceInstaller1.ServiceName);
         }
 
         private void serviceInstaller1_BeforeUninstall(object sender, InstallEventArgs e)

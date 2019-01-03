@@ -31,7 +31,7 @@
                     _status = "Not in policy";
                     break;
                 case "3":
-                    _status = "Exculuded";
+                    _status = "Excluded";
                     break;
                 case "4":
                     _status = "Off";

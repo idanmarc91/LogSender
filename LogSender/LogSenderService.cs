@@ -24,7 +24,7 @@ namespace LogSender
         {
             try
             {
-                log.Debug( "Log Sender Service OnStart Fucntion" );
+                log.Debug( "Log Sender Service OnStart Function" );
                 _logSender = new LogSender();
                 _logSender.RunService();
             }
@@ -36,8 +36,8 @@ namespace LogSender
 
         protected override void OnStop()
         {
-            log.Debug( "Log Sender Service enter OnStop Fucntion" );
-            log.Warn( "The service has stoped" );
+            log.Debug( "Log Sender Service enter OnStop Function" );
+            log.Warn( "The service has stopped" );
         }
     }
 }

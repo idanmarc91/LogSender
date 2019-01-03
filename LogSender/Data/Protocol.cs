@@ -113,7 +113,7 @@ namespace LogSender.Data
                     _protocol = "MAX";
                     break;
                 default:
-                    _protocol = "ERROR!!!";
+                    _protocol = "Error";
                     break;
             }
         }

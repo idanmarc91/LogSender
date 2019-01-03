@@ -27,7 +27,7 @@ namespace LogSender.Utilities
             {"TCP MM","Error"},
             {"UDP MM","Error"},
             {"Path overflow","Error"},
-            {"Config exculuded", "Excluded"}
+            {"Config excluded", "Excluded"}
         };
 
         public static string Map(string reason)

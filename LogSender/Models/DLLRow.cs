@@ -70,7 +70,7 @@ namespace LogSender.Models
             }
 
             //The agent is suppling us with status and reason in the same field
-            //we need to seperate them to 2 fields: reason, real status.(the
+            //we need to separate them to 2 fields: reason, real status.(the
             //extracted status is not the real status)
 
             _reasonDll.GetReasonFromExtractedData(_fileExtractData[(int)_fileExtractDataIndexs.STATUS_REASON_LOG].GetData());

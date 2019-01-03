@@ -86,7 +86,7 @@ namespace LogSender.Data
                     _reason = "Service MM";
                     break;
                 default:
-                    _reason = "ErrorVal";
+                    _reason = "Error Val";
                     break;
             }
         }
