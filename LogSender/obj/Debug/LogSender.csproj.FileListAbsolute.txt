@@ -43,3 +43,4 @@ C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Debug\nunit.framework.dll
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Debug\Newtonsoft.Json.pdb
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Debug\nunit.framework.pdb
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Debug\nunit.framework.xml
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\obj\Debug\LogSender.csprojAssemblyReference.cache

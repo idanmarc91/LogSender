@@ -32,7 +32,7 @@ namespace LogSender.Utilities
                 //still being written to
                 //or being processed by another thread
                 //or does not exist (has already been processed)
-                log.Warn(file.Name + " file is in writing mode. cannot be access!", ex);
+                log.Warn(file.Name + " file is in writing mode. cannot be access!");
                 return true;
             }
             finally
@@ -48,7 +48,7 @@ namespace LogSender.Utilities
         }
 
         /// <summary>
-        /// This fuction delete a file
+        /// This function delete a file
         /// </summary>
         /// <param name="listOfFileToDelete"></param>
         public static void FileDelete(List<FileInfo> listOfFileToDelete)
@@ -117,12 +117,12 @@ namespace LogSender.Utilities
             }
             catch(Exception ex)
             {
-                log.Error("Problem occured while trying to delete an empty file",ex);
+                log.Error("Problem occurred while trying to delete an empty file",ex);
             }
         }
 
         /// <summary>
-        /// This function oparete when the folder has exceeded limit size and delete the old log 
+        /// This function operate when the folder has exceeded limit size and delete the old log 
         /// files from it
         /// </summary>
         /// <param name="dir"></param>
@@ -133,7 +133,7 @@ namespace LogSender.Utilities
             {
                 log.Debug(dir.Value.Name + " Folder size exceeded starting delete old file");
 
-                //get all files by date. first one in the array is the oldes
+                //get all files by date. first one in the array is the oldest
                 FileInfo[] files = dir.Value.GetFiles().OrderBy(f => f.CreationTime).ToArray();
 
                 foreach (FileInfo file in files)
@@ -152,7 +152,7 @@ namespace LogSender.Utilities
             }
             catch(Exception ex)
             {
-                log.Error("Problem occured while trying to delete old log file", ex);
+                log.Error("Problem occurred while trying to delete old log file", ex);
             }
         }
     }

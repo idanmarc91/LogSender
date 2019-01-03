@@ -24,6 +24,7 @@ namespace LogSender.Models
         private readonly string _direction = "outgoing";
         private readonly string _destinationPort = "445";
         private string _sourceIP;
+        private DestinationIpFsa _destIP;
 
         #endregion Member section
 
@@ -44,7 +45,7 @@ namespace LogSender.Models
             _reportingComputer = reportingComputer;
             _timeStamp = new TimeStamp(serverClientDelta);
             _headerVersion = headerVersion;
-
+            
             _sourceIP = sourceIP;
 
             _fileExtractData = new List<FileData>
@@ -83,6 +84,9 @@ namespace LogSender.Models
                 //extract data from expandedFileByteArray
                 _fileExtractData[index].ExtractData(loopIndex, expandedFileByteArray, ref fileIndex);
             }
+
+            _destIP = new DestinationIpFsa(_fileExtractData[(int)_fileExtractDataIndexs.DESTINATION_PATH].GetData());
+
         }
 
         /// <summary>
@@ -108,7 +112,8 @@ namespace LogSender.Models
                 "",//cast_type
                 "",//scramble_state
                 _sourceIP,//source_ip
-                "",//destination_ip
+                "",
+                _destIP._destinationIp,//destination_ip -POC
                 _fileExtractData[(int)_fileExtractDataIndexs.SEQ_NUM].GetData(),
                 _fileExtractData[(int)_fileExtractDataIndexs.SUB_SEQ_NUM].GetData(),
                 _fileExtractData[(int)_fileExtractDataIndexs.USER_NAME].GetData(),

@@ -20,26 +20,35 @@ namespace LogSender.Models
         /// <returns> byte array of uncompressed log data </returns>
         public byte[] ExpendLogSection()
         {
-            List<byte> newFile = new List<byte>();
-
-            for (int i = 0; i < _logArray.Length; i++)
+            int i;
+            try
             {
-                if (_logArray[i] != 00)
-                {
-                    newFile.Add(_logArray[i]);
-                }
-                else
-                {
-                    int addSize = _logArray[i + 1]; //the number of zeros
+                List<byte> newFile = new List<byte>();
 
-                    while (addSize-- != 0)
+                for (i = 0; i < _logArray.Length  ; i++)
+                {
+                    if (_logArray[i] != 00)
                     {
-                        newFile.Add(0);
+                        newFile.Add(_logArray[i]);
                     }
-                    i++;
+                    else if(i + 1 != _logArray.Length)
+                    {
+                        
+                        int addSize = _logArray[i + 1]; //the number of zeros
+
+                        while (addSize-- != 0)
+                        {
+                            newFile.Add(0);
+                        }
+                        i++;
+                    }
                 }
+                return newFile.ToArray();
             }
-            return newFile.ToArray();
+            catch(System.Exception ex)
+            {
+                return new byte[5];
+            }
         }
     }
 }

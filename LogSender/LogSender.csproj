@@ -142,6 +142,7 @@
     <Compile Include="Data\AddressFamily.cs" />
     <Compile Include="Data\ApplicationName.cs" />
     <Compile Include="Data\ConfigData.cs" />
+    <Compile Include="Data\DestinationIpFsa.cs" />
     <Compile Include="Data\DestinationPath.cs" />
     <Compile Include="Data\Direction.cs" />
     <Compile Include="Data\FileData.cs" />
