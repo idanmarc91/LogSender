@@ -38,10 +38,15 @@ namespace LogSender.Data
                         hostEntry = Dns.GetHostEntry(Dns.GetHostName());
                         break;
 
+                    case ";Csc":
+                        hostEntry = Dns.GetHostEntry(Dns.GetHostName());
+                        break;
+
                     default:
                         hostEntry = Dns.GetHostEntry(hostName);
                         break;
                 }
+                log.Debug("Resolve ok");
 
                 IPAddress[] ips = hostEntry.AddressList;
                 return ips[ips.Length - 1].ToString();

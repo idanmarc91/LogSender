@@ -112,7 +112,6 @@ namespace LogSender.Models
                 "",//cast_type
                 "",//scramble_state
                 _sourceIP,//source_ip
-                "",
                 _destIP._destinationIp,//destination_ip -POC
                 _fileExtractData[(int)_fileExtractDataIndexs.SEQ_NUM].GetData(),
                 _fileExtractData[(int)_fileExtractDataIndexs.SUB_SEQ_NUM].GetData(),
