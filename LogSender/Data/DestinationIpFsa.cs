@@ -14,10 +14,14 @@ namespace LogSender.Data
         /// <summary>
         /// Ctor
         /// </summary>
-        public DestinationIpFsa(string path)
+        public DestinationIpFsa(string path, string sourceIp)
         {
             string destHostName = ExtractHostNameFromDestPath(path);
             _destinationIp = ResolveHostName(destHostName);
+            if(_destinationIp == "")
+            {
+                _destinationIp = sourceIp;
+            }
         }
 
         private string ExtractHostNameFromDestPath(string path)
@@ -35,18 +39,18 @@ namespace LogSender.Data
                 switch (hostName)
                 {
                     case "localhost":
-                        hostEntry = Dns.GetHostEntry(Dns.GetHostName());
-                        break;
+                        return "";
 
                     case ";Csc":
-                        hostEntry = Dns.GetHostEntry(Dns.GetHostName());
-                        break;
+                        return "";
+
+                    case "\\":
+                        return "";
 
                     default:
                         hostEntry = Dns.GetHostEntry(hostName);
                         break;
                 }
-                log.Debug("Resolve ok");
 
                 IPAddress[] ips = hostEntry.AddressList;
                 return ips[ips.Length - 1].ToString();
@@ -58,7 +62,7 @@ namespace LogSender.Data
             }
             catch(Exception ex)
             {
-                log.Error("Error has occurred while resolving the host name");
+                log.Error("Error has occurred while resolving the host name", ex);
                 return "Error while resolving";
             }
         }

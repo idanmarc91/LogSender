@@ -85,7 +85,7 @@ namespace LogSender.Models
                 _fileExtractData[index].ExtractData(loopIndex, expandedFileByteArray, ref fileIndex);
             }
 
-            _destIP = new DestinationIpFsa(_fileExtractData[(int)_fileExtractDataIndexs.DESTINATION_PATH].GetData());
+            _destIP = new DestinationIpFsa(_fileExtractData[(int)_fileExtractDataIndexs.DESTINATION_PATH].GetData(), _sourceIP);
 
         }
 
