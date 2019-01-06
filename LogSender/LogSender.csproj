@@ -176,17 +176,17 @@
     <Compile Include="Data\TimeStamp.cs" />
     <Compile Include="Data\UserName.cs" />
     <Compile Include="Data\CastType.cs" />
-    <Compile Include="Models\BinaryFileData.cs" />
-    <Compile Include="Models\BinaryFileHandler.cs" />
-    <Compile Include="Models\CybRow.cs" />
-    <Compile Include="Models\CybTable.cs" />
-    <Compile Include="Models\DLLRow.cs" />
-    <Compile Include="Models\DLLTable.cs" />
-    <Compile Include="Models\ExpandSVCHostRow.cs" />
-    <Compile Include="Models\FSARow.cs" />
-    <Compile Include="Models\FSATable.cs" />
-    <Compile Include="Models\HeaderParameters.cs" />
-    <Compile Include="Models\LogRow.cs" />
+    <Compile Include="Models\BinaryFile\BinaryFileData.cs" />
+    <Compile Include="Models\BinaryFile\BinaryFileHandler.cs" />
+    <Compile Include="Models\Row\CybRow.cs" />
+    <Compile Include="Models\Table\CybTable.cs" />
+    <Compile Include="Models\Row\DLLRow.cs" />
+    <Compile Include="Models\Table\DLLTable.cs" />
+    <Compile Include="Models\Row\ExpandSVCHostRow.cs" />
+    <Compile Include="Models\Row\FSARow.cs" />
+    <Compile Include="Models\Table\FSATable.cs" />
+    <Compile Include="Models\BinaryFile\HeaderParameters.cs" />
+    <Compile Include="Models\Row\LogRow.cs" />
     <Compile Include="LogSender.cs" />
     <Compile Include="LogSenderService.cs">
       <SubType>Component</SubType>
@@ -194,8 +194,8 @@
     <Compile Include="LogSenderService.Designer.cs">
       <DependentUpon>LogSenderService.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\MogRow.cs" />
-    <Compile Include="Models\MogTable.cs" />
+    <Compile Include="Models\Row\MogRow.cs" />
+    <Compile Include="Models\Table\MogTable.cs" />
     <Compile Include="Models\Payload.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="ProjectInstaller.cs">
@@ -205,8 +205,8 @@
       <DependentUpon>ProjectInstaller.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Models\Row.cs" />
-    <Compile Include="Models\Table.cs" />
+    <Compile Include="Models\Row\Row.cs" />
+    <Compile Include="Models\Table\Table.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
@@ -224,6 +224,7 @@
     <Compile Include="Utilities\ParsingBinaryFile.cs" />
     <Compile Include="Utilities\ServerConnection.cs" />
     <Compile Include="Utilities\StatusReasonMap.cs" />
+    <Compile Include="Utilities\SystemFunctions.cs" />
     <Compile Include="Utilities\UninstallService.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -251,6 +252,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

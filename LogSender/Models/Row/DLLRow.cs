@@ -6,11 +6,14 @@ using System.Text;
 
 namespace LogSender.Models
 {
-    class DLLRow : Row
+    internal class DLLRow : Row
     {
         ///**********************************************
         ///             Members Section
         ///**********************************************
+
+        #region Members section
+
         enum _fileExtractDataIndexs
         {
             PROCESS_ID, DLL_PATH, DLL_NAME, PARENT_PATH, PARENT_NAME, STATUS_REASON_LOG
@@ -19,9 +22,13 @@ namespace LogSender.Models
         private ReasonLog _reasonDll = new ReasonLog();
         private string _realStatusDll = "";
 
+        #endregion Member section
+
         ///**********************************************
         ///             Functions Section
         ///**********************************************
+
+        #region Function section
 
         /// <summary>
         /// Ctor of DLL Row class
@@ -79,6 +86,16 @@ namespace LogSender.Models
         }
 
         /// <summary>
+        /// This function add current row to data output
+        /// </summary>
+        /// <param name="dataAsString"></param>
+        public StringBuilder AddRowToDataOutput()
+        {
+            List<string> paramList = GetAsList();
+            return BuildAsCsv(paramList);
+        }
+
+        /// <summary>
         /// Get dll row parameters as List of string
         /// </summary>
         /// <returns>list<string> - dll parameters</returns>
@@ -86,7 +103,7 @@ namespace LogSender.Models
         {
             List<string> list = new List<string>
             {
-                "win",
+                Constant.OPERATINGSYSTEM,
                 _reportingComputer,
                 _timeStamp.GetClientTime(),
                 _timeStamp.GetFullServerTime(),
@@ -115,14 +132,7 @@ namespace LogSender.Models
             return list;
         }
 
-        /// <summary>
-        /// This function add current row to data output
-        /// </summary>
-        /// <param name="dataAsString"></param>
-        public StringBuilder AddRowToDataOutput()
-        {
-            List<string> paramList = GetAsList();
-            return BuildAsCsv(paramList);
-        }
+        #endregion Function section
+
     }
 }

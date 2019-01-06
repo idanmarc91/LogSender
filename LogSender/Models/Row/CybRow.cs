@@ -6,11 +6,14 @@ using System.Text;
 
 namespace LogSender.Models
 {
-    class CybRow : LogRow
+    internal class CybRow : LogRow
     {
         ///**********************************************
         ///             Members Section
         ///**********************************************
+
+        #region Members section
+
         enum _fileExtractDataIndexs
         {
             PROTOCOL, STATUS_REASON_LOG, SOURCE_PORT, DESTINATION_PORT, DIRECTION, ADDRESS_FAMILY,
@@ -21,9 +24,13 @@ namespace LogSender.Models
         private ReasonLog _reasonCyb = new ReasonLog();
         private string _realStatusCyb = "";
 
+        #endregion Member section
+
         ///**********************************************
         ///             Functions Section
         ///**********************************************
+
+        #region Function section
 
         /// <summary>
         /// ctor of LogRow class
@@ -176,6 +183,21 @@ namespace LogSender.Models
         }
 
         /// <summary>
+        /// expand svchost data - using the service table
+        /// </summary>
+        /// <param name="serviceRow"></param>
+        public void ExpandSvc(CybRow serviceRow)
+        {
+            ExpandSVCHostRow newExpandRow = new ExpandSVCHostRow
+            {
+                _appName = serviceRow._fileExtractData[(int)_fileExtractDataIndexs.PROCESS_NAME].GetData(),
+                _fullPath = serviceRow._fileExtractData[(int)_fileExtractDataIndexs.PROCESS_PATH].GetData(),
+                _reason = serviceRow._reasonCyb._reason
+            };
+            _expandSVCHost.Add(newExpandRow);
+        }
+
+        /// <summary>
         /// Return all parameters as list
         /// </summary>
         /// <returns>list of parameters </returns>
@@ -183,7 +205,7 @@ namespace LogSender.Models
         {
             List<string> list = new List<string>
             {
-                "win", //OS field
+                Constant.OPERATINGSYSTEM, //OS field
                 _reportingComputer,
                 _timeStamp.GetClientTime(),
                 _timeStamp.GetFullServerTime(),
@@ -212,19 +234,7 @@ namespace LogSender.Models
             return list;
         }
 
-        /// <summary>
-        /// expand svchost data - using the service table
-        /// </summary>
-        /// <param name="serviceRow"></param>
-        public void ExpandSvc(CybRow serviceRow)
-        {
-            ExpandSVCHostRow newExpandRow = new ExpandSVCHostRow
-            {
-                _appName = serviceRow._fileExtractData[(int)_fileExtractDataIndexs.PROCESS_NAME].GetData(),
-                _fullPath = serviceRow._fileExtractData[(int)_fileExtractDataIndexs.PROCESS_PATH].GetData(),
-                _reason = serviceRow._reasonCyb._reason
-            };
-            _expandSVCHost.Add(newExpandRow);
-        }
+        #endregion Function section
+
     }
 }

@@ -1,4 +1,5 @@
 ﻿using LogSender.Data;
+using LogSender.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,7 +11,6 @@ namespace LogSender.Models
         ///**********************************************
         ///             Members Section
         ///**********************************************
-        ///
 
         #region Member section
 
@@ -86,43 +86,6 @@ namespace LogSender.Models
         }
 
         /// <summary>
-        /// Get fsa row parameters as List of string
-        /// </summary>
-        /// <returns>list<string> - fsa parameters</returns>
-        public List<string> GetAsList()
-        {
-            List<string> list = new List<string>
-            {
-                "win",
-                _reportingComputer,
-                _timeStamp.GetClientTime(),
-                _timeStamp.GetFullServerTime(),
-                _fileExtractData[(int)_fileExtractDataIndexs.PROCESS_ID].GetData(),
-                _fileExtractData[(int)_fileExtractDataIndexs.PROCESS_NAME].GetData(),
-                _fileExtractData[(int)_fileExtractDataIndexs.PROCESS_PATH].GetData(),
-                _protocol,//protocol
-                _fileExtractData[(int)_fileExtractDataIndexs.STATUS].GetData(),
-                "",//source_port
-                _destinationPort,//destination_port
-                _direction,//direction
-                "",//cast_type
-                "",//scramble_state
-                _sourceIP,//source_ip
-                "",//destination_ip
-                _fileExtractData[(int)_fileExtractDataIndexs.SEQ_NUM].GetData(),
-                _fileExtractData[(int)_fileExtractDataIndexs.SUB_SEQ_NUM].GetData(),
-                _fileExtractData[(int)_fileExtractDataIndexs.USER_NAME].GetData(),
-                "",//mog_counter
-                _fileExtractData[(int)_fileExtractDataIndexs.DESTINATION_PATH].GetData(),
-                _fileExtractData[(int)_fileExtractDataIndexs.REASON].GetData(),
-                "",//dll path
-                "",//dll name
-                "",//chain_array
-            };
-            return list;
-        }
-
-        /// <summary>
         /// This function add current row to data output
         /// </summary>
         public StringBuilder AddRowToDataOutput()
@@ -146,7 +109,6 @@ namespace LogSender.Models
             };
             _expandSVCHost.Add(newExpandRow);
         }
-
 
         /// <summary>
         /// get sequence number
@@ -173,6 +135,43 @@ namespace LogSender.Models
         public string GetFullAccTime()
         {
             return _timeStamp.GetFullServerTime();
+        }
+
+        /// <summary>
+        /// Get fsa row parameters as List of string
+        /// </summary>
+        /// <returns>list<string> - fsa parameters</returns>
+        public List<string> GetAsList()
+        {
+            List<string> list = new List<string>
+            {
+                Constant.OPERATINGSYSTEM,
+                _reportingComputer,
+                _timeStamp.GetClientTime(),
+                _timeStamp.GetFullServerTime(),
+                _fileExtractData[(int)_fileExtractDataIndexs.PROCESS_ID].GetData(),
+                _fileExtractData[(int)_fileExtractDataIndexs.PROCESS_NAME].GetData(),
+                _fileExtractData[(int)_fileExtractDataIndexs.PROCESS_PATH].GetData(),
+                _protocol,//protocol
+                _fileExtractData[(int)_fileExtractDataIndexs.STATUS].GetData(),
+                "",//source_port
+                _destinationPort,//destination_port
+                _direction,//direction
+                "",//cast_type
+                "",//scramble_state
+                _sourceIP,//source_ip
+                "",//destination_ip
+                _fileExtractData[(int)_fileExtractDataIndexs.SEQ_NUM].GetData(),
+                _fileExtractData[(int)_fileExtractDataIndexs.SUB_SEQ_NUM].GetData(),
+                _fileExtractData[(int)_fileExtractDataIndexs.USER_NAME].GetData(),
+                "",//mog_counter
+                _fileExtractData[(int)_fileExtractDataIndexs.DESTINATION_PATH].GetData(),
+                _fileExtractData[(int)_fileExtractDataIndexs.REASON].GetData(),
+                "",//dll path
+                "",//dll name
+                "",//chain_array
+            };
+            return list;
         }
 
         #endregion Function section

@@ -13,15 +13,21 @@ namespace LogSender
         ///             Members Section
         ///**********************************************
 
+        #region Members section
+
         //Constant section
         const int BYTES_IN_ROW = 2064;
 
         //Private Section
         private readonly List<DLLRow> _DLLTable;
 
+        #endregion Member section
+
         ///**********************************************
         ///             Functions Section
         ///**********************************************
+
+        #region Function section
 
         //Ctor of DLLTable class
         public DLLTable(byte[] expandedFileByteArray , string reportingComputer , Int64 serverClientDelta)
@@ -58,5 +64,8 @@ namespace LogSender
                 csvFormat.Append( row.AddRowToDataOutput() );
             }
         }
+
+        #endregion Function section
+
     }
 }

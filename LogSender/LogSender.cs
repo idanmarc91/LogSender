@@ -1,10 +1,7 @@
 ﻿using LogSender.Utilities;
 using System;
-using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Management;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -41,14 +38,7 @@ namespace LogSender
         {
             log.Debug("Start creating log sender class");
 
-            //var name = (from x in new ManagementObjectSearcher("SELECT Caption FROM Win32_OperatingSystem").Get().Cast<ManagementObject>()
-            //            select x.GetPropertyValue("Caption")).FirstOrDefault();
-            //string os = name != null ? name.ToString() : "Unknown";
-
-            //if (!_configFile.ReadConfigFile())
-            //{
-            //    throw new Exception("Problem with config files");
-            //}
+            SystemFunctions.SetOperatingSystem();
 
             _directory = new List<KeyValuePair<string, DirectoryInfo>>
             {
@@ -57,6 +47,7 @@ namespace LogSender
                 new KeyValuePair<string , DirectoryInfo>( "cimg" , new DirectoryInfo( ConfigFile.Instance._configData._cimgFolderPath ) ) ,
                 new KeyValuePair<string , DirectoryInfo>( "mog" , new DirectoryInfo( ConfigFile.Instance._configData._mogFolderPath) )
             };
+             
             log.Debug("log sender class created");
         }
 

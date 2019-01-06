@@ -32,5 +32,7 @@
             //PARENT_NAME ,
             CHAIN_ARRAY
         }
+
+        public static string OPERATINGSYSTEM { get; set; }
     }
 }

@@ -13,6 +13,8 @@ namespace LogSender
         ///             Members Section
         ///**********************************************
 
+        #region Members section
+
         //Constant Section
         const int BYTES_IN_ROW = 1600;
 
@@ -20,9 +22,13 @@ namespace LogSender
         private readonly List<CybRow> _cybTable;
         private readonly List<CybRow> _servicesCybTable;
 
+        #endregion Member section
+
         ///**********************************************
         ///             Functions Section
         ///**********************************************
+
+        #region Function section
 
         //Ctor of CybTable Class
         public CybTable(byte[] expandedFileByteArray, string reportinComputer, Int64 serverClientDelta, UInt16 headerVersion)
@@ -91,7 +97,10 @@ namespace LogSender
                 csvFormat.Append(row.AddRowToDataOutput());
             }
         }
+
+        #endregion Function section
     }
+
 }
 
 

@@ -12,16 +12,22 @@ namespace LogSender.Models
         ///             Members Section
         ///**********************************************
 
+        #region Members section
+
         //Constant Section
         const int BYTES_IN_ROW = 1608;
 
-        //Private Sction
+        //Private Section
         private readonly List<MogRow> _mogTable;
         private readonly List<MogRow> _serviceMogTable;
+
+        #endregion Member section
 
         ///**********************************************
         ///             Functions Section
         ///**********************************************
+
+        #region Function section
 
         //Ctor of MogTable Class
         public MogTable(byte[] expandedFileByteArray , string reportingComputer , Int64 serverClientDelta , UInt16 headerVersion)
@@ -69,6 +75,8 @@ namespace LogSender.Models
 
             }
         }
+
+        #endregion Function section
     }
 }
 

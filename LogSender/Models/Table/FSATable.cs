@@ -14,6 +14,8 @@ namespace LogSender
         ///             Members Section
         ///**********************************************
 
+        #region Members section
+
         //Constant Section
         const int BYTES_IN_ROW = 2584;
 
@@ -21,10 +23,13 @@ namespace LogSender
         private readonly List<FSARow> _FsaTable;
         private readonly List<FSARow> _servicesFsaTable;
 
+        #endregion Member section
 
         ///**********************************************
         ///             Functions Section
         ///**********************************************
+
+        #region Function section
 
         //Ctor of FSATable
         public FsaTable(byte[] expandedFileByteArray , string reportingComputer , Int64 serverClientDelta , UInt16 headerVersion)
@@ -95,5 +100,7 @@ namespace LogSender
                 csvFormat.Append( row.AddRowToDataOutput() );
             }
         }
+        
+        #endregion Function section
     }
 }
