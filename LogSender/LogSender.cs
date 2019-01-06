@@ -1,7 +1,10 @@
 ﻿using LogSender.Utilities;
 using System;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Management;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -37,6 +40,10 @@ namespace LogSender
         public LogSender()
         {
             log.Debug("Start creating log sender class");
+
+            //var name = (from x in new ManagementObjectSearcher("SELECT Caption FROM Win32_OperatingSystem").Get().Cast<ManagementObject>()
+            //            select x.GetPropertyValue("Caption")).FirstOrDefault();
+            //string os = name != null ? name.ToString() : "Unknown";
 
             //if (!_configFile.ReadConfigFile())
             //{

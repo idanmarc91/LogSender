@@ -94,7 +94,7 @@ namespace LogSender.Models
             }
 
             //The agent is suppling us with status and reason in the same field
-            //we need to seperate them to 2 fields: reason, real status.(the
+            //we need to separate them to 2 fields: reason, real status.(the
             //extracted status is not the real status)
 
             _reasonMog.GetReasonFromExtractedData(_fileExtractData[(int)_fileExtractDataIndexs.STATUS_REASON_LOG].GetData());
@@ -117,7 +117,7 @@ namespace LogSender.Models
         }
 
         /// <summary>
-        /// when flow state parameter == END resert some parameters to empty string
+        /// when flow state parameter == END reset some parameters to empty string
         /// </summary>
         private void SetEmptyString()
         {
@@ -183,51 +183,6 @@ namespace LogSender.Models
         }
 
         /// <summary>
-        /// Get application name
-        /// </summary>
-        /// <returns>string - app name</returns>
-        public string GetAppName()
-        {
-            return _fileExtractData[(int)_fileExtractDataIndexs.PROCESS_NAME].GetData();
-        }
-
-        ///// <summary>
-        ///// Change application name
-        ///// </summary>
-        //public void ChangeAppName()
-        //{
-        //    _fileExtractData[(int)_fileExtractDataIndexs.Pro].SetData(_fileExtractData[(int)_fileExtractDataIndexs.APPLICATION_NAME].GetData() + " (" + _expandSVCHost.Count + ")");
-        //}
-
-
-        /// <summary>
-        /// get sub seq number parameter
-        /// </summary>
-        /// <returns>string - sequence number</returns>
-        public string GetSeqNum()
-        {
-            return _fileExtractData[(int)_fileExtractDataIndexs.SEQ_NUM].GetData();
-        }
-
-        /// <summary>
-        /// get sub seq number parameter
-        /// </summary>
-        /// <returns>string - sub sequence number</returns>
-        public string GetSubSeqNum()
-        {
-            return _fileExtractData[(int)_fileExtractDataIndexs.SUB_SEQ_NUM].GetData();
-        }
-
-        /// <summary>
-        /// get full server time parameter
-        /// </summary>
-        /// <returns></returns>
-        public string GetFullAccTime()
-        {
-            return _timeStamp.GetFullServerTime();
-        }
-
-        /// <summary>
         /// expand svchost data - using the service table
         /// </summary>
         /// <param name="serviceRow"></param>
@@ -237,7 +192,7 @@ namespace LogSender.Models
             {
                 _appName = serviceRow._fileExtractData[(int)_fileExtractDataIndexs.PROCESS_NAME].GetData(),
                 _fullPath = serviceRow._fileExtractData[(int)_fileExtractDataIndexs.PROCESS_PATH].GetData(),
-                _status = serviceRow._fileExtractData[(int)_fileExtractDataIndexs.STATUS_REASON_LOG].GetData()
+                _reason = _reasonMog._reason
             };
             _expandSVCHost.Add(newExpandRow);
         }

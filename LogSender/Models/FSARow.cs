@@ -142,27 +142,11 @@ namespace LogSender.Models
             {
                 _appName = serviceRow._fileExtractData[(int)_fileExtractDataIndexs.PROCESS_NAME].GetData(),
                 _fullPath = serviceRow._fileExtractData[(int)_fileExtractDataIndexs.DESTINATION_PATH].GetData(),
-                _status = serviceRow._fileExtractData[(int)_fileExtractDataIndexs.REASON].GetData()
+                _reason = serviceRow._fileExtractData[(int)_fileExtractDataIndexs.REASON].GetData()
             };
             _expandSVCHost.Add(newExpandRow);
         }
 
-        /// <summary>
-        /// This function return process name parameter
-        /// </summary>
-        /// <returns>string process name</returns>
-        public string GetProcessName()
-        {
-            return _fileExtractData[(int)_fileExtractDataIndexs.PROCESS_NAME].GetData();
-        }
-
-        /// <summary>
-        /// Change Process name
-        /// </summary>
-        public void ChangeProcessName()
-        {
-            _fileExtractData[(int)_fileExtractDataIndexs.PROCESS_NAME].SetData(_fileExtractData[(int)_fileExtractDataIndexs.PROCESS_NAME].GetData() + " (" + _expandSVCHost.Count + ")");
-        }
 
         /// <summary>
         /// get sequence number

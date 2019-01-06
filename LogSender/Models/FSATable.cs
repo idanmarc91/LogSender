@@ -38,7 +38,7 @@ namespace LogSender
                 int bytesInRow = DefineRowSize( headerVersion , BYTES_IN_ROW );
                 string _sourceIP = ServerConnection.GetLocalIPAddress();
 
-                //main loop itaration binary file and extract data from it
+                //main loop iteration binary file and extract data from it
                 for( int loopIndex = 0 ; loopIndex < expandedFileByteArray.Length ; loopIndex = loopIndex + bytesInRow )
                 {
                     FSARow row = new FSARow( serverClientDelta , reportingComputer , headerVersion, _sourceIP);

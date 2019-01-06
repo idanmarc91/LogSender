@@ -212,15 +212,6 @@ namespace LogSender.Models
             return list;
         }
 
-        ///// <summary>
-        ///// Get application name
-        ///// </summary>
-        ///// <returns>string - app name</returns>
-        //public string GetAppName()
-        //{
-        //    return _fileExtractData[(int)_fileExtractDataIndexs.PROCESS_NAME].GetData();
-        //}
-
         /// <summary>
         /// expand svchost data - using the service table
         /// </summary>
@@ -231,8 +222,7 @@ namespace LogSender.Models
             {
                 _appName = serviceRow._fileExtractData[(int)_fileExtractDataIndexs.PROCESS_NAME].GetData(),
                 _fullPath = serviceRow._fileExtractData[(int)_fileExtractDataIndexs.PROCESS_PATH].GetData(),
-                _status = serviceRow._realStatusCyb
-                //_status = serviceRow._fileExtractData[(int)_fileExtractDataIndexs.STATUS_REASON_CYB].GetData()
+                _reason = serviceRow._reasonCyb._reason
             };
             _expandSVCHost.Add(newExpandRow);
         }

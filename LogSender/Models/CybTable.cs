@@ -16,7 +16,7 @@ namespace LogSender
         //Constant Section
         const int BYTES_IN_ROW = 1600;
 
-        //Private Sction
+        //Private Section
         private readonly List<CybRow> _cybTable;
         private readonly List<CybRow> _servicesCybTable;
 

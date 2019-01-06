@@ -51,7 +51,7 @@ namespace LogSender.Models
 
             for (int index = 0; index < _expandSVCHost.Count; index++)
             {
-                svcTemp.Append(_expandSVCHost[index]._appName + "," + _expandSVCHost[index]._fullPath + "," + _expandSVCHost[index]._status);
+                svcTemp.Append(_expandSVCHost[index]._appName + "," + _expandSVCHost[index]._fullPath + "," + _expandSVCHost[index]._reason);
 
                 if (index + 1 != _expandSVCHost.Count)
                 {
