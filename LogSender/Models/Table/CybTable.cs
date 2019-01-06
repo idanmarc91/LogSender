@@ -55,6 +55,7 @@ namespace LogSender
                         _servicesCybTable.Add(row);
                     }
                 }
+
                 ExpandSVCHost();
             }
             catch (Exception ex)
@@ -75,12 +76,12 @@ namespace LogSender
                 {
                     foreach (CybRow serviceRow in _servicesCybTable)
                     {
-                        if ((serviceRow.GetSubSeqNum() == row.GetSeqNum()) && (serviceRow.GetFullAccTime() == row.GetFullAccTime()))
+                        if ((serviceRow.GetSubSeqNum() == row.GetSeqNum()) && (serviceRow.TimeStamp._fullServerTimeStamp == row.TimeStamp._fullServerTimeStamp))
                         {
                             row.ExpandSvc(serviceRow);
                         }
                     }
-                    _servicesCybTable.RemoveAll(i => i.GetFullAccTime() == row.GetFullAccTime() && i.GetSubSeqNum() == row.GetSeqNum());
+                    _servicesCybTable.RemoveAll(i => i.TimeStamp._fullServerTimeStamp == row.TimeStamp._fullServerTimeStamp && i.GetSubSeqNum() == row.GetSeqNum());
                 }
             }
         }

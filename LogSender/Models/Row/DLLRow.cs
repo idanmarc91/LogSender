@@ -37,7 +37,7 @@ namespace LogSender.Models
         /// <param name="rowNumber"></param>
         public DLLRow(Int64 serverClientDelta, string reportingComputer)
         {
-            _timeStamp = new TimeStamp(serverClientDelta);
+            TimeStamp = new TimeStamp(serverClientDelta);
             _reportingComputer = reportingComputer;
             _fileExtractData = new List<FileData>
             {
@@ -58,7 +58,7 @@ namespace LogSender.Models
         public void ExtractData(int loopIndex, byte[] expandedFileByteArray)
         {
             int fileIndex = 0;
-            _timeStamp.ExtractData(loopIndex, expandedFileByteArray, ref fileIndex);
+            TimeStamp.ExtractData(loopIndex, expandedFileByteArray, ref fileIndex);
 
             for (int index = 0; index < _fileExtractData.Count; index++)
             {
@@ -105,8 +105,8 @@ namespace LogSender.Models
             {
                 Constant.OPERATINGSYSTEM,
                 _reportingComputer,
-                _timeStamp.GetClientTime(),
-                _timeStamp.GetFullServerTime(),
+                TimeStamp._clientTimeStamp,
+                TimeStamp._fullServerTimeStamp,
                 _fileExtractData[(int)_fileExtractDataIndexs.PROCESS_ID].GetData(),
                 _fileExtractData[(int)_fileExtractDataIndexs.PARENT_NAME].GetData(),//process name  = parent name
                 _fileExtractData[(int)_fileExtractDataIndexs.PARENT_PATH].GetData(),//process path = parent path

@@ -11,7 +11,7 @@ namespace LogSender.Models
         ///**********************************************
         protected string _reportingComputer;
         protected List<FileData> _fileExtractData;
-        protected TimeStamp _timeStamp;
+        public TimeStamp TimeStamp { get; protected set; }
 
         ///**********************************************
         ///             Functions Section

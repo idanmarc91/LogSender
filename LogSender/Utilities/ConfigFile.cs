@@ -67,6 +67,7 @@ namespace LogSender.Utilities
             {
                 int startOffset;
                 bool hostFromAgent = false;
+
                 #region Read from LogSender config file
 
                 //Read Log Sender Configuration file

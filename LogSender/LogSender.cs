@@ -162,7 +162,7 @@ namespace LogSender
 
                 //for testing the string
                 //File.WriteAllText(@"C:\Users\idanm\Desktop\test.txt", multipleLogFileAsjsonString);
-
+                
                 //gzip data
                 MemoryStream compressedData = GZipCompresstion.CompressString(multipleLogFileAsjsonString);
 

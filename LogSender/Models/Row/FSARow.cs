@@ -42,7 +42,7 @@ namespace LogSender.Models
 
             //insert host name to row
             _reportingComputer = reportingComputer;
-            _timeStamp = new TimeStamp(serverClientDelta);
+            TimeStamp = new TimeStamp(serverClientDelta);
             _headerVersion = headerVersion;
 
             _sourceIP = sourceIP;
@@ -71,7 +71,7 @@ namespace LogSender.Models
             //reset file index
             int fileIndex = 0;
 
-            _timeStamp.ExtractData(loopIndex, expandedFileByteArray, ref fileIndex);
+            TimeStamp.ExtractData(loopIndex, expandedFileByteArray, ref fileIndex);
 
             for (int index = 0; index < _fileExtractData.Count; index++)
             {
@@ -132,10 +132,10 @@ namespace LogSender.Models
         /// get full access time
         /// </summary>
         /// <returns>string value</returns>
-        public string GetFullAccTime()
-        {
-            return _timeStamp.GetFullServerTime();
-        }
+        //public string GetFullAccTime()
+        //{
+        //    return _timeStamp.GetFullServerTime();
+        //}
 
         /// <summary>
         /// Get fsa row parameters as List of string
@@ -147,8 +147,8 @@ namespace LogSender.Models
             {
                 Constant.OPERATINGSYSTEM,
                 _reportingComputer,
-                _timeStamp.GetClientTime(),
-                _timeStamp.GetFullServerTime(),
+                TimeStamp._clientTimeStamp,
+                TimeStamp._fullServerTimeStamp,
                 _fileExtractData[(int)_fileExtractDataIndexs.PROCESS_ID].GetData(),
                 _fileExtractData[(int)_fileExtractDataIndexs.PROCESS_NAME].GetData(),
                 _fileExtractData[(int)_fileExtractDataIndexs.PROCESS_PATH].GetData(),

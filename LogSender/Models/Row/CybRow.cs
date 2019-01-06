@@ -45,7 +45,7 @@ namespace LogSender.Models
             //insert host name to row
             _reportingComputer = reportingComputer;
             _headerVersion = headerVersion;
-            _timeStamp = new TimeStamp(serverClientDelta);
+            TimeStamp = new TimeStamp(serverClientDelta);
 
             _fileExtractData = new List<FileData>
             {
@@ -80,7 +80,7 @@ namespace LogSender.Models
             int fileIndex = 0;
 
             //extract time stamp from binary file
-            _timeStamp.ExtractData(loopIndex, expandedFileByteArray, ref fileIndex);
+            TimeStamp.ExtractData(loopIndex, expandedFileByteArray, ref fileIndex);
 
             for (int index = 0; index < _fileExtractData.Count; index++)
             {
@@ -163,14 +163,14 @@ namespace LogSender.Models
             return _fileExtractData[(int)_fileExtractDataIndexs.SUB_SEQ_NUM].GetData();
         }
 
-        /// <summary>
-        /// get full server time parameter
-        /// </summary>
-        /// <returns></returns>
-        public string GetFullAccTime()
-        {
-            return _timeStamp.GetFullServerTime();
-        }
+        ///// <summary>
+        ///// get full server time parameter
+        ///// </summary>
+        ///// <returns></returns>
+        //public string GetFullAccTime()
+        //{
+        //    return _timeStamp.GetFullServerTime();
+        //}
 
         /// <summary>
         /// This function add current row to data output
@@ -207,8 +207,8 @@ namespace LogSender.Models
             {
                 Constant.OPERATINGSYSTEM, //OS field
                 _reportingComputer,
-                _timeStamp.GetClientTime(),
-                _timeStamp.GetFullServerTime(),
+                TimeStamp._clientTimeStamp,
+                TimeStamp._fullServerTimeStamp,
                 "",//process_id
                 _fileExtractData[(int)_fileExtractDataIndexs.PROCESS_NAME].GetData(),
                 _fileExtractData[(int)_fileExtractDataIndexs.PROCESS_PATH].GetData(),

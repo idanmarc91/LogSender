@@ -44,7 +44,7 @@ namespace LogSender.Models
             //insert host name to row
             _reportingComputer = reportingComputer;
             _headerVersion = headerVersion;
-            _timeStamp = new TimeStamp(serverClientDelta);
+            TimeStamp = new TimeStamp(serverClientDelta);
 
             _fileExtractData = new List<FileData>
             {
@@ -80,7 +80,7 @@ namespace LogSender.Models
             int fileIndex = 0;
 
             //extract time stamp from binary file
-            _timeStamp.ExtractData(loopIndex, expandedFileByteArray, ref fileIndex);
+            TimeStamp.ExtractData(loopIndex, expandedFileByteArray, ref fileIndex);
 
             //extract Data
             for (int index = 0; index < _fileExtractData.Count; index++)
@@ -122,6 +122,33 @@ namespace LogSender.Models
         {
             return _fileExtractData[(int)_fileExtractDataIndexs.SUB_SEQ_NUM].GetData() == "0" ? true : false;
         }
+
+        /// <summary>
+        /// get sub seq number parameter
+        /// </summary>
+        /// <returns>string - sequence number</returns>
+        public string GetSeqNum()
+        {
+            return _fileExtractData[(int)_fileExtractDataIndexs.SEQ_NUM].GetData();
+        }
+
+        /// <summary>
+        /// get sub seq number parameter
+        /// </summary>
+        /// <returns>string - sub sequence number</returns>
+        public string GetSubSeqNum()
+        {
+            return _fileExtractData[(int)_fileExtractDataIndexs.SUB_SEQ_NUM].GetData();
+        }
+
+        /// <summary>
+        /// get full server time parameter
+        /// </summary>
+        /// <returns></returns>
+        //public string GetFullAccTime()
+        //{
+        //    return _timeStamp.GetFullServerTime();
+        //}
 
         /// <summary>
         /// when flow state parameter == END reset some parameters to empty string
@@ -177,8 +204,8 @@ namespace LogSender.Models
             {
                 Constant.OPERATINGSYSTEM, //OS field
                 _reportingComputer,
-                _timeStamp.GetClientTime(),
-                _timeStamp.GetFullServerTime(),
+                TimeStamp._clientTimeStamp,
+                TimeStamp._fullServerTimeStamp,
                 "",//process id
                 _fileExtractData[(int)_fileExtractDataIndexs.PROCESS_NAME].GetData(),
                 _fileExtractData[(int)_fileExtractDataIndexs.PROCESS_PATH].GetData(),

@@ -38,9 +38,9 @@ namespace LogSender
         }
 
         /// <summary>
-        /// Get csv format string lenght (in bytes)
+        /// Get csv format string length (in bytes)
         /// </summary>
-        /// <returns>int -  size of csv lenght</returns>
+        /// <returns>int -  size of csv length</returns>
         internal int GetDataSize()
         {
             return csvFormat.Length;
