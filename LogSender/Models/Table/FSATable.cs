@@ -16,9 +16,6 @@ namespace LogSender
 
         #region Members section
 
-        //Constant Section
-        const int BYTES_IN_ROW = 2584;
-
         //Private Section
         private readonly List<FSARow> _FsaTable;
         private readonly List<FSARow> _servicesFsaTable;
@@ -40,7 +37,8 @@ namespace LogSender
                 _servicesFsaTable = new List<FSARow>();
 
                 //define how much bytes in each FSA row 
-                int bytesInRow = DefineRowSize( headerVersion , BYTES_IN_ROW );
+                int bytesInRow = DefineRowSize( headerVersion , Utilities.Constant.FSA_ROW_SIZE);
+
                 string _sourceIP = ServerConnection.GetLocalIPAddress();
 
                 //main loop iteration binary file and extract data from it

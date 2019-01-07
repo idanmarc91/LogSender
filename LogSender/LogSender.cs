@@ -38,8 +38,6 @@ namespace LogSender
         {
             log.Debug("Start creating log sender class");
 
-            SystemFunctions.SetOperatingSystem();
-
             _directory = new List<KeyValuePair<string, DirectoryInfo>>
             {
                 new KeyValuePair<string , DirectoryInfo>( "cyb" , new DirectoryInfo( ConfigFile.Instance._configData._cybFolderPath ) ) ,

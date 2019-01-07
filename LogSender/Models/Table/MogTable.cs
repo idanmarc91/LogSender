@@ -14,9 +14,6 @@ namespace LogSender.Models
 
         #region Members section
 
-        //Constant Section
-        const int BYTES_IN_ROW = 1608;
-
         //Private Section
         private readonly List<MogRow> _mogTable;
         private readonly List<MogRow> _serviceMogTable;
@@ -37,9 +34,7 @@ namespace LogSender.Models
                 _mogTable = new List<MogRow>();
                 _serviceMogTable = new List<MogRow>();
 
-                int bytesInRow = DefineRowSize( headerVersion , BYTES_IN_ROW );
-
-                for( int loopIndex = 0 ; loopIndex < expandedFileByteArray.Length ; loopIndex = loopIndex + bytesInRow )
+                for( int loopIndex = 0 ; loopIndex < expandedFileByteArray.Length ; loopIndex = loopIndex + Utilities.Constant.MOG_ROW_SIZE)
                 {
                     //create new row
                     MogRow row = new MogRow( serverClientDelta , reportingComputer , headerVersion );
@@ -55,6 +50,7 @@ namespace LogSender.Models
                         _serviceMogTable.Add( row );
                     }
                 }
+
                 ExpandSVCHost();
 
             }

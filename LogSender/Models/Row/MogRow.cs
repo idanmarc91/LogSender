@@ -202,7 +202,7 @@ namespace LogSender.Models
         {
             List<string> list = new List<string>
             {
-                Constant.OPERATINGSYSTEM, //OS field
+                Constant.OPERATING_SYSTEM, //OS field
                 _reportingComputer,
                 TimeStamp._clientTimeStamp,
                 TimeStamp._fullServerTimeStamp,

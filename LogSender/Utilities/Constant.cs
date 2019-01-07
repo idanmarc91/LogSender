@@ -1,6 +1,6 @@
 ﻿namespace LogSender.Utilities
 {
-    public class Constant
+    public static class Constant
     {
         public enum ParamListIndexs
         {
@@ -33,6 +33,11 @@
             CHAIN_ARRAY
         }
 
-        public static string OPERATINGSYSTEM { get; set; }
+        public static readonly string OPERATING_SYSTEM = SystemFunctions.GetOperatingSystem();
+
+        public const int MOG_ROW_SIZE = 2120;
+        public const int CYB_ROW_SIZE = 1600;
+        public const int DLL_ROW_SIZE = 2064;
+        public const int FSA_ROW_SIZE = 2584;
     }
 }

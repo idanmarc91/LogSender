@@ -15,9 +15,6 @@ namespace LogSender
 
         #region Members section
 
-        //Constant Section
-        const int BYTES_IN_ROW = 1600;
-
         //Private Section
         private readonly List<CybRow> _cybTable;
         private readonly List<CybRow> _servicesCybTable;
@@ -38,7 +35,7 @@ namespace LogSender
                 _cybTable = new List<CybRow>();
                 _servicesCybTable = new List<CybRow>();
 
-                int bytesInRow = DefineRowSize(headerVersion, BYTES_IN_ROW);
+                int bytesInRow = DefineRowSize(headerVersion, Utilities.Constant.CYB_ROW_SIZE);
 
                 for (int loopIndex = 0; loopIndex < expandedFileByteArray.Length; loopIndex = loopIndex + bytesInRow)
                 {

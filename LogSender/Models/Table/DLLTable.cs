@@ -15,9 +15,6 @@ namespace LogSender
 
         #region Members section
 
-        //Constant section
-        const int BYTES_IN_ROW = 2064;
-
         //Private Section
         private readonly List<DLLRow> _DLLTable;
 
@@ -37,8 +34,7 @@ namespace LogSender
                 //create new DLL list
                 _DLLTable = new List<DLLRow>();
 
-
-                for( int loopIndex = 0 ; loopIndex < expandedFileByteArray.Length ; loopIndex = loopIndex + BYTES_IN_ROW )
+                for( int loopIndex = 0 ; loopIndex < expandedFileByteArray.Length ; loopIndex = loopIndex + Utilities.Constant.DLL_ROW_SIZE)
                 {
                     //create new row
                     DLLRow row = new DLLRow( serverClientDelta, reportingComputer);
