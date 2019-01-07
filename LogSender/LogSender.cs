@@ -40,9 +40,9 @@ namespace LogSender
 
             _directory = new List<KeyValuePair<string, DirectoryInfo>>
             {
-               // new KeyValuePair<string , DirectoryInfo>( "cyb" , new DirectoryInfo( ConfigFile.Instance._configData._cybFolderPath ) ) ,
-                //new KeyValuePair<string , DirectoryInfo>( "fsa" , new DirectoryInfo( ConfigFile.Instance._configData._fsaFolderPath) ) ,
-                //new KeyValuePair<string , DirectoryInfo>( "cimg" , new DirectoryInfo( ConfigFile.Instance._configData._cimgFolderPath ) ) ,
+                new KeyValuePair<string , DirectoryInfo>( "cyb" , new DirectoryInfo( ConfigFile.Instance._configData._cybFolderPath ) ) ,
+                new KeyValuePair<string , DirectoryInfo>( "fsa" , new DirectoryInfo( ConfigFile.Instance._configData._fsaFolderPath) ) ,
+                new KeyValuePair<string , DirectoryInfo>( "cimg" , new DirectoryInfo( ConfigFile.Instance._configData._cimgFolderPath ) ) ,
                 new KeyValuePair<string , DirectoryInfo>( "mog" , new DirectoryInfo( ConfigFile.Instance._configData._mogFolderPath) )
             };
              
