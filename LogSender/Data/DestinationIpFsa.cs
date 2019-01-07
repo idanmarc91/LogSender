@@ -16,8 +16,8 @@ namespace LogSender.Data
         /// </summary>
         public DestinationIpFsa(string path, string sourceIp)
         {
-            string destHostName = ExtractHostNameFromDestPath(path);
-            _destinationIp = ResolveHostName(destHostName);
+            //string destHostName = ExtractHostNameFromDestPath(path);
+            _destinationIp = ResolveHostName(path);
             if(_destinationIp == "")
             {
                 _destinationIp = sourceIp;
@@ -26,12 +26,15 @@ namespace LogSender.Data
 
         private string ExtractHostNameFromDestPath(string path)
         {
-            string pattern = @"[^\\][\w]*[^\\]";
+            //string pattern = @"[^\\][\w]*[^\\]"; //with no ip recognize
+            string pattern = @"[^\\][\w\d.]*[^\\]"; //include ip recognize
             return Regex.Match(path, pattern).Value;
         }
 
-        private string ResolveHostName(string hostName)
+        private string ResolveHostName(string path)
         {
+            string hostName = ExtractHostNameFromDestPath(path);
+
             try
             {
                 IPHostEntry hostEntry;
@@ -53,11 +56,12 @@ namespace LogSender.Data
                 }
 
                 IPAddress[] ips = hostEntry.AddressList;
-                return ips[ips.Length - 1].ToString();
+                return (ips.Length > 0 )? ips[ips.Length - 1].ToString() : "";
             }
             catch(SocketException ex)
             {
                 log.Warn(ex.Message);
+                System.IO.File.AppendAllText(Environment.CurrentDirectory  + "\\Logs\\destination_ip.txt","Error occurred while resolving: "+ ex.Message + path);
                 return ex.Message;
             }
             catch(Exception ex)
