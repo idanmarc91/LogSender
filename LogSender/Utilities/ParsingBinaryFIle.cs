@@ -110,7 +110,7 @@ namespace LogSender.Utilities
                 //check if log table was created in the switch case above
                 if (logTable != null)
                 {
-                    log.Debug(file.Name + " log file has successfuly finished his parsing process");
+                    log.Debug(file.Name + " log file has successfully finished his parsing process");
                     return logTable;
                 }
                 else
@@ -162,12 +162,12 @@ namespace LogSender.Utilities
                         continue;
                     }
 
-                    //parsing oparation
+                    //parsing operation
                     Table logTable = ParsingBinaryFile.Parse(file, directory.Key);
 
                     if (logTable == null)
                     {
-                        log.Error("parsing process failed, log table is null. file \"" + file.Name + "\" skiped");
+                        log.Error("parsing process failed, log table is null. file \"" + file.Name + "\" skipped");
                         throw new Exception();
                     }
 
