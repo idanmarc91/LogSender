@@ -39,5 +39,9 @@
         public const int CYB_ROW_SIZE = 1600;
         public const int DLL_ROW_SIZE = 2064;
         public const int FSA_ROW_SIZE = 2584;
+
+        public static readonly string DOMAIN_FULL_NAME = SystemFunctions.GetFullDomainName();
+        public static readonly string DOMAIN_NAME = SystemFunctions.ExtractDomainName() ;
+        public static readonly string DOMAIN_IP = SystemFunctions.GetDomainIp() ;
     }
 }

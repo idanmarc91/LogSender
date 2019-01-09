@@ -71,11 +71,17 @@ namespace LogSender.Utilities
                 if (!bFile.IsFileNull())
                 {
                     log.Debug(file.Name + " log file started his parsing process");
-                    //preprocessing file
+                    //Preprocessing file
                     BinaryFileData data = bFile.SeparateHeaderAndFile();
 
-                    //expend log section
+                    //Expend log section
                     byte[] expandedFileByteArray = data.ExpendLogSection();
+
+                    //Expand process failed
+                    if (expandedFileByteArray.Length == 0)
+                    {
+                        throw new Exception("Binary file expand process has failed.");
+                    }
 
                     //get header parameters
                     HeaderParameters headerParameters = new HeaderParameters();
@@ -129,10 +135,10 @@ namespace LogSender.Utilities
         /// This funcion add data header for output string
         /// </summary>
         /// <param name="dataAsString"></param>
-        public static void AddOutputHeader(StringBuilder dataAsString)
-        {
-            dataAsString.Append(ServiceStack.Text.CsvSerializer.SerializeToCsv(_csvHeader));
-        }
+        //public static void AddOutputHeader(StringBuilder dataAsString)
+        //{
+        //    dataAsString.Append(ServiceStack.Text.CsvSerializer.SerializeToCsv(_csvHeader));
+        //}
 
         /// <summary>
         /// This function parse the binary logs inside current folder

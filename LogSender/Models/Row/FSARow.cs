@@ -21,9 +21,10 @@ namespace LogSender.Models
         };
 
         private readonly string _protocol = "SMB";
-        private readonly string _direction = "outgoing";
+        private readonly string _direction = "Outbound";
         private readonly string _destinationPort = "445";
         private string _sourceIP;
+        private DestinationIpFsa _destIP;
 
         #endregion Member section
 
@@ -83,6 +84,8 @@ namespace LogSender.Models
                 //extract data from expandedFileByteArray
                 _fileExtractData[index].ExtractData(loopIndex, expandedFileByteArray, ref fileIndex);
             }
+
+            _destIP = new DestinationIpFsa(_fileExtractData[(int)_fileExtractDataIndexs.DESTINATION_PATH].GetData(), _sourceIP);
         }
 
         /// <summary>
@@ -129,15 +132,6 @@ namespace LogSender.Models
         }
 
         /// <summary>
-        /// get full access time
-        /// </summary>
-        /// <returns>string value</returns>
-        //public string GetFullAccTime()
-        //{
-        //    return _timeStamp.GetFullServerTime();
-        //}
-
-        /// <summary>
         /// Get fsa row parameters as List of string
         /// </summary>
         /// <returns>list<string> - fsa parameters</returns>
@@ -160,7 +154,7 @@ namespace LogSender.Models
                 "",//cast_type
                 "",//scramble_state
                 _sourceIP,//source_ip
-                "",//destination_ip
+                _destIP._destinationIp,//destination_ip,//destination_ip
                 _fileExtractData[(int)_fileExtractDataIndexs.SEQ_NUM].GetData(),
                 _fileExtractData[(int)_fileExtractDataIndexs.SUB_SEQ_NUM].GetData(),
                 _fileExtractData[(int)_fileExtractDataIndexs.USER_NAME].GetData(),

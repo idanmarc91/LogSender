@@ -7,6 +7,8 @@ namespace LogSender.Models
         ///**********************************************
         ///             Members Section
         ///**********************************************
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger("LogSender.cs");
+
         public byte[] _headerArray;
         public byte[] _logArray;
 
@@ -47,7 +49,8 @@ namespace LogSender.Models
             }
             catch(System.Exception ex)
             {
-                return new byte[5];
+                log.Error("Expand binary file failed");
+                return new byte[0];
             }
         }
     }
