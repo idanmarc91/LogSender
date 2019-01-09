@@ -44,7 +44,6 @@ namespace LogSender.Data
             try
             {
                 IPHostEntry hostEntry = null;
-
                 switch (destHostName)
                 {
                     case "localhost":
@@ -75,7 +74,7 @@ namespace LogSender.Data
                             {
                                 log.Warn(ex.Message);
                                 System.IO.File.AppendAllText(Environment.CurrentDirectory + "\\Logs\\destination_ip.txt",
-                                                            DateTime.Now.ToString("dd/MM HH:mm:ss") + " Error occurred while resolving: " + ex.Message + " " + path + Environment.NewLine);
+                                                            DateTime.Now.ToString("dd/MM HH:mm:ss") + " Error occurred while resolving: " + ex.Message + " host name: " + destHostName + " destination path: "+ path + Environment.NewLine);
                                 return destHostName;
                             }
                             else
@@ -105,7 +104,7 @@ namespace LogSender.Data
                     return Constant.DOMAIN_IP;
                 }
             }
-            return hostName;
+            return null;
         }
     }
 }
