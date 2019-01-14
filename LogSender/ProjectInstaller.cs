@@ -19,7 +19,7 @@ namespace LogSender
         private void serviceInstaller1_AfterInstall(object sender, InstallEventArgs e)
         {
             log.Debug("After install event started");
-            InstallService.SetServiceRecovery(string.Format("failure \"{0}\" reset= 0 actions= restart/60000", "Cyber 2.0 Log Sender v5"));
+            InstallService.SetServiceRecovery(string.Format("failure \"{0}\" reset= 0 actions= restart/60000", serviceInstaller1.ServiceName));
 
             //create config file
             ConfigFile cnf = ConfigFile.Instance;
@@ -39,6 +39,7 @@ namespace LogSender
 
             string logPath = Path.Combine(exeDirPath, "Logs");
             UninstallService.DeleteLogFiles(logPath);
+
 
         }
     }

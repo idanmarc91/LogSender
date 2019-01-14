@@ -26,18 +26,35 @@ namespace LogSender.Utilities
         /// <param name="path"></param>
         public static void DeleteLogFiles(string path)
         {
-            if (Directory.Exists(path))
+            try
             {
-                DirectoryInfo logDir = new DirectoryInfo(path);
-                logDir.Delete(true);
+
+                if (Directory.Exists(path))
+                {
+                    DirectoryInfo logDir = new DirectoryInfo(path);
+                    logDir.Delete(true);
+                }
             }
+            catch (System.Exception ex)
+            {
+                //cannot delete files because files are open
+            }
+
         }
+
 
         public static void DeleteFileByName(string filePath)
         {
-            if (File.Exists(filePath))
-            { 
-                File.Delete(filePath);
+            try
+            {
+                if (File.Exists(filePath))
+                { 
+                    File.Delete(filePath);
+                }
+            }
+            catch (System.Exception ex)
+            {
+                //cannot delete files because files are open
             }
         }
     }

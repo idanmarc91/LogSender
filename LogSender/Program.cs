@@ -23,6 +23,7 @@ namespace LogSender
                 Thread.Sleep(Timeout.Infinite );
 
 #else
+            CosturaUtility.Initialize();
             ServiceBase[] ServicesToRun;
             ServicesToRun = new ServiceBase[]
             {
