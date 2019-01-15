@@ -658,12 +658,6 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_74F3B2C3487170481FF623D686DA8355"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_EB403F26D1BCB8BCF0EBE1E52749E1B5"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -749,6 +743,12 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_AD40DBA419672EE3C11143BC778FF94C"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_74F3B2C3487170481FF623D686DA8355"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -3463,7 +3463,7 @@
         {
             "{3C67513D-01DD-4637-8A68-80971EB9504F}:_228606BE9EA44B82843BA1EE8B9744C1"
             {
-            "DefaultLocation" = "8:[ProgramFiles64Folder][Manufacturer]\\Cyber 2.0 Agent\\[ProductName]"
+            "DefaultLocation" = "8:[ProgramFiles64Folder][Manufacturer]\\Cyber 2.0 Agent\\"
             "Name" = "8:#1925"
             "AlwaysCreate" = "11:FALSE"
             "Condition" = "8:"
@@ -3512,7 +3512,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:v5 LogSender"
         "ProductCode" = "8:{33098ED5-F873-42F6-982D-5A7033A3195F}"
-        "PackageCode" = "8:{440E70F3-0996-45F0-9DA6-8CE3E13F8183}"
+        "PackageCode" = "8:{0842ED0B-9C27-4A87-B150-04DAD2288098}"
         "UpgradeCode" = "8:{E60CB089-EF74-4C3B-9C05-0A0E1D52123D}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"

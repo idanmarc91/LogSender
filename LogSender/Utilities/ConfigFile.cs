@@ -337,7 +337,8 @@ namespace LogSender.Utilities
                 {
                     log.Info("reading host ip from Agent config file");
 
-                    string[] AgentCfgFile = System.IO.File.ReadAllLines(path + @"\..\Config.cfg");
+                    //string[] AgentCfgFile = System.IO.File.ReadAllLines(path + @"\..\Config.cfg");
+                    string[] AgentCfgFile = System.IO.File.ReadAllLines(path + @"\Config.cfg");
                     string tempIp;
                     foreach (string line in AgentCfgFile)
                     {

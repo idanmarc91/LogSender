@@ -73,7 +73,7 @@ namespace LogSender.Data
                             if (ip == null)//if we cannot resolve the destHostName we write it to a log file for further investigation
                             {
                                 log.Warn(ex.Message);
-                                System.IO.File.AppendAllText(Environment.CurrentDirectory + "\\Logs\\destination_ip.txt",
+                                System.IO.File.AppendAllText(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\ls-logs\\destination_ip.txt",
                                                             DateTime.Now.ToString("dd/MM HH:mm:ss") + " Error occurred while resolving: " + ex.Message + " host name: " + destHostName + " destination path: "+ path + Environment.NewLine);
                                 return destHostName;
                             }

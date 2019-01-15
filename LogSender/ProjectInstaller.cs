@@ -37,10 +37,8 @@ namespace LogSender
 
             UninstallService.DeleteFileByName(Path.Combine(exeDirPath, "LogSenderConfiguration.cfg"));
 
-            string logPath = Path.Combine(exeDirPath, "Logs");
+            string logPath = Path.Combine(exeDirPath, "ls-logs");
             UninstallService.DeleteLogFiles(logPath);
-
-
         }
     }
 }
