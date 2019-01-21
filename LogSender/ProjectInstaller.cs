@@ -31,7 +31,7 @@ namespace LogSender
         private void serviceInstaller1_BeforeUninstall(object sender, InstallEventArgs e)
         {
             //stop the service -not working goods
-            UninstallService.StopService(serviceInstaller1.ServiceName);
+            //UninstallService.StopService(serviceInstaller1.ServiceName);
 
             string exeDirPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
 
