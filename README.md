@@ -34,6 +34,7 @@ To install a production ready application you can follow the [Dev Installing](#d
 * Visual studio
 
 ## Versioning
+**if a new version is made, update "AssemblyVersion" and "AssemblyFileVersion" at "AssemblyInfo" file**
 
 See vestion notes [Version notes Google docs](https://docs.google.com/document/u/1/d/15fN9bL6YFy0ZJIrxfmFL691V4POe_7zb4SqEcy7h5pk/edit?usp=drive_web&ouid=107850385867994278819) 
 
