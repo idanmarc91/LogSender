@@ -55,7 +55,6 @@ namespace LogSender
         public async void RunService()
         {
             log.Debug("Main Service thread started");
-
             while (true) //main service loop
             {
                 //check if server is online
@@ -68,6 +67,8 @@ namespace LogSender
                 {
                     OfflineProcessLogFolders();
                 }
+
+                RecSender.SendRecFiles();
 
                 log.Debug("Main thread going to sleep for " + ConfigFile.Instance._configData._threadSleepTime / 1000 + " seconds");
                 Thread.Sleep(ConfigFile.Instance._configData._threadSleepTime);
@@ -83,7 +84,6 @@ namespace LogSender
             try
             {
                 List<Task> taskList = new List<Task>();
-
                 foreach (KeyValuePair<string, DirectoryInfo> dir in _directory)//run on all log directories
                 {
                     FileMaintenance.ZeroSizeFileCleanup(dir.Value);
@@ -112,6 +112,7 @@ namespace LogSender
                 Thread.CurrentThread.Abort();
             }
         }
+
 
         /// <summary>
         /// This function is processing the log folders when server is offline
@@ -179,6 +180,7 @@ namespace LogSender
                 {
                     log.Error("Task failed. problem occurred while trying to send data to server.");
                 }
+
             }
             catch (Exception ex)
             {

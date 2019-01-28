@@ -9,9 +9,6 @@ C:\Users\idanm\source\repos\LogSender\LogSender\obj\Debug\LogSender.csproj.CopyC
 C:\Users\idanm\source\repos\LogSender\LogSender\obj\Debug\LogSender.exe
 C:\Users\idanm\source\repos\LogSender\LogSender\obj\Debug\LogSender.pdb
 C:\Users\idanm\source\repos\LogSender\LogSender\obj\Debug\LogSender.csprojAssemblyReference.cache
-C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\obj\Debug\LogSender.ProjectInstaller.resources
-C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\obj\Debug\LogSender.csproj.GenerateResource.cache
-C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\obj\Debug\LogSender.csproj.CoreCompileInputs.cache
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Debug\NUnit3.TestAdapter.dll
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Debug\NUnit3.TestAdapter.pdb
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Debug\nunit.engine.dll
@@ -30,6 +27,9 @@ C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Debug\System.Buffers.xml
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Debug\System.Memory.xml
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Debug\System.Numerics.Vectors.xml
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\obj\Debug\LogSender.ProjectInstaller.resources
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\obj\Debug\LogSender.csproj.GenerateResource.cache
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\obj\Debug\LogSender.csproj.CoreCompileInputs.cache
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\obj\Debug\LogSender.csproj.CopyComplete
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\obj\Debug\LogSender.exe
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\obj\Debug\LogSender.pdb

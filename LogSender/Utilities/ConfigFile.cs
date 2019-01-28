@@ -250,7 +250,7 @@ namespace LogSender.Utilities
                         }
                         catch (Exception)
                         {
-                            _configData._hostIp = ""; // default host port
+                            _configData._hostIp = ""; // default host IP
                         }
                     }
                     if (line.Contains("max_binary_folder_size="))
@@ -348,20 +348,20 @@ namespace LogSender.Utilities
 
                             if (line.Contains("#"))
                             {
-                                tempIp = line.Substring(startOffset, line.IndexOf('#') - startOffset).Trim();
+                                _configData._hostIp = line.Substring(startOffset, line.IndexOf('#') - startOffset).Trim();
                             }
                             else
                             {
-                                tempIp = line.Substring(startOffset, line.Length - startOffset);
+                                _configData._hostIp = line.Substring(startOffset, line.Length - startOffset);
                             }
-                            _configData._hostIp = "http://" + tempIp + ":" + _configData._hostPort;
+                            //_configData._hostIp = "http://" + tempIp + ":" + _configData._hostPort;
                         }
                     }
                 }
-                else //assemble ip address from log sender config file with port number
-                {
-                    _configData._hostIp = "http://" + _configData._hostIp + ":" + _configData._hostPort;
-                }
+                //else //assemble ip address from log sender config file with port number
+                //{
+                //    _configData._hostIp = "http://" + _configData._hostIp + ":" + _configData._hostPort;
+                //}
 
                 if (String.IsNullOrEmpty(_configData._hostIp))
                     log.Error("No host ip");

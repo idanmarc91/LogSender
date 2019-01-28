@@ -69,20 +69,20 @@ namespace LogSender.Utilities
         {
             try
             {
-                log.Debug("check if server (" + ConfigFile.Instance._configData._hostIp + ") is alive");
+                log.Debug("check if server (" + "http://" +  ConfigFile.Instance._configData._hostIp + ":" + ConfigFile.Instance._configData._hostPort + ") is alive");
 
                 using (HttpClient client = new HttpClient())
                 {
-                    using (HttpResponseMessage response = await client.GetAsync(ConfigFile.Instance._configData._hostIp + "/ping"))
+                    using (HttpResponseMessage response = await client.GetAsync("http://" + ConfigFile.Instance._configData._hostIp + ":" + ConfigFile.Instance._configData._hostPort + "/ping"))
                     {
-                        log.Info("The server (" + ConfigFile.Instance._configData._hostIp + ") is online");
+                        log.Info("The server (" + "http://" + ConfigFile.Instance._configData._hostIp + ":" + ConfigFile.Instance._configData._hostPort + ") is online");
                         return true;
                     }
                 }
             }
             catch (Exception ex)
             {
-                log.Error("The server (" + ConfigFile.Instance._configData._hostIp + ") is offline", ex);
+                log.Error("The server (" + "http://" + ConfigFile.Instance._configData._hostIp + ":" + ConfigFile.Instance._configData._hostPort + ") is offline", ex);
                 return false;
             }
         }
@@ -121,7 +121,7 @@ namespace LogSender.Utilities
             int retry = ConfigFile.Instance._configData._numberOfTimesToRetry;
             while (retry != 0)//retry loop
             {
-                if (await SendDataToServerAsync(ConfigFile.Instance._configData._hostIp, compressedData))
+                if (await SendDataToServerAsync("http://" + ConfigFile.Instance._configData._hostIp + ":" + ConfigFile.Instance._configData._hostPort , compressedData))
                 {
                     return true;//when file sent sucessfuly exit while loop
                 }

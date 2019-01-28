@@ -191,6 +191,12 @@ namespace LogSender.Models
                 _fullPath = serviceRow._fileExtractData[(int)_fileExtractDataIndexs.PROCESS_PATH].GetData(),
                 _reason = _reasonMog._reason
             };
+
+            //for testing
+            //if (string.IsNullOrEmpty(newExpandRow._appName) && string.IsNullOrEmpty(newExpandRow._fullPath) && string.IsNullOrEmpty(newExpandRow._reason))
+            //{
+            //    string what = "what?";
+            //}
             _expandSVCHost.Add(newExpandRow);
         }
 
