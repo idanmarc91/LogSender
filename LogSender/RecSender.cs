@@ -30,7 +30,7 @@ namespace LogSender
 
             if (directoryRepository.EnumerateFiles("*.xml").Where(f => (f.Length <= 6291456) && (f.Length > 0)).ToArray().Length >= 1)
             {
-
+                log.Debug("Start sending xml files");
                 // if the directory does not exists, create it.
                 if (!Directory.Exists(pathToFilesToZipRepository))
                 {
@@ -226,6 +226,7 @@ namespace LogSender
                     responseFromServerRepository = SendByteArrayToServer(fts.GetByteData());
                     if (responseFromServerRepository == true)
                     {
+                        log.Debug(".xml file was sent to the server");
                         try
                         {
                             //delete the zip file

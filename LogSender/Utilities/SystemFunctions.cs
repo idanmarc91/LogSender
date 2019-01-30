@@ -32,7 +32,7 @@ namespace LogSender.Utilities
             }
             catch(Exception ex)
             {
-                log.Error("Problem occurred while resolving domain ip, domain name is: " + Constant.DOMAIN_FULL_NAME);
+                log.Error("Problem occurred while resolving domain ip, domain name is: " + Constant.DOMAIN_FULL_NAME,ex);
                 return "";
             }
         }
