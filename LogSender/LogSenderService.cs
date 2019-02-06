@@ -27,6 +27,7 @@ namespace LogSender
                 log.Debug( "Log Sender Service OnStart Function" );
                 _logSender = new LogSender();
                 _logSender.RunService();
+                
             }
             catch( Exception ex )
             {

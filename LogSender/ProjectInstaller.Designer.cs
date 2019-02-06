@@ -47,6 +47,7 @@ namespace LogSender
             this.serviceInstaller1.Description = "Cyber 2.0 Log Sender v5";
             this.serviceInstaller1.DisplayName = "Cyber 2.0 Log Sender";
             this.serviceInstaller1.ServiceName = "Cyber20LogSender";
+            this.serviceInstaller1.Committed += new System.Configuration.Install.InstallEventHandler(this.serviceInstaller1_Committed);
             this.serviceInstaller1.AfterInstall += new System.Configuration.Install.InstallEventHandler(this.serviceInstaller1_AfterInstall);
             this.serviceInstaller1.BeforeUninstall += new System.Configuration.Install.InstallEventHandler(this.serviceInstaller1_BeforeUninstall);
             // 

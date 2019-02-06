@@ -22,9 +22,9 @@ namespace LogSender
             InstallService.SetServiceRecovery(string.Format("failure \"{0}\" reset= 0 actions= restart/60000", serviceInstaller1.ServiceName));
 
             //create config file
-            ConfigFile cnf = ConfigFile.Instance;
+            //ConfigFile cnf = ConfigFile.Instance;
 
-            //start the service
+            ////start the service
             InstallService.StartService(serviceInstaller1.ServiceName);
         }
 
@@ -39,6 +39,12 @@ namespace LogSender
 
             string logPath = Path.Combine(exeDirPath, "ls-logs");
             UninstallService.DeleteLogFiles(logPath);
+        }
+
+        private void serviceInstaller1_Committed(object sender, InstallEventArgs e)
+        {
+            //start the service
+            //InstallService.StartService(serviceInstaller1.ServiceName);
         }
     }
 }

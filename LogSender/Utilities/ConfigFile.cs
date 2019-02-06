@@ -338,24 +338,35 @@ namespace LogSender.Utilities
                     log.Info("reading host ip from Agent config file");
 
                     //string[] AgentCfgFile = System.IO.File.ReadAllLines(path + @"\..\Config.cfg");
-                    string[] AgentCfgFile = System.IO.File.ReadAllLines(path + @"\Config.cfg");
-                    string tempIp;
-                    foreach (string line in AgentCfgFile)
-                    {
-                        if (line.Contains("host="))
-                        {
-                            startOffset = 5;
 
-                            if (line.Contains("#"))
+                    try
+                    {
+                        string[] AgentCfgFile = System.IO.File.ReadAllLines(path + @"\Config.cfg");
+
+
+                        string tempIp;
+                        foreach (string line in AgentCfgFile)
+                        {
+                            if (line.Contains("host="))
                             {
-                                _configData._hostIp = line.Substring(startOffset, line.IndexOf('#') - startOffset).Trim();
+                                startOffset = 5;
+
+                                if (line.Contains("#"))
+                                {
+                                    _configData._hostIp = line.Substring(startOffset, line.IndexOf('#') - startOffset).Trim();
+                                }
+                                else
+                                {
+                                    _configData._hostIp = line.Substring(startOffset, line.Length - startOffset);
+                                }
+                                //_configData._hostIp = "http://" + tempIp + ":" + _configData._hostPort;
                             }
-                            else
-                            {
-                                _configData._hostIp = line.Substring(startOffset, line.Length - startOffset);
-                            }
-                            //_configData._hostIp = "http://" + tempIp + ":" + _configData._hostPort;
                         }
+                    }
+                    catch (System.IO.FileNotFoundException ex)
+                    {
+                        log.Fatal("Fatal error config file in creation or reading process, agent config file was found", ex);
+                        throw new Exception();
                     }
                 }
                 //else //assemble ip address from log sender config file with port number
@@ -369,6 +380,7 @@ namespace LogSender.Utilities
             catch (Exception ex)
             {
                 log.Fatal("Fatal error config file in creation or reading process", ex);
+                throw new Exception();
             }
         }
 
