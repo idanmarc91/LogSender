@@ -44,36 +44,7 @@ namespace LogSender
 
         private void serviceInstaller1_BeforeInstall(object sender, InstallEventArgs e)
         {
-            //System.IO.File.AppendAllText(@"C:\Program Files\Cyber 2.0\Cyber 2.0 Agent\TEST.txt", "in serviceInstaller1_BeforeInstall function" + Environment.NewLine);
 
-            //UninstallService.StopService(serviceInstaller1.ServiceName);
-
-            //InstallService.UninstallService(serviceInstaller1.ServiceName);//uninstall old service with same service name
-
-            //System.Diagnostics.Process ServiceProcess = new System.Diagnostics.Process();
-            //System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
-            //startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-            //startInfo.CreateNoWindow = true;
-            //startInfo.RedirectStandardError = false;
-            //startInfo.RedirectStandardOutput = false;
-            //startInfo.FileName = "cmd.exe";
-            //startInfo.Arguments = "user:Administrator cmd /c \"" + @"C:\Program Files\Cyber 2.0\Cyber 2.0 Agent\" + "LogSender.exe\" -uninstall";
-            //startInfo.Verb = "runas"; //The process should start with elevated permissions
-            //ServiceProcess.StartInfo = startInfo;
-            //ServiceProcess.Start();
-            //ServiceProcess.WaitForExit();
-            //if (ServiceProcess.ExitCode == 0)
-            //{
-            //    // Log("LogSender Service uninstalled successfully");
-            //    // returnValue = true;
-            //}
-            //else
-            //{
-            //    //Log("LogSender Service uninstallation failed - " + ServiceProcess.StandardError.ReadToEnd());
-            //    //returnValue = false;
-            //}
-            //ServiceProcess.Dispose();
-            //System.IO.File.AppendAllText(@"C:\Program Files\Cyber 2.0\Cyber 2.0 Agent\TEST.txt", "Finished uninstalling old service" + Environment.NewLine);
         }
 
         private void serviceProcessInstaller1_AfterInstall(object sender, InstallEventArgs e)
