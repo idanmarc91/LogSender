@@ -13,9 +13,10 @@ namespace LogSender.Utilities
         {
             using (var sc = new ServiceController(serviceName))
             {
-                if(sc.CanStop)
+                if (sc.CanStop)
                 {
                     sc.Stop();
+                    sc.WaitForStatus(ServiceControllerStatus.Stopped);
                 }
             }
         }
@@ -48,7 +49,7 @@ namespace LogSender.Utilities
             try
             {
                 if (File.Exists(filePath))
-                { 
+                {
                     File.Delete(filePath);
                 }
             }

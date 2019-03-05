@@ -202,7 +202,9 @@
     <Compile Include="Models\BinaryFile\HeaderParameters.cs" />
     <Compile Include="Models\Row\LogRow.cs" />
     <Compile Include="LogSender.cs" />
-    <Compile Include="LogSenderService.cs" />
+    <Compile Include="LogSenderService.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="LogSenderService.Designer.cs">
       <DependentUpon>LogSenderService.cs</DependentUpon>
     </Compile>
@@ -225,6 +227,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="RecSender.cs" />
+    <Compile Include="SelfInstaller.cs" />
     <Compile Include="Utilities\ConfigFile.cs" />
     <Compile Include="Utilities\Constant.cs" />
     <Compile Include="Utilities\FileMaintenance.cs" />

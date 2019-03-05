@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration.Install;
 using System.Diagnostics;
 using System.ServiceProcess;
 
@@ -40,10 +41,28 @@ namespace LogSender.Utilities
         /// <param name="serviceName"></param>
         public static void StartService(string serviceName)
         {
-            using (var sc = new ServiceController(serviceName))
+            try
             {
-                sc.Start();
+
+                using (var sc = new ServiceController(serviceName))
+                {
+                    sc.Start();
+                }
             }
+            catch (Exception)
+            {
+
+                //throw;
+            }
+        }
+
+        public static void UninstallService(string serviceName)
+        {
+            ServiceInstaller ServiceInstallerObj = new ServiceInstaller();
+            InstallContext Context = new InstallContext("<<log file path>>", null);
+            ServiceInstallerObj.Context = Context;
+            ServiceInstallerObj.ServiceName = serviceName;
+            ServiceInstallerObj.Uninstall(null);
         }
     }
 }

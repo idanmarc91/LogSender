@@ -148,6 +148,12 @@
         "Entry"
         {
         "MsmKey" = "8:_438274DBAD31AB0353973D7EB8F1B10E"
+        "OwnerKey" = "8:_CC9BCEF4D9A248E995BEC883E483BADC"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_438274DBAD31AB0353973D7EB8F1B10E"
         "OwnerKey" = "8:_5F54ACA6CBCFA4EF702F0E605C7E2914"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -531,6 +537,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_CC9BCEF4D9A248E995BEC883E483BADC"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_D0118FBE30E475E9BC3F11EB2E34CDEF"
         "OwnerKey" = "8:_42F395537E634033A64CBF4B8766EBAF"
         "MsmSig" = "8:_UNDEFINED"
@@ -653,6 +665,12 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_D23D574580D6605512C8FC3DF4A26D4E"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_CC9BCEF4D9A248E995BEC883E483BADC"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1141,20 +1159,6 @@
     {
         "CustomAction"
         {
-            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_388780695F7E4EEAA3A229825E508F53"
-            {
-            "Name" = "8:Primary output from LogSender (Active)"
-            "Condition" = "8:"
-            "Object" = "8:_42F395537E634033A64CBF4B8766EBAF"
-            "FileType" = "3:2"
-            "InstallAction" = "3:1"
-            "Arguments" = "8:"
-            "EntryPoint" = "8:"
-            "Sequence" = "3:1"
-            "Identifier" = "8:_9BDA816A_5A6C_4B9D_9CBF_69B4781C33B4"
-            "InstallerClass" = "11:TRUE"
-            "CustomActionData" = "8:"
-            }
             "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_494D849082094A31B6DCC71721565E49"
             {
             "Name" = "8:Primary output from LogSender (Active)"
@@ -1167,6 +1171,20 @@
             "Sequence" = "3:1"
             "Identifier" = "8:_D8645209_6733_4863_98E3_8D9C933C9226"
             "InstallerClass" = "11:TRUE"
+            "CustomActionData" = "8:"
+            }
+            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_9798D1411FF946F78E535E31B5A44CC0"
+            {
+            "Name" = "8:Primary output from Uninstall (Release Any CPU)"
+            "Condition" = "8:"
+            "Object" = "8:_CC9BCEF4D9A248E995BEC883E483BADC"
+            "FileType" = "3:2"
+            "InstallAction" = "3:2"
+            "Arguments" = "8:"
+            "EntryPoint" = "8:"
+            "Sequence" = "3:1"
+            "Identifier" = "8:_C82220FA_1CF8_4329_8DF1_A724E9AD4E1E"
+            "InstallerClass" = "11:FALSE"
             "CustomActionData" = "8:"
             }
         }
@@ -3463,7 +3481,7 @@
         {
             "{3C67513D-01DD-4637-8A68-80971EB9504F}:_228606BE9EA44B82843BA1EE8B9744C1"
             {
-            "DefaultLocation" = "8:[ProgramFiles64Folder][Manufacturer]\\Cyber 2.0 Agent\\"
+            "DefaultLocation" = "8:[ProgramFiles64Folder][Manufacturer]\\Cyber 2.0 Agent\\temp\\"
             "Name" = "8:#1925"
             "AlwaysCreate" = "11:FALSE"
             "Condition" = "8:"
@@ -3495,6 +3513,18 @@
                 {
                 }
             }
+            "{994432C3-9487-495D-8656-3E829A8DBDDE}:_BB096CFDB59446B18059CC28745890F7"
+            {
+            "DefaultLocation" = "8:[CommonAppDataFolder]\\Cyber20Agent\\Temp"
+            "Name" = "8:Temp Folder"
+            "AlwaysCreate" = "11:FALSE"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Property" = "8:TEMPFOLDER"
+                "Folders"
+                {
+                }
+            }
         }
         "LaunchCondition"
         {
@@ -3512,7 +3542,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:v5 LogSender"
         "ProductCode" = "8:{4885A338-C79C-41F5-ACF2-A90ACA3D6D5B}"
-        "PackageCode" = "8:{6F3F6EE6-057E-4833-8094-4A6406D4516A}"
+        "PackageCode" = "8:{76CF5C56-2526-49C4-BDA4-020914A2FCF7}"
         "UpgradeCode" = "8:{E60CB089-EF74-4C3B-9C05-0A0E1D52123D}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -4054,6 +4084,34 @@
             "OutputConfiguration" = "8:"
             "OutputGroupCanonicalName" = "8:Built"
             "OutputProjectGuid" = "8:{CC24A769-2AF6-4994-A05B-A9F06795CE36}"
+            "ShowKeyOutput" = "11:TRUE"
+                "ExcludeFilters"
+                {
+                }
+            }
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_CC9BCEF4D9A248E995BEC883E483BADC"
+            {
+            "SourcePath" = "8:..\\Uninstall\\obj\\Release\\Uninstall.exe"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_228606BE9EA44B82843BA1EE8B9744C1"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            "ProjectOutputGroupRegister" = "3:1"
+            "OutputConfiguration" = "8:Release|Any CPU"
+            "OutputGroupCanonicalName" = "8:Built"
+            "OutputProjectGuid" = "8:{9254FEAC-D61B-4CF3-B32D-5815FFD6B73F}"
             "ShowKeyOutput" = "11:TRUE"
                 "ExcludeFilters"
                 {
