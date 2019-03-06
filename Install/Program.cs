@@ -1,72 +1,101 @@
 ﻿using LogSender.Utilities;
 using System;
+using System.Linq;
+using System.ServiceProcess;
+
+[assembly: log4net.Config.XmlConfigurator(Watch = true)]
 
 namespace Install
 {
     class Program
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger("Program.cs");
+
+        private static readonly string pathToOldService = @"C:\Program Files\Cyber 2.0\Cyber 2.0 Agent\LogSender.exe";
+        private static readonly string pathToOldServiceConfig = @"C:\Program Files\Cyber 2.0\Cyber 2.0 Agent\LogSender.exe.config";
+        private static readonly string pathToOldServiceConfigurationFile = @"C:\Program Files\Cyber 2.0\Cyber 2.0 Agent\Log Sender Configuration.cfg";
+
         static void Main(string[] args)
         {
-            //StreamWriter logFile = new StreamWriter(TempFolder + "Installation Log.txt", true);
-            //logFile.WriteLine("\n" + DateTime.Now + "   Uninstalling LogSender service" + "\n");
-            //logFile.Close();
+
+            log.Info("Starting to install the LogSender windows service");
+
+            log.Info("Deleting old service");
+
+            if (DoesServiceExist("Cyber20LogSender"))//check if old service is installed
+            {
+                try
+                {
+                    StopService("Cyber20LogSender");
+                    System.Diagnostics.Process ServiceProcess = new System.Diagnostics.Process();
+                    System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+                    startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                    startInfo.CreateNoWindow = true;
+                    startInfo.RedirectStandardError = false;
+                    startInfo.RedirectStandardOutput = false;
+                    startInfo.FileName = "cmd.exe";
+                    startInfo.Arguments = "user:Administrator cmd /c \"" + @"C:\Program Files\Cyber 2.0\Cyber 2.0 Agent\" + "LogSender.exe\" -uninstall";
+                    startInfo.Verb = "runas"; //The process should start with elevated permissions
+                    ServiceProcess.StartInfo = startInfo;
+                    ServiceProcess.Start();
+                    ServiceProcess.WaitForExit();
+                    if (ServiceProcess.ExitCode == 0)
+                    {
+                        log.Info("Old service deleted");
+                    }
+                    else
+                    {
+                        log.Fatal("Problem occurred while trying to delete old service");
+                    }
+                    ServiceProcess.Dispose();
+
+                }
+                catch (Exception ex)
+                {
+                    log.Fatal("Problem occurred while trying to delete old service, installation could not proceed", ex);
+                    return;
+                }
+            }
 
 
-            //uninstall old
-            //System.IO.File.AppendAllText(@"C:\Users\Cyber\Desktop\TEST.txt", "before uninstall old" + Environment.NewLine);
 
             try
             {
-                System.Diagnostics.Process ServiceProcess = new System.Diagnostics.Process();
-                System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
-                startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                startInfo.CreateNoWindow = true;
-                startInfo.RedirectStandardError = false;
-                startInfo.RedirectStandardOutput = false;
-                startInfo.FileName = "cmd.exe";
-                startInfo.Arguments = "user:Administrator cmd /c \"" + @"C:\Program Files\Cyber 2.0\Cyber 2.0 Agent\" + "LogSender.exe\" -uninstall";
-                startInfo.Verb = "runas"; //The process should start with elevated permissions
-                ServiceProcess.StartInfo = startInfo;
-                ServiceProcess.Start();
-                ServiceProcess.WaitForExit();
-                if (ServiceProcess.ExitCode == 0)
-                {
-                    // Log("LogSender Service uninstalled successfully");
-                    // returnValue = true;
-                }
-                else
-                {
-                    //Log("LogSender Service uninstallation failed - " + ServiceProcess.StandardError.ReadToEnd());
-                    //returnValue = false;
-                }
-                ServiceProcess.Dispose();
+                log.Info("Starting to delete old service files");
 
+                if (System.IO.File.Exists(pathToOldService) &&
+                   System.IO.File.Exists(pathToOldServiceConfig) &&
+                   System.IO.File.Exists(pathToOldServiceConfigurationFile))
+                {
+                    System.IO.File.Delete(pathToOldService);
+                    System.IO.File.Delete(pathToOldServiceConfig);
+                    System.IO.File.Delete(pathToOldServiceConfigurationFile);
+                    log.Debug("Delete old files has ended");
+                }
             }
             catch (Exception ex)
             {
-                System.IO.File.AppendAllText(@"C:\Users\Cyber\Desktop\error.txt", "error in delete old service" + ex.Message + Environment.NewLine);
-
+                log.Fatal("Error occurred while trying to delete old service files", ex);
+                return;
             }
-
-
-            //install new
 
             try
             {
-                System.IO.File.Delete(@"C:\Program Files\Cyber 2.0\Cyber 2.0 Agent\LogSender.exe");
-                System.IO.File.Delete(@"C:\Program Files\Cyber 2.0\Cyber 2.0 Agent\LogSender.exe.config");
-
-                System.IO.File.Move(@"C:\Program Files\Cyber 2.0\Cyber 2.0 Agent\Cyber20LogSender.exe", @"C:\Program Files\Cyber 2.0\Cyber 2.0 Agent\LogSender.exe");
+                log.Debug("Starting to rename new service name to the old service name");
                 System.IO.File.Move(@"C:\Program Files\Cyber 2.0\Cyber 2.0 Agent\Cyber20LogSender.exe.config", @"C:\Program Files\Cyber 2.0\Cyber 2.0 Agent\LogSender.exe.config");
+                System.IO.File.Move(@"C:\Program Files\Cyber 2.0\Cyber 2.0 Agent\Cyber20LogSender.exe", @"C:\Program Files\Cyber 2.0\Cyber 2.0 Agent\LogSender.exe");
+                log.Debug("Rename ended");
             }
             catch (Exception ex)
             {
-                System.IO.File.AppendAllText(@"C:\Users\Cyber\Desktop\error.txt", "error in delete" + ex.Message + Environment.NewLine);
-
+                log.Fatal("Error occurred while trying rename new service", ex);
+                return;
             }
+
 
             try
             {
+                log.Info("Starting to install new service");
                 System.Diagnostics.Process ServiceProcess1 = new System.Diagnostics.Process();
                 System.Diagnostics.ProcessStartInfo startInfo1 = new System.Diagnostics.ProcessStartInfo();
                 startInfo1.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
@@ -81,26 +110,44 @@ namespace Install
                 ServiceProcess1.WaitForExit();
                 if (ServiceProcess1.ExitCode == 0)
                 {
-                    // Log("LogSender Service uninstalled successfully");
-                    // returnValue = true;
+                    log.Info("Installation new service has completed");
                 }
                 else
                 {
-                    //Log("LogSender Service uninstallation failed - " + ServiceProcess.StandardError.ReadToEnd());
-                    //returnValue = false;
+                    log.Fatal("Error has occurred while trying to install new service");
+                    return;
                 }
                 ServiceProcess1.Dispose();
             }
             catch (Exception ex)
             {
-                System.IO.File.AppendAllText(@"C:\Users\Cyber\Desktop\error.txt", "error in install new service" + ex.Message + Environment.NewLine);
-
+                log.Fatal("Error has occurred while trying to install new service", ex);
+                return;
             }
 
+            log.Info("Define and start new service");
 
             InstallService.SetServiceRecovery(string.Format("failure \"{0}\" reset= 0 actions= restart/60000", "Cyber20LogSender"));
             InstallService.StartService("Cyber20LogSender");
 
+            log.Info("End of installation");
+        }
+
+        static bool DoesServiceExist(string serviceName)
+        {
+            return ServiceController.GetServices().Any(serviceController => serviceController.ServiceName.Equals(serviceName));
+        }
+
+        public static void StopService(string serviceName)
+        {
+            using (var sc = new ServiceController(serviceName))
+            {
+                if (sc.Status != ServiceControllerStatus.Stopped)
+                {
+                    sc.Stop();
+                    sc.WaitForStatus(ServiceControllerStatus.Stopped);
+                }
+            }
         }
     }
 }

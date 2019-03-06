@@ -41,7 +41,6 @@ namespace LogSender
             this.serviceProcessInstaller1.Account = System.ServiceProcess.ServiceAccount.LocalSystem;
             this.serviceProcessInstaller1.Password = null;
             this.serviceProcessInstaller1.Username = null;
-            this.serviceProcessInstaller1.AfterInstall += new System.Configuration.Install.InstallEventHandler(this.serviceProcessInstaller1_AfterInstall);
             // 
             // serviceInstaller1
             // 
@@ -49,7 +48,6 @@ namespace LogSender
             this.serviceInstaller1.DisplayName = "Cyber 2.0 Log Sender";
             this.serviceInstaller1.ServiceName = "Cyber20LogSender";
             this.serviceInstaller1.AfterInstall += new System.Configuration.Install.InstallEventHandler(this.serviceInstaller1_AfterInstall);
-            this.serviceInstaller1.BeforeInstall += new System.Configuration.Install.InstallEventHandler(this.serviceInstaller1_BeforeInstall);
             this.serviceInstaller1.BeforeUninstall += new System.Configuration.Install.InstallEventHandler(this.serviceInstaller1_BeforeUninstall);
             // 
             // ProjectInstaller

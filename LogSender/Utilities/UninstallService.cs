@@ -13,7 +13,7 @@ namespace LogSender.Utilities
         {
             using (var sc = new ServiceController(serviceName))
             {
-                if (sc.CanStop)
+                if (sc.Status != ServiceControllerStatus.Stopped)
                 {
                     sc.Stop();
                     sc.WaitForStatus(ServiceControllerStatus.Stopped);

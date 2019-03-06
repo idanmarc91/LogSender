@@ -1,7 +1,5 @@
-﻿using LogSender.Utilities;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Configuration.Install;
-using System.IO;
 
 namespace LogSender
 {
@@ -32,24 +30,14 @@ namespace LogSender
         private void serviceInstaller1_BeforeUninstall(object sender, InstallEventArgs e)
         {
             //stop the service -not working goods
-            UninstallService.StopService(serviceInstaller1.ServiceName);
+            //UninstallService.StopService(serviceInstaller1.ServiceName);
 
-            string exeDirPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            //string exeDirPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
 
-            UninstallService.DeleteFileByName(Path.Combine(exeDirPath, "LogSenderConfiguration.cfg"));
+            //UninstallService.DeleteFileByName(Path.Combine(exeDirPath, "LogSenderConfiguration.cfg"));
 
-            string logPath = Path.Combine(exeDirPath, "ls-logs");
-            UninstallService.DeleteLogFiles(logPath);
-        }
-
-        private void serviceInstaller1_BeforeInstall(object sender, InstallEventArgs e)
-        {
-
-        }
-
-        private void serviceProcessInstaller1_AfterInstall(object sender, InstallEventArgs e)
-        {
-
+            //string logPath = Path.Combine(exeDirPath, "ls-logs");
+            //UninstallService.DeleteLogFiles(logPath);
         }
     }
 }
