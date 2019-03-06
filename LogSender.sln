@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogSender Tests", "LogSende
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "x64 LogSender Installer", "x64 LogSender Installer\x64 LogSender Installer.vdproj", "{5D8367F3-20B6-4C29-AF87-B80D8E82DDB0}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "TestInstaller", "TestInstaller\TestInstaller.vdproj", "{394EF692-8D21-4334-9B26-C35E5B43F841}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Install", "Install\Install.csproj", "{A360A282-94BC-41BE-9828-9CE16D9B815C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Uninstall", "Uninstall\Uninstall.csproj", "{00B13085-4DEC-4CF7-B62F-8E0E774F8E50}"
@@ -57,12 +55,6 @@ Global
 		{5D8367F3-20B6-4C29-AF87-B80D8E82DDB0}.Release|Any CPU.Build.0 = Release
 		{5D8367F3-20B6-4C29-AF87-B80D8E82DDB0}.Release|x64.ActiveCfg = Release
 		{5D8367F3-20B6-4C29-AF87-B80D8E82DDB0}.Release|x86.ActiveCfg = Release
-		{394EF692-8D21-4334-9B26-C35E5B43F841}.Debug|Any CPU.ActiveCfg = Debug
-		{394EF692-8D21-4334-9B26-C35E5B43F841}.Debug|x64.ActiveCfg = Debug
-		{394EF692-8D21-4334-9B26-C35E5B43F841}.Debug|x86.ActiveCfg = Debug
-		{394EF692-8D21-4334-9B26-C35E5B43F841}.Release|Any CPU.ActiveCfg = Release
-		{394EF692-8D21-4334-9B26-C35E5B43F841}.Release|x64.ActiveCfg = Release
-		{394EF692-8D21-4334-9B26-C35E5B43F841}.Release|x86.ActiveCfg = Release
 		{A360A282-94BC-41BE-9828-9CE16D9B815C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A360A282-94BC-41BE-9828-9CE16D9B815C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A360A282-94BC-41BE-9828-9CE16D9B815C}.Debug|x64.ActiveCfg = Debug|Any CPU
