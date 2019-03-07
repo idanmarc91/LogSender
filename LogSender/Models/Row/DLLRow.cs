@@ -16,11 +16,11 @@ namespace LogSender.Models
 
         enum _fileExtractDataIndexs
         {
-            PROCESS_ID, DLL_PATH, DLL_NAME, PARENT_PATH, PARENT_NAME, STATUS_REASON_LOG
+            PROCESS_ID, DLL_PATH, DLL_NAME, PARENT_PATH, PARENT_NAME, REASON_LOG
         };
 
-        private ReasonLog _reasonDll = new ReasonLog();
-        private string _realStatusDll = "";
+        private StatusLogDLL _statusDll = new StatusLogDLL();
+        //private string _realStatusDll = "";
 
         #endregion Member section
 
@@ -46,7 +46,7 @@ namespace LogSender.Models
                 new DllName(),
                 new ParentPath(),
                 new ParentName(),
-                new StatusReasonDll()
+                new ReasonDll()
             };
         }
 
@@ -80,9 +80,11 @@ namespace LogSender.Models
             //we need to separate them to 2 fields: reason, real status.(the
             //extracted status is not the real status)
 
-            _reasonDll.GetReasonFromExtractedData(_fileExtractData[(int)_fileExtractDataIndexs.STATUS_REASON_LOG].GetData());
+            _statusDll.DefineStatusFromDataDLL(_fileExtractData[(int)_fileExtractDataIndexs.REASON_LOG].GetData());
 
-            _realStatusDll = StatusReasonMap.Map(_fileExtractData[(int)_fileExtractDataIndexs.STATUS_REASON_LOG].GetData());
+            //_reasonDll.MapStatusFromReason(_fileExtractData[(int)_fileExtractDataIndexs.STATUS_REASON_LOG].GetData());
+
+            //_realStatusDll = StatusReasonMap.Map(_fileExtractData[(int)_fileExtractDataIndexs.STATUS_REASON_LOG].GetData());
         }
 
         /// <summary>
@@ -111,7 +113,7 @@ namespace LogSender.Models
                 _fileExtractData[(int)_fileExtractDataIndexs.PARENT_NAME].GetData(),//process name  = parent name
                 _fileExtractData[(int)_fileExtractDataIndexs.PARENT_PATH].GetData(),//process path = parent path
                 "",//protocol
-                _realStatusDll,//status
+                _statusDll._status,//status
                 "",//source_port
                 "",//destination_port
                 "",//direction
@@ -124,7 +126,7 @@ namespace LogSender.Models
                 "",//user_name
                 "",//mog_counter
                 "",//destination_path
-                _reasonDll._reason,
+                _fileExtractData[(int)_fileExtractDataIndexs.REASON_LOG].GetData(),//reason
                 _fileExtractData[(int)_fileExtractDataIndexs.DLL_PATH].GetData(),
                 _fileExtractData[(int)_fileExtractDataIndexs.DLL_NAME].GetData(),
                 "",//chain_array
@@ -133,6 +135,5 @@ namespace LogSender.Models
         }
 
         #endregion Function section
-
     }
 }

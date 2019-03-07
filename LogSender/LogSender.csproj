@@ -174,14 +174,13 @@
     <Compile Include="Data\ProcessName.cs" />
     <Compile Include="Data\ProcessPath.cs" />
     <Compile Include="Data\Protocol.cs" />
-    <Compile Include="Data\ReasonLog.cs" />
-    <Compile Include="Data\StatusReasonDll.cs" />
+    <Compile Include="Data\StatusLogDLL.cs" />
+    <Compile Include="Data\ReasonDll.cs" />
     <Compile Include="Data\ReasonFsa.cs" />
     <Compile Include="Data\SquenceNumber.cs" />
     <Compile Include="Data\ScrambleState.cs" />
-    <Compile Include="Data\StatusReasonLog.cs" />
+    <Compile Include="Data\ReasonLog.cs" />
     <Compile Include="Data\StatusFsa.cs" />
-    <Compile Include="Data\StatusLog.cs" />
     <Compile Include="Data\TimeStamp.cs" />
     <Compile Include="Data\UserName.cs" />
     <Compile Include="Data\CastType.cs" />
@@ -235,7 +234,6 @@
     <Compile Include="Utilities\JsonDataConvertion.cs" />
     <Compile Include="Utilities\ParsingBinaryFile.cs" />
     <Compile Include="Utilities\ServerConnection.cs" />
-    <Compile Include="Utilities\StatusReasonMap.cs" />
     <Compile Include="Utilities\SystemFunctions.cs" />
     <Compile Include="Utilities\UninstallService.cs" />
   </ItemGroup>

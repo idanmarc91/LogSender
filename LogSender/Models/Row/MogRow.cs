@@ -16,12 +16,12 @@ namespace LogSender.Models
 
         enum _fileExtractDataIndexs
         {
-            PROTOCOL, STATUS_REASON_LOG, SOURCE_PORT, DESTINATION_PORT, DIRECTION, ADDRESS_FAMILY,
-            PROCESS_NAME, PROCESS_PATH, FLOW_HANDLE, FLOW_STATE, CAST_TYPE,SCRAMBLE_STATE,
+            PROTOCOL, REASON_LOG, SOURCE_PORT, DESTINATION_PORT, DIRECTION, ADDRESS_FAMILY,
+            PROCESS_NAME, PROCESS_PATH, FLOW_HANDLE, FLOW_STATE, CAST_TYPE, SCRAMBLE_STATE,
             SOURCE_IP, DESTINATION_IP, SEQ_NUM, SUB_SEQ_NUM, USER_NAME, MOG_COUNTER
         };
-        private ReasonLog _reasonMog = new ReasonLog();
-        private string _realStatusMog = "";
+        private StatusLogDLL _statusMog = new StatusLogDLL();
+        //private string _realStatusMog = "";
 
         #endregion Member section
 
@@ -49,7 +49,7 @@ namespace LogSender.Models
             _fileExtractData = new List<FileData>
             {
                 new Protocol(),
-                new StatusReasonLog(),
+                new ReasonLog(),
                 new Port(), //source port
                 new Port(), //destination port
                 new Direction(),
@@ -104,9 +104,12 @@ namespace LogSender.Models
             //we need to separate them to 2 fields: reason, real status.(the
             //extracted status is not the real status)
 
-            _reasonMog.GetReasonFromExtractedData(_fileExtractData[(int)_fileExtractDataIndexs.STATUS_REASON_LOG].GetData());
+            //_reasonMog.MapStatusFromReason(_fileExtractData[(int)_fileExtractDataIndexs.STATUS_REASON_LOG].GetData());
 
-            _realStatusMog = StatusReasonMap.Map(_fileExtractData[(int)_fileExtractDataIndexs.STATUS_REASON_LOG].GetData());
+            // _realStatusMog = StatusReasonMap.Map(_fileExtractData[(int)_fileExtractDataIndexs.STATUS_REASON_LOG].GetData());
+
+            _statusMog.DefineStatusFromDataLog(_fileExtractData[(int)_fileExtractDataIndexs.REASON_LOG].GetData(), _fileExtractData[(int)_fileExtractDataIndexs.SEQ_NUM].GetData());
+
 
             if (_fileExtractData[(int)_fileExtractDataIndexs.FLOW_STATE].GetData() == "END")
             {
@@ -164,8 +167,10 @@ namespace LogSender.Models
             _fileExtractData[(int)_fileExtractDataIndexs.SOURCE_IP].SetData("");
             _fileExtractData[(int)_fileExtractDataIndexs.SOURCE_PORT].SetData("");
             _fileExtractData[(int)_fileExtractDataIndexs.SCRAMBLE_STATE].SetData("");
-            _fileExtractData[(int)_fileExtractDataIndexs.STATUS_REASON_LOG].SetData("");
+            _fileExtractData[(int)_fileExtractDataIndexs.REASON_LOG].SetData("");
             _fileExtractData[(int)_fileExtractDataIndexs.CAST_TYPE].SetData("");
+            _statusMog._status = "";
+
         }
 
         /// <summary>
@@ -189,7 +194,7 @@ namespace LogSender.Models
             {
                 _appName = serviceRow._fileExtractData[(int)_fileExtractDataIndexs.PROCESS_NAME].GetData(),
                 _fullPath = serviceRow._fileExtractData[(int)_fileExtractDataIndexs.PROCESS_PATH].GetData(),
-                _reason = _reasonMog._reason
+                _reason = _statusMog._status
             };
 
             //for testing
@@ -216,7 +221,7 @@ namespace LogSender.Models
                 _fileExtractData[(int)_fileExtractDataIndexs.PROCESS_NAME].GetData(),
                 _fileExtractData[(int)_fileExtractDataIndexs.PROCESS_PATH].GetData(),
                 _fileExtractData[(int)_fileExtractDataIndexs.PROTOCOL].GetData(),
-                _realStatusMog,
+                _statusMog._status,
                 _fileExtractData[(int)_fileExtractDataIndexs.SOURCE_PORT].GetData(),
                 _fileExtractData[(int)_fileExtractDataIndexs.DESTINATION_PORT].GetData(),
                 _fileExtractData[(int)_fileExtractDataIndexs.DIRECTION].GetData(),
@@ -229,7 +234,7 @@ namespace LogSender.Models
                 _fileExtractData[(int)_fileExtractDataIndexs.USER_NAME].GetData(),
                 _fileExtractData[(int)_fileExtractDataIndexs.MOG_COUNTER].GetData(),
                 "",//destination path
-               _reasonMog._reason,//reason
+               _fileExtractData[(int)_fileExtractDataIndexs.REASON_LOG].GetData(),//reason
                 "",//dll path
                 "",//dll name
                 ""//chain array

@@ -16,13 +16,13 @@ namespace LogSender.Models
 
         enum _fileExtractDataIndexs
         {
-            PROTOCOL, STATUS_REASON_LOG, SOURCE_PORT, DESTINATION_PORT, DIRECTION, ADDRESS_FAMILY,
+            PROTOCOL, REASON_LOG, SOURCE_PORT, DESTINATION_PORT, DIRECTION, ADDRESS_FAMILY,
             PROCESS_NAME, PROCESS_PATH, FLOW_HANDLE, FLOW_STATE, CAST_TYPE, SCRAMBLE_STATE, SOURCE_IP,
             DESTINATION_IP, SEQ_NUM, SUB_SEQ_NUM, USER_NAME, REASON
         };
 
-        private ReasonLog _reasonCyb = new ReasonLog();
-        private string _realStatusCyb = "";
+        private StatusLogDLL _statusCyb = new StatusLogDLL();
+        //private string _realStatusCyb = "";
 
         #endregion Member section
 
@@ -50,7 +50,7 @@ namespace LogSender.Models
             _fileExtractData = new List<FileData>
             {
                 new Protocol(),
-                new StatusReasonLog(),
+                new ReasonLog(),
                 new Port(), //source port
                 new Port(), //destination port
                 new Direction(),
@@ -101,10 +101,10 @@ namespace LogSender.Models
             //The agent is suppling us with status and reason in the same field
             //we need to separate them to 2 fields: reason, real status.(the
             //extracted status is not the real status)
-            
-            _reasonCyb.GetReasonFromExtractedData(_fileExtractData[(int)_fileExtractDataIndexs.STATUS_REASON_LOG].GetData());
 
-            _realStatusCyb = StatusReasonMap.Map(_fileExtractData[(int)_fileExtractDataIndexs.STATUS_REASON_LOG].GetData());
+            //_statusCyb.MapStatusFromReason(_fileExtractData[(int)_fileExtractDataIndexs.REASON_LOG].GetData());
+            _statusCyb.DefineStatusFromDataLog(_fileExtractData[(int)_fileExtractDataIndexs.REASON_LOG].GetData(), _fileExtractData[(int)_fileExtractDataIndexs.SEQ_NUM].GetData());
+            //_realStatusCyb = StatusReasonMap.Map(_fileExtractData[(int)_fileExtractDataIndexs.REASON_LOG].GetData());
 
             if (_fileExtractData[(int)_fileExtractDataIndexs.FLOW_STATE].GetData() == "END")
             {
@@ -138,9 +138,10 @@ namespace LogSender.Models
             _fileExtractData[(int)_fileExtractDataIndexs.SOURCE_IP].SetData("");
             _fileExtractData[(int)_fileExtractDataIndexs.SOURCE_PORT].SetData("");
             _fileExtractData[(int)_fileExtractDataIndexs.SCRAMBLE_STATE].SetData("");
-            _fileExtractData[(int)_fileExtractDataIndexs.STATUS_REASON_LOG].SetData("");
-            _realStatusCyb = "";
-            _reasonCyb._reason = "";
+            _fileExtractData[(int)_fileExtractDataIndexs.REASON_LOG].SetData("");
+            //_realStatusCyb = "";
+            _fileExtractData[(int)_fileExtractDataIndexs.REASON_LOG].SetData("");
+            _statusCyb._status = "";
             _fileExtractData[(int)_fileExtractDataIndexs.CAST_TYPE].SetData("");
             _fileExtractData[(int)_fileExtractDataIndexs.PROCESS_PATH].SetData("");
         }
@@ -192,7 +193,7 @@ namespace LogSender.Models
             {
                 _appName = serviceRow._fileExtractData[(int)_fileExtractDataIndexs.PROCESS_NAME].GetData(),
                 _fullPath = serviceRow._fileExtractData[(int)_fileExtractDataIndexs.PROCESS_PATH].GetData(),
-                _reason = serviceRow._reasonCyb._reason
+                _reason = serviceRow._statusCyb._status
             };
 
             // for testing
@@ -210,6 +211,7 @@ namespace LogSender.Models
         /// <returns>list of parameters </returns>
         private List<string> GetAsList()
         {
+            //ORDER IS IMPORTENT
             List<string> list = new List<string>
             {
                 Constant.OPERATING_SYSTEM, //OS field
@@ -220,7 +222,8 @@ namespace LogSender.Models
                 _fileExtractData[(int)_fileExtractDataIndexs.PROCESS_NAME].GetData(),
                 _fileExtractData[(int)_fileExtractDataIndexs.PROCESS_PATH].GetData(),
                 _fileExtractData[(int)_fileExtractDataIndexs.PROTOCOL].GetData(),
-                _realStatusCyb,
+                _statusCyb._status,
+                //_realStatusCyb,
                 _fileExtractData[(int)_fileExtractDataIndexs.SOURCE_PORT].GetData(),
                 _fileExtractData[(int)_fileExtractDataIndexs.DESTINATION_PORT].GetData(),
                 _fileExtractData[(int)_fileExtractDataIndexs.DIRECTION].GetData(),
@@ -233,7 +236,7 @@ namespace LogSender.Models
                 _fileExtractData[(int)_fileExtractDataIndexs.USER_NAME].GetData(),
                 "",//mog_counter
                 "",//destination_path
-                _reasonCyb._reason,//reason
+                _fileExtractData[(int)_fileExtractDataIndexs.REASON_LOG].GetData(),//reason
                 "",//dll_path
                 "",//dll_name
                 ""//chain_array

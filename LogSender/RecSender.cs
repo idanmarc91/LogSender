@@ -1,15 +1,12 @@
-﻿using System;
+﻿using LogSender.Utilities;
+using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.IO.Compression;
-
-using System.Text;
-using System.Threading.Tasks;
-using LogSender.Utilities;
-using System.ServiceModel;
-using System.Net.NetworkInformation;
+using System.Linq;
 using System.Management;
+using System.Net.NetworkInformation;
+using System.ServiceModel;
 
 namespace LogSender
 {
@@ -21,7 +18,7 @@ namespace LogSender
         static string pathToRepositoryFiles = "C:\\Program Files\\Cyber 2.0\\Cyber 2.0 Agent" + "\\RepositoryFiles";
         static string pathToFilesToZipRepository = pathToRepositoryFiles + "\\Files To Zip";
         static DirectoryInfo directoryRepository = new DirectoryInfo(pathToRepositoryFiles);
-        
+
         static List<FileToSend> filesToSendListRepository = new List<FileToSend>();
         static bool responseFromServerRepository = false;
 
@@ -38,6 +35,7 @@ namespace LogSender
                 }
                 //make sure that the folder is empty
                 DirectoryInfo di = new DirectoryInfo(pathToFilesToZipRepository);
+                log.Debug("Delete zip files in " + pathToFilesToZipRepository);
                 foreach (FileInfo file in di.GetFiles())
                 {
                     try
@@ -48,14 +46,15 @@ namespace LogSender
                     {
                         //string cs = "Cyber 2.0 - Log Sender";
                         log.Error("Cannot delete zip file in file to zip folder", ex);
-                      //  if (!EventLog.SourceExists(cs))
-                          //  EventLog.CreateEventSource(cs, "Application");
+                        //  if (!EventLog.SourceExists(cs))
+                        //  EventLog.CreateEventSource(cs, "Application");
 
                         //EventLog.WriteEntry(cs, e.Message, EventLogEntryType.Error);
                         break;
                     }
 
                 }
+
                 foreach (DirectoryInfo dir in di.GetDirectories())
                 {
                     try
@@ -80,7 +79,7 @@ namespace LogSender
                 responseFromServerRepository = false;
                 //first take care of zip files if last service was stopped
                 string[] filetosend = Directory.EnumerateFiles(pathToRepositoryFiles, "*.zip").Where(f => (f.Length <= 10485760)).ToArray();
-
+                log.Debug("Checking if there are waiting zip files to be sent to the server");
                 foreach (string fname in filetosend)
                 {
                     string name = Path.GetFileName(fname);
@@ -131,13 +130,15 @@ namespace LogSender
                     catch (IOException)
                     {
                         if (File.Exists(pathToFilesToZipRepository + "\\" + fileName))
+                        {
                             File.Delete(pathToRepositoryFiles + "\\" + fileName);
+                        }
                     }
 
                     //}
 
                 }
-
+                log.Debug("Deleting empty files");
                 //delete the empty files
                 FileInfo[] emptyFiles = directoryRepository.GetFiles().Where(f => (f.FullName.EndsWith(".xml")) && (f.Length == 0)).ToArray();
                 foreach (FileInfo fi in emptyFiles)
@@ -220,7 +221,7 @@ namespace LogSender
             {
                 //check the stop flag first
                 //if (stopFlag == true)
-                 //   break;
+                //   break;
                 if (await ServerConnection.IsServerAliveAsync())
                 {
                     responseFromServerRepository = SendByteArrayToServer(fts.GetByteData());
@@ -228,6 +229,8 @@ namespace LogSender
                     {
                         try
                         {
+                            log.Info("Sending process is ended successfully");
+                            log.Debug("delete zip file");
                             //delete the zip file
                             FileInfo fi = new FileInfo(pathToRepositoryFiles + "\\" + fts.nameOfFile + ".zip");
                             fi.Delete();
@@ -240,16 +243,24 @@ namespace LogSender
                             return;
                         }
                     }
+                    else
+                    {
+                        log.Error("Error occurred while sending message to the server. server response is false");
+                    }
                     if (filesToSendListRepository.Count > 1)
                     {
-                      //  for (int i = 0; i < 10; i++)
-                       // {
-                          //  if (stopFlag == true) // check every second if the stop flag is triggered
-                             //   break;
-                            //Thread.Sleep(1000);
-                       // }
+                        //  for (int i = 0; i < 10; i++)
+                        // {
+                        //  if (stopFlag == true) // check every second if the stop flag is triggered
+                        //   break;
+                        //Thread.Sleep(1000);
+                        // }
                     }
 
+                }
+                else
+                {
+                    log.Warn("Server (log insert) is offline cannot send .xml files");
                 }
             }
 
@@ -276,6 +287,7 @@ namespace LogSender
             bool responseFromServer = false;
             try
             {
+                log.Info("Sending .xml zipped files to the server");
                 LogSender1.ServiceReference.Cyber20WebServiceSoapClient client = new LogSender1.ServiceReference.Cyber20WebServiceSoapClient("Cyber20WebServiceSoap");
                 client.Endpoint.Address = new EndpointAddress(@"http://" + ConfigFile.Instance._configData._hostIp + "/serverws/cyber20webservice.asmx");
                 responseFromServer = client.GetLogFileFromClient(byteArray, GetMacs(), Environment.MachineName, GetWhitelistGUID(), GetComputerGUID() + GetCPUID());
@@ -294,22 +306,27 @@ namespace LogSender
             (
                 from nic in NetworkInterface.GetAllNetworkInterfaces()
                 where (nic.NetworkInterfaceType != NetworkInterfaceType.Loopback && nic.NetworkInterfaceType != NetworkInterfaceType.Tunnel) //nic.OperationalStatus == OperationalStatus.Up && 
-            select nic.GetPhysicalAddress().ToString()
+                select nic.GetPhysicalAddress().ToString()
             ).ToList();
 
             //delete empty macs
             for (int i = 0; i < macs.Count; i++)
             {
                 if (macs[i] == "")
+                {
                     macs.Remove(macs[i]);
+                }
             }
 
             macs = macs.OrderBy(q => q).ToList();
 
             if (macs.Count > 0)
+            {
                 return macs[0];
+            }
+
             return "";
-            
+
         }
         private static string GetWhitelistGUID()
         {
