@@ -45,7 +45,7 @@ namespace LogSender
                 new KeyValuePair<string , DirectoryInfo>( "cimg" , new DirectoryInfo( ConfigFile.Instance._configData._cimgFolderPath ) ) ,
                 new KeyValuePair<string , DirectoryInfo>( "mog" , new DirectoryInfo( ConfigFile.Instance._configData._mogFolderPath) )
             };
-             
+
             log.Debug("log sender class created");
         }
 
@@ -54,7 +54,7 @@ namespace LogSender
         /// </summary>
         public async void RunService()
         {
-            log.Debug("Main Service thread started");
+            log.Info("Main Service thread started");
             while (true) //main service loop
             {
                 //check if server is online
@@ -91,7 +91,7 @@ namespace LogSender
                     //check folder status
                     if (FolderWatcher.IsFolderReadyToSendWatcher(dir))
                     {
-                        log.Debug("Sending process can begin, creating sending process Task for " + dir.Value.Name + " log folder");
+                        log.Info("Sending process can begin, creating sending process Task for " + dir.Value.Name + " log folder");
 
                         //create task for the current folder
                         taskList.Add(Task.Run(() => SendFolderLogsAsync(dir)));
@@ -104,7 +104,7 @@ namespace LogSender
                 Task.WaitAll(taskList.ToArray());
 
                 taskList.Clear();
-                log.Debug("Task list deleted, main loop has finished the current iteration, going to sleep");
+                log.Info("Task list deleted, main loop has finished the current iteration, going to sleep");
             }
             catch (Exception ex)
             {
@@ -121,6 +121,7 @@ namespace LogSender
         {
             try
             {
+                log.Debug("Starting offline procedure for log folders");
                 foreach (KeyValuePair<string, DirectoryInfo> dir in _directory)
                 {
                     FileMaintenance.ZeroSizeFileCleanup(dir.Value);
@@ -161,7 +162,7 @@ namespace LogSender
 
                 //for testing the string
                 //File.WriteAllText(@"C:\Users\idanm\Desktop\test.txt", multipleLogFileAsjsonString);
-                
+
                 //gzip data
                 MemoryStream compressedData = GZipCompresstion.CompressString(multipleLogFileAsjsonString);
 

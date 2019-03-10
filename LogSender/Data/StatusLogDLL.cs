@@ -56,7 +56,7 @@ namespace LogSender.Data
 
         internal void DefineStatusFromDataLog(string reason, string seqNum)
         {
-            if (seqNum == "0")
+            if (seqNum != "0")
             {
                 _status = "Chain";
             }
