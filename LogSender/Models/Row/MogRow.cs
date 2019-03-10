@@ -117,6 +117,11 @@ namespace LogSender.Models
             }
         }
 
+        internal bool IsEndOfFlow()
+        {
+            return (_fileExtractData[(int)_fileExtractDataIndexs.FLOW_STATE].GetData() == "END") ? true : false;
+        }
+
         /// <summary>
         /// check if sub sequence number == 0 
         /// </summary>

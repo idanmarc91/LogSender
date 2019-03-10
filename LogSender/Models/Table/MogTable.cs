@@ -6,7 +6,7 @@ namespace LogSender.Models
 {
     public class MogTable : Table
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger( "MogTable.cs" );
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger("MogTable.cs");
 
         ///**********************************************
         ///             Members Section
@@ -27,36 +27,39 @@ namespace LogSender.Models
         #region Function section
 
         //Ctor of MogTable Class
-        public MogTable(byte[] expandedFileByteArray , string reportingComputer , Int64 serverClientDelta , UInt16 headerVersion)
+        public MogTable(byte[] expandedFileByteArray, string reportingComputer, Int64 serverClientDelta, UInt16 headerVersion)
         {
             try
             {
                 _mogTable = new List<MogRow>();
                 _serviceMogTable = new List<MogRow>();
 
-                for( int loopIndex = 0 ; loopIndex < expandedFileByteArray.Length ; loopIndex = loopIndex + Utilities.Constant.MOG_ROW_SIZE)
+                for (int loopIndex = 0; loopIndex < expandedFileByteArray.Length; loopIndex = loopIndex + Utilities.Constant.MOG_ROW_SIZE)
                 {
                     //create new row
-                    MogRow row = new MogRow( serverClientDelta , reportingComputer , headerVersion );
+                    MogRow row = new MogRow(serverClientDelta, reportingComputer, headerVersion);
 
-                    row.ExtractData( loopIndex , expandedFileByteArray );
+                    row.ExtractData(loopIndex, expandedFileByteArray);
 
-                    if( row.CheckSubSeqNum() )
+                    if (!row.IsEndOfFlow())
                     {
-                        _mogTable.Add( row );
-                    }
-                    else
-                    {
-                        _serviceMogTable.Add( row );
+                        if (row.CheckSubSeqNum())
+                        {
+                            _mogTable.Add(row);
+                        }
+                        else
+                        {
+                            _serviceMogTable.Add(row);
+                        }
                     }
                 }
 
                 ExpandSVCHost();
 
             }
-            catch ( Exception ex )
+            catch (Exception ex)
             {
-                log.Error( "Problem with creating MOG table for one of the binary files" , ex );
+                log.Error("Problem with creating MOG table for one of the binary files", ex);
             }
         }
 
@@ -88,9 +91,9 @@ namespace LogSender.Models
         {
             csvFormat = new StringBuilder();
 
-            foreach( MogRow row in _mogTable )
+            foreach (MogRow row in _mogTable)
             {
-                csvFormat.Append( row.AddRowToDataOutput() );
+                csvFormat.Append(row.AddRowToDataOutput());
 
             }
         }

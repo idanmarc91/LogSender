@@ -69,6 +69,11 @@ namespace LogSender.Models
             };
         }
 
+        internal bool IsEndOfFlow()
+        {
+            return (_fileExtractData[(int)_fileExtractDataIndexs.FLOW_STATE].GetData() == "END") ? true : false;
+        }
+
         /// <summary>
         /// This function extract data from binary file
         /// </summary>
@@ -102,9 +107,7 @@ namespace LogSender.Models
             //we need to separate them to 2 fields: reason, real status.(the
             //extracted status is not the real status)
 
-            //_statusCyb.MapStatusFromReason(_fileExtractData[(int)_fileExtractDataIndexs.REASON_LOG].GetData());
             _statusCyb.DefineStatusFromDataLog(_fileExtractData[(int)_fileExtractDataIndexs.REASON_LOG].GetData(), _fileExtractData[(int)_fileExtractDataIndexs.SEQ_NUM].GetData());
-            //_realStatusCyb = StatusReasonMap.Map(_fileExtractData[(int)_fileExtractDataIndexs.REASON_LOG].GetData());
 
             if (_fileExtractData[(int)_fileExtractDataIndexs.FLOW_STATE].GetData() == "END")
             {

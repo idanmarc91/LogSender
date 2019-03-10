@@ -43,13 +43,16 @@ namespace LogSender
                     CybRow row = new CybRow(serverClientDelta, reportinComputer, headerVersion);
                     row.ExtractData(loopIndex, expandedFileByteArray);
 
-                    if (row.CheckSubSeqNum())
+                    if (!row.IsEndOfFlow())
                     {
-                        _cybTable.Add(row);
-                    }
-                    else
-                    {
-                        _servicesCybTable.Add(row);
+                        if (row.CheckSubSeqNum())
+                        {
+                            _cybTable.Add(row);
+                        }
+                        else
+                        {
+                            _servicesCybTable.Add(row);
+                        }
                     }
                 }
 
