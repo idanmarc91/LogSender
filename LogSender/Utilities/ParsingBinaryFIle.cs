@@ -132,7 +132,7 @@ namespace LogSender.Utilities
         }
 
         /// <summary>
-        /// This funcion add data header for output string
+        /// This function add data header for output string
         /// </summary>
         /// <param name="dataAsString"></param>
         //public static void AddOutputHeader(StringBuilder dataAsString)

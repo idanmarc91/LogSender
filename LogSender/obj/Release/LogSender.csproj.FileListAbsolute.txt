@@ -41,4 +41,14 @@ C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\Newtonsoft.Json.pdb
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\nunit.framework.pdb
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\obj\Release\Cyber20LogSender.exe
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\obj\Release\Cyber20LogSender.pdb
-C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\obj\Release\LogSender.csprojAssemblyReference.cache
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\ServiceStack.Client.dll
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\ServiceStack.Common.dll
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\ServiceStack.dll
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\ServiceStack.Interfaces.dll
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\System.ValueTuple.dll
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\ServiceStack.xml
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\ServiceStack.Client.xml
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\ServiceStack.Common.xml
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\ServiceStack.Interfaces.xml
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\System.ValueTuple.xml
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\obj\Release\Cyber20LogSender.exe.config
