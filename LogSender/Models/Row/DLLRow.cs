@@ -19,7 +19,7 @@ namespace LogSender.Models
             PROCESS_ID, DLL_PATH, DLL_NAME, PARENT_PATH, PARENT_NAME, REASON_LOG
         };
 
-        private StatusLogDLL _statusDll = new StatusLogDLL();
+        private MapedStatus _statusDll = new MapedStatus();
         //private string _realStatusDll = "";
 
         #endregion Member section

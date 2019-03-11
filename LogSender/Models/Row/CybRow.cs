@@ -21,7 +21,7 @@ namespace LogSender.Models
             DESTINATION_IP, SEQ_NUM, SUB_SEQ_NUM, USER_NAME, REASON
         };
 
-        private StatusLogDLL _statusCyb = new StatusLogDLL();
+        private MapedStatus _statusCyb = new MapedStatus();
         //private string _realStatusCyb = "";
 
         #endregion Member section

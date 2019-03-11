@@ -70,7 +70,9 @@ namespace LogSender_Tests
             KeyValuePair<string, DirectoryInfo> overWeightFolder = new KeyValuePair<string, DirectoryInfo>
                                                             ("fsa", new DirectoryInfo(path + @"\\..\\..\\Watcher Tests\FolderReady"));
             //Act
-            bool FolderOverWeightTrue = FolderWatcher.FolderSizeWatcher(overWeightFolder);
+            long dirSize = FileMaintenance.DirSize(overWeightFolder.Value.GetFiles());// get directory size
+
+            bool FolderOverWeightTrue = FolderWatcher.FolderSizeWatcher(overWeightFolder, dirSize);
 
             //Assert
             Assert.IsTrue(FolderOverWeightTrue);

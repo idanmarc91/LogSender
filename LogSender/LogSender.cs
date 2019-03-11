@@ -40,10 +40,10 @@ namespace LogSender
 
             _directory = new List<KeyValuePair<string, DirectoryInfo>>
             {
-                new KeyValuePair<string , DirectoryInfo>( "cyb" , new DirectoryInfo( ConfigFile.Instance._configData._cybFolderPath ) ) ,
+               // new KeyValuePair<string , DirectoryInfo>( "cyb" , new DirectoryInfo( ConfigFile.Instance._configData._cybFolderPath ) ) ,
                 new KeyValuePair<string , DirectoryInfo>( "fsa" , new DirectoryInfo( ConfigFile.Instance._configData._fsaFolderPath) ) ,
-                new KeyValuePair<string , DirectoryInfo>( "cimg" , new DirectoryInfo( ConfigFile.Instance._configData._cimgFolderPath ) ) ,
-                new KeyValuePair<string , DirectoryInfo>( "mog" , new DirectoryInfo( ConfigFile.Instance._configData._mogFolderPath) )
+                //new KeyValuePair<string , DirectoryInfo>( "cimg" , new DirectoryInfo( ConfigFile.Instance._configData._cimgFolderPath ) ) ,
+                //new KeyValuePair<string , DirectoryInfo>( "mog" , new DirectoryInfo( ConfigFile.Instance._configData._mogFolderPath) )
             };
 
             log.Debug("log sender class created");
@@ -125,10 +125,12 @@ namespace LogSender
                 foreach (KeyValuePair<string, DirectoryInfo> dir in _directory)
                 {
                     FileMaintenance.ZeroSizeFileCleanup(dir.Value);
-                    if (FolderWatcher.FolderSizeWatcher(dir))
+                    long dirSize = FileMaintenance.DirSize(dir.Value.GetFiles());// get directory size
+
+                    if (FolderWatcher.FolderSizeWatcher(dir, dirSize))
                     {
                         //folder size exceeded delete old files
-                        FileMaintenance.DeleteOldFiles(dir);
+                        FileMaintenance.DeleteOldFiles(dir, dirSize);
                     }
                 }
                 log.Debug("Folder management finished, main loop has finished the current iteration, going to sleep");

@@ -4791,15 +4791,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:v5 LogSender"
-        "ProductCode" = "8:{5FB87705-2F7C-4C1E-BFEC-D9B09EA0E268}"
-        "PackageCode" = "8:{6B6C2B60-688A-4D9B-8BCE-5AB875E149BC}"
+        "ProductCode" = "8:{B9540248-2D43-463B-8B4A-7E86762FBB5B}"
+        "PackageCode" = "8:{7F37571A-F1CE-4511-9970-FC5509550920}"
         "UpgradeCode" = "8:{E60CB089-EF74-4C3B-9C05-0A0E1D52123D}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.1.0"
+        "ProductVersion" = "8:1.2.0"
         "Manufacturer" = "8:Cyber 2.0"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:www.cyber20.com"
@@ -5369,7 +5369,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_BD35F0C63745435DBEB1EA06EB13CA29"
             {
-            "SourcePath" = "8:..\\LogSender\\obj\\Release\\Cyber20LogSender.exe"
+            "SourcePath" = "8:..\\LogSender\\obj\\Debug\\Cyber20LogSender.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_228606BE9EA44B82843BA1EE8B9744C1"

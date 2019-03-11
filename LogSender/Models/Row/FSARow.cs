@@ -25,6 +25,7 @@ namespace LogSender.Models
         private readonly string _destinationPort = "445";
         private string _sourceIP;
         private DestinationIpFsa _destIP;
+        private MapedStatus _status = new MapedStatus();
 
         #endregion Member section
 
@@ -86,6 +87,7 @@ namespace LogSender.Models
             }
 
             _destIP = new DestinationIpFsa(_fileExtractData[(int)_fileExtractDataIndexs.DESTINATION_PATH].GetData(), _sourceIP);
+            _status.DefineStatusFromDataLog(_fileExtractData[(int)_fileExtractDataIndexs.REASON].GetData(), _fileExtractData[(int)_fileExtractDataIndexs.SEQ_NUM].GetData());
         }
 
         /// <summary>
@@ -111,12 +113,6 @@ namespace LogSender.Models
                 _reason = serviceRow._fileExtractData[(int)_fileExtractDataIndexs.REASON].GetData()
             };
 
-            // for testing
-            //if(string.IsNullOrEmpty(newExpandRow._appName ) && string.IsNullOrEmpty(newExpandRow._fullPath) && string.IsNullOrEmpty(newExpandRow._reason))
-            //{
-            //    string what = "what?";
-            //}
-                
             _expandSVCHost.Add(newExpandRow);
         }
 
@@ -154,7 +150,8 @@ namespace LogSender.Models
                 _fileExtractData[(int)_fileExtractDataIndexs.PROCESS_NAME].GetData(),
                 _fileExtractData[(int)_fileExtractDataIndexs.PROCESS_PATH].GetData(),
                 _protocol,//protocol
-                _fileExtractData[(int)_fileExtractDataIndexs.STATUS].GetData(),
+                _status._status,
+                //_fileExtractData[(int)_fileExtractDataIndexs.STATUS].GetData(),
                 "",//source_port
                 _destinationPort,//destination_port
                 _direction,//direction

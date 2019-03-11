@@ -216,14 +216,14 @@ namespace LogSender
 
         private static async void SendFilesToServerRepository()
         {
-            //List<FileToSend> filesToDeleteRepository = new List<FileToSend>();
-            foreach (FileToSend fts in filesToSendListRepository)
+            if (await ServerConnection.IsServerAliveAsync())
             {
-                //check the stop flag first
-                //if (stopFlag == true)
-                //   break;
-                if (await ServerConnection.IsServerAliveAsync())
+                //List<FileToSend> filesToDeleteRepository = new List<FileToSend>();
+                foreach (FileToSend fts in filesToSendListRepository)
                 {
+                    //check the stop flag first
+                    //if (stopFlag == true)
+                    //   break;
                     responseFromServerRepository = SendByteArrayToServer(fts.GetByteData());
                     if (responseFromServerRepository == true)
                     {
@@ -258,27 +258,26 @@ namespace LogSender
                     }
 
                 }
-                else
+
+
+                //delete the files that were sent from the list
+                foreach (FileToSend fi in filesToSendListRepository.ToList())
                 {
-                    log.Warn("Server (log insert) is offline cannot send .xml files");
+                    try
+                    {
+                        filesToSendListRepository.Remove(fi);
+                    }
+                    catch (Exception ex)
+                    {
+                        log.Error("Cannot delete the .xml files after sending to server", ex);
+                    }
+
                 }
             }
-
-
-            //delete the files thate were sent from the list
-            foreach (FileToSend fi in filesToSendListRepository.ToList())
+            else
             {
-                try
-                {
-                    filesToSendListRepository.Remove(fi);
-                }
-                catch (Exception ex)
-                {
-                    log.Error("Cannot delete the .xml files after sending to server", ex);
-                }
-
+                log.Warn("The server (log insert) is offline cannot send repository files");
             }
-            //filesToDeleteRepository.Clear();
 
         }
 

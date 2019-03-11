@@ -20,7 +20,7 @@ namespace LogSender.Models
             PROCESS_NAME, PROCESS_PATH, FLOW_HANDLE, FLOW_STATE, CAST_TYPE, SCRAMBLE_STATE,
             SOURCE_IP, DESTINATION_IP, SEQ_NUM, SUB_SEQ_NUM, USER_NAME, MOG_COUNTER
         };
-        private StatusLogDLL _statusMog = new StatusLogDLL();
+        private MapedStatus _statusMog = new MapedStatus();
         //private string _realStatusMog = "";
 
         #endregion Member section

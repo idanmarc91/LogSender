@@ -12,7 +12,7 @@ namespace LogSender.Utilities
         ///**********************************************
         ///             Functions Section
         ///**********************************************
-        
+
         /// <summary>
         /// This function check if the current file can be access
         /// </summary>
@@ -32,7 +32,7 @@ namespace LogSender.Utilities
                 //still being written to
                 //or being processed by another thread
                 //or does not exist (has already been processed)
-                log.Warn(file.Name + " file is in writing mode. cannot be access!");
+                log.Info(file.Name + " file is in writing mode. cannot be access!");
                 return true;
             }
             finally
@@ -115,9 +115,9 @@ namespace LogSender.Utilities
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                log.Error("Problem occurred while trying to delete an empty file",ex);
+                log.Error("Problem occurred while trying to delete an empty file", ex);
             }
         }
 
@@ -127,7 +127,7 @@ namespace LogSender.Utilities
         /// </summary>
         /// <param name="dir"></param>
         /// <param name="binaryFileMaxSize"></param>
-        public static void DeleteOldFiles(KeyValuePair<string, DirectoryInfo> dir)
+        public static void DeleteOldFiles(KeyValuePair<string, DirectoryInfo> dir, long dirSize)
         {
             try
             {
@@ -142,15 +142,17 @@ namespace LogSender.Utilities
                     {
                         continue;
                     }
+                    long fileSize = file.Length;
                     file.Delete();
 
-                    if (!FolderWatcher.FolderSizeWatcher(dir))
+                    if (dirSize - fileSize < ConfigFile.Instance._configData._binaryFolderMaxSize)
                     {
+                        dirSize -= fileSize;// update dir size
                         break;
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 log.Error("Problem occurred while trying to delete old log file", ex);
             }

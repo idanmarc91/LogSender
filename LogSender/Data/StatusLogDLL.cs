@@ -2,7 +2,7 @@
 
 namespace LogSender.Data
 {
-    class StatusLogDLL
+    class MapedStatus
     {
         private static Dictionary<string, string> _reasonStatusMap = new Dictionary<string, string>
         {
@@ -56,7 +56,7 @@ namespace LogSender.Data
 
         internal void DefineStatusFromDataLog(string reason, string seqNum)
         {
-            if (seqNum != "0")
+            if (seqNum != "0")//if sequence number != 0 the row is chain
             {
                 _status = "Chain";
             }

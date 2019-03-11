@@ -8,7 +8,7 @@ namespace LogSender
 {
     public class FsaTable : Table
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger( "FSATable.cs" );
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger("FSATable.cs");
 
         ///**********************************************
         ///             Members Section
@@ -29,7 +29,7 @@ namespace LogSender
         #region Function section
 
         //Ctor of FSATable
-        public FsaTable(byte[] expandedFileByteArray , string reportingComputer , Int64 serverClientDelta , UInt16 headerVersion)
+        public FsaTable(byte[] expandedFileByteArray, string reportingComputer, Int64 serverClientDelta, UInt16 headerVersion)
         {
             try
             {
@@ -37,31 +37,31 @@ namespace LogSender
                 _servicesFsaTable = new List<FSARow>();
 
                 //define how much bytes in each FSA row 
-                int bytesInRow = DefineRowSize( headerVersion , Utilities.Constant.FSA_ROW_SIZE);
+                int bytesInRow = DefineRowSize(headerVersion, Utilities.Constant.FSA_ROW_SIZE);
 
                 string _sourceIP = ServerConnection.GetLocalIPAddress();
 
                 //main loop iteration binary file and extract data from it
-                for( int loopIndex = 0 ; loopIndex < expandedFileByteArray.Length ; loopIndex = loopIndex + bytesInRow )
+                for (int loopIndex = 0; loopIndex < expandedFileByteArray.Length; loopIndex = loopIndex + bytesInRow)
                 {
-                    FSARow row = new FSARow( serverClientDelta , reportingComputer , headerVersion, _sourceIP);
-                    row.ExtractData( loopIndex , expandedFileByteArray );
+                    FSARow row = new FSARow(serverClientDelta, reportingComputer, headerVersion, _sourceIP);
+                    row.ExtractData(loopIndex, expandedFileByteArray);
 
-                    if( row.GetSubSeqNum() == "0" )
+                    if (row.GetSubSeqNum() == "0")
                     {
-                        _FsaTable.Add( row );
+                        _FsaTable.Add(row);
                     }
                     else
                     {
-                        _servicesFsaTable.Add( row );
+                        _servicesFsaTable.Add(row);
                     }
                 }
 
                 ExpandSVCHost();
             }
-            catch( Exception ex )
+            catch (Exception ex)
             {
-                log.Error( "Problem with creating FSA table for one of the binary files" , ex );
+                log.Error("Problem with creating FSA table for one of the binary files", ex);
             }
         }
 
@@ -70,18 +70,18 @@ namespace LogSender
         /// </summary>
         private void ExpandSVCHost()
         {
-            foreach( FSARow row in _FsaTable )
+            foreach (FSARow row in _FsaTable)
             {
-                if( row.GetSeqNum() != "0" )
+                if (row.GetSeqNum() != "0")//if sequence number != 0 the row is chain
                 {
-                    foreach( FSARow serviceRow in _servicesFsaTable )
+                    foreach (FSARow serviceRow in _servicesFsaTable)
                     {
-                        if( ( serviceRow.GetSubSeqNum() == row.GetSeqNum() ) && ( serviceRow.TimeStamp._fullServerTimeStamp == row.TimeStamp._fullServerTimeStamp) )
+                        if ((serviceRow.GetSubSeqNum() == row.GetSeqNum()) && (serviceRow.TimeStamp._fullServerTimeStamp == row.TimeStamp._fullServerTimeStamp))
                         {
-                            row.ExpandSvc( serviceRow );
+                            row.ExpandSvc(serviceRow);
                         }
                     }
-                    _servicesFsaTable.RemoveAll( i => i.TimeStamp._fullServerTimeStamp == row.TimeStamp._fullServerTimeStamp && i.GetSubSeqNum() == row.GetSeqNum() );
+                    _servicesFsaTable.RemoveAll(i => i.TimeStamp._fullServerTimeStamp == row.TimeStamp._fullServerTimeStamp && i.GetSubSeqNum() == row.GetSeqNum());
                 }
             }
         }
@@ -93,12 +93,12 @@ namespace LogSender
         {
             csvFormat = new StringBuilder();
 
-            foreach( FSARow row in _FsaTable )
+            foreach (FSARow row in _FsaTable)
             {
-                csvFormat.Append( row.AddRowToDataOutput() );
+                csvFormat.Append(row.AddRowToDataOutput());
             }
         }
-        
+
         #endregion Function section
     }
 }

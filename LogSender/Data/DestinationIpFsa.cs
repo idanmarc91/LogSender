@@ -74,8 +74,8 @@ namespace LogSender.Data
                             {
                                 log.Warn(ex.Message);
                                 System.IO.File.AppendAllText(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\ls-logs\\destination_ip.txt",
-                                                            DateTime.Now.ToString("dd/MM HH:mm:ss") + " Error occurred while resolving: " + ex.Message + " host name: " + destHostName + " destination path: "+ path + Environment.NewLine);
-                                return destHostName;
+                                                            DateTime.Now.ToString("dd/MM HH:mm:ss") + " Error occurred while resolving: " + ex.Message + " host name: " + destHostName + " destination path: " + path + Environment.NewLine);
+                                return (destHostName == null) ? "Cannot Resolve IP" : destHostName;
                             }
                             else
                             {
