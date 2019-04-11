@@ -37,5 +37,4 @@ C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\ServiceStack.Common
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\ServiceStack.Interfaces.xml
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Release\System.ValueTuple.xml
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\obj\Release\Cyber20LogSender.exe.config
-C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\obj\Release\LogSender.csprojAssemblyReference.cache
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\obj\Release\LogSender.csproj.Fody.CopyLocal.cache

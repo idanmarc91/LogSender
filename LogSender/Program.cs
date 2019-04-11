@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
 using System.ServiceProcess;
-using System.Threading;
 
 [assembly: log4net.Config.XmlConfigurator(Watch = true)]
 
@@ -18,11 +17,11 @@ namespace LogSender
         {
             try
             {
+
+#if DEBUG
                 log.Info("===========================");
                 log.Info("Cyber 2.0");
                 log.Info("Log Sender application started, application version: " + GetApplicationVersion());
-
-#if DEBUG
                 log.Info("Service starting in DEBUG mode");
                 log.Info("===========================");
 
@@ -52,6 +51,9 @@ namespace LogSender
                 }
                 else
                 {
+                    log.Info("===========================");
+                    log.Info("Cyber 2.0");
+                    log.Info("Log Sender application started, application version: " + GetApplicationVersion());
                     log.Info("Service starting in RELEASE mode");
                     log.Info("===========================");
 
@@ -68,7 +70,6 @@ namespace LogSender
             catch (Exception ex)
             {
                 log.Fatal("Problem with service creation", ex);
-                Thread.CurrentThread.Abort();
             }
         }
 

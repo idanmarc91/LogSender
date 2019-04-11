@@ -53,7 +53,8 @@ namespace LogSender.Utilities
             catch (Exception ex)
             {
                 log.Fatal("config file create or read fail. service cannot start", ex);
-                System.Threading.Thread.CurrentThread.Abort();
+                throw new Exception();
+                //System.Threading.Thread.CurrentThread.Abort();
             }
         }
 
@@ -242,7 +243,7 @@ namespace LogSender.Utilities
                                 _configData._hostIp = line.Substring(startOffset, line.Length - startOffset);
                             }
 
-                            if(String.IsNullOrEmpty(_configData._hostIp))
+                            if (String.IsNullOrEmpty(_configData._hostIp))
                             {
                                 hostFromAgent = true;
                             }
@@ -365,7 +366,7 @@ namespace LogSender.Utilities
                     }
                     catch (System.IO.FileNotFoundException ex)
                     {
-                        log.Fatal("Fatal error config file in creation or reading process, agent config file was found", ex);
+                        log.Fatal("Fatal error config file in creation or reading process, agent config file was not found", ex);
                         throw new Exception();
                     }
                 }
@@ -375,7 +376,9 @@ namespace LogSender.Utilities
                 //}
 
                 if (String.IsNullOrEmpty(_configData._hostIp))
+                {
                     log.Error("No host ip");
+                }
             }
             catch (Exception ex)
             {

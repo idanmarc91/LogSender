@@ -31,21 +31,6 @@ C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\obj\Debug\LogSender.csproj.Copy
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Debug\Cyber20LogSender.exe.config
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Debug\Cyber20LogSender.exe
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Debug\Cyber20LogSender.pdb
-C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Debug\log4net.dll
-C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Debug\Newtonsoft.Json.dll
-C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Debug\nunit.framework.dll
-C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Debug\ServiceStack.Client.dll
-C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Debug\ServiceStack.Common.dll
-C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Debug\ServiceStack.dll
-C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Debug\ServiceStack.Interfaces.dll
-C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Debug\ServiceStack.Text.dll
-C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Debug\System.Buffers.dll
-C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Debug\System.Memory.dll
-C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Debug\System.Numerics.Vectors.dll
-C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
-C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Debug\System.ValueTuple.dll
-C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Debug\Newtonsoft.Json.pdb
-C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Debug\nunit.framework.pdb
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Debug\ServiceStack.xml
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Debug\ServiceStack.Client.xml
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\bin\Debug\ServiceStack.Common.xml
@@ -55,3 +40,4 @@ C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\obj\Debug\Cyber20LogSender.exe.
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\obj\Debug\Cyber20LogSender.exe
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\obj\Debug\Cyber20LogSender.pdb
 C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\obj\Debug\LogSender.csprojAssemblyReference.cache
+C:\_DEV\workspace\Client-Log-Sender-v5\LogSender\obj\Debug\LogSender.csproj.Fody.CopyLocal.cache

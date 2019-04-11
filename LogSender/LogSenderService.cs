@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ServiceProcess;
+using System.Threading;
 
 namespace LogSender
 {
@@ -9,6 +10,8 @@ namespace LogSender
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger("LogSenderService.cs");
 
         LogSender _logSender;
+        static Thread MainThread;
+
         public LogSenderService()
         {
             InitializeComponent();
@@ -19,17 +22,45 @@ namespace LogSender
             OnStart(null);
         }
 
-        protected override void OnStart(string[] args)
+        public void Main()
         {
             try
             {
-                log.Debug("Log Sender Service OnStart Function");
                 _logSender = new LogSender();
                 _logSender.RunService();
             }
             catch (Exception ex)
             {
                 log.Fatal("Creation of log sender class problem", ex);
+
+                log.Info("Stopping the service.");
+                string serviceName = "Cyber20LogSender";
+                using (var sc = new ServiceController(serviceName))
+                {
+                    if (sc.Status != ServiceControllerStatus.Stopped)
+                    {
+                        sc.Stop();
+                    }
+                }
+            }
+        }
+
+        protected override void OnStart(string[] args)
+        {
+            try
+            {
+                log.Debug("Log Sender Service OnStart Function started");
+
+
+                MainThread = new Thread(new ThreadStart(Main));
+                MainThread.IsBackground = true; // impotent!
+                MainThread.Start();
+
+                log.Debug("Log Sender Service OnStart Function finished");
+            }
+            catch (Exception ex)
+            {
+
             }
         }
 
