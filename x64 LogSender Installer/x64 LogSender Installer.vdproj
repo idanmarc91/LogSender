@@ -4798,7 +4798,7 @@
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
-        "InstallAllUsers" = "11:FALSE"
+        "InstallAllUsers" = "11:TRUE"
         "ProductVersion" = "8:1.2.0"
         "Manufacturer" = "8:Cyber 2.0"
         "ARPHELPTELEPHONE" = "8:"

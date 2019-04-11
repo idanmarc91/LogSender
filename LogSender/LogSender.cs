@@ -40,13 +40,13 @@ namespace LogSender
 
             _directory = new List<KeyValuePair<string, DirectoryInfo>>
             {
-               // new KeyValuePair<string , DirectoryInfo>( "cyb" , new DirectoryInfo( ConfigFile.Instance._configData._cybFolderPath ) ) ,
+                new KeyValuePair<string , DirectoryInfo>( "cyb" , new DirectoryInfo( ConfigFile.Instance._configData._cybFolderPath ) ) ,
                 new KeyValuePair<string , DirectoryInfo>( "fsa" , new DirectoryInfo( ConfigFile.Instance._configData._fsaFolderPath) ) ,
-                //new KeyValuePair<string , DirectoryInfo>( "cimg" , new DirectoryInfo( ConfigFile.Instance._configData._cimgFolderPath ) ) ,
-                //new KeyValuePair<string , DirectoryInfo>( "mog" , new DirectoryInfo( ConfigFile.Instance._configData._mogFolderPath) )
+                new KeyValuePair<string , DirectoryInfo>( "cimg" , new DirectoryInfo( ConfigFile.Instance._configData._cimgFolderPath ) ) ,
+                new KeyValuePair<string , DirectoryInfo>( "mog" , new DirectoryInfo( ConfigFile.Instance._configData._mogFolderPath) )
             };
 
-            log.Debug("log sender class created");
+            log.Debug("Log sender class created");
         }
 
         /// <summary>
@@ -99,10 +99,10 @@ namespace LogSender
                         log.Debug("Task created for " + dir.Value.Name + " folder and started his operation");
                     }
                 }
-                /*PREF: the program is not really parallel because main thread is waiting - waiting for the folders to be updated - if not updated th log sender can send the same log to the server.*/
+                /*PREF: the program is not really parallel because main thread is waiting - waiting for the folders to be updated - if not updated the log sender can send the same log to the server.*/
                 log.Debug("Main thread is waiting for all task to finish there operation");
                 Task.WaitAll(taskList.ToArray());
-
+                
                 taskList.Clear();
                 log.Info("Task list deleted, main loop has finished the current iteration, going to sleep");
             }
@@ -151,7 +151,7 @@ namespace LogSender
             {
                 log.Debug(dir.Value.Name + " Folder starting his sending process task");
 
-                //Multifile string - hold data from few file
+                //Multi file string - hold data from few file
                 StringBuilder dataAsString = new StringBuilder();
 
                 //Start the parsing process on the folder
@@ -183,6 +183,8 @@ namespace LogSender
                 {
                     log.Error("Task failed. problem occurred while trying to send data to server.");
                 }
+
+                log.Debug(dir.Value.Name + " Folder Finished sending process task");
 
             }
             catch (Exception ex)

@@ -69,7 +69,7 @@ namespace LogSender.Utilities
         {
             try
             {
-                log.Debug("check if server (" + "http://" +  ConfigFile.Instance._configData._hostIp + ":" + ConfigFile.Instance._configData._hostPort + ") is alive");
+                log.Debug("check if server (" + "http://" + ConfigFile.Instance._configData._hostIp + ":" + ConfigFile.Instance._configData._hostPort + ") is alive");
 
                 using (HttpClient client = new HttpClient())
                 {
@@ -87,6 +87,13 @@ namespace LogSender.Utilities
             }
         }
 
+
+        /// <summary>
+        /// THIS FUNCTION USED IN UNIT TESTING!
+        /// This function check if the server is online
+        /// </summary>
+        /// <param name="ip"></param>
+        /// <returns></returns>
         public static async Task<bool> IsServerAliveAsync(string ip)
         {
             try
@@ -112,7 +119,7 @@ namespace LogSender.Utilities
         /// <summary>
         /// This function is responsible for server connection logic.
         /// if the sending process fail this function will manage the delay and resend process 
-        /// depent on the configuration file data
+        /// depend on the configuration file data
         /// </summary>
         /// <param name="compressedData"></param>
         /// <returns></returns>
@@ -121,9 +128,9 @@ namespace LogSender.Utilities
             int retry = ConfigFile.Instance._configData._numberOfTimesToRetry;
             while (retry != 0)//retry loop
             {
-                if (await SendDataToServerAsync("http://" + ConfigFile.Instance._configData._hostIp + ":" + ConfigFile.Instance._configData._hostPort , compressedData))
+                if (await SendDataToServerAsync("http://" + ConfigFile.Instance._configData._hostIp + ":" + ConfigFile.Instance._configData._hostPort, compressedData))
                 {
-                    return true;//when file sent sucessfuly exit while loop
+                    return true;//when file sent successfully exit while loop
                 }
                 await Task.Delay(ConfigFile.Instance._configData._waitTimeBeforeRetry);
                 retry--;

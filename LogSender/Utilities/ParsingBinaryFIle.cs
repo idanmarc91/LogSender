@@ -149,7 +149,7 @@ namespace LogSender.Utilities
         public static List<FileInfo> ParseFolder(StringBuilder dataAsString,
                                                  KeyValuePair<string, DirectoryInfo> directory)
         {
-            log.Debug(directory.Value.Name + "folder started his parsing process");
+            log.Debug(directory.Value.Name + " folder started his parsing process");
 
             //add csv format data headers line
             //AddOutputHeader(dataAsString);
