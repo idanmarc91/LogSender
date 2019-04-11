@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.ServiceProcess;
 using System.Threading;
 
@@ -17,10 +18,17 @@ namespace LogSender
         {
             try
             {
+                log.Info("===========================");
+                log.Info("Cyber 2.0");
+                log.Info("Log Sender application started, application version: " + GetApplicationVersion());
+
 #if DEBUG
+                log.Info("Service starting in DEBUG mode");
+                log.Info("===========================");
+
                 LogSenderService service = new LogSenderService();
                 service.LogSenderServiceOnDebug();
-                Thread.Sleep(Timeout.Infinite );
+                Thread.Sleep(Timeout.Infinite);
 
 #else
                 //CosturaUtility.Initialize();
@@ -44,7 +52,9 @@ namespace LogSender
                 }
                 else
                 {
-                    log.Debug("Service starting in RELEASE mode");
+                    log.Info("Service starting in RELEASE mode");
+                    log.Info("===========================");
+
 
                     ServiceBase[] ServicesToRun;
                     ServicesToRun = new ServiceBase[]
@@ -60,6 +70,13 @@ namespace LogSender
                 log.Fatal("Problem with service creation", ex);
                 Thread.CurrentThread.Abort();
             }
+        }
+
+        static string GetApplicationVersion()
+        {
+            System.Reflection.Assembly assembly = System.Reflection.Assembly.GetExecutingAssembly();
+            FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
+            return fvi.FileVersion;
         }
     }
 }

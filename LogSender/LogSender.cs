@@ -18,10 +18,20 @@ namespace LogSender
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger("LogSender.cs");
 
+        enum FILE_TYPE
+        {
+            PACKETS,
+            FSACCESS,
+            IMAGES,
+            MULTIEVENT
+        }
+
         private readonly List<KeyValuePair<string, DirectoryInfo>> _directory;
 
         //Data from config file
         private readonly ConfigFile _configFile = ConfigFile.Instance;
+
+        private List<Task> m_taskList = new List<Task>();
 
         #endregion Members section
 
@@ -45,6 +55,11 @@ namespace LogSender
                 new KeyValuePair<string , DirectoryInfo>( "cimg" , new DirectoryInfo( ConfigFile.Instance._configData._cimgFolderPath ) ) ,
                 new KeyValuePair<string , DirectoryInfo>( "mog" , new DirectoryInfo( ConfigFile.Instance._configData._mogFolderPath) )
             };
+
+            foreach (var dir in _directory)
+            {
+                m_taskList.Add(new Task(() => SendFolderLogsAsync(dir)));
+            }
 
             log.Debug("Log sender class created");
         }
@@ -83,28 +98,36 @@ namespace LogSender
         {
             try
             {
-                List<Task> taskList = new List<Task>();
-                foreach (KeyValuePair<string, DirectoryInfo> dir in _directory)//run on all log directories
+
+                for (int index = 0; index < _directory.Count; index++)
                 {
-                    FileMaintenance.ZeroSizeFileCleanup(dir.Value);
-                    /* PREF: Task created for each folder */
-                    //check folder status
-                    if (FolderWatcher.IsFolderReadyToSendWatcher(dir))
+                    var c = m_taskList[index].Status;
+
+                    //if previews task has been finished create new one
+                    if (m_taskList[index].IsCompleted)// || m_taskList[index].Status == TaskStatus.Created)
                     {
-                        log.Info("Sending process can begin, creating sending process Task for " + dir.Value.Name + " log folder");
-
-                        //create task for the current folder
-                        taskList.Add(Task.Run(() => SendFolderLogsAsync(dir)));
-
-                        log.Debug("Task created for " + dir.Value.Name + " folder and started his operation");
+                        m_taskList[index] = new Task(() => SendFolderLogsAsync(_directory[index]));
                     }
+
+                    //if new task, start it 
+                    if (m_taskList[index].Status == TaskStatus.Created)
+                    {
+                        FileMaintenance.ZeroSizeFileCleanup(_directory[index].Value);
+
+                        //check folder status
+                        if (FolderWatcher.IsFolderReadyToSendWatcher(_directory[index]))
+                        {
+                            log.Info("Sending process can begin, creating sending process Task for " + _directory[index].Value.Name + " log folder");
+
+                            //start task for the current folder
+                            m_taskList[index].Start();
+
+                            log.Debug("Task created for " + _directory[index].Value.Name + " folder and started his operation");
+                        }
+                    }
+
                 }
-                /*PREF: the program is not really parallel because main thread is waiting - waiting for the folders to be updated - if not updated the log sender can send the same log to the server.*/
-                log.Debug("Main thread is waiting for all task to finish there operation");
-                Task.WaitAll(taskList.ToArray());
-                
-                taskList.Clear();
-                log.Info("Task list deleted, main loop has finished the current iteration, going to sleep");
+                //log.Info("Task list deleted, main loop has finished the current iteration, going to sleep");
             }
             catch (Exception ex)
             {
@@ -145,7 +168,7 @@ namespace LogSender
         /// Main thread function
         /// </summary>
         /// <param name="dir"></param>
-        private async Task SendFolderLogsAsync(KeyValuePair<string, DirectoryInfo> dir)
+        private async void SendFolderLogsAsync(KeyValuePair<string, DirectoryInfo> dir)
         {
             try
             {
@@ -171,8 +194,8 @@ namespace LogSender
                 ServerConnection serverConnection = new ServerConnection();
 
                 if (serverConnection.
-                    ServerManagerAsync(compressedData)
-                    .Result)
+                    ServerManagerAsync(compressedData).
+                    Result)
                 {
                     log.Info("Log sender sent " + listOfFileToDelete.Count + " files to the server and the server received them");
 

@@ -101,12 +101,6 @@ namespace LogSender.Utilities
                 log.Debug("Cleaning all zero size files in " + directory.Name + " directory");
                 foreach (FileInfo file in directory.GetFiles())
                 {
-                    ////cannot access file- cant add his vale to counter
-                    //if (IsFileLocked(file))
-                    //{
-                    //    continue;
-                    //}
-
                     //delete file with zero size
                     if (file.Length == 0 && !IsFileLocked(file))
                     {
@@ -145,9 +139,10 @@ namespace LogSender.Utilities
                     long fileSize = file.Length;
                     file.Delete();
 
-                    if (dirSize - fileSize < ConfigFile.Instance._configData._binaryFolderMaxSize)
+                    dirSize -= fileSize;
+                    if (dirSize < ConfigFile.Instance._configData._binaryFolderMaxSize)
                     {
-                        dirSize -= fileSize;// update dir size
+                        // dirSize -= fileSize;// update dir size
                         break;
                     }
                 }
