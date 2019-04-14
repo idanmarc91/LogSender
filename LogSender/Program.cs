@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.ServiceProcess;
+using System.Threading;
 
 [assembly: log4net.Config.XmlConfigurator(Watch = true)]
 

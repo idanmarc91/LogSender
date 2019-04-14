@@ -22,7 +22,7 @@ namespace LogSender
             OnStart(null);
         }
 
-        public void Main()
+        public void ServiceMain()
         {
             try
             {
@@ -52,7 +52,7 @@ namespace LogSender
                 log.Debug("Log Sender Service OnStart Function started");
 
 
-                MainThread = new Thread(new ThreadStart(Main));
+                MainThread = new Thread(new ThreadStart(ServiceMain));
                 MainThread.IsBackground = true; // impotent!
                 MainThread.Start();
 
