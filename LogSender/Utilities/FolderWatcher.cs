@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 
 namespace LogSender.Utilities
 {
@@ -26,10 +25,10 @@ namespace LogSender.Utilities
 
                 long dirSize = FileMaintenance.DirSize(dir.Value.GetFiles());// get directory size
 
-                if (FolderSizeWatcher(dir,dirSize))
+                if (FolderSizeWatcher(dir, dirSize))
                 {
                     //folder size exceeded delete old files
-                    FileMaintenance.DeleteOldFiles(dir,dirSize);
+                    FileMaintenance.DeleteOldFiles(dir, dirSize);
                 }
 
                 if (FileSorting.GetAllFilesByConfigSettings(dir)
@@ -52,7 +51,7 @@ namespace LogSender.Utilities
         }
 
         /// <summary>
-        /// This function maintaine folder when server is offline
+        /// This function maintain folder when server is offline
         /// the function check if the folder size is bigger or smaller then "_maxBinaryFolderSize" set in config file
         /// </summary>
         /// <param name="dir"></param>
@@ -64,7 +63,7 @@ namespace LogSender.Utilities
             {
                 log.Debug("Watching size of \'" + dir.Value.Name + "\' folder");
 
-                //long lenght = FileMaintenance.DirSize(dir.Value.GetFiles());
+                //long length = FileMaintenance.DirSize(dir.Value.GetFiles());
 
                 if (dirSize > ConfigFile.Instance._configData._binaryFolderMaxSize)
                 {

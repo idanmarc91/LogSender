@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace LogSender
 {
@@ -18,20 +17,10 @@ namespace LogSender
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger("LogSender.cs");
 
-        enum FILE_TYPE
-        {
-            PACKETS,
-            FSACCESS,
-            IMAGES,
-            MULTIEVENT
-        }
-
         private readonly List<KeyValuePair<string, DirectoryInfo>> _directory;
 
         //Data from config file
         private readonly ConfigFile _configFile = ConfigFile.Instance;
-
-        private List<Task> m_taskList = new List<Task>();
 
         #endregion Members section
 
@@ -55,11 +44,6 @@ namespace LogSender
                 new KeyValuePair<string , DirectoryInfo>( "cimg" , new DirectoryInfo( ConfigFile.Instance._configData._cimgFolderPath ) ) ,
                 new KeyValuePair<string , DirectoryInfo>( "mog" , new DirectoryInfo( ConfigFile.Instance._configData._mogFolderPath) )
             };
-
-            foreach (var dir in _directory)
-            {
-                m_taskList.Add(new Task(() => SendFolderLogsAsync(dir)));
-            }
 
             log.Debug("Log sender class created");
         }
@@ -98,41 +82,24 @@ namespace LogSender
         {
             try
             {
-
                 for (int index = 0; index < _directory.Count; index++)
                 {
-                    var c = m_taskList[index].Status;
+                    FileMaintenance.ZeroSizeFileCleanup(_directory[index].Value);
 
-                    //if previews task has been finished create new one
-                    if (m_taskList[index].IsCompleted)// || m_taskList[index].Status == TaskStatus.Created)
+                    //check folder status
+                    if (FolderWatcher.IsFolderReadyToSendWatcher(_directory[index]))
                     {
-                        m_taskList[index] = new Task(() => SendFolderLogsAsync(_directory[index]));
+                        log.Info("Sending process can begin, creating sending process Task for " + _directory[index].Value.Name + " log folder");
+
+                        SendLogFolder(_directory[index]);
+
+                        log.Debug("Task created for " + _directory[index].Value.Name + " folder and started his operation");
                     }
-
-                    //if new task, start it 
-                    if (m_taskList[index].Status == TaskStatus.Created)
-                    {
-                        FileMaintenance.ZeroSizeFileCleanup(_directory[index].Value);
-
-                        //check folder status
-                        if (FolderWatcher.IsFolderReadyToSendWatcher(_directory[index]))
-                        {
-                            log.Info("Sending process can begin, creating sending process Task for " + _directory[index].Value.Name + " log folder");
-
-                            //start task for the current folder
-                            m_taskList[index].Start();
-
-                            log.Debug("Task created for " + _directory[index].Value.Name + " folder and started his operation");
-                        }
-                    }
-
                 }
-                //log.Info("Task list deleted, main loop has finished the current iteration, going to sleep");
             }
             catch (Exception ex)
             {
-                log.Fatal("Problem in thread creation", ex);
-                Thread.CurrentThread.Abort();
+                log.Error("Problem occurred while sending the logs data to the server.", ex);
             }
         }
 
@@ -168,11 +135,11 @@ namespace LogSender
         /// Main thread function
         /// </summary>
         /// <param name="dir"></param>
-        private async void SendFolderLogsAsync(KeyValuePair<string, DirectoryInfo> dir)
+        private void SendLogFolder(KeyValuePair<string, DirectoryInfo> dir)
         {
             try
             {
-                log.Debug(dir.Value.Name + " Folder starting his sending process task");
+                log.Debug("*** Starting sending process with " + dir.Value.Name + " Folder ***");
 
                 //Multi file string - hold data from few file
                 StringBuilder dataAsString = new StringBuilder();
@@ -204,10 +171,10 @@ namespace LogSender
                 }
                 else
                 {
-                    log.Error("Task failed. problem occurred while trying to send data to server.");
+                    log.Error("Server sending process failed. problem occurred while trying to send data to server.");
                 }
 
-                log.Debug(dir.Value.Name + " Folder Finished sending process task");
+                log.Debug("*** Finished sending process with " + dir.Value.Name + " Folder. ***");
 
             }
             catch (Exception ex)

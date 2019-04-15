@@ -1,7 +1,12 @@
 ﻿using System;
 using System.Diagnostics;
+
+#if !DEBUG
 using System.ServiceProcess;
+#else
 using System.Threading;
+#endif
+
 
 [assembly: log4net.Config.XmlConfigurator(Watch = true)]
 
@@ -55,7 +60,16 @@ namespace LogSender
                     log.Info("===========================");
                     log.Info("Cyber 2.0");
                     log.Info("Log Sender application started, application version: " + GetApplicationVersion());
+#if QARELEASE
+
+                    log.Info("Service starting in QA RELEASE mode");
+                    log.Info("NOT FOR PRODUCTION PURPOSE!");
+#endif
+
+#if RELEASE
                     log.Info("Service starting in RELEASE mode");
+
+#endif
                     log.Info("===========================");
 
 
