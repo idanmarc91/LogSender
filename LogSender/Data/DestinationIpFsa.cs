@@ -68,7 +68,7 @@ namespace LogSender.Data
                         }
                         catch (SocketException ex)//catch special host name
                         {
-#if QARELEASE 
+//#if QARELEASE || DEBUG
                             string ip = SpecialHostName(destHostName);
 
                             if (ip == null)//if we cannot resolve the destHostName we write it to a log file for further investigation
@@ -82,7 +82,7 @@ namespace LogSender.Data
                             {
                                 return ip;
                             }
-#endif
+//#endif
                         }
                         break;
                 }
