@@ -230,7 +230,7 @@ namespace LogSender
                         try
                         {
                             log.Info("Sending process is ended successfully");
-                            log.Debug("delete zip file");
+                            log.Debug("Delete zip file");
                             //delete the zip file
                             FileInfo fi = new FileInfo(pathToRepositoryFiles + "\\" + fts.nameOfFile + ".zip");
                             fi.Delete();

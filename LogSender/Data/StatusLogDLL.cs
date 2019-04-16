@@ -44,9 +44,7 @@ namespace LogSender.Data
         {
             if (_reasonStatusMap.ContainsKey(reason))
             {
-                //_status = _reasonStatusMap[status];
                 return _reasonStatusMap[reason];
-
             }
             else
             {
@@ -56,7 +54,7 @@ namespace LogSender.Data
 
         internal void DefineStatusFromDataLog(string reason, string seqNum)
         {
-            if (seqNum != "0")//if sequence number != 0 the row is chain
+            if (seqNum != "0" && reason != "Ok")//if sequence number != 0 the row is chain
             {
                 _status = "Chain";
             }
