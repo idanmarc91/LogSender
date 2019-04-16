@@ -30,9 +30,17 @@ namespace LogSender.Utilities
                 PingReply reply = pinger.Send(Constant.DOMAIN_FULL_NAME);
                 return reply.Address.ToString();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                log.Error("Problem occurred while resolving domain ip, domain name is: " + Constant.DOMAIN_FULL_NAME);
+                if (string.IsNullOrEmpty(Constant.DOMAIN_FULL_NAME))
+                {
+                    log.Error("The computer is not connected to a domain");
+                }
+                else
+                {
+                    log.Error("Problem occurred while resolving domain IP, domain name is: " + Constant.DOMAIN_FULL_NAME);
+                }
+
                 return "";
             }
         }

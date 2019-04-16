@@ -17,7 +17,15 @@ namespace LogSender.Data
         /// </summary>
         public DestinationIpFsa(string path, string sourceIp)
         {
+            // if the computer is not registers to a domain the destination ip will be empty. domain is required for resolving.
+            if (string.IsNullOrEmpty(Constant.DOMAIN_FULL_NAME))
+            {
+                _destinationIp = "";
+                return;
+            }
+
             _destinationIp = ResolveHostName(path);
+
             if (_destinationIp == "")
             {
                 _destinationIp = sourceIp;
@@ -68,7 +76,7 @@ namespace LogSender.Data
                         }
                         catch (SocketException ex)//catch special host name
                         {
-//#if QARELEASE || DEBUG
+                            //#if QARELEASE || DEBUG
                             string ip = SpecialHostName(destHostName);
 
                             if (ip == null)//if we cannot resolve the destHostName we write it to a log file for further investigation
@@ -82,7 +90,7 @@ namespace LogSender.Data
                             {
                                 return ip;
                             }
-//#endif
+                            //#endif
                         }
                         break;
                 }
