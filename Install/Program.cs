@@ -2,6 +2,8 @@
 using System;
 using System.Linq;
 using System.ServiceProcess;
+using System.Management;
+
 
 [assembly: log4net.Config.XmlConfigurator(Watch = true)]
 
@@ -11,12 +13,15 @@ namespace Install
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger("Program.cs");
 
-        private static readonly string pathToOldService = @"C:\Program Files\Cyber 2.0\Cyber 2.0 Agent\LogSender.exe";
-        private static readonly string pathToOldServiceConfig = @"C:\Program Files\Cyber 2.0\Cyber 2.0 Agent\LogSender.exe.config";
-        private static readonly string pathToOldServiceConfigurationFile = @"C:\Program Files\Cyber 2.0\Cyber 2.0 Agent\Log Sender Configuration.cfg";
+        private static readonly string OldService = @"LogSender.exe";
+        private static readonly string OldServiceConfig = @"LogSender.exe.config";
+        private static readonly string OldServiceConfigurationFile = @"Log Sender Configuration.cfg";
 
         static void Main(string[] args)
         {
+            string pathToService = "";
+            string pathToServiceConfig = "";
+            string pathToServiceConfigFile = "";
 
             log.Info("Starting to install the LogSender windows service");
 
@@ -24,6 +29,17 @@ namespace Install
 
             if (DoesServiceExist("Cyber20LogSender"))//check if old service is installed
             {
+                string pathToExecutable = GetServicePath("Cyber20LogSender");
+
+                if(string.IsNullOrEmpty(pathToExecutable))
+                {
+                    return;
+                }
+
+                pathToService = pathToExecutable + OldService;
+                pathToServiceConfig = pathToExecutable + OldServiceConfig;
+                pathToServiceConfigFile = pathToExecutable + OldServiceConfigurationFile;
+
                 try
                 {
                     StopService("Cyber20LogSender");
@@ -63,13 +79,13 @@ namespace Install
             {
                 log.Info("Starting to delete old service files");
 
-                if (System.IO.File.Exists(pathToOldService) &&
-                   System.IO.File.Exists(pathToOldServiceConfig) &&
-                   System.IO.File.Exists(pathToOldServiceConfigurationFile))
+                if (System.IO.File.Exists(pathToService) &&
+                   System.IO.File.Exists(pathToServiceConfig) &&
+                   System.IO.File.Exists(pathToServiceConfigFile))
                 {
-                    System.IO.File.Delete(pathToOldService);
-                    System.IO.File.Delete(pathToOldServiceConfig);
-                    System.IO.File.Delete(pathToOldServiceConfigurationFile);
+                    System.IO.File.Delete(pathToService);
+                    System.IO.File.Delete(pathToServiceConfig);
+                    System.IO.File.Delete(pathToServiceConfigFile);
                     log.Debug("Delete old files has ended");
                 }
             }
@@ -131,6 +147,28 @@ namespace Install
             InstallService.StartService("Cyber20LogSender");
 
             log.Info("End of installation");
+        }
+
+        private static string GetServicePath(string ServiceName)
+        {
+            string currentserviceExePath = "";
+
+            try
+            {
+                using (ManagementObject wmiService = new ManagementObject("Win32_Service.Name='" + ServiceName + "'"))
+                {
+                    wmiService.Get();
+                    currentserviceExePath = wmiService["PathName"].ToString();
+                }
+
+            }
+            catch(Exception ex) //if service not found
+            {
+                log.Fatal("Cannot find service.");
+                return "";
+            }
+            int index = currentserviceExePath.LastIndexOf('\\');
+            return currentserviceExePath.Substring(1,index); // remove \"  \" from string 
         }
 
         static bool DoesServiceExist(string serviceName)
