@@ -18,7 +18,7 @@ namespace LogSender.Models
         {
             PROTOCOL, REASON_LOG, SOURCE_PORT, DESTINATION_PORT, DIRECTION, ADDRESS_FAMILY,
             PROCESS_NAME, PROCESS_PATH, FLOW_HANDLE, FLOW_STATE, CAST_TYPE, SCRAMBLE_STATE, SOURCE_IP,
-            DESTINATION_IP, SEQ_NUM, SUB_SEQ_NUM, USER_NAME, REASON
+            DESTINATION_IP, SEQ_NUM, SUB_SEQ_NUM, USER_NAME
         };
 
         private MapedStatus _statusCyb = new MapedStatus();
@@ -196,7 +196,7 @@ namespace LogSender.Models
             {
                 _appName = serviceRow._fileExtractData[(int)_fileExtractDataIndexs.PROCESS_NAME].GetData(),
                 _fullPath = serviceRow._fileExtractData[(int)_fileExtractDataIndexs.PROCESS_PATH].GetData(),
-                _reason = serviceRow._statusCyb._status
+                _reason = serviceRow._fileExtractData[(int)_fileExtractDataIndexs.REASON_LOG].GetData()
             };
 
             // for testing
