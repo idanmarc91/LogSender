@@ -60,7 +60,7 @@ namespace LogSender
                     log.Info("===========================");
                     log.Info("Cyber 2.0");
                     log.Info("Log Sender application started, application version: " + GetApplicationVersion());
-#if QARELEASE
+#if QA_PRNT_FSA
 
                     log.Info("Service starting in QA RELEASE mode");
                     log.Info("NOT FOR PRODUCTION PURPOSE!");

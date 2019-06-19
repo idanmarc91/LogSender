@@ -10,7 +10,7 @@
     <ProjectGuid>{CC24A769-2AF6-4994-A05B-A9F06795CE36}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>LogSender</RootNamespace>
-    <AssemblyName>Cyber20LogSender</AssemblyName>
+    <AssemblyName>LogSender</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -102,7 +102,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'QA Release|AnyCPU'">
     <OutputPath>bin\QA Release\</OutputPath>
-    <DefineConstants>QARELEASE</DefineConstants>
+    <DefineConstants>QA_PRNT_FSA</DefineConstants>
     <Prefer32Bit>true</Prefer32Bit>
     <Optimize>true</Optimize>
   </PropertyGroup>
