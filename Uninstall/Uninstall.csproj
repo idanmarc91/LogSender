@@ -66,7 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LogSender\LogSender.csproj">
-      <Project>{CC24A769-2AF6-4994-A05B-A9F06795CE36}</Project>
+      <Project>{cc24a769-2af6-4994-a05b-a9f06795ce36}</Project>
       <Name>LogSender</Name>
     </ProjectReference>
   </ItemGroup>

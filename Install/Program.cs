@@ -5,6 +5,7 @@ using System.ServiceProcess;
 using System.Management;
 
 
+
 [assembly: log4net.Config.XmlConfigurator(Watch = true)]
 
 namespace Install

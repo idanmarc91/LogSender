@@ -44,8 +44,8 @@ namespace LogSender
                     {
                         case "install":
                             log.Info("Service starting install process");
-
-
+                            
+                            
                             SelfInstaller.InstallService(System.Reflection.Assembly.GetExecutingAssembly().Location);
                             break;
                         case "uninstall":
