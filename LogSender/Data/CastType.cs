@@ -38,7 +38,7 @@ namespace LogSender.Data
                     break;
 
                 default:
-                    _castType = "ERROR";
+                    _castType = "Error";
                     break;
             }
         }
@@ -100,7 +100,7 @@ namespace LogSender.Data
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
             }
         }

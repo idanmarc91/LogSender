@@ -7,7 +7,7 @@ namespace LogSender.Data
         ///**********************************************
         ///             Members Section
         ///**********************************************
-        const int MOG_COUNTER_LEN = 8;
+        const int MOG_COUNTER_LEN = 2;
         private string _mogCounter;
 
         ///**********************************************
@@ -23,7 +23,8 @@ namespace LogSender.Data
         public override void ExtractData(int loopIndex, byte[] expandedFileByteArray, ref int fileIndex)
         {
             byte[] data = GetData(loopIndex, expandedFileByteArray, ref fileIndex, MOG_COUNTER_LEN);
-            _mogCounter = BitConverter.ToUInt64(data, 0).ToString();
+            _mogCounter = BitConverter.ToUInt16(data, 0).ToString(); 
+            fileIndex += 6; // ignore 6 byte 
         }
 
         /// <summary>

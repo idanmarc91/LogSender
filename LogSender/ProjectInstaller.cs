@@ -1,9 +1,5 @@
-﻿using LogSender.Utilities;
-using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Configuration.Install;
-using System.Diagnostics;
-using System.ServiceProcess;
 
 namespace LogSender
 {
@@ -11,6 +7,7 @@ namespace LogSender
     public partial class ProjectInstaller : System.Configuration.Install.Installer
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger("ProjectInstaller.cs");
+
         public ProjectInstaller()
         {
             InitializeComponent();
@@ -18,33 +15,29 @@ namespace LogSender
 
         private void serviceInstaller1_AfterInstall(object sender, InstallEventArgs e)
         {
-            int exitCode;
+            //System.IO.File.AppendAllText(@"C:\Program Files\Cyber 2.0\Cyber 2.0 Agent\TEST.txt", "in after install function" + Environment.NewLine);
+
             log.Debug("After install event started");
-            //add recovery option to log sender service
-            using (var process = new Process())
-            {
-                var startInfo = process.StartInfo;
-                startInfo.FileName = "sc";
-                startInfo.WindowStyle = ProcessWindowStyle.Hidden;
-
-                // tell Windows that the service should restart if it fails
-                startInfo.Arguments = string.Format("failure \"{0}\" reset= 0 actions= restart/60000", "Cyber 2.0 Log Sender v5");
-                process.Start();
-                process.WaitForExit();
-
-                exitCode = process.ExitCode;
-            }
-
-            if (exitCode != 0)
-            {
-                throw new InvalidOperationException();
-            }
+            //InstallService.SetServiceRecovery(string.Format("failure \"{0}\" reset= 0 actions= restart/60000", serviceInstaller1.ServiceName));
 
             //create config file
-            ConfigFile cnf = ConfigFile.Instance;
+            //ConfigFile cnf = ConfigFile.Instance;
 
-            //start the service right after installation process complete
-            new ServiceController(serviceInstaller1.ServiceName).Start();
+            ////start the service
+            //InstallService.StartService(serviceInstaller1.ServiceName);
+        }
+
+        private void serviceInstaller1_BeforeUninstall(object sender, InstallEventArgs e)
+        {
+            //stop the service -not working goods
+            //UninstallService.StopService(serviceInstaller1.ServiceName);
+
+            //string exeDirPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+
+            //UninstallService.DeleteFileByName(Path.Combine(exeDirPath, "LogSenderConfiguration.cfg"));
+
+            //string logPath = Path.Combine(exeDirPath, "ls-logs");
+            //UninstallService.DeleteLogFiles(logPath);
         }
     }
 }

@@ -53,7 +53,8 @@ namespace LogSender.Utilities
             catch (Exception ex)
             {
                 log.Fatal("config file create or read fail. service cannot start", ex);
-                System.Threading.Thread.CurrentThread.Abort();
+                throw new Exception();
+                //System.Threading.Thread.CurrentThread.Abort();
             }
         }
 
@@ -67,6 +68,7 @@ namespace LogSender.Utilities
             {
                 int startOffset;
                 bool hostFromAgent = false;
+
                 #region Read from LogSender config file
 
                 //Read Log Sender Configuration file
@@ -241,7 +243,7 @@ namespace LogSender.Utilities
                                 _configData._hostIp = line.Substring(startOffset, line.Length - startOffset);
                             }
 
-                            if(String.IsNullOrEmpty(_configData._hostIp))
+                            if (String.IsNullOrEmpty(_configData._hostIp))
                             {
                                 hostFromAgent = true;
                             }
@@ -249,7 +251,7 @@ namespace LogSender.Utilities
                         }
                         catch (Exception)
                         {
-                            _configData._hostIp = ""; // default host port
+                            _configData._hostIp = ""; // default host IP
                         }
                     }
                     if (line.Contains("max_binary_folder_size="))
@@ -336,37 +338,52 @@ namespace LogSender.Utilities
                 {
                     log.Info("reading host ip from Agent config file");
 
-                    string[] AgentCfgFile = System.IO.File.ReadAllLines(path + @"\..\Config.cfg");
-                    string tempIp;
-                    foreach (string line in AgentCfgFile)
-                    {
-                        if (line.Contains("host="))
-                        {
-                            startOffset = 5;
+                    //string[] AgentCfgFile = System.IO.File.ReadAllLines(path + @"\..\Config.cfg");
 
-                            if (line.Contains("#"))
+                    try
+                    {
+                        string[] AgentCfgFile = System.IO.File.ReadAllLines(path + @"\Config.cfg");
+
+
+                        string tempIp;
+                        foreach (string line in AgentCfgFile)
+                        {
+                            if (line.Contains("host="))
                             {
-                                tempIp = line.Substring(startOffset, line.IndexOf('#') - startOffset).Trim();
+                                startOffset = 5;
+
+                                if (line.Contains("#"))
+                                {
+                                    _configData._hostIp = line.Substring(startOffset, line.IndexOf('#') - startOffset).Trim();
+                                }
+                                else
+                                {
+                                    _configData._hostIp = line.Substring(startOffset, line.Length - startOffset);
+                                }
+                                //_configData._hostIp = "http://" + tempIp + ":" + _configData._hostPort;
                             }
-                            else
-                            {
-                                tempIp = line.Substring(startOffset, line.Length - startOffset);
-                            }
-                            _configData._hostIp = "http://" + tempIp + ":" + _configData._hostPort;
                         }
                     }
+                    catch (System.IO.FileNotFoundException ex)
+                    {
+                        log.Fatal("Fatal error config file in creation or reading process, agent config file was not found", ex);
+                        throw new Exception();
+                    }
                 }
-                else //assemble ip address from log sender config file with port number
-                {
-                    _configData._hostIp = "http://" + _configData._hostIp + ":" + _configData._hostPort;
-                }
+                //else //assemble ip address from log sender config file with port number
+                //{
+                //    _configData._hostIp = "http://" + _configData._hostIp + ":" + _configData._hostPort;
+                //}
 
                 if (String.IsNullOrEmpty(_configData._hostIp))
+                {
                     log.Error("No host ip");
+                }
             }
             catch (Exception ex)
             {
                 log.Fatal("Fatal error config file in creation or reading process", ex);
+                throw new Exception();
             }
         }
 

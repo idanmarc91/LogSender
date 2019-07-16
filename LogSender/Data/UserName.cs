@@ -31,7 +31,6 @@ namespace LogSender.Data
         /// <param name="fileIndex"></param>
         public override void ExtractData(int loopIndex, byte[] expandedFileByteArray, ref int fileIndex)
         {
-            //fileIndex += 16;
             if (_headerVersion > 2)
             {
                 byte[] data = GetData(loopIndex, expandedFileByteArray, ref fileIndex, USER_NAME_STR_LEN);

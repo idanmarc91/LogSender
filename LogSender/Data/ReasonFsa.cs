@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace LogSender.Data
+﻿namespace LogSender.Data
 {
     class ReasonFsa : FileData
     {
@@ -74,7 +72,7 @@ namespace LogSender.Data
                     _reason = "Wait for SUP";
                     break;
                 case "17":
-                    _reason = "Chain block";
+                    _reason = "Chain break";
                     break;
                 case "18":
                     _reason = "NotPD";
@@ -83,10 +81,10 @@ namespace LogSender.Data
                     _reason = "Error";
                     break;
                 case "20":
-                    _reason = "Service MM";
+                    _reason = "Svchost MM";
                     break;
                 default:
-                    _reason = "ErrorVal";
+                    _reason = "Error";
                     break;
             }
         }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 
 namespace LogSender.Utilities
 {
@@ -24,10 +23,12 @@ namespace LogSender.Utilities
             {
                 log.Info("Watching \'" + dir.Value.Name + "\' folder");
 
-                if (FolderSizeWatcher(dir))
+                long dirSize = FileMaintenance.DirSize(dir.Value.GetFiles());// get directory size
+
+                if (FolderSizeWatcher(dir, dirSize))
                 {
                     //folder size exceeded delete old files
-                    FileMaintenance.DeleteOldFiles(dir);
+                    FileMaintenance.DeleteOldFiles(dir, dirSize);
                 }
 
                 if (FileSorting.GetAllFilesByConfigSettings(dir)
@@ -50,26 +51,26 @@ namespace LogSender.Utilities
         }
 
         /// <summary>
-        /// This function maintaine folder when server is offline
+        /// This function maintain folder when server is offline
         /// the function check if the folder size is bigger or smaller then "_maxBinaryFolderSize" set in config file
         /// </summary>
         /// <param name="dir"></param>
         /// <param name="maxBinaryFolderSize"></param>
         /// <returns>true if folder need maintenance false if not</returns>
-        public static bool FolderSizeWatcher(KeyValuePair<string, DirectoryInfo> dir)
+        public static bool FolderSizeWatcher(KeyValuePair<string, DirectoryInfo> dir, long dirSize)
         {
             try
             {
                 log.Debug("Watching size of \'" + dir.Value.Name + "\' folder");
 
-                long lenght = FileMaintenance.DirSize(dir.Value.GetFiles());
+                //long length = FileMaintenance.DirSize(dir.Value.GetFiles());
 
-                if (lenght > ConfigFile.Instance._configData._binaryFolderMaxSize)
+                if (dirSize > ConfigFile.Instance._configData._binaryFolderMaxSize)
                 {
-                    log.Error("The binary folder " + dir.Value.Name + " has reached size limit");
+                    log.Warn("The binary folder " + dir.Value.Name + " has reached size limit");
                     return true;
                 }
-                log.Debug("Folder size is " + lenght + " within the limit (" + ConfigFile.Instance._configData._binaryFolderMaxSize + " bytes)");
+                log.Debug("Folder size is " + dirSize + " within the limit (" + ConfigFile.Instance._configData._binaryFolderMaxSize + " bytes)");
 
                 return false;
             }

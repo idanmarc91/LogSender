@@ -13,7 +13,7 @@ namespace LogSender_Tests
         public async Task CheckIfServerIsAliveTest()
         {
             //Act
-            bool isServerOnline = await ServerConnection.IsServerAliveAsync("http://10.0.0.40:8080");
+            bool isServerOnline = await ServerConnection.IsServerAliveAsync("http://10.0.0.13:8080");
 
             //Assert
             Assert.IsTrue(isServerOnline);
@@ -37,7 +37,7 @@ namespace LogSender_Tests
             //Act
             ServerConnection con = new ServerConnection();
 
-            bool isServerOnline = await con.SendDataToServerAsync("http://10.0.0.40:8080", compressedData);
+            bool isServerOnline = await con.SendDataToServerAsync("http://10.0.0.13:8080", compressedData);
 
             //Assert
             Assert.IsTrue(isServerOnline);

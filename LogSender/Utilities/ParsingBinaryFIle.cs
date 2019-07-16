@@ -71,11 +71,17 @@ namespace LogSender.Utilities
                 if (!bFile.IsFileNull())
                 {
                     log.Debug(file.Name + " log file started his parsing process");
-                    //preprocessing file
+                    //Preprocessing file
                     BinaryFileData data = bFile.SeparateHeaderAndFile();
 
-                    //expend log section
+                    //Expend log section
                     byte[] expandedFileByteArray = data.ExpendLogSection();
+
+                    //Expand process failed
+                    if (expandedFileByteArray.Length == 0)
+                    {
+                        throw new Exception("Binary file expand process has failed.");
+                    }
 
                     //get header parameters
                     HeaderParameters headerParameters = new HeaderParameters();
@@ -110,7 +116,7 @@ namespace LogSender.Utilities
                 //check if log table was created in the switch case above
                 if (logTable != null)
                 {
-                    log.Debug(file.Name + " log file has successfuly finished his parsing process");
+                    log.Debug(file.Name + " log file has successfully finished his parsing process");
                     return logTable;
                 }
                 else
@@ -126,13 +132,13 @@ namespace LogSender.Utilities
         }
 
         /// <summary>
-        /// This funcion add data header for output string
+        /// This function add data header for output string
         /// </summary>
         /// <param name="dataAsString"></param>
-        public static void AddOutputHeader(StringBuilder dataAsString)
-        {
-            dataAsString.Append(ServiceStack.Text.CsvSerializer.SerializeToCsv(_csvHeader));
-        }
+        //public static void AddOutputHeader(StringBuilder dataAsString)
+        //{
+        //    dataAsString.Append(ServiceStack.Text.CsvSerializer.SerializeToCsv(_csvHeader));
+        //}
 
         /// <summary>
         /// This function parse the binary logs inside current folder
@@ -143,7 +149,7 @@ namespace LogSender.Utilities
         public static List<FileInfo> ParseFolder(StringBuilder dataAsString,
                                                  KeyValuePair<string, DirectoryInfo> directory)
         {
-            log.Debug(directory.Value.Name + "folder started his parsing process");
+            log.Debug(directory.Value.Name + " folder started his parsing process");
 
             //add csv format data headers line
             //AddOutputHeader(dataAsString);
@@ -162,12 +168,12 @@ namespace LogSender.Utilities
                         continue;
                     }
 
-                    //parsing oparation
+                    //parsing operation
                     Table logTable = ParsingBinaryFile.Parse(file, directory.Key);
 
                     if (logTable == null)
                     {
-                        log.Error("parsing process failed, log table is null. file \"" + file.Name + "\" skiped");
+                        log.Error("parsing process failed, log table is null. file \"" + file.Name + "\" skipped");
                         throw new Exception();
                     }
 

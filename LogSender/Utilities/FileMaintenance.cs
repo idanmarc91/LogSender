@@ -12,7 +12,7 @@ namespace LogSender.Utilities
         ///**********************************************
         ///             Functions Section
         ///**********************************************
-        
+
         /// <summary>
         /// This function check if the current file can be access
         /// </summary>
@@ -32,7 +32,7 @@ namespace LogSender.Utilities
                 //still being written to
                 //or being processed by another thread
                 //or does not exist (has already been processed)
-                log.Warn(file.Name + " file is in writing mode. cannot be access!", ex);
+                log.Info(file.Name + " file is in writing mode. cannot be access!");
                 return true;
             }
             finally
@@ -48,7 +48,7 @@ namespace LogSender.Utilities
         }
 
         /// <summary>
-        /// This fuction delete a file
+        /// This function delete a file
         /// </summary>
         /// <param name="listOfFileToDelete"></param>
         public static void FileDelete(List<FileInfo> listOfFileToDelete)
@@ -101,12 +101,6 @@ namespace LogSender.Utilities
                 log.Debug("Cleaning all zero size files in " + directory.Name + " directory");
                 foreach (FileInfo file in directory.GetFiles())
                 {
-                    ////cannot access file- cant add his vale to counter
-                    //if (IsFileLocked(file))
-                    //{
-                    //    continue;
-                    //}
-
                     //delete file with zero size
                     if (file.Length == 0 && !IsFileLocked(file))
                     {
@@ -115,25 +109,25 @@ namespace LogSender.Utilities
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                log.Error("Problem occured while trying to delete an empty file",ex);
+                log.Error("Problem occurred while trying to delete an empty file", ex);
             }
         }
 
         /// <summary>
-        /// This function oparete when the folder has exceeded limit size and delete the old log 
+        /// This function operate when the folder has exceeded limit size and delete the old log 
         /// files from it
         /// </summary>
         /// <param name="dir"></param>
         /// <param name="binaryFileMaxSize"></param>
-        public static void DeleteOldFiles(KeyValuePair<string, DirectoryInfo> dir)
+        public static void DeleteOldFiles(KeyValuePair<string, DirectoryInfo> dir, long dirSize)
         {
             try
             {
                 log.Debug(dir.Value.Name + " Folder size exceeded starting delete old file");
 
-                //get all files by date. first one in the array is the oldes
+                //get all files by date. first one in the array is the oldest
                 FileInfo[] files = dir.Value.GetFiles().OrderBy(f => f.CreationTime).ToArray();
 
                 foreach (FileInfo file in files)
@@ -142,17 +136,20 @@ namespace LogSender.Utilities
                     {
                         continue;
                     }
+                    long fileSize = file.Length;
                     file.Delete();
 
-                    if (!FolderWatcher.FolderSizeWatcher(dir))
+                    dirSize -= fileSize;
+                    if (dirSize < ConfigFile.Instance._configData._binaryFolderMaxSize)
                     {
+                        // dirSize -= fileSize;// update dir size
                         break;
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                log.Error("Problem occured while trying to delete old log file", ex);
+                log.Error("Problem occurred while trying to delete old log file", ex);
             }
         }
     }

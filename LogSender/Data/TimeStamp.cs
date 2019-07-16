@@ -10,8 +10,8 @@ namespace LogSender.Data
         private const int TIME_STR_LEN = 8;
 
         private Int64 _serverClientDelta;
-        private string _clientTimeStamp;
-        private string _fullServerTimeStamp;
+        public string _clientTimeStamp { get; set; }
+        public string _fullServerTimeStamp { get; set; }
 
         ///**********************************************
         ///             Functions Section
@@ -46,22 +46,22 @@ namespace LogSender.Data
             _fullServerTimeStamp = time.AddMilliseconds(_serverClientDelta).ToString("dd/MM HH:mm:ss.fff");
         }
 
-        /// <summary>
-        /// get client time
-        /// </summary>
-        /// <returns>string - client time</returns>
-        public string GetClientTime()
-        {
-            return _clientTimeStamp;
-        }
+        ///// <summary>
+        ///// get client time
+        ///// </summary>
+        ///// <returns>string - client time</returns>
+        //public string GetClientTime()
+        //{
+        //    return _clientTimeStamp;
+        //}
 
-        /// <summary>
-        /// get full server time
-        /// </summary>
-        /// <returns>string - full server time</returns>
-        public string GetFullServerTime()
-        {
-            return _fullServerTimeStamp;
-        }
+        ///// <summary>
+        ///// get full server time
+        ///// </summary>
+        ///// <returns>string - full server time</returns>
+        //public string GetFullServerTime()
+        //{
+        //    return _fullServerTimeStamp;
+        //}
     }
 }

@@ -25,12 +25,13 @@
             switch (builder.ToString())
             {
                 case "1":
-                    _status = "OK";
+                    _status = "Ok";
                     break;
                 case "2":
                     _status = "Blocked";
                     break;
                 default:
+                    _status = "Error";
                     _status = builder.ToString();
                     break;
             }

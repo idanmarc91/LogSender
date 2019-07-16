@@ -54,8 +54,8 @@ namespace LogSender_Tests
                 //**  USE ONLY WHEN OUTPUT IS CHANGE **
                 //for creating new output file
 #if WRITE_NEW_TEST
-File.Delete(path + @"\\cyb json output.txt");
-File.WriteAllText(path + @"\\cyb json output.txt", jsonTest);
+                File.Delete(path + @"\\cyb json output.txt");
+                File.WriteAllText(path + @"\\cyb json output.txt", jsonTest);
 #endif
             }
 
@@ -104,8 +104,8 @@ File.WriteAllText(path + @"\\cyb json output.txt", jsonTest);
                 //**  USE ONLY WHEN OUTPUT IS CHANGE **
                 //for creating new output file
 #if WRITE_NEW_TEST
-File.Delete(path + "\\fsa json output.txt");
-File.WriteAllText(path + "\\fsa json output.txt", jsonTest);
+                File.Delete(path + "\\fsa json output.txt");
+                File.WriteAllText(path + "\\fsa json output.txt", jsonTest);
 #endif
             }
 
@@ -154,8 +154,8 @@ File.WriteAllText(path + "\\fsa json output.txt", jsonTest);
                 //**  USE ONLY WHEN OUTPUT IS CHANGE **
                 //for creating new output file
 #if WRITE_NEW_TEST
-File.Delete(path + "\\cimg json output.txt");
-File.WriteAllText(path + "\\cimg json output.txt", jsonTest);
+                File.Delete(path + "\\cimg json output.txt");
+                File.WriteAllText(path + "\\cimg json output.txt", jsonTest);
 #endif
             }
 
@@ -204,8 +204,8 @@ File.WriteAllText(path + "\\cimg json output.txt", jsonTest);
                 //**  USE ONLY WHEN OUTPUT IS CHANGE **
                 //for creating new output file
 #if WRITE_NEW_TEST
-File.Delete(path + "\\mog json output.txt");
-File.WriteAllText(path + "\\mog json output.txt", jsonTest);
+                File.Delete(path + "\\mog json output.txt");
+                File.WriteAllText(path + "\\mog json output.txt", jsonTest);
 #endif
             }
 

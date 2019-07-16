@@ -1,0 +1,1344 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s1="http://tempuri.org/AbstractTypes" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="GetNewCertFile">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="encCurrentPubKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="GUID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="compName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetNewCertFileResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetNewCertFileResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ManualyCreateCertFile">
+        <s:complexType />
+      </s:element>
+      <s:element name="ManualyCreateCertFileResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ManualyCreateCertFileResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CanGetCertificate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="currentClientPubKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MAC" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="whiteListVersionNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SubWhiteListsVersions" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="compName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="gotCert" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="GUID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UIVersion" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="driverVersion" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SUPVersion" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="serviceVersion" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="reconVersion" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="logSenderVersion" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="OSVersion" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="IsScrambled" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="LogedInUser" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CanGetCertificateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CanGetCertificateResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetLogFileFromClient">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="logFile" type="s:base64Binary" />
+            <s:element minOccurs="0" maxOccurs="1" name="creator" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="hostname" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="clientGUID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetLogFileFromClientResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetLogFileFromClientResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="TestConnectionToWebService">
+        <s:complexType />
+      </s:element>
+      <s:element name="TestConnectionToWebServiceResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="TestConnectionToWebServiceResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetWhiteListZipFileToInsertDB">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="whiteListZipFile" type="s:base64Binary" />
+            <s:element minOccurs="0" maxOccurs="1" name="creator" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="fileCreationTime" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="whiteListName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="whiteListDescription" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetWhiteListZipFileToInsertDBResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetWhiteListZipFileToInsertDBResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetNewWhiteList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GUID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="compName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetNewWhiteListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetNewWhiteListResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetNewSubWhiteList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GUID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="compName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetNewSubWhiteListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetNewSubWhiteListResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetNewConfigFile">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GUID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="compName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetNewConfigFileResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetNewConfigFileResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReturnWhiteListByVersionNumber">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="versionNumber" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReturnWhiteListByVersionNumberResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReturnWhiteListByVersionNumberResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReturnWhiteListXMLByVersionNumber">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="versionNumber" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReturnWhiteListXMLByVersionNumberResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReturnWhiteListXMLByVersionNumberResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSubWhitelistTable">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetSubWhitelistTableResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSubWhitelistTableResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetSubWhitelist">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="groupName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="fileVersion" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="mode" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSubWhitelistResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSubWhitelistResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UploadSubWhiteList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="groupName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="xmlfile" type="s:base64Binary" />
+            <s:element minOccurs="0" maxOccurs="1" name="cwmffile" type="s:base64Binary" />
+            <s:element minOccurs="0" maxOccurs="1" name="description" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UploadSubWhiteListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UploadSubWhiteListResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ActivateSubWhiteList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="groupName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Version" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ActivateSubWhiteListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ActivateSubWhiteListResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="string" nillable="true" type="s:string" />
+      <s:element name="int" type="s:int" />
+      <s:element name="boolean" type="s:boolean" />
+      <s:element name="ArrayOfString" nillable="true" type="tns:ArrayOfString" />
+    </s:schema>
+    <s:schema targetNamespace="http://tempuri.org/AbstractTypes">
+      <s:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+      <s:complexType name="StringArray">
+        <s:complexContent mixed="false">
+          <s:restriction base="soapenc:Array">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="unbounded" name="String" type="s:string" />
+            </s:sequence>
+          </s:restriction>
+        </s:complexContent>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetNewCertFileSoapIn">
+    <wsdl:part name="parameters" element="tns:GetNewCertFile" />
+  </wsdl:message>
+  <wsdl:message name="GetNewCertFileSoapOut">
+    <wsdl:part name="parameters" element="tns:GetNewCertFileResponse" />
+  </wsdl:message>
+  <wsdl:message name="ManualyCreateCertFileSoapIn">
+    <wsdl:part name="parameters" element="tns:ManualyCreateCertFile" />
+  </wsdl:message>
+  <wsdl:message name="ManualyCreateCertFileSoapOut">
+    <wsdl:part name="parameters" element="tns:ManualyCreateCertFileResponse" />
+  </wsdl:message>
+  <wsdl:message name="CanGetCertificateSoapIn">
+    <wsdl:part name="parameters" element="tns:CanGetCertificate" />
+  </wsdl:message>
+  <wsdl:message name="CanGetCertificateSoapOut">
+    <wsdl:part name="parameters" element="tns:CanGetCertificateResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetLogFileFromClientSoapIn">
+    <wsdl:part name="parameters" element="tns:GetLogFileFromClient" />
+  </wsdl:message>
+  <wsdl:message name="GetLogFileFromClientSoapOut">
+    <wsdl:part name="parameters" element="tns:GetLogFileFromClientResponse" />
+  </wsdl:message>
+  <wsdl:message name="TestConnectionToWebServiceSoapIn">
+    <wsdl:part name="parameters" element="tns:TestConnectionToWebService" />
+  </wsdl:message>
+  <wsdl:message name="TestConnectionToWebServiceSoapOut">
+    <wsdl:part name="parameters" element="tns:TestConnectionToWebServiceResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetWhiteListZipFileToInsertDBSoapIn">
+    <wsdl:part name="parameters" element="tns:GetWhiteListZipFileToInsertDB" />
+  </wsdl:message>
+  <wsdl:message name="GetWhiteListZipFileToInsertDBSoapOut">
+    <wsdl:part name="parameters" element="tns:GetWhiteListZipFileToInsertDBResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetNewWhiteListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetNewWhiteList" />
+  </wsdl:message>
+  <wsdl:message name="GetNewWhiteListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetNewWhiteListResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetNewSubWhiteListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetNewSubWhiteList" />
+  </wsdl:message>
+  <wsdl:message name="GetNewSubWhiteListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetNewSubWhiteListResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetNewConfigFileSoapIn">
+    <wsdl:part name="parameters" element="tns:GetNewConfigFile" />
+  </wsdl:message>
+  <wsdl:message name="GetNewConfigFileSoapOut">
+    <wsdl:part name="parameters" element="tns:GetNewConfigFileResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReturnWhiteListByVersionNumberSoapIn">
+    <wsdl:part name="parameters" element="tns:ReturnWhiteListByVersionNumber" />
+  </wsdl:message>
+  <wsdl:message name="ReturnWhiteListByVersionNumberSoapOut">
+    <wsdl:part name="parameters" element="tns:ReturnWhiteListByVersionNumberResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReturnWhiteListXMLByVersionNumberSoapIn">
+    <wsdl:part name="parameters" element="tns:ReturnWhiteListXMLByVersionNumber" />
+  </wsdl:message>
+  <wsdl:message name="ReturnWhiteListXMLByVersionNumberSoapOut">
+    <wsdl:part name="parameters" element="tns:ReturnWhiteListXMLByVersionNumberResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSubWhitelistTableSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSubWhitelistTable" />
+  </wsdl:message>
+  <wsdl:message name="GetSubWhitelistTableSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSubWhitelistTableResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSubWhitelistSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSubWhitelist" />
+  </wsdl:message>
+  <wsdl:message name="GetSubWhitelistSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSubWhitelistResponse" />
+  </wsdl:message>
+  <wsdl:message name="UploadSubWhiteListSoapIn">
+    <wsdl:part name="parameters" element="tns:UploadSubWhiteList" />
+  </wsdl:message>
+  <wsdl:message name="UploadSubWhiteListSoapOut">
+    <wsdl:part name="parameters" element="tns:UploadSubWhiteListResponse" />
+  </wsdl:message>
+  <wsdl:message name="ActivateSubWhiteListSoapIn">
+    <wsdl:part name="parameters" element="tns:ActivateSubWhiteList" />
+  </wsdl:message>
+  <wsdl:message name="ActivateSubWhiteListSoapOut">
+    <wsdl:part name="parameters" element="tns:ActivateSubWhiteListResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetNewCertFileHttpGetIn">
+    <wsdl:part name="encCurrentPubKey" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="compName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetNewCertFileHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ManualyCreateCertFileHttpGetIn" />
+  <wsdl:message name="ManualyCreateCertFileHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="CanGetCertificateHttpGetIn">
+    <wsdl:part name="currentClientPubKey" type="s:string" />
+    <wsdl:part name="MAC" type="s:string" />
+    <wsdl:part name="whiteListVersionNumber" type="s:string" />
+    <wsdl:part name="SubWhiteListsVersions" type="s:string" />
+    <wsdl:part name="compName" type="s:string" />
+    <wsdl:part name="gotCert" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="UIVersion" type="s:string" />
+    <wsdl:part name="driverVersion" type="s:string" />
+    <wsdl:part name="SUPVersion" type="s:string" />
+    <wsdl:part name="serviceVersion" type="s:string" />
+    <wsdl:part name="reconVersion" type="s:string" />
+    <wsdl:part name="logSenderVersion" type="s:string" />
+    <wsdl:part name="OSVersion" type="s:string" />
+    <wsdl:part name="IsScrambled" type="s:string" />
+    <wsdl:part name="LogedInUser" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CanGetCertificateHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetLogFileFromClientHttpGetIn">
+    <wsdl:part name="logFile" type="s1:StringArray" />
+    <wsdl:part name="creator" type="s:string" />
+    <wsdl:part name="hostname" type="s:string" />
+    <wsdl:part name="UID" type="s:string" />
+    <wsdl:part name="clientGUID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetLogFileFromClientHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="TestConnectionToWebServiceHttpGetIn" />
+  <wsdl:message name="TestConnectionToWebServiceHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="GetWhiteListZipFileToInsertDBHttpGetIn">
+    <wsdl:part name="whiteListZipFile" type="s1:StringArray" />
+    <wsdl:part name="creator" type="s:string" />
+    <wsdl:part name="fileCreationTime" type="s:string" />
+    <wsdl:part name="whiteListName" type="s:string" />
+    <wsdl:part name="whiteListDescription" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetWhiteListZipFileToInsertDBHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="GetNewWhiteListHttpGetIn">
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="compName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetNewWhiteListHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetNewSubWhiteListHttpGetIn">
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="compName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetNewSubWhiteListHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetNewConfigFileHttpGetIn">
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="compName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetNewConfigFileHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ReturnWhiteListByVersionNumberHttpGetIn">
+    <wsdl:part name="versionNumber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReturnWhiteListByVersionNumberHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ReturnWhiteListXMLByVersionNumberHttpGetIn">
+    <wsdl:part name="versionNumber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReturnWhiteListXMLByVersionNumberHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetSubWhitelistTableHttpGetIn" />
+  <wsdl:message name="GetSubWhitelistTableHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfString" />
+  </wsdl:message>
+  <wsdl:message name="GetSubWhitelistHttpGetIn">
+    <wsdl:part name="groupName" type="s:string" />
+    <wsdl:part name="fileVersion" type="s:string" />
+    <wsdl:part name="mode" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetSubWhitelistHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="UploadSubWhiteListHttpGetIn">
+    <wsdl:part name="groupName" type="s:string" />
+    <wsdl:part name="xmlfile" type="s1:StringArray" />
+    <wsdl:part name="cwmffile" type="s1:StringArray" />
+    <wsdl:part name="description" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UploadSubWhiteListHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="ActivateSubWhiteListHttpGetIn">
+    <wsdl:part name="groupName" type="s:string" />
+    <wsdl:part name="Version" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ActivateSubWhiteListHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="GetNewCertFileHttpPostIn">
+    <wsdl:part name="encCurrentPubKey" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="compName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetNewCertFileHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ManualyCreateCertFileHttpPostIn" />
+  <wsdl:message name="ManualyCreateCertFileHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="CanGetCertificateHttpPostIn">
+    <wsdl:part name="currentClientPubKey" type="s:string" />
+    <wsdl:part name="MAC" type="s:string" />
+    <wsdl:part name="whiteListVersionNumber" type="s:string" />
+    <wsdl:part name="SubWhiteListsVersions" type="s:string" />
+    <wsdl:part name="compName" type="s:string" />
+    <wsdl:part name="gotCert" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="UIVersion" type="s:string" />
+    <wsdl:part name="driverVersion" type="s:string" />
+    <wsdl:part name="SUPVersion" type="s:string" />
+    <wsdl:part name="serviceVersion" type="s:string" />
+    <wsdl:part name="reconVersion" type="s:string" />
+    <wsdl:part name="logSenderVersion" type="s:string" />
+    <wsdl:part name="OSVersion" type="s:string" />
+    <wsdl:part name="IsScrambled" type="s:string" />
+    <wsdl:part name="LogedInUser" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CanGetCertificateHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetLogFileFromClientHttpPostIn">
+    <wsdl:part name="logFile" type="s1:StringArray" />
+    <wsdl:part name="creator" type="s:string" />
+    <wsdl:part name="hostname" type="s:string" />
+    <wsdl:part name="UID" type="s:string" />
+    <wsdl:part name="clientGUID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetLogFileFromClientHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="TestConnectionToWebServiceHttpPostIn" />
+  <wsdl:message name="TestConnectionToWebServiceHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="GetWhiteListZipFileToInsertDBHttpPostIn">
+    <wsdl:part name="whiteListZipFile" type="s1:StringArray" />
+    <wsdl:part name="creator" type="s:string" />
+    <wsdl:part name="fileCreationTime" type="s:string" />
+    <wsdl:part name="whiteListName" type="s:string" />
+    <wsdl:part name="whiteListDescription" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetWhiteListZipFileToInsertDBHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="GetNewWhiteListHttpPostIn">
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="compName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetNewWhiteListHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetNewSubWhiteListHttpPostIn">
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="compName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetNewSubWhiteListHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetNewConfigFileHttpPostIn">
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="compName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetNewConfigFileHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ReturnWhiteListByVersionNumberHttpPostIn">
+    <wsdl:part name="versionNumber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReturnWhiteListByVersionNumberHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ReturnWhiteListXMLByVersionNumberHttpPostIn">
+    <wsdl:part name="versionNumber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReturnWhiteListXMLByVersionNumberHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetSubWhitelistTableHttpPostIn" />
+  <wsdl:message name="GetSubWhitelistTableHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfString" />
+  </wsdl:message>
+  <wsdl:message name="GetSubWhitelistHttpPostIn">
+    <wsdl:part name="groupName" type="s:string" />
+    <wsdl:part name="fileVersion" type="s:string" />
+    <wsdl:part name="mode" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetSubWhitelistHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="UploadSubWhiteListHttpPostIn">
+    <wsdl:part name="groupName" type="s:string" />
+    <wsdl:part name="xmlfile" type="s1:StringArray" />
+    <wsdl:part name="cwmffile" type="s1:StringArray" />
+    <wsdl:part name="description" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UploadSubWhiteListHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="ActivateSubWhiteListHttpPostIn">
+    <wsdl:part name="groupName" type="s:string" />
+    <wsdl:part name="Version" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ActivateSubWhiteListHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:portType name="Cyber20WebServiceSoap">
+    <wsdl:operation name="GetNewCertFile">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns new certificate file if public key after menipulation is correct.</wsdl:documentation>
+      <wsdl:input message="tns:GetNewCertFileSoapIn" />
+      <wsdl:output message="tns:GetNewCertFileSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ManualyCreateCertFile">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Raise flag to manualy create certificate.</wsdl:documentation>
+      <wsdl:input message="tns:ManualyCreateCertFileSoapIn" />
+      <wsdl:output message="tns:ManualyCreateCertFileSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CanGetCertificate">
+      <wsdl:input message="tns:CanGetCertificateSoapIn" />
+      <wsdl:output message="tns:CanGetCertificateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLogFileFromClient">
+      <wsdl:input message="tns:GetLogFileFromClientSoapIn" />
+      <wsdl:output message="tns:GetLogFileFromClientSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="TestConnectionToWebService">
+      <wsdl:input message="tns:TestConnectionToWebServiceSoapIn" />
+      <wsdl:output message="tns:TestConnectionToWebServiceSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetWhiteListZipFileToInsertDB">
+      <wsdl:input message="tns:GetWhiteListZipFileToInsertDBSoapIn" />
+      <wsdl:output message="tns:GetWhiteListZipFileToInsertDBSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNewWhiteList">
+      <wsdl:input message="tns:GetNewWhiteListSoapIn" />
+      <wsdl:output message="tns:GetNewWhiteListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNewSubWhiteList">
+      <wsdl:input message="tns:GetNewSubWhiteListSoapIn" />
+      <wsdl:output message="tns:GetNewSubWhiteListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNewConfigFile">
+      <wsdl:input message="tns:GetNewConfigFileSoapIn" />
+      <wsdl:output message="tns:GetNewConfigFileSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReturnWhiteListByVersionNumber">
+      <wsdl:input message="tns:ReturnWhiteListByVersionNumberSoapIn" />
+      <wsdl:output message="tns:ReturnWhiteListByVersionNumberSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReturnWhiteListXMLByVersionNumber">
+      <wsdl:input message="tns:ReturnWhiteListXMLByVersionNumberSoapIn" />
+      <wsdl:output message="tns:ReturnWhiteListXMLByVersionNumberSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSubWhitelistTable">
+      <wsdl:input message="tns:GetSubWhitelistTableSoapIn" />
+      <wsdl:output message="tns:GetSubWhitelistTableSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSubWhitelist">
+      <wsdl:input message="tns:GetSubWhitelistSoapIn" />
+      <wsdl:output message="tns:GetSubWhitelistSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UploadSubWhiteList">
+      <wsdl:input message="tns:UploadSubWhiteListSoapIn" />
+      <wsdl:output message="tns:UploadSubWhiteListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ActivateSubWhiteList">
+      <wsdl:input message="tns:ActivateSubWhiteListSoapIn" />
+      <wsdl:output message="tns:ActivateSubWhiteListSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="Cyber20WebServiceHttpGet">
+    <wsdl:operation name="GetNewCertFile">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns new certificate file if public key after menipulation is correct.</wsdl:documentation>
+      <wsdl:input message="tns:GetNewCertFileHttpGetIn" />
+      <wsdl:output message="tns:GetNewCertFileHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ManualyCreateCertFile">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Raise flag to manualy create certificate.</wsdl:documentation>
+      <wsdl:input message="tns:ManualyCreateCertFileHttpGetIn" />
+      <wsdl:output message="tns:ManualyCreateCertFileHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CanGetCertificate">
+      <wsdl:input message="tns:CanGetCertificateHttpGetIn" />
+      <wsdl:output message="tns:CanGetCertificateHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLogFileFromClient">
+      <wsdl:input message="tns:GetLogFileFromClientHttpGetIn" />
+      <wsdl:output message="tns:GetLogFileFromClientHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="TestConnectionToWebService">
+      <wsdl:input message="tns:TestConnectionToWebServiceHttpGetIn" />
+      <wsdl:output message="tns:TestConnectionToWebServiceHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetWhiteListZipFileToInsertDB">
+      <wsdl:input message="tns:GetWhiteListZipFileToInsertDBHttpGetIn" />
+      <wsdl:output message="tns:GetWhiteListZipFileToInsertDBHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNewWhiteList">
+      <wsdl:input message="tns:GetNewWhiteListHttpGetIn" />
+      <wsdl:output message="tns:GetNewWhiteListHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNewSubWhiteList">
+      <wsdl:input message="tns:GetNewSubWhiteListHttpGetIn" />
+      <wsdl:output message="tns:GetNewSubWhiteListHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNewConfigFile">
+      <wsdl:input message="tns:GetNewConfigFileHttpGetIn" />
+      <wsdl:output message="tns:GetNewConfigFileHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReturnWhiteListByVersionNumber">
+      <wsdl:input message="tns:ReturnWhiteListByVersionNumberHttpGetIn" />
+      <wsdl:output message="tns:ReturnWhiteListByVersionNumberHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReturnWhiteListXMLByVersionNumber">
+      <wsdl:input message="tns:ReturnWhiteListXMLByVersionNumberHttpGetIn" />
+      <wsdl:output message="tns:ReturnWhiteListXMLByVersionNumberHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSubWhitelistTable">
+      <wsdl:input message="tns:GetSubWhitelistTableHttpGetIn" />
+      <wsdl:output message="tns:GetSubWhitelistTableHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSubWhitelist">
+      <wsdl:input message="tns:GetSubWhitelistHttpGetIn" />
+      <wsdl:output message="tns:GetSubWhitelistHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UploadSubWhiteList">
+      <wsdl:input message="tns:UploadSubWhiteListHttpGetIn" />
+      <wsdl:output message="tns:UploadSubWhiteListHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ActivateSubWhiteList">
+      <wsdl:input message="tns:ActivateSubWhiteListHttpGetIn" />
+      <wsdl:output message="tns:ActivateSubWhiteListHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="Cyber20WebServiceHttpPost">
+    <wsdl:operation name="GetNewCertFile">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns new certificate file if public key after menipulation is correct.</wsdl:documentation>
+      <wsdl:input message="tns:GetNewCertFileHttpPostIn" />
+      <wsdl:output message="tns:GetNewCertFileHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ManualyCreateCertFile">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Raise flag to manualy create certificate.</wsdl:documentation>
+      <wsdl:input message="tns:ManualyCreateCertFileHttpPostIn" />
+      <wsdl:output message="tns:ManualyCreateCertFileHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CanGetCertificate">
+      <wsdl:input message="tns:CanGetCertificateHttpPostIn" />
+      <wsdl:output message="tns:CanGetCertificateHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLogFileFromClient">
+      <wsdl:input message="tns:GetLogFileFromClientHttpPostIn" />
+      <wsdl:output message="tns:GetLogFileFromClientHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="TestConnectionToWebService">
+      <wsdl:input message="tns:TestConnectionToWebServiceHttpPostIn" />
+      <wsdl:output message="tns:TestConnectionToWebServiceHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetWhiteListZipFileToInsertDB">
+      <wsdl:input message="tns:GetWhiteListZipFileToInsertDBHttpPostIn" />
+      <wsdl:output message="tns:GetWhiteListZipFileToInsertDBHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNewWhiteList">
+      <wsdl:input message="tns:GetNewWhiteListHttpPostIn" />
+      <wsdl:output message="tns:GetNewWhiteListHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNewSubWhiteList">
+      <wsdl:input message="tns:GetNewSubWhiteListHttpPostIn" />
+      <wsdl:output message="tns:GetNewSubWhiteListHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNewConfigFile">
+      <wsdl:input message="tns:GetNewConfigFileHttpPostIn" />
+      <wsdl:output message="tns:GetNewConfigFileHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReturnWhiteListByVersionNumber">
+      <wsdl:input message="tns:ReturnWhiteListByVersionNumberHttpPostIn" />
+      <wsdl:output message="tns:ReturnWhiteListByVersionNumberHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReturnWhiteListXMLByVersionNumber">
+      <wsdl:input message="tns:ReturnWhiteListXMLByVersionNumberHttpPostIn" />
+      <wsdl:output message="tns:ReturnWhiteListXMLByVersionNumberHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSubWhitelistTable">
+      <wsdl:input message="tns:GetSubWhitelistTableHttpPostIn" />
+      <wsdl:output message="tns:GetSubWhitelistTableHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSubWhitelist">
+      <wsdl:input message="tns:GetSubWhitelistHttpPostIn" />
+      <wsdl:output message="tns:GetSubWhitelistHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UploadSubWhiteList">
+      <wsdl:input message="tns:UploadSubWhiteListHttpPostIn" />
+      <wsdl:output message="tns:UploadSubWhiteListHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ActivateSubWhiteList">
+      <wsdl:input message="tns:ActivateSubWhiteListHttpPostIn" />
+      <wsdl:output message="tns:ActivateSubWhiteListHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="Cyber20WebServiceSoap" type="tns:Cyber20WebServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetNewCertFile">
+      <soap:operation soapAction="http://tempuri.org/GetNewCertFile" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ManualyCreateCertFile">
+      <soap:operation soapAction="http://tempuri.org/ManualyCreateCertFile" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CanGetCertificate">
+      <soap:operation soapAction="http://tempuri.org/CanGetCertificate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLogFileFromClient">
+      <soap:operation soapAction="http://tempuri.org/GetLogFileFromClient" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TestConnectionToWebService">
+      <soap:operation soapAction="http://tempuri.org/TestConnectionToWebService" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWhiteListZipFileToInsertDB">
+      <soap:operation soapAction="http://tempuri.org/GetWhiteListZipFileToInsertDB" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNewWhiteList">
+      <soap:operation soapAction="http://tempuri.org/GetNewWhiteList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNewSubWhiteList">
+      <soap:operation soapAction="http://tempuri.org/GetNewSubWhiteList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNewConfigFile">
+      <soap:operation soapAction="http://tempuri.org/GetNewConfigFile" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReturnWhiteListByVersionNumber">
+      <soap:operation soapAction="http://tempuri.org/ReturnWhiteListByVersionNumber" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReturnWhiteListXMLByVersionNumber">
+      <soap:operation soapAction="http://tempuri.org/ReturnWhiteListXMLByVersionNumber" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSubWhitelistTable">
+      <soap:operation soapAction="http://tempuri.org/GetSubWhitelistTable" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSubWhitelist">
+      <soap:operation soapAction="http://tempuri.org/GetSubWhitelist" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UploadSubWhiteList">
+      <soap:operation soapAction="http://tempuri.org/UploadSubWhiteList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ActivateSubWhiteList">
+      <soap:operation soapAction="http://tempuri.org/ActivateSubWhiteList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="Cyber20WebServiceSoap12" type="tns:Cyber20WebServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetNewCertFile">
+      <soap12:operation soapAction="http://tempuri.org/GetNewCertFile" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ManualyCreateCertFile">
+      <soap12:operation soapAction="http://tempuri.org/ManualyCreateCertFile" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CanGetCertificate">
+      <soap12:operation soapAction="http://tempuri.org/CanGetCertificate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLogFileFromClient">
+      <soap12:operation soapAction="http://tempuri.org/GetLogFileFromClient" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TestConnectionToWebService">
+      <soap12:operation soapAction="http://tempuri.org/TestConnectionToWebService" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWhiteListZipFileToInsertDB">
+      <soap12:operation soapAction="http://tempuri.org/GetWhiteListZipFileToInsertDB" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNewWhiteList">
+      <soap12:operation soapAction="http://tempuri.org/GetNewWhiteList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNewSubWhiteList">
+      <soap12:operation soapAction="http://tempuri.org/GetNewSubWhiteList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNewConfigFile">
+      <soap12:operation soapAction="http://tempuri.org/GetNewConfigFile" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReturnWhiteListByVersionNumber">
+      <soap12:operation soapAction="http://tempuri.org/ReturnWhiteListByVersionNumber" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReturnWhiteListXMLByVersionNumber">
+      <soap12:operation soapAction="http://tempuri.org/ReturnWhiteListXMLByVersionNumber" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSubWhitelistTable">
+      <soap12:operation soapAction="http://tempuri.org/GetSubWhitelistTable" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSubWhitelist">
+      <soap12:operation soapAction="http://tempuri.org/GetSubWhitelist" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UploadSubWhiteList">
+      <soap12:operation soapAction="http://tempuri.org/UploadSubWhiteList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ActivateSubWhiteList">
+      <soap12:operation soapAction="http://tempuri.org/ActivateSubWhiteList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="Cyber20WebServiceHttpGet" type="tns:Cyber20WebServiceHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="GetNewCertFile">
+      <http:operation location="/GetNewCertFile" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ManualyCreateCertFile">
+      <http:operation location="/ManualyCreateCertFile" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CanGetCertificate">
+      <http:operation location="/CanGetCertificate" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLogFileFromClient">
+      <http:operation location="/GetLogFileFromClient" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TestConnectionToWebService">
+      <http:operation location="/TestConnectionToWebService" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWhiteListZipFileToInsertDB">
+      <http:operation location="/GetWhiteListZipFileToInsertDB" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNewWhiteList">
+      <http:operation location="/GetNewWhiteList" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNewSubWhiteList">
+      <http:operation location="/GetNewSubWhiteList" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNewConfigFile">
+      <http:operation location="/GetNewConfigFile" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReturnWhiteListByVersionNumber">
+      <http:operation location="/ReturnWhiteListByVersionNumber" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReturnWhiteListXMLByVersionNumber">
+      <http:operation location="/ReturnWhiteListXMLByVersionNumber" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSubWhitelistTable">
+      <http:operation location="/GetSubWhitelistTable" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSubWhitelist">
+      <http:operation location="/GetSubWhitelist" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UploadSubWhiteList">
+      <http:operation location="/UploadSubWhiteList" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ActivateSubWhiteList">
+      <http:operation location="/ActivateSubWhiteList" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="Cyber20WebServiceHttpPost" type="tns:Cyber20WebServiceHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="GetNewCertFile">
+      <http:operation location="/GetNewCertFile" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ManualyCreateCertFile">
+      <http:operation location="/ManualyCreateCertFile" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CanGetCertificate">
+      <http:operation location="/CanGetCertificate" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLogFileFromClient">
+      <http:operation location="/GetLogFileFromClient" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TestConnectionToWebService">
+      <http:operation location="/TestConnectionToWebService" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWhiteListZipFileToInsertDB">
+      <http:operation location="/GetWhiteListZipFileToInsertDB" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNewWhiteList">
+      <http:operation location="/GetNewWhiteList" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNewSubWhiteList">
+      <http:operation location="/GetNewSubWhiteList" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNewConfigFile">
+      <http:operation location="/GetNewConfigFile" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReturnWhiteListByVersionNumber">
+      <http:operation location="/ReturnWhiteListByVersionNumber" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReturnWhiteListXMLByVersionNumber">
+      <http:operation location="/ReturnWhiteListXMLByVersionNumber" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSubWhitelistTable">
+      <http:operation location="/GetSubWhitelistTable" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSubWhitelist">
+      <http:operation location="/GetSubWhitelist" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UploadSubWhiteList">
+      <http:operation location="/UploadSubWhiteList" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ActivateSubWhiteList">
+      <http:operation location="/ActivateSubWhiteList" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Cyber20WebService">
+    <wsdl:port name="Cyber20WebServiceSoap" binding="tns:Cyber20WebServiceSoap">
+      <soap:address location="http://10.0.0.152/serverws/cyber20webservice.asmx" />
+    </wsdl:port>
+    <wsdl:port name="Cyber20WebServiceSoap12" binding="tns:Cyber20WebServiceSoap12">
+      <soap12:address location="http://10.0.0.152/serverws/cyber20webservice.asmx" />
+    </wsdl:port>
+    <wsdl:port name="Cyber20WebServiceHttpGet" binding="tns:Cyber20WebServiceHttpGet">
+      <http:address location="http://10.0.0.152/serverws/cyber20webservice.asmx" />
+    </wsdl:port>
+    <wsdl:port name="Cyber20WebServiceHttpPost" binding="tns:Cyber20WebServiceHttpPost">
+      <http:address location="http://10.0.0.152/serverws/cyber20webservice.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
