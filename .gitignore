@@ -3,3 +3,11 @@
 ################################################################################
 
 /.vs/LogSender/v15/Server/sqlite3/db.lock
+/.vs/LogSender/v16
+/Install/bin
+/Install/obj
+/LogSender
+/LogSender Tests
+/packages
+/Uninstall
+/x86 LogSender Installer/Debug
