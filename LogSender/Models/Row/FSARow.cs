@@ -86,7 +86,11 @@ namespace LogSender.Models
                 _fileExtractData[index].ExtractData(loopIndex, expandedFileByteArray, ref fileIndex);
             }
 
-            _destIP = new DestinationIpFsa(_fileExtractData[(int)_fileExtractDataIndexs.DESTINATION_PATH].GetData(), _sourceIP);
+            //This line was removed because of cases when the destHostName cannot be resolved and the log sender get slow because of the timeout for every DNS request
+            //destIP = new DestinationIpFsa(_fileExtractData[(int)_fileExtractDataIndexs.DESTINATION_PATH].GetData(), _sourceIP);
+
+            _destIP = new DestinationIpFsa();
+
             _status.DefineStatusFromDataLog(_fileExtractData[(int)_fileExtractDataIndexs.REASON].GetData(), _fileExtractData[(int)_fileExtractDataIndexs.SEQ_NUM].GetData());
         }
 
