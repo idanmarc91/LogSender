@@ -84,6 +84,14 @@ namespace LogSender
             {
                 for (int index = 0; index < _directory.Count; index++)
                 {
+                    //Check if directory exist
+                    if (!Directory.Exists(_directory[index].Value.FullName))
+                    {
+                        log.Error(_directory[index].Value.FullName + " folder not exist, cannot send files.");
+                        return;
+                    }
+
+
                     FileMaintenance.ZeroSizeFileCleanup(_directory[index].Value);
 
                     //check folder status

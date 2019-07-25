@@ -24,179 +24,193 @@ namespace LogSender
 
         public static void SendRecFiles()
         {
-
-            if (directoryRepository.EnumerateFiles("*.xml").Where(f => (f.Length <= 6291456) && (f.Length > 0)).ToArray().Length >= 1)
+            try
             {
 
-                // if the directory does not exists, create it.
-                if (!Directory.Exists(pathToFilesToZipRepository))
+                //Check if directory exist
+                if (!Directory.Exists(pathToRepositoryFiles))
                 {
-                    Directory.CreateDirectory(pathToFilesToZipRepository);
-                }
-                //make sure that the folder is empty
-                DirectoryInfo di = new DirectoryInfo(pathToFilesToZipRepository);
-                log.Debug("Delete zip files in " + pathToFilesToZipRepository);
-                foreach (FileInfo file in di.GetFiles())
-                {
-                    try
-                    {
-                        file.Delete();
-                    }
-                    catch (Exception ex)
-                    {
-                        //string cs = "Cyber 2.0 - Log Sender";
-                        log.Error("Cannot delete zip file in file to zip folder", ex);
-                        //  if (!EventLog.SourceExists(cs))
-                        //  EventLog.CreateEventSource(cs, "Application");
-
-                        //EventLog.WriteEntry(cs, e.Message, EventLogEntryType.Error);
-                        break;
-                    }
-
+                    log.Error(pathToRepositoryFiles + " folder not exist, cannot send files.");
+                    return;
                 }
 
-                foreach (DirectoryInfo dir in di.GetDirectories())
+                if (directoryRepository.EnumerateFiles("*.xml").Where(f => (f.Length <= 6291456) && (f.Length > 0)).ToArray().Length >= 1)
                 {
-                    try
+
+                    // if the directory does not exists, create it.
+                    if (!Directory.Exists(pathToFilesToZipRepository))
                     {
-                        dir.Delete(true);
+                        Directory.CreateDirectory(pathToFilesToZipRepository);
                     }
-                    catch (Exception ex)
+                    //make sure that the folder is empty
+                    DirectoryInfo di = new DirectoryInfo(pathToFilesToZipRepository);
+                    log.Debug("Delete zip files in " + pathToFilesToZipRepository);
+                    foreach (FileInfo file in di.GetFiles())
                     {
-                        //string cs = "Cyber 2.0 - Log Sender";
-                        log.Error("Cannot delete zip folder", ex);
-
-                        // if (!EventLog.SourceExists(cs))
-                        //    EventLog.CreateEventSource(cs, "Application");
-
-                        // EventLog.WriteEntry(cs, e.Message, EventLogEntryType.Error);
-                        break;
-                    }
-                }
-
-                filesToSendListRepository.Clear();
-
-                responseFromServerRepository = false;
-                //first take care of zip files if last service was stopped
-                string[] filetosend = Directory.EnumerateFiles(pathToRepositoryFiles, "*.zip").Where(f => (f.Length <= 10485760)).ToArray();
-                log.Debug("Checking if there are waiting zip files to be sent to the server");
-                foreach (string fname in filetosend)
-                {
-                    string name = Path.GetFileName(fname);
-                    name = name.Substring(0, name.Length - 4);
-                    FileToSend find = filesToSendListRepository.Find(r => r.nameOfFile.ToLower() == fname.ToLower());
-                    if (find == null)
-                    {
-                        FileToSend filezip = new FileToSend();
-                        filezip.nameOfFile = Path.GetFileName(fname);
-
-                        filezip.nameOfFile = filezip.nameOfFile.Substring(0, filezip.nameOfFile.Length - 4);
-
-                        filezip.timeOfCreation = File.GetCreationTime(fname);
-                        byte[] zipToBytesold = StreamFile(pathToRepositoryFiles + "\\" + filezip.nameOfFile + ".zip");
-
-                        filezip.SetByteData(zipToBytesold);
-                        filesToSendListRepository.Add(filezip);
-                    }
-                }
-                //get the files in the directory
-                FileInfo[] allfiles = directoryRepository.EnumerateFiles("*.xml").Where(f => (f.Length > 0) && (f.Length <= 6291456)).ToArray();
-
-                //save the most recent file
-                //FileInfo mostRecentFile = GetLatestWritenFileFileInDirectory(directoryRepository, ".xml");
-
-                //check if the filesize is greater than 50 - need to check!
-                FileInfo[] files = allfiles;
-                if (allfiles.Length > 50)
-                {
-                    // take all the files and order them by their write time, take the first 50 with the newest write time.
-                    files = allfiles.OrderByDescending(f => f.LastWriteTime).Take(50).ToArray();
-                }
-
-                //if the file is not the latest file Move Files to new folder 
-                string fileName;
-                foreach (FileInfo s in files)
-                {
-                    fileName = Path.GetFileName(s.FullName);
-                    //if (fileName != mostRecentFile.Name)
-                    //{
-                    try
-                    {
-                        //if (CheckIfFileIsBeingUsed(pathToFolder + "\\" + fileName) == false)
-
-                        File.Move(pathToRepositoryFiles + "\\" + fileName, pathToFilesToZipRepository + "\\" + fileName);
-
-                    }
-                    catch (IOException)
-                    {
-                        if (File.Exists(pathToFilesToZipRepository + "\\" + fileName))
+                        try
                         {
-                            File.Delete(pathToRepositoryFiles + "\\" + fileName);
+                            file.Delete();
+                        }
+                        catch (Exception ex)
+                        {
+                            //string cs = "Cyber 2.0 - Log Sender";
+                            log.Error("Cannot delete zip file in file to zip folder", ex);
+                            //  if (!EventLog.SourceExists(cs))
+                            //  EventLog.CreateEventSource(cs, "Application");
+
+                            //EventLog.WriteEntry(cs, e.Message, EventLogEntryType.Error);
+                            break;
+                        }
+
+                    }
+
+                    foreach (DirectoryInfo dir in di.GetDirectories())
+                    {
+                        try
+                        {
+                            dir.Delete(true);
+                        }
+                        catch (Exception ex)
+                        {
+                            //string cs = "Cyber 2.0 - Log Sender";
+                            log.Error("Cannot delete zip folder", ex);
+
+                            // if (!EventLog.SourceExists(cs))
+                            //    EventLog.CreateEventSource(cs, "Application");
+
+                            // EventLog.WriteEntry(cs, e.Message, EventLogEntryType.Error);
+                            break;
                         }
                     }
 
-                    //}
+                    filesToSendListRepository.Clear();
 
-                }
-                log.Debug("Deleting empty files");
-                //delete the empty files
-                FileInfo[] emptyFiles = directoryRepository.GetFiles().Where(f => (f.FullName.EndsWith(".xml")) && (f.Length == 0)).ToArray();
-                foreach (FileInfo fi in emptyFiles)
-                {
+                    responseFromServerRepository = false;
+                    //first take care of zip files if last service was stopped
+                    string[] filetosend = Directory.EnumerateFiles(pathToRepositoryFiles, "*.zip").Where(f => (f.Length <= 10485760)).ToArray();
+                    log.Debug("Checking if there are waiting zip files to be sent to the server");
+                    foreach (string fname in filetosend)
+                    {
+                        string name = Path.GetFileName(fname);
+                        name = name.Substring(0, name.Length - 4);
+                        FileToSend find = filesToSendListRepository.Find(r => r.nameOfFile.ToLower() == fname.ToLower());
+                        if (find == null)
+                        {
+                            FileToSend filezip = new FileToSend();
+                            filezip.nameOfFile = Path.GetFileName(fname);
+
+                            filezip.nameOfFile = filezip.nameOfFile.Substring(0, filezip.nameOfFile.Length - 4);
+
+                            filezip.timeOfCreation = File.GetCreationTime(fname);
+                            byte[] zipToBytesold = StreamFile(pathToRepositoryFiles + "\\" + filezip.nameOfFile + ".zip");
+
+                            filezip.SetByteData(zipToBytesold);
+                            filesToSendListRepository.Add(filezip);
+                        }
+                    }
+                    //get the files in the directory
+                    FileInfo[] allfiles = directoryRepository.EnumerateFiles("*.xml").Where(f => (f.Length > 0) && (f.Length <= 6291456)).ToArray();
+
+                    //save the most recent file
+                    //FileInfo mostRecentFile = GetLatestWritenFileFileInDirectory(directoryRepository, ".xml");
+
+                    //check if the filesize is greater than 50 - need to check!
+                    FileInfo[] files = allfiles;
+                    if (allfiles.Length > 50)
+                    {
+                        // take all the files and order them by their write time, take the first 50 with the newest write time.
+                        files = allfiles.OrderByDescending(f => f.LastWriteTime).Take(50).ToArray();
+                    }
+
+                    //if the file is not the latest file Move Files to new folder 
+                    string fileName;
+                    foreach (FileInfo s in files)
+                    {
+                        fileName = Path.GetFileName(s.FullName);
+                        //if (fileName != mostRecentFile.Name)
+                        //{
+                        try
+                        {
+                            //if (CheckIfFileIsBeingUsed(pathToFolder + "\\" + fileName) == false)
+
+                            File.Move(pathToRepositoryFiles + "\\" + fileName, pathToFilesToZipRepository + "\\" + fileName);
+
+                        }
+                        catch (IOException)
+                        {
+                            if (File.Exists(pathToFilesToZipRepository + "\\" + fileName))
+                            {
+                                File.Delete(pathToRepositoryFiles + "\\" + fileName);
+                            }
+                        }
+
+                        //}
+
+                    }
+                    log.Debug("Deleting empty files");
+                    //delete the empty files
+                    FileInfo[] emptyFiles = directoryRepository.GetFiles().Where(f => (f.FullName.EndsWith(".xml")) && (f.Length == 0)).ToArray();
+                    foreach (FileInfo fi in emptyFiles)
+                    {
+                        try
+                        {
+                            fi.Delete();
+                        }
+                        catch (Exception ex)
+                        {
+                            log.Error("Cannot delete empty file", ex);
+                        }
+                    }
+
+                    // create object of a file to send
+                    FileToSend fileziptosend = new FileToSend();
+                    DateTime timeNowOfFileCreation = DateTime.Now;
+                    fileziptosend.timeOfCreation = timeNowOfFileCreation;         // the name of the file and the file creation date are the same,
+                    fileziptosend.nameOfFile = timeNowOfFileCreation.ToString().Replace('/', '-').Replace(':', '-');  // but it is safer that we keep DateTime in case that someone tires to change the name of the file
+
+
+
+                    //create zip file from sub-folder
                     try
                     {
-                        fi.Delete();
+                        ZipFile.CreateFromDirectory(pathToFilesToZipRepository, pathToRepositoryFiles + "\\" + fileziptosend.nameOfFile + ".zip");
                     }
                     catch (Exception ex)
                     {
-                        log.Error("Cannot delete empty file", ex);
+                        log.Error("Cannot create zip file", ex);
                     }
-                }
 
-                // create object of a file to send
-                FileToSend fileziptosend = new FileToSend();
-                DateTime timeNowOfFileCreation = DateTime.Now;
-                fileziptosend.timeOfCreation = timeNowOfFileCreation;         // the name of the file and the file creation date are the same,
-                fileziptosend.nameOfFile = timeNowOfFileCreation.ToString().Replace('/', '-').Replace(':', '-');  // but it is safer that we keep DateTime in case that someone tires to change the name of the file
+                    //it is much easier to pass byte array than sending a file
+                    byte[] zipToBytes = StreamFile(pathToRepositoryFiles + "\\" + fileziptosend.nameOfFile + ".zip");
 
+                    fileziptosend.SetByteData(zipToBytes);
+                    filesToSendListRepository.Add(fileziptosend);
 
 
-                //create zip file from sub-folder
-                try
-                {
-                    ZipFile.CreateFromDirectory(pathToFilesToZipRepository, pathToRepositoryFiles + "\\" + fileziptosend.nameOfFile + ".zip");
-                }
-                catch (Exception ex)
-                {
-                    log.Error("Cannot create zip file", ex);
-                }
+                    //send the byte array to the server
+                    SendFilesToServerRepository();
 
-                //it is much easier to pass byte array than sending a file
-                byte[] zipToBytes = StreamFile(pathToRepositoryFiles + "\\" + fileziptosend.nameOfFile + ".zip");
-
-                fileziptosend.SetByteData(zipToBytes);
-                filesToSendListRepository.Add(fileziptosend);
-
-
-                //send the byte array to the server
-                SendFilesToServerRepository();
-
-                //delete the files that are already zipped
-                try
-                {
-                    foreach (FileInfo file in di.GetFiles())
+                    //delete the files that are already zipped
+                    try
                     {
-                        file.Delete();
+                        foreach (FileInfo file in di.GetFiles())
+                        {
+                            file.Delete();
+                        }
+
                     }
+                    catch (IOException ex)
+                    {
+                        log.Error("Cannot delete the files that are already zipped", ex);
+                    }
+                    //if (stopFlag == true)
+                    //   break;
 
                 }
-                catch (IOException ex)
-                {
-                    log.Error("Cannot delete the files that are already zipped", ex);
-                }
-                //if (stopFlag == true)
-                //   break;
-
+            }
+            catch(Exception ex)
+            {
+                log.Error("Error occurred while sending rec files", ex);
             }
         }
         private static byte[] StreamFile(string filename)
