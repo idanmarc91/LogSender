@@ -13,6 +13,14 @@ namespace LogSender.Data
         public string _destinationIp { get; private set; }
 
         /// <summary>
+        /// Empty Ctor
+        /// </summary>
+        public DestinationIpFsa()
+        {
+            _destinationIp = "";
+        }
+
+        /// <summary>
         /// Ctor
         /// </summary>
         public DestinationIpFsa(string path, string sourceIp)
@@ -71,6 +79,7 @@ namespace LogSender.Data
                             {
                                 return Constant.DOMAIN_IP;
                             }
+
                             //resolve the destHostName with dns domain cache
                             hostEntry = Dns.GetHostEntry(destHostName);
                         }
