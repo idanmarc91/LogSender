@@ -1,33 +1,26 @@
-# v5-LogSender-Client
-v5 LogSender Client 
+# LogSender Windows Service
+LogSender Windows Service 
 
-The Log Sender Windows Service send log file (cyb,mog,fsa,cimg) located in Cyber 2.0 folder to Cyber 2.0 managment server.
-The log sender also responsible for managing the log folders and cleaning them when server is offline.
+The Log Sender Windows Service send log files to a management server.
+There are 4 kind of logs cyb, mog, fsa, cimg (binary file deserialized in the log sender sending process).
+The log sending process includes desearialized, data mapping and gziping the data before sending it to node service located on the server. 
+The logs are created by another services that collect data from the Network and File System on the machine meaning the folder contain new logs every few seconds.
+The log sender service is also responsible for managing the log folders and cleaning them when server is offline.
+To controll the log sender configuration there is a config file called "LogSenderConfiguration.cfg". this file is a text file that the service is reading during start up process
 
-## Getting Started
-
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
-See deployment for notes on how to deploy the project on a live system.
 
 ### Prerequisites
 
-* Visual studio 2017
+* Visual Studio
 * log4net
 * newtonsoft.Json
-* Cyber 2.0 managment server for logs receiving
 
-### Installing
-
-This solution include a Service Installer project. the output of this project is an msi that install the service
 
 ## Running the tests
 
 The Log Sender solution include a unit test projet.
 The unit testing will run only in visual studio.
 
-## Deployment
-
-To install a production ready application you can follow the [Dev Installing](#dev-installing) after installing/validating Prerequisites are met.
 
 ## Built With
 
@@ -35,12 +28,6 @@ To install a production ready application you can follow the [Dev Installing](#d
 
 ## Versioning
 **if a new version is made, update "AssemblyVersion" and "AssemblyFileVersion" at "AssemblyInfo" file**
-
-See vestion notes [Version notes Google docs](https://docs.google.com/document/u/1/d/15fN9bL6YFy0ZJIrxfmFL691V4POe_7zb4SqEcy7h5pk/edit?usp=drive_web&ouid=107850385867994278819) 
-
-## Documentaion
-
-[link to SRS\SDD\Project Docs in Google Drive](https://drive.google.com/drive/u/1/folders/1vfT1gL1AlZhlDlGf4ZXBqHlhSjwlgPEK)
 
 ## Authors
 
